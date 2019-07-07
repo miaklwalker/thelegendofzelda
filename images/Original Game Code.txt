@@ -1,0 +1,655 @@
+0000 - Memory offset processing
+0001 - Memory offset processing
+0002 - ?
+0003 - ?
+0004 - Memory offset processing
+0005 - Memory offset processing
+0006 - ?
+0007 - Sprite width processing / amount to damage enemy
+0008 - Sprite width processing
+0009 - ?
+000A - Sprite width processing
+000B - Player movement processing
+000C - Processing sprite's rotation / map loading
+000D - Processing sprite's frame
+000E - Processing sprite's graphic offset
+
+0029 - Gannon Stun Duration (00-3F)
+
+0050 - Enemy Tally (00-0A) (Reset when you get hit or kill an enemy that can drop items)
+
+0058 - Map Loading when moving north/south in rooms
+0059 - Something to do with number of sprites on the screen
+
+005B - Memory offset when entering a room
+
+006A - Written to by sound engine
+006B - Written to by sound engine
+
+Sprite X Positions - some overlap between player objects and enemy objects
+0070 - Link X Position
+0071-007B - Enemy X Positions
+007B - Raft/Ladder X Position
+007C - Left Screen Wipe Position
+007D - Sword X Position / Right Screen Wipe Position
+007E - Sword/Rod Bolt X Position
+007F - Boomerang/Bait X Position
+0080 - Fire 1 / Bomb X Position
+0081 - Fire 2 X Position
+0082 - Rod/Arrow X Position
+0083 - Item X Position
+
+Sprite Y Positions - some overlap between player objects and enemy objects
+0084 - Link Y Position
+0085-008F - Enemy Y Position
+008F - Raft/Ladder Y Position
+0090 - 
+0091 - Sword Y Position
+0092 - Sword/Rod Bolt Y Position
+0093 - Boomerang/Bait Y Position
+0094 - Fire 1 / Bomb Y Position
+0095 - Fire 2 Y Position
+0096 - Rod/Arrow Y Position
+0097 - Item Y Screen Position
+
+0098-00A3 - Object Direction (01 - Right, 02 - Left, 04 - Down, 08 - Up) Used by Link, monsters, weapons, etc.
+
+00AC - Link Status Flag (40 - Paralyzed)
+00AD - Gannon - Arrow Vulnerability Duration (00-FF) Flashes below 2F
+00AE-00B7 - Projectile Flags (Stepladder counts as a projectile)
+
+00E3 - Flag for drawing the map while scrolling rooms
+00E6 - Flips between 01 and 00 as you change rooms
+00E7 - Room change direction (01 - Right, 02 - Left, 04 - Down, 08 - Up)
+00E8 - Room scrolling counter - left/right
+00E9 - Room scrolling counter - up/down. Also timeout before changing rooms (15-00) - If you alter 82E5 to 00, you will see the room before it's drawn
+00EB - Room You're In (00-7F). High nybble is row, low nybble is column. In dungeons, the offset is based on the furthest most top and left room. Also cave exit room
+00EC - Room You're Going To (00-7F)
+00ED - Room scrolling counter up/down (counts differently than 00FD)
+00EE - Direction you entered this room from (01 - Right, 02 - Left, 04 - Down, 08 - Up)
+00F3 - Unknown flag, set to 01 while scrolling rooms
+
+00F8 - Controller 1 Press
+00F9 - Controller 2 Press
+00FA - Controller 1 Down
+00FB - Controller 2 Down
+00FC - 
+00FD - Room scrolling counter - left/right
+00FE - 1E normally, 00 when entering caves/dungeons
+00FF - Affected by room scrolling
+
+0100-01FF - Stack
+
+0200-02FF - PPU memory
+
+0300-0324 - Info screen drawing
+
+0340 - Counter on which sprites are processed (00-0B)
+0341-0344 - Onscreen animated sprite into (flashing rupies, flames, blinking hearts, etc.)
+
+034C - Number of enemy projectiles on screen
+034E - Number of maximum enemies in the current room
+034F - Number of enemies killed in the current room
+
+0350-035E - Object Type (See Object List)
+
+0394 - Link Delta
+0395-39F - Enemy Deltas (not all enemies use this)
+03A8 - Link Movement Flag
+03A9-03B4 - Enemy Movement Flags
+03D0 - Link Animation Counter
+03D1-03DC - Enemy Animation Counters
+03E4 - Link Animation Frame
+03E5-03F0 - Enemy Animation Frames
+
+03F8 - Link Direction (01 - Right, 02 - Left, 04 - Down, 08 - Up)
+03F9-0404 - Enemy Directions (01 - Right, 02 - Left, 04 - Down, 08 - Up)
+
+0407-0410 - Enemy Flags?
+0411-041A - Enemy Values?
+041B-0424 - Enemy Values?
+042D-0436 - Enemy Animation Frame
+0452-045B - Enemy Delay to Shoot
+045A-045C - Enemy Projectile X Delta
+0467-046A - Enemy Projectile Y Delta
+0479-0482 - Enemy Pattern Count
+0485-0490 - Enemy Hit Points (includes bosses), uses high nybble.
+0494-049D - Enemy Flags?
+049E-04A7 - Enemy Flags?
+04BF-04CE - Enemy Graphic Info
+
+04CC - Room Flags
+	10 - Fires shoot Link (because he hit old man)
+04CD - Room Type (different values for underworld and overworld)
+	+01 - Killing all enemies opens all shuttered doors
+	+02 - Room has ringleader
+	+04 - Has a pushable block that opens shuttered door
+	+05 - Has a pushable block that reveals a secret stairway
+	+07 - Room has item after killing all monsters and all shuttered doors are opened
+	+10 - Killing all ememies opens specific shuttered door?
+	+20 - Item already visible?
+	+30 - Triforce room
+04E4 - Get set to different values when link leaves a room and reset to 0 when the scrolling ends.
+
+04E8-04EB - Statue Bolt Timeouts
+
+04F0 - Link Invulnerable Timeout (Palette dependent on value)
+04F1-04FC - Enemy Invulnerable Timeouts
+
+0505 - Item Holding Up (See Item List)
+0506 - Item Holding Up Timeout
+
+0521 - Gets set to different values when link leaves a room and reset to 0 when the scrolling ends.
+
+052E - Red Bubble Flag (00 - No, 01 - Yes)
+052F - Lost Mountains Counter (00-03)
+
+0560-05DF - Number of enemies killed in each dungeon room (set when you leave the room), becomes 0F when all enemies are killed (matches up with full underworld map 1 or 2, see Maps)
+
+05F0 - Triangle wave value
+
+05F2 - Sword Timeout (when hit by bubbles)
+
+0605 - Link's Action Flag 2
+	00 - Nothing
+	04 - Rod
+	10 - Displaying Text
+0606 - Link's Action Flag 2
+	00 - Nothing
+ 	01 - Sword Attack
+	02 - Boomerang / Arrow
+	04 - Candle
+	08 - Entering/Exiting Cave
+0607 - Link's Action Flag 3
+	00 - Nothing
+	10 - Whistle
+
+0609-061F - Audio variables
+
+0656 - Currently Selected Item
+	00 - Boomerang or Empty
+	01 - Bomb
+	02 - Arrow
+	03 - Bow
+	04 - Candle
+	05 - Flute
+	06 - Bait
+	07 - Medicine
+	08 - Rod
+	09 - Raft (Crash if you use)
+	0A - Book (Crash if you use)
+	0B - Ring (Crash if you use)
+	0C - Ladder (Crash if you use)
+	0D - Magic Key (Crash if you use)
+	0E - Bracelet (Changes last palette group if you use)
+	0F - ?
+0657 - Sword
+	00 - None
+	01 - Wooden
+	02 - White
+	03 - Magical
+	04 - Red/Green Sword
+	05 - Really weak wood sword
+	07 - Regular sword using magical sword palette
+0658 - Bombs
+0659 - Arrow Flag
+	00 - None
+	01 - Wooden
+	02 - Silver
+	03 - Red
+	04 - Black
+065A - Bow Flag
+065B - Candle Flag
+	00 - None
+	01 - Blue
+	02 - Red
+	03 - Green
+	04 - Brown
+065C - Flute Flag
+065D - Bait Flag
+065E - Medicine Flag
+	00 - None
+	01 - Blue
+	02 - Red
+	03 - Black
+	04 - Green
+065F - Magical Rod Flag
+0660 - Raft Flag
+0661 - Book Flag
+0662 - Ring Flag (Doesn't affect armor or link color)
+	00 - None
+	01 - Blue
+	02 - Red
+	03 - Brown
+	04 - Green
+0663 - Step Ladder Flag
+0664 - Magic Key Flag
+0665 - Bracelet Flag
+0666 - Letter Flag
+0667 - Compass Flag (bit flag)
+0668 - Map Flag (bit flag)
+0669 - Level 9 Compass
+066A - Level 9 Map
+066B - 
+066C - Clock Flag
+066D - Rupees
+066E - Keys
+066F - Heart Containers (High nybble flag for container (0-F), low nybble flag for full (0-F)
+0670 - Hit Points Per Heart (00-FF, becomes a half heart at 7F)
+0671 - Triforce Flag (Bit flags)
+0672 - Triforce of Power Flag
+0673 - 
+0674 - Boomerang Flag
+0675 - Magical Boomerang Flag
+	00 - No
+	01 - Yes
+	02 - Orange
+	03 - Dark
+	04 - Mini
+0676 - Magic Shield Flag
+
+067C - Maximum Bombs
+067D - Rupee Incrementer
+067E - Rupee Decrementer
+
+0680-06FF - Number of enemies killed in Overworld rooms
+
+0700-07FE - Underworld Room Statuses (0700-077F matches up with full underworld map 1, 0780-07FE to map 2, see Maps) 
+	+01 - West Passage Open (Locked door or bomb wall only)
+	+02 - East Passage Open
+	+04 - South Passage Open
+	+08 - North Passage Open
+	+10 - Room Item Taken
+	+20 - Room Visited
+	+40 - One Enemy Killed
+	+80 - More Than One Enemy Killed (if joined with +40, All enemies killed)
+Save Slots
+Names
+6001-6009 - Slot Name 1
+600A-6011 - Slot Name 2
+6012-6019 - Slot Name 3
+
+Items - This section is protected by a checksum
+Slot #1
+601A - Sword Type
+601B - Bombs
+601C - Arrow Type
+...
+
+Slot #2
+6042 - Sword Type
+6043 - Bombs
+6044 - Arrow Type
+...
+
+Room Statuses
+Slot #1
+6092-6121 - Killed Overworld Enemies
+6122-6221 - Underworld Status Flags
+
+Slot #2
+Slot #3
+
+Clothes
+Slot #1
+6804 - Link's Tunic Color
+6805 - Link's Skin Color
+6806 - Link's Belt Color
+
+Slot #2
+6808 - Link's Tunic Color
+6809 - Link's Skin Color
+680A - Link's Belt Color
+
+Slot #3
+680C - Link's Tunic Color
+680D - Link's Skin Color
+680E - Link's Belt Color
+ROM Data
+6B81-6BA0 - Game Palettes
+
+In-Game Link Attributes
+6B92 - Link's Tunic Color
+6B93 - Link's Skin Color
+6B94 - Link's Belt Color
+
+6BA2 - Starting number of enemies in underworld room type 1
+6BA3 - Starting number of enemies in underworld room type 2
+6BA4 - Starting number of enemies in underworld room type 3
+6BA5 - Starting number of enemies in underworld room type 4
+Tables
+Item List
+01 - Sword
+02 - White Sword
+03 - Magic Sword
+04 - Bait
+05 - Recorder
+06 - Blue Candle
+07 - Red Candle
+08 - Arrow
+09 - Silver Arrow
+0A - Bow
+0B - Magic Key
+0C - Raft
+0D - Step Ladder
+0E - Moblin Error
+0F - 5 Rupies
+10 - Rod
+11 - Book
+12 - Blue Ring
+13 - Red Ring
+14 - Bracelet
+15 - Letter
+16 - Compass
+17 - Map
+18 - Rupy
+19 - Key
+1A - Heart Container
+1B - Triforce
+1C - Magic Shield
+1D - Boomerang
+1E - Magic Boomerang
+1F - Blue Medicine
+20 - Red Medicine
+21 - Clock
+22 - Heart
+23 - Fairy (Flying) ?
+24 - Fairy (Stationary) ?
+25 - Upsidedown Link
+26 - Sword (Shooting)
+27 - Magic Bolt
+28 - Bomb (Item) ?
+29 - Bomb (Exploding) ?
+Object List
+01 - Lynel - Blue
+02 - Lynel - Red
+03 - Moblin - Blue
+04 - Moglin - Red
+05 - Goryia - Blue
+06 - Goryia - Red
+07 - Octorok - Red
+08 - Fast Octorok - Red
+09 - Octorok - Blue
+0A - Fast Octorok - Blue
+0B - Darknut - Red
+0C - Darknut - Blue
+0D - Tektite - Blue
+0E - Tektite - Red
+0F - Leever - Blue
+10 - Leever - Red
+11 - Zora
+12 - Vire
+13 - Zol
+14 - Gel - Slow
+15 - Gel - Fast
+16 - Pols Voice
+17 - Like-Like
+18 - Digdogger - Small
+19 - ?
+1A - Peahat
+1B - Keese - Blue
+1C - Keese - Red
+1D - Keese - Black
+1E - Armos - Fast & Slow
+1F - Rock Spawner
+20 - Falling Rock
+21 - Ghini
+22 - Ghini - Summoned
+23 - Wizzrobe - Blue
+24 - Wizzrobe - Red
+25 - Patra Eyes - Spiral
+26 - Patra Eyes - Expanding
+27 - Wallmaster
+28 - Rope / Flashing Rope
+29 - ?
+2A - Stalfos / Stalfos - Shooting
+2B - Bubble
+2C - Bubble - Blue
+2D - Bubble - Red
+2E - Whistle Whirlwind
+2F - Fairy In Pond
+30 - Gibdo
+31 - Dodongo - Three
+32 - Dodongo - One
+33 - Ghoma - Blue
+34 - Ghoma - Red
+35 - 10 Rupees
+36 - Grumble, Grumble
+37 - Zelda
+38 - Digdogger / Digdogger 3 Spawn
+39 - Digdigger - Unused
+3A - Lanmola - Red
+3B - Lanmola - Blue
+3C - Manhandla
+3D - Aquamentus
+3E - Gannon / Triforce of Power
+3F - Fire Blocking Zelda
+40 - Fire
+41 - Moldorm
+42 - Gleeok - 1 Head - Unused ?
+43 - Gleeok - 2 Heads
+44 - Gleeok - 3 Heads
+45 - Gleeok - 4 Heads
+46 - Gleeok Head
+47 - Patra - Spiral
+48 - Patra - Expanding
+49 - Trap
+4A - Trap - Unused ?
+4B - Old Man - Dungeon Clue 1 - These 8 include 
+4C - Old Man - Dungeon Clue 2 - More Bombs
+4D - Old Man - Dungeon Clue 3 - And Leave Your
+4E - Old Man - Dungeon Clue 4 - Money Or Life
+4F - Old Man - Dungeon Clue 5
+50 - Old Man - Dungeon Clue 6
+51 - Old Man - Dungeon Clue 7
+52 - Old Man - Dungeon Clue 8
+53 - Octorok's Rock
+54 - ? Bolt
+55 - Zora's Bolt / Statue's Bolt / Fire's Bolt / Aquamentus' Bolt
+56 - Gannon's Bolt / Manhandla's Bolt / Gleeok's Bolt
+57 - Lynel's Sword, Stalfos Sword
+58 - ? Bolt
+59 - Wizzrobe's Bolt
+5A - ? Bolt
+5B - Moblin's Spear
+5C - Goriya's Boomerang
+5D - ? Death Explosion
+5E - Whistle Makes Stairs Appear
+5F - Step Ladder
+60 - Heart / Rupee / 5 Rupees / Fairy / Clock
+61 - Raft Launch
+62 - Pushable Boulder
+63 - Bombable Wall
+64 - Burnable Bush
+65 - Pushable Tombstone
+66 - ?
+67 - ?
+68 - Pushable Block
+69 - ?
+6A - Old Man - Rusty Sword
+6B - Old Man - Take Medicine / Heart
+6C - Old Man - White Sword
+6D - Old Man - Magic Sword
+6E - Old Man - Warp
+6F - Old Man - Secret Tree At Dead-End
+70 - Old Man - Money Making Game 
+71 - Old Man - Door Repair
+72 - Old Man - With Letter
+73 - Old Woman - Meet the Old Man At the Grave
+74 - Old Woman - Medicine
+75 - Old Woman - Pay to Talk (Go Up the Mountain)
+76 - Old Woman - Pay to Talk (Go North, West, South, West)
+77 - Merchant 1 (130 Shield, 20 Bombs, 80 Arrows)
+78 - Merchant 2 (160 Shield, 100 Key, 60 Candle)
+79 - Merchant 3 (90 Shield, 100 Bait, 10 Heart)
+7A - Merchant 4 (80 Key, 250 Ring, 60 Bait)
+7B - Secret to Everybody - 30
+7C - Secret to Everybody - 100
+7D - Secret to Everybody - 
+7E - ?
+7F - ?
+Maps
+There are six different maps in the game, each is 16 screens wide and 8 screens tall.
+
+
+Overworld, First Quest
+
+ 
+
+Underworld 1, First Quest
+
+ 
+
+Underworld 2, First Quest
+
+ 
+
+Overworld, Second Quest
+
+ 
+
+Underworld 1, Second Quest
+
+ 
+
+Underworld 2, Second Quest
+
+Code
+Damage Enemy
+Expected:
+ $0007 - High nybble is amount of damage to deal.
+ X     - Hit object's offset.
+ Y     - Hitting object's direction offset.
+
+7C3F:C9 0B     CMP #$0B
+7C41:F0 04     BEQ $7C47
+7C43:C9 0C     CMP #$0C
+7C45:D0 0D     BNE $7C54
+7C47:B9 98 00  LDA $0098,Y      ; Load the object's direction.
+7C4A:15 98     ORA $98,X
+7C4C:C9 0C     CMP #$0C
+7C4E:F0 19     BEQ $7C69
+7C50:C9 03     CMP #$03
+7C52:F0 15     BEQ $7C69
+7C54:A9 02     LDA #$02
+7C56:8D 04 06  STA $0604
+7C59:BD 85 04  LDA 0485,X       ; Load enemy's hit points into A.
+7C5C:C5 07     CMP $0007        ; Check for killing hit.
+7C5E:90 16     BCC $7C76        ; If hit will put HP below 0, jump to 7C76 (kill monster).
+7C60:38        SEC              ; 
+7C61:E5 07     SBC $0007        ; Subtract damage amount from A.
+7C63:9D 85 04  STA 0485,X       ; Store modified hit points.
+7C66:F0 0E     BEQ $7C76        ; If monster's new HP is 0, jump to 7C76 (kill monster).
+7C68:60        RTS
+Load Room With Enemies
+889D:B9 A2 6B  LDA $6BA2,Y      ; Load from the list of maximum enemies in the rooms.
+88A0:A4 02     LDY $0002
+88A2:C0 62     CPY #$62
+88A4:B0 06     BCS $88AC
+88A6:C0 32     CPY #$32
+88A8:90 02     BCC $88AC
+88AA:A9 01     LDA #$01
+88AC:85 03     STA $0003        ; $0003 temporarily houses the number of enemies in the room.
+88AE:A5 10     LDA $0010
+88B0:D0 06     BNE $88B8
+88B2:20 B8 90  JSR $90B8
+88B5:4C C7 88  JMP $88C7
+88B8:20 9D 92  JSR $929D
+...
+Text
+The Legend of Zelda uses a single character set throughout the entire game. It features letters, numbers, and some symbols. However, it uses the 8th bit as a carriage return / linefeed flag, so the entire character set is duplicated in the table, the first set is normal letters, the second set is end-of-line letters. Also, EC is a period that causes a full stop in the interpreter.
+
+00=0
+01=1
+02=2
+03=3
+04=4
+05=5
+06=6
+07=7
+08=8
+09=9
+0A=A
+0B=B
+0C=C
+0D=D
+0E=E
+0F=F
+10=G
+11=H
+12=I
+13=J
+14=K
+15=L
+16=M
+17=N
+18=O
+19=P
+1A=Q
+1B=R
+1C=S
+1D=T
+1E=U
+1F=V
+20=W
+21=X
+22=Y
+23=Z
+24= 
+28=,
+29=!
+2A='
+2B=&
+2C=.
+2D="
+2E=?
+2F=-
+30=™
+64=+
+7A=©
+80=0
+81=1
+82=2
+83=3
+84=4
+85=5
+86=6
+87=7
+88=8
+89=9
+8A=A
+8B=B
+8C=C
+8D=D
+8E=E
+8F=F
+90=G
+91=H
+92=I
+93=J
+94=K
+95=L
+96=M
+97=N
+98=O
+99=P
+9A=Q
+9B=R
+9C=S
+9D=T
+9E=U
+9F=V
+A0=W
+A1=X
+A2=Y
+A3=Z
+A4= 
+A8=,
+A9=!
+AA='
+AB=&
+AC=.
+AD="
+AE=?
+AF=-
+EC=.

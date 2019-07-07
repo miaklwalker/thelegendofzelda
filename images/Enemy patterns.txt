@@ -1,0 +1,113 @@
+Armos
+
+These foes are living statues and do not move around like other enemies until disturbed. Touching or striking them will cause them to move around. They are vulnerable to all type of weaponry. Secrets can sometimes be hidden behind these enemies so they cannot always be avoided.
+
+Blade Trap
+
+A blade trap will attack if you stand directly horizontal or vertical to it. This enemy cannot be destroyed but can be blocked blocks.
+
+Boulder
+
+More of an obstacle than an enemy. Boulders fall from the mountain range and cannot be destroyed only avoided.
+
+Bubble
+
+These flaming skulls are found in many dungeons. These enemies do not cause damage to the player when touched but, you will not be able to use your sword for a short period of time. In the second quest this is changed slightly where Red Bubbles cause you to lose use of your sword and only Blue Bubbles can cure you.
+
+Darknut
+
+A Darknut is heavily armored and uses a shield to block all attacks from the front. You must attack from the side or back to cause damage. There are two types of Darknuts: red and blue. Blue Darknuts take more damage.
+
+Gel
+
+Small, weak and annoying. Gel split off from Zols once a Zol is defeated but can appear on there own too. They are easy to defeat though then can at times be hard to hit do to there movement and size.
+
+Ghini
+
+Appearing only in the graveyard these ghoulish spirits appear when certain gravestone are touched. They can be beat by most weapons. However, if more than one spawn on the screen only the first to appear can be destroyed; once it is all others will be destroyed too.
+
+Gibdo
+
+Slow moving, strong and very resilient the undead Gibdo are one of the more dangerous enemies in the game. Attack with caution and do not underestimate.
+
+Goriya
+
+Wielding boomerangs Goriyas are one of a few range enemies. They can only throw horizontally or vertically. There are two types of Goriya: red and blue. Blue Goriyas are stronger.
+
+Keese
+
+Though they are not a strong enemy they move erratically and often attack in groups. This makes them tricky to defeat at times and a range weapon is the good way to defeat them.
+
+Lanmola
+
+A powerful enemy appearing only later in the game. In order to defeat this centipedeyou need to destroy it from the tail until you have worked your way to its head. There are two types of Lanmola: red and blue. Blue Lanmolasare faster and more dangerous.
+
+Leever
+
+Living in the ground the Leevers can surprise the player by burrowing underground and reappearing in a different spot on the screen. They are not particularly strong enemy. There are two types of Leever: red and blue. Blue Leeverare stronger.
+
+Like Like
+
+If you get too close to one it will swallow you whole! You need to fight your way out quickly or it will eat your Magic Shield.
+
+Lynel
+
+Easily one of the most dangerous enemies you will in counter. Lynel have a good deal of health and they can shoot beams from their swords. There is no special trick to defeating them as the take damage from all types of weapons. There are two types of Lynel: red and blue. Blue Lynelare stronger.
+
+Moblin
+
+A fairly common enemy. The moblins are a well balanced threat. they throw spears and cause damage if they touch you. There are two types of Moblin: red and blue. Blue Moblins are stronger.
+
+Moldorm
+
+Similar to the Lanmola all sections of this enemy must be defeated individually. Unlike the Lanmola the order you do this does not matter.
+
+Octorok
+
+This classic octopus-like creature shoots rocks out his mouth either horizontally or vertically. There are two types of Octorok: red and blue. Blue Octorokare stronger.
+
+Peahat
+
+While moving this enemy cannot be damaged. Wait of it to stop flying and it's pedals to stop spinning to attack it. Peahats do not take damage from fire or a boomerang.
+
+Pols Voice
+
+This rabbit-like monster is vulnerable to arrow and bomb attacks. Though it can be defeated with a sword, it takes many hits an giving the amount of damage a Pols Voice can do if touched, it's best to keep your distance.
+
+In the Japanese release of the game the Pols Voice could be easily defeated by making a loud noise in to the Famicoms controllers mic, there was no such mic on the NES.
+
+Rope
+
+These snake creatures do not attack until the player is either directly horizontal or vertical from them, then they will quickly charge you so have a weapon ready.
+
+Stalfos
+
+A fairly easy enemy, these skeletons don't take much damage. Keep an eye out! they often have keys embedded into their ribcage. In the second quest they shoot beams from their swords.
+
+Stone Statue
+
+These are stationary turretsthat shoot fireballs. They cannot be defeated though there are often ways to deactivate them: like hitting a switch or defeating all the enemies in the room.
+
+Tektite
+
+Tekti jump all over the screen making them a bit tricky to defeat. They are vulnerable to all types of attacks just make sure you get out of their way when they jump at you.
+
+Vire
+
+If this blue demon is hit with a weaker weapon it will split into two keese instead of being truly defeated. The magic sword is one of the few weapons that can truly dispatch it.
+
+Wallmaster
+
+Wallmasters are disembodied hands appear only in dungeons and come out of the walls . If you are caught by one, you will be taken back to the start of the dungeon.
+
+Wizzrobe
+
+Wizzrobes shoot magical attacks and have the ability to appear and disappear. There are two types of Wizzrobes: red and blue. Blue Wizzrobes are stronger and also have the ability to teleport.
+
+Zol
+
+When attacked with a weaker weapon this enemy will split into two gels.
+
+River Zora
+
+Living in the water these enemies will pop out of the water and spit their attack. Due to the fact they live in the water they can be very tricky to defeat and at times it's better to avoid them.\
