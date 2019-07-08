@@ -4,7 +4,7 @@ import loadJson from "./components/functions/getjson.js";
 
 let canvas = makeCanvas() as HTMLCanvasElement;
 let ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-let game = new Game(240,240);
+let game = new Game(480,480);
 game.makeGameScreen(canvas,ctx);
 game.startScreen(ctx);
 loadJson("../json/sprites.json")

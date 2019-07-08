@@ -8,10 +8,10 @@ export default class Game {
         this.height = height;
     }
     makeGameScreen(canvas, context) {
-        canvas.width = 480;
-        canvas.height = 480;
+        canvas.width = this.width;
+        canvas.height = this.height;
         document.body.appendChild(canvas);
     }
-    startScreen(context) {
-    }
+    startScreen(context) { }
 }
+//# sourceMappingURL=game.js.map

@@ -1,4 +1,4 @@
-import showImage from "../functions/drawImage.js"
+import showImage from "../functions/drawImage.js";
 /*
 Is going to be used for storing non state elements of the game such as diminsions and various screens
 
@@ -14,11 +14,9 @@ export default class Game {
         canvas: HTMLCanvasElement,
         context: CanvasRenderingContext2D,
     ) {
-        canvas.width = 480;
-        canvas.height = 480;
+        canvas.width = this.width;
+        canvas.height = this.height;
         document.body.appendChild(canvas);
     }
-    startScreen(context:CanvasRenderingContext2D){
-        
-    }
+    startScreen(context: CanvasRenderingContext2D) {}
 }
