@@ -17,5 +17,7 @@
   "devDependencies": {
     "typescript": "^3.5.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "typescript": "3.5.2"
+  }
 }
