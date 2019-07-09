@@ -1,0 +1,289 @@
+You know, I think it's time I posted this stuff here:
+
+Each enemy has a specific amount of health, and you can gauge exactly how much life an enemy has by using a variety of weapons on them. 
+Some factors may deviate from this, such as the Boomerang killing weaker enemies, but stunning the rest. As well as being able to defeat a Dodongo with one sword strike, regardless of it's armor or health when stunned by a bomb blast.
+
+Anyway. You can accurately measure damage and attack power, in hearts. 
+
+
+Items:
+
+Wooden Sword:1 heart damage
+White Sword:2 hearts damage
+Magical Sword:4 hearts damage
+Boomerangs:0.5 hearts damage (Hurts weaker enemies only)(Stuns minor enemies)
+Bomb:4 hearts damage (Does not hurt link)(Can hit more than once)
+Arrow:2 hearts damage
+Silver Arrow:4 hearts damage
+Blue/Red Candle:1 heart damage (0.5 hearts damage to Link)
+Wand:2 hearts (Melee strike)(Fire does 1 heart damage to enemies and 0.5 hearts to Link)
+
+Enemies
+
+Red Octorok:
+Life:0.5 Hearts
+Damage:0.5 Hearts
+
+Blue Octorok:
+Life:1 Heart
+Damage:0.5 Hearts
+
+Red Tektite:
+Life:0.5 Hearts
+Damage: 0.5 Hearts
+(Special Ability:Can pass over rocks/trees)
+
+Blue Tektite:
+Life:0.5 Hearts
+Damage:0.5 Hearts
+(Special Ability:Can pass over rocks/trees)
+
+Red Leever:
+Life:2 Hearts
+Damage:0.5 Hearts
+(Special Ability:Can burrow, and quickly resurface to your location)
+
+Blue Leever:
+Life:4 Hearts
+Damage:1 Heart
+(Special Ability:Burrows after a set period of time, randomly reappears)
+
+Orange Moblin:
+Life:2 Hearts
+Damage:0.5 Hearts
+
+Black Moblin:
+Life:3 Hearts
+Damage: 0.5 Hearts
+
+Zola:
+Life:2 Hearts
+Damage:0.5 Hearts
+(Special Ability:Can recover health when submerging underwater)
+
+Armos:
+Life:3 Hearts
+Damage:1 Heart
+(Special Ability:Can go either slow or fast upon coming to life)
+
+Peahat:
+Life:2 Hearts
+Damage:0.5 Hearts
+(Special Ability:Can hover, and not be hurt while hovering. Can only be hurt when on the ground)
+
+Red Lynel:
+Life:4 Hearts
+Damage:2 Hearts (Sword Shot)
+
+Blue Lynel:
+Life:6 Hearts
+Damage:2 Hearts (Sword Shot)
+
+Ghini:
+Life:9 Hearts
+Damage:1 Heart
+
+Fake Ghini:
+Life:N/A
+Damage:1 Heart
+(Special Ability:Can move diagonally, and pass through objects, while the solid Ghini can't)
+(Only spawns from gravestones when they are touched)
+
+Gel:
+Life:0.5 Hearts
+Damage:0.5 Hearts
+(Can be defeated with the boomerang)
+
+Zol:
+Life:2 Hearts
+Damage:1 Heart
+(Special Ability:Splits into 2 Gels when hit with damage less than 2 Hearts)
+
+Keese:
+Life:0.5 Hearts
+Damage:0.5 Hearts
+(Can be defeated with the boomerang)
+
+Stalfos:
+Life:2 Hearts
+Damage:0.5 Hearts
+
+Red Goriya
+Life:3 Hearts
+Damage:1 Heart
+
+Blue Goriya
+Life:5 Hearts
+Damage:1 Heart
+
+Shooting Statue
+Life:N/A
+Damage:0.5 Hearts
+
+Razor Trap
+Life:N/A
+Damage:1 Heart
+(Can only move on a specific path. Must return to it's corner before it can move again)
+
+Aquamentus (Boss)
+Life:6 Hearts
+Damage:0.5 Hearts
+
+Rope
+Life:0.5 Hearts
+Damage:0.5 Hearts
+
+Flashing Rope
+Life:3 Hearts
+Damage:0.5 Hearts
+(2nd Quest enemy only)
+
+Dodongo (Boss)
+Life:8 Hearts 
+Damage:1 Heart
+(Can be killed in one sword strike regardless if stunned by smoke from a bomb)
+
+Red Darknut 
+Life:4 Hearts
+Damage:1 Heart
+(Impervious to frontal attacks)
+
+Blue Darknut
+Life:8 Hearts
+Damage:2 Hearts
+(Impervious to frontal attacks)
+
+Manhandla (Boss)
+Life:3 Hearts per hand, 12 hearts total
+Damage:1 Heart
+(Special Ability:Gains speed upon losing hands)
+
+Vire
+Life:4 Hearts
+Damage:1 Heart
+(Splits into 2 red Keese when hit with any shot that does less than 4 damage)
+
+Like-Like
+Life:9 Hearts
+Damage:1 Heart
+(Special Ability:Can eat your large (magical) Shield)
+
+Bubble
+Life:N/A
+Damage:0 Hearts
+(Causes Temporary Sword Curse)
+
+Blue Bubble
+Life:N/A
+Damage:0 Hearts
+(Removes Permanent Sword Curse)
+(2nd Quest Enemy Only)
+
+Red Bubble
+Life:N/A
+Damage:0 Hearts
+(Causes Permanent Sword Curse)
+(2nd Quest Enemy Only)
+(Curse can be removed by Blue Bubbles, using a potion, collecting a Triforce shard, and I believe when one loses a life)
+
+Gleeok (Boss) (2, 3, or 4 Heads)
+Life:4 Hearts per head (8, 12, or 16 Hearts total)
+Damage:1 Heart
+(Defeated heads can fly around and shoot fireballs until the Gleeok perishes)
+
+Gleeok (head)
+Life:Invincible
+Damage:1 Heart
+(Will vanish once Gleeok is defeated)
+
+Gibdo
+Life:8 Hearts
+Damage:2 Hearts
+
+Pols Voice
+Life:9 Hearts
+Damage:2 Hearts
+(Can be defeated in one shot with arrows, regardless of health)
+
+Digdogger (Boss)
+Life:Cannot be damaged until the Flute is used
+Damage:1 Heart
+(Will either split into 1 eye or 3 eyes)
+
+Digdogger (Weakened)
+Life:I forget, anywhere from 4-8 Hearts
+Damage:1 Heart
+
+Orange Wizzrobe
+Life:4 Hearts
+Damage:4 Hearts
+(Special Ability:Teleportation)
+(Does most damage in game alongside Ganon himself)
+
+Blue Wizzrobe
+Life:8 Hearts
+Damage:2 Hearts
+(Special Ability:Can pass through objects)
+
+Red Gohma (Boss)
+Life:2 Hearts
+Damage:1 Heart
+(Impervious to all attacks when eye is closed, and can only be damaged with arrow once eye is open)
+
+Blue Gohma (Boss)
+Life:6 Hearts
+Damage:1 Heart
+(Impervious to all attacks when eye is closed, and can only be damaged with arrow once eye is open)
+
+Orange Lanmola
+Life:?
+Damage:2 Hearts
+
+Blue Lanmola
+Life:?
+Damage:2 Hearts
+(Very Fast)
+
+Patra Baby
+Life:5 to 8 Hearts
+Damage:2 Hearts
+
+Patra
+Life:9 Hearts
+Damage:2 Hearts
+(Impervious to damage until all Patra Babies are defeated)
+
+Black Keese
+Life:0.5 Hearts
+Damage: 0.5 Hearts
+(2nd Quest Only)
+
+Flames
+Life:N/A
+Damage:0.5 Hearts
+(Only the fires in Zeldas room can be defeated)
+
+
+Death Mountain Boulder
+
+Life:N/A
+Damage:0.5 Hearts
+(Special Ability:Can pass over objects)
+
+Moldorm
+Life:
+Damage:0.5 Hearts
+
+Sword-Shooting Stalfos
+Life:2 Hearts
+Damage:2 Hearts (Sword Shot) 
+(2nd Quest Enemy Only)
+
+
+
+Ganon (Final Boss)
+Life:16 Hearts
+Damage:4 Hearts (Touch damage) 2 Hearts (Fireball damage)
+(Special Ability:invisibility and Teleportation)
+
+The game uses two bytes to determine Link's health. One byte is for the last non-full heart (out of 255) and the other byte is for the number of full hearts and maximum hearts. This also goes up to 255, but works in a different way. The value is divided by 16, with the value +1 being the max number of hearts and the remainder being the number of full hearts. For example, if this byte was set to 250, Link would have 16 maximum hearts, 10 full hearts, and the 11th heart could be full or half empty as determined by the other byte

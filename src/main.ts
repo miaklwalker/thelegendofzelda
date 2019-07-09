@@ -8,6 +8,5 @@ let game = new Game(512,480);
 game.makeGameScreen(canvas,ctx);
 loadJson("../json/sprites.json")
 .then(data=>console.log(data))
-//ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 
