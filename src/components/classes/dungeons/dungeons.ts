@@ -1,4 +1,4 @@
-export default class Dungeons {
+export default class Dungeon {
     name: string;
     keys: Array<any>;
     miniboss: boolean;
@@ -7,7 +7,8 @@ export default class Dungeons {
     rooms: any[];
     visitedRooms: any[];
     boss: boolean;
-    constructor(name: string) {
+    treasures: string[];
+    constructor(name: string,equipment:string[]) {
         this.name = name;
         this.keys = [];
         this.miniboss = false;
@@ -16,5 +17,6 @@ export default class Dungeons {
         this.rooms = [];
         this.visitedRooms = [];
         this.boss = false;
+        this.treasures=equipment
     }
 }
