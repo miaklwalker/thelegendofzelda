@@ -1,14 +1,20 @@
 import showImage from "../functions/drawImage.js";
-/*
-Is going to be used for storing non state elements of the game such as diminsions and various screens
+import Hud from "./hud.js"
+import gameState from "./gameState.js";
+import Link from "./actors/link.js";
 
-*/
 export default class Game {
     width: number;
     height: number;
+    gameState: gameState;
+    hud: Hud;
+    Link: Link;
     constructor(width: number, height: number) {
         this.width = width;
         this.height = height;
+        this.gameState = new gameState()
+        this.Link = new Link()
+        this.hud = new Hud(this.gameState.inventory,this.Link)
     }
     makeGameScreen(
         canvas: HTMLCanvasElement,

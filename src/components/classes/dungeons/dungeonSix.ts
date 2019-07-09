@@ -1,7 +1,7 @@
 import Dungeon from "./dungeons";
 
 export default class sixthDungeon extends Dungeon{
-  constructor(name:string,equipment:string[]){
+  constructor(){
     super('sixthDungeon',["map","compas","magicRod","heartContainer","shardSix"])
   }
   }
