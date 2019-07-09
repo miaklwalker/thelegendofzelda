@@ -9,4 +9,3 @@ function uniqueid() {
     return idstr;
 }
 export default uniqueid;
-//# sourceMappingURL=createId.js.map

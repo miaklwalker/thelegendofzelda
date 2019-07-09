@@ -7,4 +7,3 @@ export default function loadImage(url) {
         image.src = url;
     });
 }
-//# sourceMappingURL=getImage.js.map

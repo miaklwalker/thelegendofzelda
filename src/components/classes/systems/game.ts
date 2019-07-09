@@ -1,7 +1,7 @@
-import showImage from "../functions/drawImage.js";
+import showImage from "../../functions/drawImage.js";
 import Hud from "./hud.js"
 import gameState from "./gameState.js";
-import Link from "./actors/link.js";
+import Link from "../actors/link.js";
 
 export default class Game {
     width: number;
@@ -23,6 +23,8 @@ export default class Game {
         canvas.width = this.width;
         canvas.height = this.height;
         document.body.appendChild(canvas);
+        this.hud.show(context,this);
+     
     }
     startScreen(context: CanvasRenderingContext2D) {}
 }

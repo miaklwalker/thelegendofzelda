@@ -1,13 +1,13 @@
-import firstDungeon from "./dungeons/dungeonOne";
-import secondDungeon from "./dungeons/dungeonTwo";
-import thirdDungeon from "./dungeons/dungeonThree";
-import fourthDungeon from "./dungeons/dungeonFour";
-import fifthDungeon from "./dungeons/dungeonFive";
-import sixthDungeon from "./dungeons/dungeonSix";
-import seventhDungeon from "./dungeons/dungeonSeven";
-import eighthDungeon from "./dungeons/dungeonEight";
-import ninthDungeon from "./dungeons/dungeonNine";
-import inventory from "./inventory";
+import firstDungeon from "../dungeons/dungeonOne.js";
+import secondDungeon from "../dungeons/dungeonTwo.js";
+import thirdDungeon from "../dungeons/dungeonThree.js";
+import fourthDungeon from "../dungeons/dungeonFour.js";
+import fifthDungeon from "../dungeons/dungeonFive.js";
+import sixthDungeon from "../dungeons/dungeonSix.js";
+import seventhDungeon from "../dungeons/dungeonSeven.js";
+import eighthDungeon from "../dungeons/dungeonEight.js";
+import ninthDungeon from "../dungeons/dungeonNine.js";
+import inventory from "./inventory.js";
 
 export default class gameState {
     dungeonOne: firstDungeon;

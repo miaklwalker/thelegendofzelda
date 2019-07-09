@@ -1,4 +1,4 @@
-import Dungeon from "./dungeons";
+import Dungeon from "./dungeons.js";
 
 export default class seventhDungeon extends Dungeon{
   constructor(){
