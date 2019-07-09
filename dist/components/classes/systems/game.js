@@ -14,6 +14,7 @@ export default class Game {
         canvas.height = this.height;
         document.body.appendChild(canvas);
         this.hud.show(context, this);
+        this.hud.showHearts(context);
     }
     startScreen(context) { }
 }

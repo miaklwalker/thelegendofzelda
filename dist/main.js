@@ -5,5 +5,5 @@ let canvas = makeCanvas();
 let ctx = canvas.getContext("2d");
 let game = new Game(512, 480);
 game.makeGameScreen(canvas, ctx);
-loadJson("../json/sprites.json")
+loadJson("../json/game.json")
     .then(data => console.log(data));
