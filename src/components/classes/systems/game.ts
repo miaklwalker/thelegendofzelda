@@ -23,7 +23,7 @@ export default class Game {
         this.hud = new Hud(this.gameState.inventory,this.Link)
         this.json = json
         this.overWorld= new Overworld()
-        this.camera = new camera()
+        this.camera = new camera(8,7)
     }
     makeGameScreen(
         canvas: HTMLCanvasElement,
@@ -32,13 +32,8 @@ export default class Game {
         canvas.width = this.width;
         canvas.height = this.height;
         document.body.appendChild(canvas);
-        // loadImage(this.json.urls.font)
-        // .then(data=>context.drawImage(data,0,0,this.width,this.height))
         this.hud.show(context,this,this.json);
-        //this.hud.showHearts(context)
         this.camera.show(this,context)
-
-     
     }
     startScreen(context: CanvasRenderingContext2D) {}
 }
