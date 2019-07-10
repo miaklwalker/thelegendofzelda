@@ -286,4 +286,9 @@ Life:16 Hearts
 Damage:4 Hearts (Touch damage) 2 Hearts (Fireball damage)
 (Special Ability:invisibility and Teleportation)
 
-The game uses two bytes to determine Link's health. One byte is for the last non-full heart (out of 255) and the other byte is for the number of full hearts and maximum hearts. This also goes up to 255, but works in a different way. The value is divided by 16, with the value +1 being the max number of hearts and the remainder being the number of full hearts. For example, if this byte was set to 250, Link would have 16 maximum hearts, 10 full hearts, and the 11th heart could be full or half empty as determined by the other byte
+The game uses two bytes to determine Link's health. 
+One byte is for the last non-full heart (out of 255) and the other byte is for the number of full hearts and maximum hearts. 
+This also goes up to 255, but works in a different way. The value is divided by 16,
+ with the value +1 being the max number of hearts and the remainder being the number of full hearts.
+  For example, if this byte was set to 250, Link would have 16 maximum hearts, 10 full hearts, 
+  and the 11th heart could be full or half empty as determined by the other byte

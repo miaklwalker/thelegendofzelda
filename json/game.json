@@ -18,7 +18,8 @@
         "font":             "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/system/font.png",
         "overworldTileset": "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/tiles/overworldTileset.png",
         "overWorldTiles":   "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/tiles/tiles-overworld.png",
-        "title":            "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/tiles/title.png"
+        "title":            "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/tiles/title.png",
+        "overWorld":        "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/overworld/zelda-overworld.png"
     },
     "hud": {
         "top": [260, 11, 250, 55.5, 0, 0, 512, 120]
