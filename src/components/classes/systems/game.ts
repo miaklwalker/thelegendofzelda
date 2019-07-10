@@ -35,7 +35,7 @@ export default class Game {
         // loadImage(this.json.urls.font)
         // .then(data=>context.drawImage(data,0,0,this.width,this.height))
         this.hud.show(context,this,this.json);
-        this.hud.showHearts(context)
+        //this.hud.showHearts(context)
         this.camera.show(this,context)
 
      

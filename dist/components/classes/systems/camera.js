@@ -1,17 +1,17 @@
 import { Vector } from "../math/vector.js";
 import loadImage from "../../functions/getImage.js";
+import showGrid from "../../../showScreenGrid.js";
 export default class camera {
     constructor() {
-        this.position = new Vector(1, 1);
-        this.location = new Vector(8, 8);
+        this.position = new Vector(8, 2);
     }
     show(game, context) {
         loadImage(game.json.urls.overworld)
             .then(data => {
-            context.drawImage(data, 1800, 1228, 240, 240, 0, 120, game.width, game.height);
+            context.drawImage(data, this.position.x * 256, this.position.y * 175, 256, 405, 0, 120, 512, 863);
+            showGrid(context);
+            console.log(this.position.x * 256, this.position.y * 175);
         });
-        context.fillStyle = 'saddleBrown';
-        context.fillRect(0, 60, game.width, game.height);
     }
 }
 // 16 W    8 H  

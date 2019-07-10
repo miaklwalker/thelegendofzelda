@@ -22,6 +22,6 @@
         "overworld":        "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/overworld/zelda-overworld.png"
     },
     "hud": {
-        "top": [260, 11, 250, 55.5, 0, 0, 512, 120]
+        "top": [258, 11, 255.5, 55.5   , 0, 0, 512, 120]
     }
 }
