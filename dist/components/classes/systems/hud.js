@@ -1,4 +1,6 @@
 import loadImage from "../../functions/getImage.js";
+import heartCover from "../../functions/heartCover.js";
+import showImage from "../../functions/drawImage.js";
 export default class Hud {
     constructor(inventory, character) {
         /*
@@ -10,15 +12,16 @@ export default class Hud {
         this.bombs = inventory.bombs;
         this.hearts = character.hearts;
     }
-    show(context, game) {
+    show(context, game, json) {
         context.fillStyle = 'saddleBrown';
         context.fillRect(0, 60, game.width, game.height);
-        loadImage('../../images/system/HUD.png')
+        loadImage(json.urls.hud)
             .then(data => {
             context.clearRect(0, 0, game.width, game.height * .25);
-            context.drawImage(data, 260, 11, 250, 55.5, 0, 0, game.width, game.height * .25);
-            context.fillStyle = 'black';
-            context.fillRect(355.4, 86.8, 17, 17);
+            let position = [];
+            console.log(game.width);
+            showImage(context, data, json.hud.top);
+            heartCover(context);
         });
     }
     showHearts(context) {

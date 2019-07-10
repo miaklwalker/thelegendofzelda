@@ -1,6 +1,5 @@
 import loadImage from "./getImage.js";
 
-export default async function showImage(context:CanvasRenderingContext2D,url:string,[x,y,w,h]:Array<number>){
-    let image:HTMLImageElement = await loadImage(url)
-    context.drawImage(image,x,y,w,h)
+export default async function showImage(context:CanvasRenderingContext2D,image:HTMLImageElement,[x,y,w,h,sx,sy,sw,sh]:Array<number>){
+    context.drawImage(image,x,y,w,h,sx,sy,sw,sh)
 }

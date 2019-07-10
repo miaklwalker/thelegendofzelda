@@ -1,23 +1,26 @@
 {
     "TitleScreen": {},
-    "urls":{
-        "dungeonTiles":"https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/dungeons/tiles-dungeon.gif",
-        "enemyTiles":"https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/bosses.png",
-        "enemy":"https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/enemies.png",
-        "enemyTwo":"https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/enemies-2.png",
-        "enemyThree":"https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/enemies-3.png",
-        "link3":"https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/link-3.png",
-        "misc2":"https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/misc-2.png",
-        "misc":"https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/misc.gif",
-        "npc":"https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/npc.png",
-        "npc2":"https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/npc2.png",
-        "zelda":"https://github.com/miaklwalker/thelegendofzelda/blob/master/images/sprites/zelda.png",
-        "zelda2":"https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/zelda2.png",
-        "hud":"https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/system/HUD.png",
-        "fileSelect":"https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/system/fileSelect.png",
-        "font":"https://github.com/miaklwalker/thelegendofzelda/blob/master/images/system/font.png",
-        "overworldTileset":"https://github.com/miaklwalker/thelegendofzelda/blob/master/images/tiles/overworldTileset.png",
-        "overWorldTiles":"https://github.com/miaklwalker/thelegendofzelda/blob/master/images/tiles/tiles-overworld.png",
-        "title":"https://github.com/miaklwalker/thelegendofzelda/blob/master/images/tiles/title.png" 
-       }
+    "urls": {
+        "dungeonTiles":     "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/dungeons/tiles-dungeon.gif",
+        "enemyTiles":       "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/bosses.png",
+        "enemy":            "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/enemies.png",
+        "enemyTwo":         "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/enemies-2.png",
+        "enemyThree":       "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/enemies-3.png",
+        "link3":            "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/link-3.png",
+        "misc2":            "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/misc-2.png",
+        "misc":             "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/misc.gif",
+        "npc":              "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/npc.png",
+        "npc2":             "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/npc2.png",
+        "zelda":            "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/zelda.png",
+        "zelda2":           "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/zelda2.png",
+        "hud":              "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/system/HUD.png",
+        "fileSelect":       "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/system/fileSelect.png",
+        "font":             "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/system/font.png",
+        "overworldTileset": "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/tiles/overworldTileset.png",
+        "overWorldTiles":   "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/tiles/tiles-overworld.png",
+        "title":            "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/tiles/title.png"
+    },
+    "hud": {
+        "top": [260, 11, 250, 55.5, 0, 0, 512, 120]
+    }
 }
