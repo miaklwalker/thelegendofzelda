@@ -1,4 +1,5 @@
-let alphabet = function drawLetter(text) { };
+function drawLetter(text) { }
+;
 export default drawLetter;
 /*
 {

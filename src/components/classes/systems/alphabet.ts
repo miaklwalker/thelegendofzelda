@@ -1,7 +1,7 @@
 import loadImage from "../../functions/getImage";
 
 
-let alphabet = function drawLetter(text: string | number) {};
+function drawLetter(text: string | number) {};
 
 export default drawLetter;
 
