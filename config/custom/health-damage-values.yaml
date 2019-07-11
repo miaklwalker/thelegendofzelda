@@ -1,0 +1,56 @@
+# Each enemy has a specific amount of health, and you can gauge exactly how much life an enemy has by using a variety of weapons on them.
+# Some factors may deviate from this, such as the Boomerang killing weaker enemies, but stunning the rest. As well as being able to defeat a Dodongo with one sword strike, regardless of it's armor or health when stunned by a bomb blast.
+
+Items:
+
+  Wooden Sword:
+    damage: 1 # 1 heart (damage measured in # hearts)
+  White Sword:
+    damage: 2
+  Magical Sword:
+    damage: 4
+  Boomerangs:
+    damage: 0.5 hearts damage (Hurts weaker enemies only)(Stuns minor enemies) # TODO: how to represent -- maybe enemy model can have damage overrides? per item
+  Bomb:
+    # 4 hearts damage (Does not hurt link)(Can hit more than once)
+    damage: 4
+    aoe: true
+    radius: 1 # TODO: what's the real radius value?
+  Arrow:
+    damage: 2
+  Silver Arrow:
+    4
+  Blue/Red Candle:
+#    1 heart damage (0.5 hearts damage to Link)
+    damage: 1
+    kickback: 0.5 # damages Link for 0.5 hearts -- I feel like there's probably a better term than "kickback" for this lol. backlash?
+  Wand:
+#    2 hearts (Melee strike)(Fire does 1 heart damage to enemies and 0.5 hearts to Link)
+    damage: 2
+    projectileDamage: 1 # TODO: ?
+
+Enemies:
+
+  Red Octorok:
+    Life: 0.5 # 0.5 Hearts (life measured in # hearts)
+    Damage: 0.5
+
+  Blue Octorok:
+    Life: 1 Heart
+    Damage: 0.5
+
+  Red Tektite:
+    Life: 0.5
+    Damage: 0.5
+#    (Special Ability: Can pass over rocks/trees)
+    abilities:
+      - No_Wall_Collision
+      - No_Rock_Collision
+
+  Blue Tektite:
+    Life: 0.5
+    Damage: 0.5
+#    (Special Ability: Can pass over rocks/trees)
+    abilities:
+      - No_Wall_Collision
+      - No_Rock_Collision
