@@ -15,7 +15,7 @@ export default class camera {
             this.position.y*176.1,
             256,405,0,120,512,863
             )
-                //showGrid(context);
+                showGrid(context);
         })
         
     }

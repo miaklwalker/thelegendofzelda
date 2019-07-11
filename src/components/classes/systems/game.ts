@@ -1,8 +1,6 @@
-import showImage from "../../functions/drawImage.js";
 import Hud from "./hud.js"
 import gameState from "./gameState.js";
 import Link from "../actors/link.js";
-import loadImage from "../../functions/getImage.js";
 import Overworld from "../overworld.js";
 import camera from "./camera.js";
 
@@ -24,7 +22,7 @@ export default class Game {
         this.hud = new Hud(this.gameState.inventory,this.Link)
         this.json = json
         this.overWorld= new Overworld()
-        this.camera = new camera(7,7)
+        this.camera = new camera(15,7)
     }
     makeGameScreen(
         canvas: HTMLCanvasElement,
@@ -34,11 +32,7 @@ export default class Game {
         canvas.height = this.height;
         document.body.appendChild(canvas);
         this.hud.show(context,this)
-        //this.camera.show(this,context)
+        this.camera.show(this,context)
     }
     startScreen(context: CanvasRenderingContext2D) {}
 }
-
-/*
-'../../images/system/font.png'
-*/
