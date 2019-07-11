@@ -1,9 +1,6 @@
-You know, I think it's time I posted this stuff here:
-
 Each enemy has a specific amount of health, and you can gauge exactly how much life an enemy has by using a variety of weapons on them. 
 Some factors may deviate from this, such as the Boomerang killing weaker enemies, but stunning the rest. As well as being able to defeat a Dodongo with one sword strike, regardless of it's armor or health when stunned by a bomb blast.
 
-Anyway. You can accurately measure damage and attack power, in hearts. 
 
 
 Items:
