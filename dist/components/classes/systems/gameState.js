@@ -20,5 +20,6 @@ export default class gameState {
         this.dungeonEight = new eighthDungeon();
         this.dungeonNine = new ninthDungeon();
         this.inventory = new inventory();
+        this.paused = true;
     }
 }

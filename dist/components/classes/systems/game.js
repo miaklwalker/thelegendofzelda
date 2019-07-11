@@ -12,14 +12,14 @@ export default class Game {
         this.hud = new Hud(this.gameState.inventory, this.Link);
         this.json = json;
         this.overWorld = new Overworld();
-        this.camera = new camera(8, 7);
+        this.camera = new camera(7, 7);
     }
     makeGameScreen(canvas, context) {
         canvas.width = this.width;
         canvas.height = this.height;
         document.body.appendChild(canvas);
-        this.hud.show(context, this, this.json);
-        this.camera.show(this, context);
+        this.hud.show(context, this);
+        //this.camera.show(this,context)
     }
     startScreen(context) { }
 }
