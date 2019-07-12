@@ -2,9 +2,7 @@ import inventory from "./inventory.js";
 import Link from "../actors/link.js";
 import Game from "./game.js";
 import loadImage from "../../functions/getImage.js";
-import heartCover from "../../functions/heartCover.js";
 import showImage from "../../functions/drawImage.js";
-import showGrid from "../../../showScreenGrid.js";
 
 export default class Hud {
     map: string;

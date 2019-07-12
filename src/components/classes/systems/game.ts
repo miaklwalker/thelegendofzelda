@@ -34,11 +34,11 @@ export default class Game {
         canvas.width = this.width;
         canvas.height = this.height;
         document.body.appendChild(canvas);
+        let paused = this.gameState.paused ? 0 : -340  ;
         //this.hud.show(context,this)
-        //this.camera.show(this,context)
+        this.camera.show(this,context)
         pauseMenu().then(data=>{
-            console.log(data)
-            context.drawImage(data,0,0,512,480)
+            context.drawImage(data,0,paused,512,480)
         })
         
         
