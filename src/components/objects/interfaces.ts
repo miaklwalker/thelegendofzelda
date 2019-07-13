@@ -26,13 +26,13 @@
     }
 
     export interface Hud {
-        top: number[];
-        paused: number[];
-        triforce: number[];
-        items: number[];
+        top: [number,number,number,number,number,number,number,number];
+        paused:[number,number,number,number,number,number,number,number];
+        triforce:[number,number,number,number,number,number,number,number];
+        inventory: [number,number,number,number,number,number,number,number];
     }
 
-    export interface RootObject {
+    export default interface RootObject {
         TitleScreen: TitleScreen;
         urls: Urls;
         hud: Hud;

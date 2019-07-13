@@ -31,12 +31,13 @@ export default class pauseScreen {
 
             let imageOne = await loadImage(game.json.urls.hud);
             const HUD: HTMLImageElement = await imageOne;
-            context.drawImage(HUD, 1, 30, 255, 88, 0, 0, 512, 200); //*inventory
-            context.drawImage(HUD, 1, 115, 255, 90, 0, 155, 512, 220); //*triforce
-            context.drawImage(HUD, 258, 16, 255.5, 55, 0, 360, 512, 130); //*hud
+            context.drawImage(HUD, ...game.json.hud.inventory); //*inventory
+            context.drawImage(HUD, ...game.json.hud.triforce); //*triforce
+            context.drawImage(HUD, ...game.json.hud.top); //*hud
             this.minimap(context);
             return canvas;
         };
+        
         return screen;
     }
 }
