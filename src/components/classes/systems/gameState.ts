@@ -21,6 +21,7 @@ export default class gameState {
     dungeonNine: ninthDungeon;
     inventory: inventory;
     paused:boolean;
+    transition:boolean;
     constructor() {
         this.dungeonOne = new firstDungeon();
         this.dungeonTwo = new secondDungeon();
@@ -32,6 +33,7 @@ export default class gameState {
         this.dungeonEight = new eighthDungeon();
         this.dungeonNine = new ninthDungeon();
         this.inventory = new inventory();
-        this.paused = true
+        this.paused = false;
+        this.transition = false;
     }
 }
