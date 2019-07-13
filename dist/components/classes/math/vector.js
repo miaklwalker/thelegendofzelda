@@ -16,6 +16,22 @@ export class Vector {
         this.x += v.x;
         this.y += v.y;
     }
+    addX(v) {
+        this.x += v.x;
+    }
+    addY(v) {
+        this.y += v.y;
+    }
+    subtract(v) {
+        this.x -= v.x;
+        this.y -= v.y;
+    }
+    subtractX(v) {
+        this.x -= v.x;
+    }
+    subtractY(v) {
+        this.y -= v.y;
+    }
     mult(factor) {
         if (factor instanceof Vector) {
             this.x *= factor.x;
@@ -36,6 +52,20 @@ export class Vector {
             this.x /= divisor;
             this.y /= divisor;
         }
+    }
+    distanceX(v) {
+        return this.x - v.x;
+    }
+    distanceY(v) {
+        return this.y - v.y;
+    }
+    distance(v) {
+        return Math.sqrt(this.distanceSq(v));
+    }
+    distanceSq(v) {
+        let dx = this.distanceX(v);
+        let dy = this.distanceY(v);
+        return dx * dx + dy * dy;
     }
     limit(max) {
         let mSq = this.x * this.x + this.y * this.y;

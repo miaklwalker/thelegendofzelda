@@ -1,3 +1,9 @@
+/**
+ *
+ *
+ * @export
+ * @class Dungeon
+ */
 export default class Dungeon {
     constructor(name, equipment) {
         this.name = name;

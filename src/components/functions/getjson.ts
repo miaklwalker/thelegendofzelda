@@ -1,4 +1,3 @@
-export default async function loadJson(url: string) {
-    let response = await (await fetch(url,{mode: 'no-cors'})).json();
-    return response;
-}
+ const loadJson = async (url: string)=> await (await fetch(url)).json();
+export default loadJson
+

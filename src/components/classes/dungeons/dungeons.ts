@@ -1,3 +1,11 @@
+
+
+/**
+ *
+ *
+ * @export
+ * @class Dungeon
+ */
 export default class Dungeon {
     name: string;
     keys: Array<any>;

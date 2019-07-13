@@ -16,6 +16,7 @@
   "author": "Michael Walker",
   "license": "MIT",
   "devDependencies": {
+    "@babel/types": "^7.5.0",
     "@types/jest": "^24.0.15",
     "@types/js-yaml": "^3.12.1",
     "@types/node": "^12.6.2",

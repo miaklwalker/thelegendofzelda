@@ -1,3 +1,2 @@
-export default function makeCanvas(){
-    return document.createElement('canvas');
-}
+let makeCanvas=()=>document.createElement('canvas');
+export default makeCanvas

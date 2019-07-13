@@ -4,7 +4,8 @@
     "module": "esnext",
     "outDir": "./dist",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "node"
   },
   "include": [
     "./src"

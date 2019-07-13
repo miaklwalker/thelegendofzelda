@@ -1,3 +1,10 @@
+
+/**
+ *
+ *
+ * @export
+ * @class Link
+ */
 export default class Link {
     hearts: number;
     health: number;

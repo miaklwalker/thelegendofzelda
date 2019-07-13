@@ -16,9 +16,9 @@ function showGrid(ctx:CanvasRenderingContext2D){
         ctx.lineTo(j,canvas.height);
         ctx.stroke();
     }
-    // ctx.beginPath();
-	// ctx.moveTo(0, 480);
-	// ctx.lineTo(canvas.width, 480);
-    // ctx.stroke();
+     ctx.beginPath();
+	 ctx.moveTo(0, 480);
+	 ctx.lineTo(canvas.width, 480);
+     ctx.stroke();
 }
 export default showGrid

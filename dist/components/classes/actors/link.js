@@ -1,3 +1,9 @@
+/**
+ *
+ *
+ * @export
+ * @class Link
+ */
 export default class Link {
     constructor() {
         this.hearts = 3;

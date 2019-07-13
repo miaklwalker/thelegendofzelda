@@ -1,3 +1,11 @@
+
+
+/**
+ *
+ *
+ * @export
+ * @class enemy
+ */
 export default class enemy{
     behavior: number;
     health: number;
