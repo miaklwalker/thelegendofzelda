@@ -47,7 +47,6 @@ export default class Game {
     loadFiles() {
 
        let images =  Object.values(this.json.urls).map(url  =>loadImage(url))
-       console.log(images)
-       Promise.all(images).then(response=>{this.images.push(response)}).finally(()=>console.log(this.images))
+       Promise.all(images).then(response=>{this.images.push(response)})
     }
 }

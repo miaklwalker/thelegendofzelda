@@ -20,7 +20,7 @@ function setup() {
 }
 function draw() {
     game.makeGameScreen(canvas, ctx);
-    //loop();
+    loop();
 }
 function loop() {
     requestAnimationFrame(draw);

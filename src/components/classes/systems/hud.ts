@@ -1,6 +1,4 @@
 import Game from "./game.js";
-import loadImage from "../../functions/getImage.js";
-import showImage from "../../functions/drawImage.js";
 
 export default class Hud {
 
