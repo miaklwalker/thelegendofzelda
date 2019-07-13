@@ -10,23 +10,21 @@ export default class Game {
         this.height = height;
         this.gameState = new gameState();
         this.Link = new Link();
-        this.hud = new Hud(this.gameState.inventory, this.Link);
+        this.hud = new Hud(this);
         this.json = json;
         this.overWorld = new Overworld();
         this.camera = new camera(7, 7);
         this.pauseScreen = new pauseScreen();
     }
     makeGameScreen(canvas, context) {
-        let pauseMenu = this.pauseScreen.show(this);
         canvas.width = this.width;
         canvas.height = this.height;
         document.body.appendChild(canvas);
-        let paused = this.gameState.paused ? 0 : -340;
-        //this.hud.show(context,this)
+        let pauseMenu = this.pauseScreen.show(this);
+        let paused = this.gameState.paused ? 0 : -360;
         this.camera.show(this, context);
         pauseMenu().then(data => {
             context.drawImage(data, 0, paused, 512, 480);
         });
     }
-    startScreen(context) { }
 }

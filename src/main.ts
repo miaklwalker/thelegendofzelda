@@ -6,8 +6,11 @@ import loadJson from './components/functions/getjson.js';
 let canvas = makeCanvas() as HTMLCanvasElement;
 let ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 let game: Game;
-
+function draw(){
 loadJson('../json/game.json').then(data => {
 	game = new Game(512, 480, data);
     game.makeGameScreen(canvas, ctx);
 });
+//requestAnimationFrame(draw)
+}
+draw()
