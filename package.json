@@ -4,7 +4,8 @@
   "description": "A TypeScript Remake of the original Tloz for nes",
   "main": "index.html",
   "scripts": {
-    "start": "tsc --watch"
+    "start": "tsc --watch",
+    "test": "jest"
   },
   "keywords": [
     "nes",
@@ -15,9 +16,24 @@
   "author": "Michael Walker",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "@types/js-yaml": "^3.12.1",
+    "@types/node": "^12.6.2",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.5.2"
   },
   "dependencies": {
+    "js-yaml": "^3.13.1",
     "typescript": "3.5.2"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src",
+      "<rootDir>/test"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    }
   }
 }
