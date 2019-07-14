@@ -1,4 +1,14 @@
+/**
+ *
+ *
+ * @export
+ * @class inventory
+ */
 export default class inventory {
+    /**
+     *Creates an instance of inventory.
+     * @memberof inventory
+     */
     constructor() {
         this.rupees = 0;
         this.items = [];

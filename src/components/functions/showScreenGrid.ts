@@ -1,3 +1,8 @@
+/**
+ *
+ *
+ * @param {CanvasRenderingContext2D} ctx
+ */
 function showGrid(ctx:CanvasRenderingContext2D){
     let canvas = {
         width:512,

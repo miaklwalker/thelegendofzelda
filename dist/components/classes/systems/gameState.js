@@ -9,7 +9,17 @@ import eighthDungeon from "../dungeons/dungeonEight.js";
 import ninthDungeon from "../dungeons/dungeonNine.js";
 import inventory from "./inventory.js";
 import Overworld from "../../overworld.js";
+/**
+ *
+ *
+ * @export
+ * @class gameState
+ */
 export default class gameState {
+    /**
+     *Creates an instance of gameState.
+     * @memberof gameState
+     */
     constructor() {
         this.overworld = new Overworld();
         this.dungeonOne = new firstDungeon();
@@ -26,6 +36,12 @@ export default class gameState {
         this.transition = false;
         this.currentMap = this.overworld;
     }
+    /**
+     *
+     *
+     * @param {number} num
+     * @memberof gameState
+     */
     changeMap(num) {
         const MAPS = [
             this.overworld,

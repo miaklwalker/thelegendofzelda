@@ -2,15 +2,31 @@ import Game from './game';
 import loadImage from '../../functions/getImage.js';
 import { Vector } from '../math/vector.js';
 
+/**
+ *
+ *
+ * @export
+ * @class pauseScreen
+ */
 export default class pauseScreen {
 	position: Vector;
     frame: number;
 	blink: boolean;
+	/**
+	 *Creates an instance of pauseScreen.
+	 * @memberof pauseScreen
+	 */
 	constructor() {
         this.position = new Vector();
 		this.frame = 0;
 		this.blink = true
 	}
+	/**
+	 *
+	 *
+	 * @param {CanvasRenderingContext2D} context
+	 * @memberof pauseScreen
+	 */
 	minimap(context: CanvasRenderingContext2D) {
 		this.frame++
 		if (this.frame%30===0){this.blink = !this.blink} ;
@@ -27,6 +43,13 @@ export default class pauseScreen {
 		context.fillStyle = colors[color];
 		context.fillRect(x, y, 9, 9);
 	}
+	/**
+	 *
+	 *
+	 * @param {Game} game
+	 * @returns
+	 * @memberof pauseScreen
+	 */
 	show(game: Game) {
 		this.position = game.camera.position;
 		let screen = async () => {

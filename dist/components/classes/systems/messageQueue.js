@@ -1,13 +1,38 @@
+/**
+ *
+ *
+ * @export
+ * @class MessageQueue
+ */
 export default class MessageQueue {
+    /**
+     *Creates an instance of MessageQueue.
+     * @memberof MessageQueue
+     */
     constructor() {
         this.messages = [];
         this.entities = [];
     }
+    /**
+     *
+     *
+     * @param {Message} msg
+     * @memberof MessageQueue
+     */
     add(msg) {
         this.messages.push(msg);
     }
-    addEntities() {
-    }
+    /**
+     *
+     *
+     * @memberof MessageQueue
+     */
+    addEntities() { }
+    /**
+     *
+     *
+     * @memberof MessageQueue
+     */
     dispatch() {
         for (let i = 0; i < this.messages.length; i++) {
             let msg = this.messages[i];

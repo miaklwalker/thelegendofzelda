@@ -1,3 +1,8 @@
+ /**
+  *
+  *
+  * @returns
+  */
  function uniqueid() {
 	let idString:string = String.fromCharCode(Math.floor(Math.random() * 25 + 65));
 	do {

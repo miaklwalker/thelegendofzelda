@@ -5,7 +5,16 @@ import camera from "./camera.js";
 import pauseScreen from "./pauseScreen.js";
 import loadImage from "../../functions/getImage.js";
 import RootObject from "../../objects/interfaces.js";
-
+/**
+ *
+ *
+ * @export
+ * @class Game
+ * @param width The width of the game screen
+ * @param height The hieght of the game screen
+ * @param json A Json containing all of the games files 
+ * 
+ */
 export default class Game {
     width: number;
     height: number;
@@ -16,6 +25,13 @@ export default class Game {
     camera: camera;
     pauseScreen: pauseScreen;
     images: any[];
+    /**
+     *Creates an instance of Game.
+     * @param {number} width
+     * @param {number} height
+     * @param {*} json
+     * @memberof Game
+     */
     constructor(width: number, height: number, json: any) {
         this.width = width;
         this.height = height;
@@ -27,6 +43,12 @@ export default class Game {
         this.pauseScreen = new pauseScreen();
         this.images = [];
     }
+    /**
+     *
+     *
+     * @param {CanvasRenderingContext2D} context
+     * @memberof Game
+     */
     makeGameScreen(context: CanvasRenderingContext2D) {
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
@@ -36,6 +58,11 @@ export default class Game {
         });
     }
     rungame() {}
+    /**
+     *
+     *
+     * @memberof Game
+     */
     loadFiles() {
         let images = Object.values(this.json.urls).map(url => loadImage(url));
         Promise.all(images).then(response => {

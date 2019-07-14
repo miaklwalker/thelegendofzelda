@@ -1,3 +1,15 @@
+/**
+ *
+ *
+ * @export
+ * @class SpriteSheet
+ */
+/**
+ *
+ *
+ * @export
+ * @class SpriteSheet
+ */
 export default class SpriteSheet{
     sheet: HTMLImageElement;
     name: string;
