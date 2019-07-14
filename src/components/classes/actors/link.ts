@@ -12,4 +12,7 @@ export default class Link {
         this.hearts = 3;
         this.health = 3;
     }
+    show(){
+        
+    }
 }
