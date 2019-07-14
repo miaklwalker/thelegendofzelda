@@ -1,18 +1,17 @@
 import makeCanvas from "./components/functions/canvas.js";
 import Game from "./components/classes/systems/game.js";
 import loadJson from "./components/functions/getjson.js";
-import RootObject from "../src/components/objects/interfaces"
+import RootObject from "../src/components/objects/interfaces";
 let canvas = makeCanvas() as HTMLCanvasElement;
 let ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 let game: Game;
 
-function preload(){
-loadJson("../json/game.json")
-    .then((data:RootObject)   => {
-        game = new Game(512, 480, data);
-        
-    })
-    .finally(setup);
+function preload() {
+    loadJson("../json/game.json")
+        .then((data: RootObject) => {
+            game = new Game(512, 480, data);
+        })
+        .finally(setup);
 }
 
 function setup() {
@@ -24,12 +23,11 @@ function setup() {
 }
 
 function draw() {
-    game.makeGameScreen(canvas, ctx);
+    game.makeGameScreen(ctx);
     loop();
-    
 }
 
-function loop(){
+function loop() {
     requestAnimationFrame(draw);
 }
 

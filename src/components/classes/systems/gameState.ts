@@ -8,6 +8,7 @@ import seventhDungeon from "../dungeons/dungeonSeven.js";
 import eighthDungeon from "../dungeons/dungeonEight.js";
 import ninthDungeon from "../dungeons/dungeonNine.js";
 import inventory from "./inventory.js";
+import Overworld from "../../overworld.js";
 
 export default class gameState {
     dungeonOne: firstDungeon;
@@ -20,9 +21,12 @@ export default class gameState {
     dungeonEight: eighthDungeon;
     dungeonNine: ninthDungeon;
     inventory: inventory;
-    paused:boolean;
-    transition:boolean;
+    paused: boolean;
+    transition: boolean;
+    overworld: Overworld;
+    currentMap: Overworld;
     constructor() {
+        this.overworld = new Overworld();
         this.dungeonOne = new firstDungeon();
         this.dungeonTwo = new secondDungeon();
         this.dungeonThree = new thirdDungeon();
@@ -35,5 +39,21 @@ export default class gameState {
         this.inventory = new inventory();
         this.paused = false;
         this.transition = false;
+        this.currentMap = this.overworld;
+    }
+    changeMap(num:number) {
+        const MAPS = [
+            this.overworld,
+            this.dungeonOne,
+            this.dungeonTwo,
+            this.dungeonThree,
+            this.dungeonFour,
+            this.dungeonFive,
+            this.dungeonSix,
+            this.dungeonSeven,
+            this.dungeonEight,
+            this.dungeonNine,
+        ];
+        this.currentMap = MAPS[num]
     }
 }

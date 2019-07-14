@@ -1,3 +1,4 @@
+import { Vector } from "../math/vector.js";
 /**
  *
  *
@@ -7,6 +8,8 @@
 export default class Dungeon {
     constructor(name, equipment) {
         this.name = name;
+        this.position = new Vector();
+        this.url = "";
         this.keys = [];
         this.miniboss = false;
         this.item = false;

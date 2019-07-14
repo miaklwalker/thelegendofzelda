@@ -19,7 +19,7 @@ function setup() {
     draw();
 }
 function draw() {
-    game.makeGameScreen(canvas, ctx);
+    game.makeGameScreen(ctx);
     loop();
 }
 function loop() {

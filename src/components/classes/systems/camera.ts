@@ -4,12 +4,13 @@ import Game from "./game";
 
 export default class camera {
     position: Vector;
-    constructor(x:number,y:number){
-        this.position = new Vector(x,y);
+    constructor(){
+        this.position = new Vector();
     }
     show(game:Game,context:CanvasRenderingContext2D){
         let paused = game.gameState.paused ? 480 : 120;
-        loadImage(game.json.urls.overworld).then(data =>{
+        loadImage(game.gameState.currentMap.url).then(data =>{
+            this.position = game.gameState.currentMap.position
         context.drawImage(data,
             this.position.x*256   , 
             this.position.y*176.1,

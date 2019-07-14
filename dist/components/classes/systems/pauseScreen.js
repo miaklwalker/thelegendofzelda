@@ -4,10 +4,15 @@ export default class pauseScreen {
     constructor() {
         this.position = new Vector();
         this.frame = 0;
+        this.blink = true;
     }
     minimap(context) {
         this.frame++;
-        let color = this.frame % 10 ? 0 : 1;
+        if (this.frame % 30 === 0) {
+            this.blink = !this.blink;
+        }
+        ;
+        let color = this.blink ? 0 : 1;
         let colors = ['lightGrey', 'Grey'];
         let x = (130 / 14) * this.position.x + 31;
         let y = (77 / 8) * this.position.y + 385;

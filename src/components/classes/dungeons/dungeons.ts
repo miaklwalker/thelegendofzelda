@@ -1,3 +1,4 @@
+import { Vector } from "../math/vector.js";
 
 
 /**
@@ -16,8 +17,12 @@ export default class Dungeon {
     visitedRooms: any[];
     boss: boolean;
     treasures: string[];
+    position: Vector;
+    url: string;
     constructor(name: string,equipment:string[]) {
         this.name = name;
+        this.position = new Vector();
+        this.url = ""
         this.keys = [];
         this.miniboss = false;
         this.item = false;

@@ -5,13 +5,16 @@ import { Vector } from '../math/vector.js';
 export default class pauseScreen {
 	position: Vector;
     frame: number;
+	blink: boolean;
 	constructor() {
         this.position = new Vector();
-        this.frame = 0;
+		this.frame = 0;
+		this.blink = true
 	}
 	minimap(context: CanvasRenderingContext2D) {
-        this.frame++
-        let color = this.frame % 10 ? 0 : 1 ;
+		this.frame++
+		if (this.frame%30===0){this.blink = !this.blink} ;
+		let color = this.blink ? 0 : 1 
         let colors = [ 'lightGrey','Grey']
 		let x = (130 / 14) * this.position.x + 31;
 		let y = (77 / 8) * this.position.y + 385;

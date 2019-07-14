@@ -1,0 +1,2 @@
+Camera should accept the current map 
+each map Dungeon , OverWorld should keep a position for link and dungeons should have a default entry position
