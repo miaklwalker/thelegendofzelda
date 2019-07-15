@@ -16,7 +16,7 @@ export default class Link {
         this.health = 3;
         this.position = new Vector(8,5)
     }
-    show(){
+    show(context:CanvasRenderingContext2D,Images:HTMLImageElement[]){
         
     }
 }

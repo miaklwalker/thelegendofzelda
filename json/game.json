@@ -30,7 +30,9 @@
     "Sprites": {
         "Bosses": {},
         "Enemies": {},
-        "Link": {},
+        "Link": {
+            "test":[]
+        },
         "NPC": {},
         "Tiles": {}
     }

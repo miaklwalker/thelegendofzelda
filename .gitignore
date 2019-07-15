@@ -2,8 +2,9 @@ node_modules
 .vscode
 config-ability
 .idea
-=======
 package-lock.json
 sandbox.config.json
-dist
 master
+coverage
+dist
+
