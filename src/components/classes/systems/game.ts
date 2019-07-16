@@ -5,6 +5,7 @@ import camera from "./camera.js";
 import pauseScreen from "./pauseScreen.js";
 import loadImage from "../../functions/getImage.js";
 import RootObject from "../../objects/interfaces.js";
+import SpriteSheet from "./SpriteSheet.js";
 /**
  *
  *
@@ -24,7 +25,8 @@ export default class Game {
     json: RootObject;
     camera: camera;
     pauseScreen: pauseScreen;
-    images: any[];
+    images: SpriteSheet[];
+    frame:number
     /**
      *Creates an instance of Game.
      * @param {number} width
@@ -42,6 +44,7 @@ export default class Game {
         this.camera = new camera();
         this.pauseScreen = new pauseScreen();
         this.images = [];
+        this.frame = 0 
     }
     /**
      *
@@ -53,6 +56,10 @@ export default class Game {
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
         this.camera.show(this, context);
+        if(this.images[5]!==undefined){
+            this.images[5].renderSprite(context,this.Link.show(),[240,300,30,30])
+        }
+        
         pauseMenu().then(data => {
             context.drawImage(data, 0, paused, 512, 480);
         });
@@ -64,9 +71,20 @@ export default class Game {
      * @memberof Game
      */
     loadFiles() {
+        let iterator = 0 
+        console.log("Making SpriteSheets")
+        let names = Object.keys(this.json.urls)
         let images = Object.values(this.json.urls).map(url => loadImage(url));
-        Promise.all(images).then(response => {
-            this.images.push(response);
+        Promise.all(images).then((response:HTMLImageElement[]) => {
+            response.forEach(res=>{let spriteSheet = new SpriteSheet(res,names[iterator])
+                if(names[iterator]=="link"){
+                    spriteSheet.makeSprites(this.json)
+                }
+                this.images.push(spriteSheet);
+                iterator++
+            })
+
         });
+        console.log(this.images)
     }
 }
