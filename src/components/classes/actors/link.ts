@@ -24,12 +24,12 @@ export default class Link {
         this.position = new Vector(8,5)
         this.action = 'walk'
         this.shield = 'big'
-        this.direction = 'down'
+        this.direction = 'right'
     }
     show(){
         let numbers = ['one','one','two']
         this.frameActual++
-        if(this.frameActual%24===0){this.frameAdjusted++}
+        if(this.frameActual%6===0){this.frameAdjusted++}
         return `link-${this.action}-${this.direction}-${numbers[this.frameAdjusted%3]}-${this.shield}`
     }
 }

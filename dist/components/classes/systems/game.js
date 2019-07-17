@@ -52,10 +52,8 @@ export default class Game {
                 30,
                 30,
             ]);
+            context.drawImage(pauseMenu(), 0, paused, 512, 480);
         }
-        pauseMenu().then(data => {
-            context.drawImage(data, 0, paused, 512, 480);
-        });
     }
     rungame() { }
     /**

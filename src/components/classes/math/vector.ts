@@ -42,7 +42,6 @@ export class Vector {
         } else {
             this.x *= factor;
             this.y *= factor;
-            return this;
         }
     }
 

@@ -10,12 +10,14 @@ function preload() {
     loadJson("../json/game.json")
         .then((data: RootObject) => {
             game = new Game(512, 480, data);
+            game.loadFiles()
+            console.log(game.images)
         })
         .finally(setup);
 }
 
 function setup() {
-    game.loadFiles();
+    console.log(game.images[0])
     canvas.width = 512;
     canvas.height = 480;
     document.body.appendChild(canvas);

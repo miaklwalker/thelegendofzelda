@@ -56,18 +56,17 @@ export default class Game {
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
         this.camera.show(this, context);
-        if (this.images[5] !== undefined) {
+         if (this.images[5] !== undefined) {
             this.images[5].renderSprite(context, this.Link.show(), [
                 240,
                 300,
                 30,
                 30,
             ]);
+            context.drawImage(pauseMenu(), 0, paused, 512, 480);
         }
-
-        pauseMenu().then(data => {
-            context.drawImage(data, 0, paused, 512, 480);
-        });
+            
+       
     }
     rungame() {}
     /**
