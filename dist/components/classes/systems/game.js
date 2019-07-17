@@ -46,7 +46,12 @@ export default class Game {
         let paused = this.gameState.paused ? 0 : -360;
         this.camera.show(this, context);
         if (this.images[5] !== undefined) {
-            this.images[5].renderSprite(context, this.Link.show(), [240, 300, 30, 30]);
+            this.images[5].renderSprite(context, this.Link.show(), [
+                240,
+                300,
+                30,
+                30,
+            ]);
         }
         pauseMenu().then(data => {
             context.drawImage(data, 0, paused, 512, 480);
@@ -60,7 +65,6 @@ export default class Game {
      */
     loadFiles() {
         let iterator = 0;
-        console.log("Making SpriteSheets");
         let names = Object.keys(this.json.urls);
         let images = Object.values(this.json.urls).map(url => loadImage(url));
         Promise.all(images).then((response) => {
@@ -73,6 +77,5 @@ export default class Game {
                 iterator++;
             });
         });
-        console.log(this.images);
     }
 }

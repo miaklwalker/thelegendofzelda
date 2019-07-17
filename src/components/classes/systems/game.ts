@@ -13,8 +13,8 @@ import SpriteSheet from "./SpriteSheet.js";
  * @class Game
  * @param width The width of the game screen
  * @param height The hieght of the game screen
- * @param json A Json containing all of the games files 
- * 
+ * @param json A Json containing all of the games files
+ *
  */
 export default class Game {
     width: number;
@@ -26,7 +26,7 @@ export default class Game {
     camera: camera;
     pauseScreen: pauseScreen;
     images: SpriteSheet[];
-    frame:number
+    frame: number;
     /**
      *Creates an instance of Game.
      * @param {number} width
@@ -44,7 +44,7 @@ export default class Game {
         this.camera = new camera();
         this.pauseScreen = new pauseScreen();
         this.images = [];
-        this.frame = 0 
+        this.frame = 0;
     }
     /**
      *
@@ -56,10 +56,15 @@ export default class Game {
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
         this.camera.show(this, context);
-        if(this.images[5]!==undefined){
-            this.images[5].renderSprite(context,this.Link.show(),[240,300,30,30])
+        if (this.images[5] !== undefined) {
+            this.images[5].renderSprite(context, this.Link.show(), [
+                240,
+                300,
+                30,
+                30,
+            ]);
         }
-        
+
         pauseMenu().then(data => {
             context.drawImage(data, 0, paused, 512, 480);
         });
@@ -71,20 +76,18 @@ export default class Game {
      * @memberof Game
      */
     loadFiles() {
-        let iterator = 0 
-        console.log("Making SpriteSheets")
-        let names = Object.keys(this.json.urls)
+        let iterator = 0;
+        let names = Object.keys(this.json.urls);
         let images = Object.values(this.json.urls).map(url => loadImage(url));
-        Promise.all(images).then((response:HTMLImageElement[]) => {
-            response.forEach(res=>{let spriteSheet = new SpriteSheet(res,names[iterator])
-                if(names[iterator]=="link"){
-                    spriteSheet.makeSprites(this.json)
+        Promise.all(images).then((response: HTMLImageElement[]) => {
+            response.forEach(res => {
+                let spriteSheet = new SpriteSheet(res, names[iterator]);
+                if (names[iterator] == "link") {
+                    spriteSheet.makeSprites(this.json);
                 }
                 this.images.push(spriteSheet);
-                iterator++
-            })
-
+                iterator++;
+            });
         });
-        console.log(this.images)
     }
 }

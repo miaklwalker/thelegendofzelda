@@ -21,20 +21,22 @@ export default class gameState {
      * @memberof gameState
      */
     constructor() {
-        this.overworld = new Overworld();
-        this.dungeonOne = new firstDungeon();
-        this.dungeonTwo = new secondDungeon();
-        this.dungeonThree = new thirdDungeon();
-        this.dungeonFour = new fourthDungeon();
-        this.dungeonFive = new fifthDungeon();
-        this.dungeonSix = new sixthDungeon();
-        this.dungeonSeven = new seventhDungeon();
-        this.dungeonEight = new eighthDungeon();
-        this.dungeonNine = new ninthDungeon();
+        this.maps = [
+            new Overworld(),
+            new firstDungeon(),
+            new secondDungeon(),
+            new thirdDungeon(),
+            new fourthDungeon(),
+            new fifthDungeon(),
+            new sixthDungeon(),
+            new seventhDungeon(),
+            new eighthDungeon(),
+            new ninthDungeon(),
+        ];
         this.inventory = new inventory();
         this.paused = false;
         this.transition = false;
-        this.currentMap = this.overworld;
+        this.currentMap = this.maps[0];
     }
     /**
      *
@@ -43,18 +45,11 @@ export default class gameState {
      * @memberof gameState
      */
     changeMap(num) {
-        const MAPS = [
-            this.overworld,
-            this.dungeonOne,
-            this.dungeonTwo,
-            this.dungeonThree,
-            this.dungeonFour,
-            this.dungeonFive,
-            this.dungeonSix,
-            this.dungeonSeven,
-            this.dungeonEight,
-            this.dungeonNine,
-        ];
-        this.currentMap = MAPS[num];
+        if (num < 0 || num > 9) {
+            throw new Error('Dungeon not found');
+        }
+        else {
+            this.currentMap = this.maps[num];
+        }
     }
 }

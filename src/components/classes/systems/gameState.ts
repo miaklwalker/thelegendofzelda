@@ -17,39 +17,32 @@ import Overworld from "../../overworld.js";
  * @class gameState
  */
 export default class gameState {
-    dungeonOne: firstDungeon;
-    dungeonTwo: secondDungeon;
-    dungeonThree: thirdDungeon;
-    dungeonFour: fourthDungeon;
-    dungeonFive: fifthDungeon;
-    dungeonSix: sixthDungeon;
-    dungeonSeven: seventhDungeon;
-    dungeonEight: eighthDungeon;
-    dungeonNine: ninthDungeon;
+    maps:any[]
     inventory: inventory;
     paused: boolean;
     transition: boolean;
-    overworld: Overworld;
     currentMap: Overworld;
     /**
      *Creates an instance of gameState.
      * @memberof gameState
      */
     constructor() {
-        this.overworld = new Overworld();
-        this.dungeonOne = new firstDungeon();
-        this.dungeonTwo = new secondDungeon();
-        this.dungeonThree = new thirdDungeon();
-        this.dungeonFour = new fourthDungeon();
-        this.dungeonFive = new fifthDungeon();
-        this.dungeonSix = new sixthDungeon();
-        this.dungeonSeven = new seventhDungeon();
-        this.dungeonEight = new eighthDungeon();
-        this.dungeonNine = new ninthDungeon();
+        this.maps = [
+            new Overworld(),
+            new firstDungeon(),
+            new secondDungeon(),
+            new thirdDungeon(),
+            new fourthDungeon(),
+            new fifthDungeon(),
+            new sixthDungeon(),
+            new seventhDungeon(),
+            new eighthDungeon(),
+            new ninthDungeon(),
+        ];
         this.inventory = new inventory();
         this.paused = false;
         this.transition = false;
-        this.currentMap = this.overworld;
+        this.currentMap = this.maps[0];
     }
     /**
      *
@@ -57,19 +50,11 @@ export default class gameState {
      * @param {number} num
      * @memberof gameState
      */
-    changeMap(num:number) {
-        const MAPS = [
-            this.overworld,
-            this.dungeonOne,
-            this.dungeonTwo,
-            this.dungeonThree,
-            this.dungeonFour,
-            this.dungeonFive,
-            this.dungeonSix,
-            this.dungeonSeven,
-            this.dungeonEight,
-            this.dungeonNine,
-        ];
-        this.currentMap = MAPS[num]
+    changeMap(num: number) {
+        if(num < 0 || num > 9){
+            throw new Error('Dungeon not found')
+        }else{
+        this.currentMap = this.maps[num];
+        }
     }
 }

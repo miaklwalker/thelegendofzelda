@@ -30,12 +30,18 @@ export default class pauseScreen {
 	minimap(context: CanvasRenderingContext2D) {
 		this.frame++
 		if (this.frame%30===0){this.blink = !this.blink} ;
+		let minimapX = 130;
+		let minimapY = 77;
+		let width=14
+		let height=8
+		let offsetX = 31
+		let offsetY = 385
 		let color = this.blink ? 0 : 1 
         let colors = [ 'lightGrey','Grey']
-		let x = (130 / 14) * this.position.x + 31;
-		let y = (77 / 8) * this.position.y + 385;
+		let x = (minimapX / width) * this.position.x + offsetX;
+		let y = (minimapY / height) * this.position.y + offsetY;
 		context.fillStyle = colors[1];
-		context.fillRect(31, 385, 130, 77);
+		context.fillRect(offsetX,offsetY, minimapX, minimapY);
 
 		context.fillStyle = 'black';
 		context.fillRect(31, 366, 130, 19);

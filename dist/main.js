@@ -19,7 +19,6 @@ function setup() {
     draw();
 }
 function draw() {
-    console.log("Draw");
     game.makeGameScreen(ctx);
     loop();
 }
