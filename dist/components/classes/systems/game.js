@@ -1,10 +1,14 @@
-import Hud from "./hud.js";
-import gameState from "./gameState.js";
-import Link from "../actors/link.js";
-import camera from "./camera.js";
-import pauseScreen from "./pauseScreen.js";
-import loadImage from "../../functions/getImage.js";
-import SpriteSheet from "./SpriteSheet.js";
+import Hud from './hud.js';
+import gameState from './gameState.js';
+import Link from '../actors/link.js';
+import camera from './camera.js';
+import pauseScreen from './pauseScreen.js';
+import loadImage from '../../functions/getImage.js';
+import SpriteSheet from './SpriteSheet.js';
+import controlsConfig from './controllerConfig.js';
+import Controls from './controls.js';
+import MessageQueue from './messageQueue.js';
+let config = new controlsConfig('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter', 'Space', 'KeyA', 'KeyB');
 /**
  *
  *
@@ -29,11 +33,12 @@ export default class Game {
         this.gameState = new gameState();
         this.Link = new Link();
         this.hud = new Hud(this);
+        this.controls = new Controls(config);
         this.json = json;
         this.camera = new camera();
         this.pauseScreen = new pauseScreen();
+        this.messageCenter = new MessageQueue(this);
         this.images = [];
-        this.frame = 0;
     }
     /**
      *
@@ -42,7 +47,7 @@ export default class Game {
      * @memberof Game
      */
     makeGameScreen(context) {
-        this.gameState.Map = 3;
+        this.gameState.Map = 0;
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
         this.camera.show(this, context);
@@ -54,9 +59,13 @@ export default class Game {
                 30,
             ]);
             context.drawImage(pauseMenu(), 0, paused, 512, 480);
+            this.rungame();
         }
     }
-    rungame() { }
+    rungame() {
+        this.controls.setupControls(this.messageCenter);
+        this.messageCenter.dispatch();
+    }
     /**
      *
      *
@@ -69,7 +78,7 @@ export default class Game {
         Promise.all(images).then((response) => {
             response.forEach(res => {
                 let spriteSheet = new SpriteSheet(res, names[iterator]);
-                if (names[iterator] == "link") {
+                if (names[iterator] == 'link') {
                     spriteSheet.makeSprites(this.json);
                 }
                 this.images.push(spriteSheet);

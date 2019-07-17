@@ -1,4 +1,5 @@
 import Message from "./message";
+import Game from "./game";
 
 /**
  *
@@ -9,14 +10,16 @@ import Message from "./message";
 export default class MessageQueue {
     messages: any[];
     entities: any[];
+    game:Game
 
     /**
      *Creates an instance of MessageQueue.
      * @memberof MessageQueue
      */
-    constructor() {
+    constructor(game:Game) {
         this.messages = [];
         this.entities = [];
+        this.game = game;
     }
 
     /**
@@ -44,10 +47,11 @@ export default class MessageQueue {
     dispatch() {
         for (let i = 0; i < this.messages.length; i++) {
             let msg = this.messages[i];
-            this.entities.forEach(entity => {
-                entity.onMessage(msg);
-            });
-            this.messages.splice(i, 1);
+            console.log(this.messages)
+            console.log(msg.to)
+                        //@ts-ignore
+            this.game[msg.to].onMessage(msg)
+            this.messages.splice(i,1);
         }
     }
     purge() {

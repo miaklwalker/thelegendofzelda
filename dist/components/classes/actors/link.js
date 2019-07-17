@@ -23,6 +23,13 @@ export default class Link {
         if (this.frameActual % 6 === 0) {
             this.frameAdjusted++;
         }
-        return `link-${this.action}-${this.direction}-${numbers[this.frameAdjusted % 2]}-${this.shield}`;
+        let str = `link-${this.action}-right-${numbers[this.frameAdjusted % 2]}-${this.shield}`;
+        let tststr = `link-${this.action}-${this.direction}-${numbers[this.frameAdjusted % 2]}-${this.shield}`;
+        console.log(tststr);
+        return tststr;
+    }
+    onMessage(msg) {
+        console.log(this.direction, msg.data, "right");
+        this.direction = msg.data;
     }
 }

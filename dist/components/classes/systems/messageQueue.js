@@ -9,9 +9,10 @@ export default class MessageQueue {
      *Creates an instance of MessageQueue.
      * @memberof MessageQueue
      */
-    constructor() {
+    constructor(game) {
         this.messages = [];
         this.entities = [];
+        this.game = game;
     }
     /**
      *
@@ -36,9 +37,10 @@ export default class MessageQueue {
     dispatch() {
         for (let i = 0; i < this.messages.length; i++) {
             let msg = this.messages[i];
-            this.entities.forEach(entity => {
-                entity.onMessage(msg);
-            });
+            console.log(this.messages);
+            console.log(msg.to);
+            //@ts-ignore
+            this.game[msg.to].onMessage(msg);
             this.messages.splice(i, 1);
         }
     }
