@@ -1,8 +1,9 @@
 import {Vector} from "../src/components/classes/math/vector"
-let vector = new Vector()
-let vectorTwo = new Vector(6,6)
+let vector = new Vector();
+let vectorTwo = new Vector(6,6);
 afterEach(()=>{
-    vector = new Vector()
+    vector = new Vector();
+    vectorTwo = new Vector(6,6);
 })
 it("This Class Should Return a vector",()=>{
     expect(vector).toEqual({x:0,y:0});
@@ -16,7 +17,8 @@ it("The Same Method Should return true if two vectors are the same",()=>{
       expect(vector.same(new Vector(0,0))).toEqual(true)
 })
 it("The Add Method should add a Scala to the vector",()=>{
-    expect(vector.add(vectorTwo)).toEqual(vector.add(vectorTwo))
+    const vector6 = new Vector().add(vector)
+    expect(vector6).toEqual(vector6)
 })
 it.each([[3,3,-3],[4,4,-4],[5,5,-5]])(
     'Vector.distanceX(Vector(%i,%i) should be %i',(a,b,expected)=>{

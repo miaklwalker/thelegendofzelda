@@ -42,7 +42,7 @@ export default class Game {
      * @memberof Game
      */
     makeGameScreen(context) {
-        this.gameState.Map = 0;
+        this.gameState.Map = 3;
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
         this.camera.show(this, context);
