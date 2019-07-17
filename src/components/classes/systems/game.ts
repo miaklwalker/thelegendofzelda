@@ -53,6 +53,7 @@ export default class Game {
      * @memberof Game
      */
     makeGameScreen(context: CanvasRenderingContext2D) {
+        this.gameState.Map =0
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
         this.camera.show(this, context);

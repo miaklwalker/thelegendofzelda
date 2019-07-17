@@ -44,7 +44,7 @@ export default class gameState {
      * @param {number} num
      * @memberof gameState
      */
-    changeMap(num) {
+    set Map(num) {
         if (num < 0 || num > 9) {
             throw new Error('Dungeon not found');
         }
