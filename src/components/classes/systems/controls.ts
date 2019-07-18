@@ -36,9 +36,8 @@ export default class Controls {
 					this.lastKey !== keys[i] 
 				) {
                               this.lastKey = keys[i];
-                              let msg:Message = new Message("Link","controls","movement",keys[i])
+                              let msg:Message = new Message("Link","controls","direction",keys[i])
                               msgCenter.add(msg)
-					console.log(keys[i]);
 				}
 			}
             });
@@ -47,9 +46,9 @@ export default class Controls {
 				if (event.code === values[i] &&
                               this.keyUp !== keys[i]){
                               this.keyUp = keys[i];
-                              console.log(keys[i])
 				}
                   }
-		});
+            });
+            setTimeout(()=>{this.lastKey=""},100)
 	}
 }

@@ -37,8 +37,6 @@ export default class MessageQueue {
     dispatch() {
         for (let i = 0; i < this.messages.length; i++) {
             let msg = this.messages[i];
-            console.log(this.messages);
-            console.log(msg.to);
             //@ts-ignore
             this.game[msg.to].onMessage(msg);
             this.messages.splice(i, 1);

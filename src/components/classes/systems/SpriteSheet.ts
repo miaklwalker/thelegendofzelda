@@ -27,6 +27,14 @@ export default class SpriteSheet{
         this.name = name;
         this.sprites = {};
     }
+    /**
+     *
+     *
+     * @param {RootObject} json
+     * @memberof SpriteSheet
+     * @description takes a string " 'name''direction'-'number(as word)'-'action'-'shieldSize'  "
+     * and uses it as the key for an array of values
+     */
     makeSprites(json:RootObject){
         //@ts-ignore
         json.Sprites[this.name].forEach((Sprite:SpriteSheetCor)=>{

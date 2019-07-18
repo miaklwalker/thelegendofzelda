@@ -11,7 +11,6 @@ function preload() {
         .then((data: RootObject) => {
             game = new Game(512, 480, data);
             game.loadFiles()
-            console.log(game.images)
         })
         .finally(setup);
 }

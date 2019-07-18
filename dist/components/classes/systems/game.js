@@ -5,10 +5,9 @@ import camera from './camera.js';
 import pauseScreen from './pauseScreen.js';
 import loadImage from '../../functions/getImage.js';
 import SpriteSheet from './SpriteSheet.js';
-import controlsConfig from './controllerConfig.js';
 import Controls from './controls.js';
 import MessageQueue from './messageQueue.js';
-let config = new controlsConfig('ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter', 'Space', 'KeyA', 'KeyB');
+import config from '../../objects/config.js';
 /**
  *
  *
@@ -51,13 +50,14 @@ export default class Game {
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
         this.camera.show(this, context);
-        if (this.images[5] !== undefined) {
+        if (this.images[0] !== undefined) {
             this.images[5].renderSprite(context, this.Link.show(), [
-                240,
-                300,
+                this.Link.position.x * 32,
+                this.Link.position.y * 34 + 120,
                 30,
                 30,
             ]);
+            console.log(this.Link.position);
             context.drawImage(pauseMenu(), 0, paused, 512, 480);
             this.rungame();
         }

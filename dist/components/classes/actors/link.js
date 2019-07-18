@@ -8,28 +8,28 @@ import { Vector } from "../math/vector.js";
  */
 export default class Link {
     constructor() {
-        this.frameActual = 0;
         this.frameAdjusted = 0;
         this.hearts = 3;
         this.health = 3;
-        this.position = new Vector(8, 5);
+        this.position = new Vector(7, 5);
         this.action = 'walk';
         this.shield = 'big';
         this.direction = 'right';
     }
     show() {
         let numbers = ['one', 'two'];
-        this.frameActual++;
-        if (this.frameActual % 6 === 0) {
-            this.frameAdjusted++;
-        }
-        let str = `link-${this.action}-right-${numbers[this.frameAdjusted % 2]}-${this.shield}`;
-        let tststr = `link-${this.action}-${this.direction}-${numbers[this.frameAdjusted % 2]}-${this.shield}`;
-        console.log(tststr);
-        return tststr;
+        let str = `link-${this.action}-${this.direction}-${numbers[this.frameAdjusted % 2]}-${this.shield}`;
+        return str;
     }
     onMessage(msg) {
-        console.log(this.direction, msg.data, "right");
-        this.direction = msg.data;
+        //@ts-ignore
+        this[msg.type] = msg.data;
+        if (msg.data === "right") {
+            this.position.x += .2;
+        }
+        if (msg.data === "down") {
+            this.position.y += .2;
+        }
+        this.frameAdjusted++;
     }
 }
