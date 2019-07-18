@@ -22,13 +22,13 @@ export default class Link {
         this.health = 3;
         this.position = new Vector(7,5)
         this.action = 'walk'
-        this.shield = 'big'
+        this.shield = 'small'
         this.direction = 'right'
     }
     show(){
-        let numbers = ['one','two']
-
-        let str = `link-${this.action}-${this.direction}-${numbers[this.frameAdjusted%2]}-${this.shield}`
+        console.log(this.frameAdjusted%2+1)
+        let str = `link-${this.action}-${this.direction}-${this.frameAdjusted%2+1}-${this.shield}`
+        console.log(str)
         return str
     }
     onMessage(msg:Message){

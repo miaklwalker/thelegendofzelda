@@ -31,104 +31,139 @@
         "Enemies": {},
         "link": [
             {
-                "name": "link-walk-down-one-small",
-                "x": 159,
-                "y": 1,
-                "w": 15,
-                "h": 16
+              "name": "link-walk-down-1-small",
+              "x": 7,
+              "y": 6,
+              "w": 15,
+              "h": 16
             },
             {
-                "name": "link-walk-down-two-small",
-                "x": 177,
-                "y": 1,
-                "w": 15,
-                "h": 16
+              "name": "link-walk-down-2-small",
+              "x": 24,
+              "y": 6,
+              "w": 15,
+              "h": 16
             },
             {
-                "name": "link-walk-up-one-small",
-                "x": 195,
-                "y": 1,
-                "w": 15,
-                "h": 16
+              "name": "link-walk-up-1-small",
+              "x": 40,
+              "y": 6,
+              "w": 14,
+              "h": 16
             },
             {
-                "name": "link-walk-right-one-small",
-                "x": 213,
-                "y": 1,
-                "w": 15,
-                "h": 16
+              "name": "link-walk-up-2-small",
+              "x": 55,
+              "y": 6,
+              "w": 14,
+              "h": 16
             },
             {
-                "name": "link-walk-right-two-small",
-                "x": 231,
-                "y": 1,
-                "w": 15,
-                "h": 16
+              "name": "link-walk-left-1-small",
+              "x": 71,
+              "y": 5,
+              "w": 14,
+              "h": 16
             },
             {
-                "name": "link-walk-down-one-big",
-                "x": 249,
-                "y": 1,
-                "w": 15,
-                "h": 16
+              "name": "link-walk-left-2-small",
+              "x": 88,
+              "y": 6,
+              "w": 15,
+              "h": 16
             },
             {
-                "name": "link-walk-down-two-big",
-                "x": 267,
-                "y": 1,
-                "w": 15,
-                "h": 16
+              "name": "link-walk-right-1-small",
+              "x": 105,
+              "y": 5,
+              "w": 15,
+              "h": 16
             },
             {
-                "name": "link-walk-right-one-big",
-                "x": 285,
-                "y": 1,
-                "w": 15,
-                "h": 16
+              "name": "link-walk-right-2-small",
+              "x": 123,
+              "y": 5,
+              "w": 15,
+              "h": 16
             },
             {
-                "name": "link-walk-right-two-big",
-                "x": 303,
-                "y": 1,
-                "w": 15,
-                "h": 16
+              "name": "link-walk-down-1-big",
+              "x": 141,
+              "y": 6,
+              "w": 15,
+              "h": 16
             },
             {
-                "name": "link-slash-down",
-                "x": 321,
-                "y": 1,
-                "w": 15,
-                "h": 16
+              "name": "link-walk-down-2-big",
+              "x": 159,
+              "y": 6,
+              "w": 15,
+              "h": 16
             },
             {
-                "name": "link-slash-up",
-                "x": 338,
-                "y": 1,
-                "w": 16,
-                "h": 16
+              "name": "link-walk-left-1-big",
+              "x": 176,
+              "y": 5,
+              "w": 16,
+              "h": 16
             },
             {
-                "name": "link-slash-right",
-                "x": 357,
-                "y": 1,
-                "w": 15,
-                "h": 16
+              "name": "link-walk-left-2-big",
+              "x": 195,
+              "y": 6,
+              "w": 16,
+              "h": 16
             },
             {
-                "name": "link-lift-one",
-                "x": 375,
-                "y": 1,
-                "w": 15,
-                "h": 16
+              "name": "link-walk-right-1-big",
+              "x": 214,
+              "y": 5,
+              "w": 16,
+              "h": 16
             },
             {
-                "name": "link-lift-two",
-                "x": 393,
-                "y": 1,
-                "w": 15,
-                "h": 16
+              "name": "link-walk-right-2-big",
+              "x": 233,
+              "y": 6,
+              "w": 16,
+              "h": 16
+            },
+            {
+              "name": "link-slash-down-1",
+              "x": 253,
+              "y": 5,
+              "w": 15,
+              "h": 16
+            },
+            {
+              "name": "link-slash-up-1",
+              "x": 271,
+              "y": 5,
+              "w": 15,
+              "h": 17
+            },
+            {
+              "name": "link-slash-right",
+              "x": 289,
+              "y": 5,
+              "w": 15,
+              "h": 16
+            },
+            {
+              "name": "link-touchdown",
+              "x": 306,
+              "y": 6,
+              "w": 15,
+              "h": 16
+            },
+            {
+              "name": "link-fieldgoal",
+              "x": 322,
+              "y": 6,
+              "w": 15,
+              "h": 16
             }
-        ],
+          ],
         "NPC": {},
         "Tiles": {}
     }

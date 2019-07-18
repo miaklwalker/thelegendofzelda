@@ -72,7 +72,7 @@ export default class Game {
 			]);
 			console.log(this.Link.position)
             context.drawImage(pauseMenu(), 0, paused, 512, 480);
-            this.rungame()
+           this.rungame()
 		}
 	}
 	rungame() {
