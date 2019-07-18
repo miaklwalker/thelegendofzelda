@@ -51,6 +51,7 @@ export default class MessageQueue {
             this.game[msg.to].onMessage(msg)
             this.messages.splice(i,1);
         }
+
     }
     purge() {
         this.entities = [];

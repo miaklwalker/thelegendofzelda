@@ -10,6 +10,7 @@ import ninthDungeon from "../dungeons/dungeonNine.js";
 import inventory from "./inventory.js";
 import Overworld from "../../overworld.js";
 import { Vector } from "../math/vector.js";
+import Message from "./message.js";
 
 /**
  *
@@ -75,6 +76,11 @@ export default class gameState {
          position.y = 9
          this.currentMap.position.y-=1
         }
-
+    }
+    onMessage(msg:Message){
+        if(msg.from === "controls"){
+            //@ts-ignore
+            this[msg.type] = !this[msg.type]
+        }
     }
 }

@@ -11,8 +11,8 @@ export default class Controls {
 	select: string;
 	A: string;
 	B: string;
-      lastKey: string;
-      keyUp:string;
+	lastKey: string;
+	keyUp: string;
 	timeOut: number;
 	constructor(config: controlsConfig) {
 		this.up = config.up;
@@ -23,32 +23,51 @@ export default class Controls {
 		this.select = config.select;
 		this.A = config.A;
 		this.B = config.B;
-            this.lastKey = '';
-            this.keyUp =""
+		this.lastKey = '';
+		this.keyUp = '';
 		this.timeOut = 0;
 	}
-	setupControls(msgCenter:MessageQueue) {
+	setupControls(msgCenter: MessageQueue) {
 		const values = Object.values(this);
 		const keys = Object.keys(this);
 		document.addEventListener('keydown', event => {
 			for (let i = 0; i < keys.length; i++) {
-				if (event.code === values[i] &&
-					this.lastKey !== keys[i] 
-				) {
-                              this.lastKey = keys[i];
-                              let msg:Message = new Message("Link","controls","direction",keys[i])
-                              msgCenter.add(msg)
+				if (event.code === values[i] &&this.lastKey !== keys[i]) {
+					if (['up','down','left','right','A','B',].includes(keys[i])
+					) {
+						this.lastKey = keys[i];
+						let msg: Message = new Message(
+							'Link',
+							'controls',
+							'direction',
+							keys[i],
+						);
+						msgCenter.add(msg);
+					} else {
+						this.lastKey = keys[i];
+						let msg: Message = new Message(
+							'gameState',
+							'controls',
+							'paused',
+							'true',
+						);
+						msgCenter.add(msg);
+					}
 				}
 			}
-            });
-            document.addEventListener('keyup', event => {
+		});
+		document.addEventListener('keyup', event => {
 			for (let i = 0; i < keys.length; i++) {
-				if (event.code === values[i] &&
-                              this.keyUp !== keys[i]){
-                              this.keyUp = keys[i];
+				if (
+					event.code === values[i] &&
+					this.keyUp !== keys[i]
+				) {
+					this.keyUp = keys[i];
 				}
-                  }
-            });
-            setTimeout(()=>{this.lastKey=""},100)
+			}
+		});
+		setTimeout(() => {
+			this.lastKey = '';
+		}, 100);
 	}
 }

@@ -70,4 +70,10 @@ export default class gameState {
             this.currentMap.position.y -= 1;
         }
     }
+    onMessage(msg) {
+        if (msg.from === "controls") {
+            //@ts-ignore
+            this[msg.type] = !this[msg.type];
+        }
+    }
 }

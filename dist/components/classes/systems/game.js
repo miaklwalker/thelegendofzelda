@@ -57,7 +57,6 @@ export default class Game {
                 30,
                 30,
             ]);
-            console.log(this.Link.position);
             context.drawImage(pauseMenu(), 0, paused, 512, 480);
             this.rungame();
         }
