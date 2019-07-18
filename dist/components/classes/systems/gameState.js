@@ -52,4 +52,22 @@ export default class gameState {
             this.currentMap = this.maps[num];
         }
     }
+    changeScreen(position) {
+        if (position.x > 15.3) {
+            position.x = 1;
+            this.currentMap.position.x += 1;
+        }
+        if (position.x < .7) {
+            position.x = 14;
+            this.currentMap.position.x -= 1;
+        }
+        if (position.y > 9.7) {
+            position.y = 1;
+            this.currentMap.position.y += 1;
+        }
+        if (position.y < .7) {
+            position.y = 9;
+            this.currentMap.position.y -= 1;
+        }
+    }
 }

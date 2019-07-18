@@ -26,9 +26,9 @@ export default class Link {
         this.direction = 'right'
     }
     show(){
-        console.log(this.frameAdjusted%2+1)
+
         let str = `link-${this.action}-${this.direction}-${this.frameAdjusted%2+1}-${this.shield}`
-        console.log(str)
+
         return str
     }
     onMessage(msg:Message){
@@ -36,6 +36,8 @@ export default class Link {
        this[msg.type] = msg.data;
        if(msg.data==="right"){this.position.x+=.2}
        if(msg.data==="down"){this.position.y+=.2}
+       if(msg.data==="left"){this.position.x-=.2}
+       if(msg.data==="up"){this.position.y-=.2}
        this.frameAdjusted++
        
     }

@@ -52,6 +52,7 @@ export default class Game {
         this.messageCenter = new MessageQueue(this);
 		this.images = [];
 	}
+
 	/**
 	 *
 	 *
@@ -77,7 +78,8 @@ export default class Game {
 	}
 	rungame() {
         this.controls.setupControls(this.messageCenter)
-        this.messageCenter.dispatch()
+		this.messageCenter.dispatch()
+		this.gameState.changeScreen(this.Link.position)
     }
 	/**
 	 *

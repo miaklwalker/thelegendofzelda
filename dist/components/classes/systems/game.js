@@ -65,6 +65,7 @@ export default class Game {
     rungame() {
         this.controls.setupControls(this.messageCenter);
         this.messageCenter.dispatch();
+        this.gameState.changeScreen(this.Link.position);
     }
     /**
      *

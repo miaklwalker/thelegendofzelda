@@ -9,6 +9,7 @@ import eighthDungeon from "../dungeons/dungeonEight.js";
 import ninthDungeon from "../dungeons/dungeonNine.js";
 import inventory from "./inventory.js";
 import Overworld from "../../overworld.js";
+import { Vector } from "../math/vector.js";
 
 /**
  *
@@ -56,5 +57,24 @@ export default class gameState {
         }else{
         this.currentMap = this.maps[num];
         }
+    }
+    changeScreen(position:Vector){
+     if(position.x>15.3){
+         position.x = 1
+         this.currentMap.position.x+=1
+        }
+     if(position.x<.7){
+         position.x=14
+         this.currentMap.position.x-=1
+        }
+     if(position.y>9.7){
+         position.y = 1
+         this.currentMap.position.y+=1
+        }
+     if(position.y<.7){
+         position.y = 9
+         this.currentMap.position.y-=1
+        }
+
     }
 }
