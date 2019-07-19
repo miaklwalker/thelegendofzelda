@@ -28,7 +28,7 @@ export default class pauseScreen {
         }
         let minimapX = 130;
         let minimapY = 77;
-        let width = 14;
+        let width = 16;
         let height = 8;
         let offsetX = 31;
         let offsetY = 385;

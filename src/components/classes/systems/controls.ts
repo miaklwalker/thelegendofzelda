@@ -49,7 +49,7 @@ export default class Controls {
 							'gameState',
 							'controls',
 							'paused',
-							'true',
+							keys[i],
 						);
 						msgCenter.add(msg);
 					}

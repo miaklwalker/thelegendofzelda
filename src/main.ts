@@ -16,7 +16,6 @@ function preload() {
 }
 
 function setup() {
-    console.log(game.images[0])
     canvas.width = 512;
     canvas.height = 480;
     document.body.appendChild(canvas);

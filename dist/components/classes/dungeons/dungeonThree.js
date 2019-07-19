@@ -6,4 +6,10 @@ export default class thirdDungeon extends Dungeon {
         this.position = new Vector(3, 5);
         this.url = "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/dungeons/zelda-dungeon3.png";
     }
+    goToOverworld(position, gameState) {
+        let exit = [3, 5, 8, 9];
+        if ([this.position.x, this.position.y, position.x, position.y] === exit) {
+            gameState.Map = 0;
+        }
+    }
 }

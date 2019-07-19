@@ -34,7 +34,7 @@ export default class pauseScreen {
         }
         let minimapX = 130;
         let minimapY = 77;
-        let width = 14;
+        let width = 16;
         let height = 8;
         let offsetX = 31;
         let offsetY = 385;
@@ -42,6 +42,7 @@ export default class pauseScreen {
         let colors = ["lightGrey", "Grey"];
         let x = (minimapX / width) * this.position.x + offsetX;
         let y = (minimapY / height) * this.position.y + offsetY;
+
         context.fillStyle = colors[1];
         context.fillRect(offsetX, offsetY, minimapX, minimapY);
 

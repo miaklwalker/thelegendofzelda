@@ -60,7 +60,6 @@ export default class Game {
 	 * @memberof Game
 	 */
 	makeGameScreen(context: CanvasRenderingContext2D) {
-		this.gameState.Map = 0;
 		let pauseMenu = this.pauseScreen.show(this);
 		let paused = this.gameState.paused ? 0 : -360;
 		this.camera.show(this, context);
@@ -76,6 +75,7 @@ export default class Game {
 		}
 	}
 	rungame() {
+		this.gameState.changeMap(this.Link.position)
         this.controls.setupControls(this.messageCenter)
 		this.messageCenter.dispatch()
 		this.gameState.changeScreen(this.Link.position)

@@ -1,14 +1,15 @@
-import firstDungeon from "../dungeons/dungeonOne.js";
-import secondDungeon from "../dungeons/dungeonTwo.js";
-import thirdDungeon from "../dungeons/dungeonThree.js";
-import fourthDungeon from "../dungeons/dungeonFour.js";
-import fifthDungeon from "../dungeons/dungeonFive.js";
-import sixthDungeon from "../dungeons/dungeonSix.js";
-import seventhDungeon from "../dungeons/dungeonSeven.js";
-import eighthDungeon from "../dungeons/dungeonEight.js";
-import ninthDungeon from "../dungeons/dungeonNine.js";
-import inventory from "./inventory.js";
-import Overworld from "../../overworld.js";
+import firstDungeon from '../dungeons/dungeonOne.js';
+import secondDungeon from '../dungeons/dungeonTwo.js';
+import thirdDungeon from '../dungeons/dungeonThree.js';
+import fourthDungeon from '../dungeons/dungeonFour.js';
+import fifthDungeon from '../dungeons/dungeonFive.js';
+import sixthDungeon from '../dungeons/dungeonSix.js';
+import seventhDungeon from '../dungeons/dungeonSeven.js';
+import eighthDungeon from '../dungeons/dungeonEight.js';
+import ninthDungeon from '../dungeons/dungeonNine.js';
+import inventory from './inventory.js';
+import Overworld from '../../overworld.js';
+let index = 0;
 /**
  *
  *
@@ -53,11 +54,11 @@ export default class gameState {
         }
     }
     changeScreen(position) {
-        if (position.x > 15.3) {
+        if (position.x > 15) {
             position.x = 1;
             this.currentMap.position.x += 1;
         }
-        if (position.x < .7) {
+        if (position.x < 0.7) {
             position.x = 14;
             this.currentMap.position.x -= 1;
         }
@@ -65,13 +66,40 @@ export default class gameState {
             position.y = 1;
             this.currentMap.position.y += 1;
         }
-        if (position.y < .7) {
+        if (position.y < 0.7) {
             position.y = 9;
             this.currentMap.position.y -= 1;
         }
     }
+    changeMap(position) {
+        if (this.currentMap !== this.maps[0]) {
+            //@ts-ignore
+            this, this.currentMap.goToOverworld(position, this);
+        }
+        let dunLoc = [
+            [7, 3, 7, 4],
+            [12, 3, 7, 4],
+            [4, 7, 8, 4],
+            [5, 4, 8, 4],
+            [11, 0, 7, 4],
+            [2, 4, 7, 4],
+            [2, 2, 7, 4],
+            [13, 6, 10, 2],
+            [5, 0, 5, 6]
+        ];
+        dunLoc.forEach(([oX, oY, lX, lY], index) => {
+            if (oX === this.currentMap.position.x &&
+                oY === this.currentMap.position.y &&
+                lX === Math.round(position.x) &&
+                lY === Math.round(position.y)) {
+                this.currentMap = this.maps[index + 1];
+                position.x = 7.5;
+                position.y = 9;
+            }
+        });
+    }
     onMessage(msg) {
-        if (msg.from === "controls") {
+        if (msg.from === 'controls') {
             //@ts-ignore
             this[msg.type] = !this[msg.type];
         }
