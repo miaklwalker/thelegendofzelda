@@ -1,4 +1,4 @@
-import { Vector } from "../math/vector.js";
+import Hud from "./hud.js";
 /**
  *
  *
@@ -10,10 +10,10 @@ export default class pauseScreen {
      *Creates an instance of pauseScreen.
      * @memberof pauseScreen
      */
-    constructor() {
-        this.position = new Vector();
+    constructor(inventory, link, camera) {
         this.frame = 0;
         this.blink = true;
+        this.hud = new Hud(inventory, link, camera);
     }
     /**
      *
@@ -21,28 +21,6 @@ export default class pauseScreen {
      * @param {CanvasRenderingContext2D} context
      * @memberof pauseScreen
      */
-    minimap(context) {
-        this.frame++;
-        if (this.frame % 30 === 0) {
-            this.blink = !this.blink;
-        }
-        let minimapX = 130;
-        let minimapY = 77;
-        let width = 16;
-        let height = 8;
-        let offsetX = 31;
-        let offsetY = 385;
-        let color = this.blink ? 0 : 1;
-        let colors = ["lightGrey", "Grey"];
-        let x = (minimapX / width) * this.position.x + offsetX;
-        let y = (minimapY / height) * this.position.y + offsetY;
-        context.fillStyle = colors[1];
-        context.fillRect(offsetX, offsetY, minimapX, minimapY);
-        context.fillStyle = "black";
-        context.fillRect(31, 366, 130, 19);
-        context.fillStyle = colors[color];
-        context.fillRect(x, y, 9, 9);
-    }
     /**
      *
      *
@@ -51,7 +29,6 @@ export default class pauseScreen {
      * @memberof pauseScreen
      */
     show(game) {
-        this.position = game.camera.position;
         let screen = () => {
             let canvas = document.createElement("canvas");
             canvas.width = game.width;
@@ -62,7 +39,7 @@ export default class pauseScreen {
             context.drawImage(HUD, ...game.json.hud.inventory); //*inventory
             context.drawImage(HUD, ...game.json.hud.triforce); //*triforce
             context.drawImage(HUD, ...game.json.hud.top); //*hud
-            this.minimap(context);
+            this.hud.minimap(context);
             return canvas;
         };
         return screen;

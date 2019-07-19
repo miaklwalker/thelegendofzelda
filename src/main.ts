@@ -28,6 +28,7 @@ function draw() {
 }
 
 function loop() {
+    
     requestAnimationFrame(draw);
   
 }

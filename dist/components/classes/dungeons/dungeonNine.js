@@ -7,7 +7,7 @@ export default class ninthDungeon extends Dungeon {
         this.url = "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/dungeons/zelda-dungeon9.png";
     }
     goToOverworld(position, gameState) {
-        let exit = [7, 8, 7.5, 9];
+        let exit = [6, 7, 7.5, 9];
         const [x, y, px, py] = exit;
         if (this.position.x === x && this.position.y === y && position.x >= px && position.y >= py) {
             gameState.Map = 0;

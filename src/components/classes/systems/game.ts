@@ -24,7 +24,6 @@ export default class Game {
 	width: number;
 	height: number;
 	gameState: gameState;
-	hud: Hud;
 	Link: Link;
 	json: RootObject;
 	camera: camera;
@@ -44,11 +43,10 @@ export default class Game {
 		this.height = height;
 		this.gameState = new gameState();
 		this.Link = new Link();
-		this.hud = new Hud(this);
 		this.controls = new Controls(config);
 		this.json = json;
 		this.camera = new camera();
-        this.pauseScreen = new pauseScreen();
+        this.pauseScreen = new pauseScreen(this.gameState.inventory,this.Link,this.camera);
         this.messageCenter = new MessageQueue(this);
 		this.images = [];
 	}
