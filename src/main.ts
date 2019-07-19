@@ -9,7 +9,7 @@ let game: Game;
 async function preload() {
 	let data = await loadJson('../json/game.json');
 	game = new Game(512, 480, data);
-	await game.loadFiles();
+      game.loadFiles();
 	let button= document.createElement('button');
 	button.innerText = 'Play Game'
 	document.body.appendChild(button);

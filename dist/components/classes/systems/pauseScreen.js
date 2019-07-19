@@ -23,14 +23,6 @@ export default class pauseScreen {
         this.hud = new Hud(inventory, link, camera);
     }
     /**
-     *
-     *
-     * @param {CanvasRenderingContext2D} context
-     * @memberof pauseScreen
-     */
-    /**
-     *
-     *
      * @param {Game} game
      * @returns
      * @memberof pauseScreen

@@ -39,10 +39,11 @@ export default class Hud {
         let y = (minimapY / height) * this.position.y + offsetY;
         context.fillStyle = colors[1];
         context.fillRect(offsetX, offsetY, minimapX, minimapY);
-        context.fillStyle = "black";
+        context.fillStyle = "Gray";
         context.fillRect(31, 366, 130, 19);
         context.fillStyle = colors[color];
         context.fillRect(x, y, 9, 9);
+        this.showHearts(context);
     }
     /**
      *
@@ -52,4 +53,24 @@ export default class Hud {
      * @memberof Hud
      */
     show(context, game) { }
+    showHearts(context) {
+        let index = 0;
+        let heartNum = this.hearts;
+        let colors = Array(8).fill('red');
+        context.fillStyle = "Gray";
+        context.fillRect(352, 423.4, 129, 39);
+        context.fillStyle = "red";
+        context.fillRect(352, 442.9, 16.125, 19.5);
+        context.fillStyle = "blue";
+        context.fillRect(368.125, 442.9, 16.125, 19.5);
+        context.fillStyle = "green";
+        context.fillRect(384.25, 442.9, 16.125, 19.5);
+        for (let i = 0; i < 2; i++) {
+            for (let j = 0; j < 8; j++) {
+                index++;
+                heartNum >= index ? context.fillStyle = colors[j] : context.fillStyle = 'black';
+                context.fillRect(352 + j * 16.125, 442.9 - 19.5 * i, 16.125, 19.5);
+            }
+        }
+    }
 }

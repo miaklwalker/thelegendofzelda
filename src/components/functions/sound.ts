@@ -11,6 +11,7 @@ export default class sound{
       this.sound.src = src;
       this.sound.setAttribute("preload", "auto");
       this.sound.setAttribute("controls", "none");
+      this.sound.setAttribute('loop',true)
       this.sound.style.display = "none";
     } 
     addSound(){
@@ -20,6 +21,7 @@ export default class sound{
       this.sound.play();
     }
     stop(){
+      this.sound.load()
       this.sound.pause();
     }
 }

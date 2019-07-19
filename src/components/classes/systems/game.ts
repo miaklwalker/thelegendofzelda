@@ -1,4 +1,3 @@
-import Hud from './hud.js';
 import gameState from './gameState.js';
 import Link from '../actors/link.js';
 import camera from './camera.js';

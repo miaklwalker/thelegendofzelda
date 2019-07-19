@@ -1,6 +1,4 @@
 import Game from "./game.js";
-import loadImage from "../../functions/getImage.js";
-import { Vector } from "../math/vector.js";
 import Hud from "./hud.js";
 import Link from "../actors/link.js";
 import inventory from "./inventory.js";
@@ -27,15 +25,6 @@ export default class pauseScreen {
         this.hud = new Hud(inventory,link,camera)
     }
     /**
-     *
-     *
-     * @param {CanvasRenderingContext2D} context
-     * @memberof pauseScreen
-     */
-
-    /**
-     *
-     *
      * @param {Game} game
      * @returns
      * @memberof pauseScreen
