@@ -26,9 +26,7 @@ export default class Link {
         this.direction = 'right'
     }
     show(){
-
         let str = `link-${this.action}-${this.direction}-${this.frameAdjusted%2+1}-${this.shield}`
-
         return str
     }
     onMessage(msg:Message){

@@ -5,6 +5,7 @@ import Hud from "./hud.js";
 import Link from "../actors/link.js";
 import inventory from "./inventory.js";
 import camera from "./camera.js";
+import { memoize } from "../../objects/decorators.js";
 
 /**
  *
@@ -39,6 +40,7 @@ export default class pauseScreen {
      * @returns
      * @memberof pauseScreen
      */
+    @memoize
     show(game: Game) {
         let screen = () => {
             let canvas: HTMLCanvasElement = document.createElement("canvas");
@@ -53,7 +55,6 @@ export default class pauseScreen {
             this.hud.minimap(context);
             return canvas;
         };
-
         return screen;
     }
 }

@@ -11,6 +11,8 @@ export default class firstDungeon extends Dungeon {
         const [x, y, px, py] = exit;
         if (this.position.x === x && this.position.y === y && position.x >= px && position.y >= py) {
             gameState.Map = 0;
+            this.theme.stop();
+            gameState.currentMap.theme.play();
             position.x = 7;
             position.y = 5;
         }

@@ -46,17 +46,11 @@ export default class Game {
     makeGameScreen(context) {
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
+        const { x, y } = this.Link.position;
         this.camera.show(this, context);
-        if (this.images[0] !== undefined) {
-            this.images[5].renderSprite(context, this.Link.show(), [
-                this.Link.position.x * 32,
-                this.Link.position.y * 34 + 120,
-                30,
-                30,
-            ]);
-            context.drawImage(pauseMenu(), 0, paused, 512, 480);
-            this.rungame();
-        }
+        this.images[5].renderSprite(context, this.Link.show(), [x * 32, y * 34 + 120, 30, 30]);
+        context.drawImage(pauseMenu(), 0, paused, 512, 480);
+        this.rungame();
     }
     rungame() {
         this.gameState.changeMap(this.Link.position);
@@ -82,6 +76,7 @@ export default class Game {
                 this.images.push(spriteSheet);
                 iterator++;
             });
+            console.log('images done');
         });
     }
 }

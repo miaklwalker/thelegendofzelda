@@ -30,7 +30,7 @@ export default class Game {
 	pauseScreen: pauseScreen;
 	images: SpriteSheet[];
 	controls: Controls;
-    messageCenter: MessageQueue;
+	messageCenter: MessageQueue;
 	/**
 	 *Creates an instance of Game.
 	 * @param {number} width
@@ -46,8 +46,12 @@ export default class Game {
 		this.controls = new Controls(config);
 		this.json = json;
 		this.camera = new camera();
-        this.pauseScreen = new pauseScreen(this.gameState.inventory,this.Link,this.camera);
-        this.messageCenter = new MessageQueue(this);
+		this.pauseScreen = new pauseScreen(
+			this.gameState.inventory,
+			this.Link,
+			this.camera,
+		);
+		this.messageCenter = new MessageQueue(this);
 		this.images = [];
 	}
 
@@ -60,24 +64,19 @@ export default class Game {
 	makeGameScreen(context: CanvasRenderingContext2D) {
 		let pauseMenu = this.pauseScreen.show(this);
 		let paused = this.gameState.paused ? 0 : -360;
+		const { x, y } = this.Link.position;
 		this.camera.show(this, context);
-		if (this.images[0] !== undefined) {
-			this.images[5].renderSprite(context, this.Link.show(), [
-				this.Link.position.x*32,
-				this.Link.position.y*34+120,
-				30,
-				30,
-			]);
-            context.drawImage(pauseMenu(), 0, paused, 512, 480);
-           this.rungame()
-		}
+		this.images[5].renderSprite(context, this.Link.show(), [x*32,y*34 +120,30,30]);
+		context.drawImage(pauseMenu(), 0, paused, 512, 480);
+		this.rungame();
 	}
+
 	rungame() {
-		this.gameState.changeMap(this.Link.position)
-        this.controls.setupControls(this.messageCenter)
-		this.messageCenter.dispatch()
-		this.gameState.changeScreen(this.Link.position)
-    }
+		this.gameState.changeMap(this.Link.position);
+		this.controls.setupControls(this.messageCenter);
+		this.messageCenter.dispatch();
+		this.gameState.changeScreen(this.Link.position);
+	}
 	/**
 	 *
 	 *
@@ -98,6 +97,7 @@ export default class Game {
 				this.images.push(spriteSheet);
 				iterator++;
 			});
+			console.log('images done');
 		});
 	}
 }

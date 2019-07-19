@@ -102,7 +102,9 @@ if(this.currentMap!==this.maps[0]){
             oY ===this.currentMap.position.y &&
             lX ===Math.round(position.x) &&
             lY ===Math.round(position.y)){
-                this.currentMap=this.maps[index+1]
+			this.currentMap.theme.stop();
+		    this.currentMap=this.maps[index+1];
+		    this.currentMap.theme.play()
                 position.x = 7.6
                 position.y = 7.7
             }

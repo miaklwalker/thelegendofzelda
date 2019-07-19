@@ -1,5 +1,5 @@
 import RootObject from "../../objects/interfaces";
-import cache from "../../functions/cache";
+
 
 
 
@@ -44,6 +44,7 @@ export default class SpriteSheet{
             }
         })
     }
+
     renderSprite(context:CanvasRenderingContext2D,action:string,location:[number,number,number,number]){
         //@ts-ignores
         context.drawImage(this.sheet,...this.sprites[action],...location)

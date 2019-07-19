@@ -1,4 +1,5 @@
 import { Vector } from "../math/vector.js";
+import sound from "../../functions/sound.js";
 /**
  *
  *
@@ -18,5 +19,6 @@ export default class Dungeon {
         this.visitedRooms = [];
         this.boss = false;
         this.treasures = equipment;
+        this.theme = new sound('../music/Labyrinth.mp3');
     }
 }
