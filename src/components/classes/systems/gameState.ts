@@ -83,7 +83,7 @@ export default class gameState {
 if(this.currentMap!==this.maps[0]){
 	//@ts-ignore
 	this,this.currentMap.goToOverworld(position,this)
-}
+}else{
 
 
     let dunLoc = [
@@ -103,11 +103,11 @@ if(this.currentMap!==this.maps[0]){
             lX ===Math.round(position.x) &&
             lY ===Math.round(position.y)){
                 this.currentMap=this.maps[index+1]
-                position.x =7.5
-                position.y = 9
+                position.x = 7.6
+                position.y = 7.7
             }
     })
-
+}
     }
 	onMessage(msg: Message) {
 		if (msg.from === 'controls') {

@@ -68,6 +68,6 @@ export default class Controls {
 		});
 		setTimeout(() => {
 			this.lastKey = '';
-		}, 100);
+		}, 150);
 	}
 }

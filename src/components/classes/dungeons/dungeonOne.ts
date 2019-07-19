@@ -9,14 +9,12 @@ constructor(){
   this.url = "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/dungeons/zelda-dungeon1.png"
 }
 goToOverworld(position:Vector,gameState:gameState){
-  console.log('testing')
-  let exit = [2,5,8,9];
-  console.log(position)
-  if([this.position.x,this.position.y,Math.round(position.x),Math.round(position.y)]===exit){
-    
+  let exit = [2,5,7.5,9];
+  const [x,y,px,py] = exit
+  if(this.position.x===x&&this.position.y===y&&position.x>=px&&position.y>=py){
     gameState.Map = 0
-    console.log('going to over world')
+    position.x = 7
+    position.y = 5
   }
-
 }
 }
