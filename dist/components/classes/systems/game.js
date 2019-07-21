@@ -1,12 +1,12 @@
-import gameState from './gameState.js';
-import Link from '../actors/link.js';
-import camera from './camera.js';
-import pauseScreen from './pauseScreen.js';
-import loadImage from '../../functions/getImage.js';
-import SpriteSheet from './SpriteSheet.js';
-import Controls from './controls.js';
-import MessageQueue from './messageQueue.js';
-import config from '../../objects/config.js';
+import gameState from "./gameState.js";
+import Link from "../actors/link.js";
+import camera from "./camera.js";
+import pauseScreen from "./pauseScreen.js";
+import loadImage from "../../functions/getImage.js";
+import SpriteSheet from "./SpriteSheet.js";
+import Controls from "./controls.js";
+import MessageQueue from "./messageQueue.js";
+import config from "../../objects/config.js";
 /**
  *
  *
@@ -46,9 +46,10 @@ export default class Game {
     makeGameScreen(context) {
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
+        let link = this.Link.show();
         const { x, y } = this.Link.position;
         this.camera.show(this, context);
-        this.images[5].renderSprite(context, this.Link.show(), [x * 32, y * 34 + 120, 30, 30]);
+        this.images[5].renderSprite(context, link, [x * 32, y * 34 + 120, 30, 30,]);
         context.drawImage(pauseMenu(), 0, paused, 512, 480);
         this.rungame();
     }
@@ -70,13 +71,12 @@ export default class Game {
         Promise.all(images).then((response) => {
             response.forEach(res => {
                 let spriteSheet = new SpriteSheet(res, names[iterator]);
-                if (names[iterator] == 'link') {
+                if (names[iterator] == "link") {
                     spriteSheet.makeSprites(this.json);
                 }
                 this.images.push(spriteSheet);
                 iterator++;
             });
-            console.log('images done');
         });
     }
 }

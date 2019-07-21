@@ -7,3 +7,4 @@ describe('CreateId should return a string 32 characters long of random numbers a
         test('UniqueId should have a length of 32',()=>{
         expect(uniqueid()).toHaveLength(32)
     })
+})
