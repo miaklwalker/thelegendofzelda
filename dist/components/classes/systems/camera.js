@@ -1,6 +1,6 @@
 import { Vector } from "../math/vector.js";
 import loadImage from "../../functions/getImage.js";
-import createTileMap from "../../functions/createTileMap.js";
+import { showTileMap } from "../../functions/createTileMap.js";
 export default class camera {
     constructor() {
         this.position = new Vector();
@@ -13,7 +13,10 @@ export default class camera {
         loadImage(url).then(data => {
             this.position = game.gameState.currentMap.position;
             context.drawImage(data, x * w, y * 176.1, w, 405, 0, paused, 512, 863);
-            createTileMap(context);
+            let index = `${game.gameState.currentMap.position.x},${game.gameState.currentMap.position.y}`;
+            //@ts-ignore
+            showTileMap(game.json.tileMap[index], context);
+            //createTileMap(context)
         });
     }
     move(game) { }

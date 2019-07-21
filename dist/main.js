@@ -1,12 +1,11 @@
 import makeCanvas from "./components/functions/canvas.js";
 import Game from "./components/classes/systems/game.js";
 import loadJson from "./components/functions/getjson.js";
-import { exportTiles } from "./components/functions/createTileMap.js";
 let canvas = makeCanvas();
 let ctx = canvas.getContext("2d");
 let game;
 async function preload() {
-    let data = await loadJson("https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/json/game.json");
+    let data = await loadJson("../json/game.json");
     game = new Game(512, 480, data);
     game.loadFiles();
     let button = document.createElement("button");
@@ -22,10 +21,7 @@ function setup() {
     canvas.width = 512;
     canvas.height = 480;
     document.body.appendChild(canvas);
-    let index = `${game.gameState.currentMap.position.x},${game.gameState.currentMap.position.y}`;
-    //showTileMap(game.json.tileMap[index],ctx)
-    console.log(game.json);
-    exportTiles();
+    //exportTiles()
     draw();
 }
 function draw() {

@@ -197,7 +197,7 @@ export function exportTiles (){
   
 }
 export function showTileMap(tilemap:[[number,number,number,number]],context:CanvasRenderingContext2D){
-  for(let tile in tilemap){
+  for(let tile = 0  ;tile<tilemap.length;tile++){
     context.fillRect(...tilemap[tile])
   }
 }
