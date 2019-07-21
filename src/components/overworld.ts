@@ -1,5 +1,5 @@
 import { Vector } from "./classes/math/vector.js";
-import sound from "./functions/sound.js";
+import sound from "./classes/systems/sound.js";
 
 export default class Overworld {
     position: Vector;

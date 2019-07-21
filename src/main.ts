@@ -1,6 +1,7 @@
 import makeCanvas from './components/functions/canvas.js';
 import Game from './components/classes/systems/game.js';
 import loadJson from './components/functions/getjson.js';
+import uniqueid from './components/functions/createId.js';
 
 let canvas = makeCanvas() as HTMLCanvasElement;
 let ctx = canvas.getContext('2d') as CanvasRenderingContext2D;

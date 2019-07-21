@@ -1,5 +1,5 @@
 import { Vector } from "../math/vector.js";
-import sound from "../../functions/sound.js";
+import sound from "../systems/sound.js";
 /**
  *
  *
