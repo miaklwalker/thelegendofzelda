@@ -1,3 +1,4 @@
+
 /**
  *
  *
@@ -25,5 +26,12 @@ function showGrid(ctx:CanvasRenderingContext2D){
 	 ctx.moveTo(0, 480);
 	 ctx.lineTo(canvas.width, 480);
      ctx.stroke();
+     ctx.fillStyle='black'
+
 }
 export default showGrid
+/*
+[0,120,32,34]
+
+
+*/

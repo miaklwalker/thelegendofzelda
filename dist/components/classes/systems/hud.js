@@ -39,7 +39,7 @@ export default class Hud {
         let y = (minimapY / height) * this.position.y + offsetY;
         context.fillStyle = colors[1];
         context.fillRect(offsetX, offsetY, minimapX, minimapY);
-        context.fillStyle = "Gray";
+        context.fillStyle = "black";
         context.fillRect(31, 366, 130, 19);
         context.fillStyle = colors[color];
         context.fillRect(x, y, 9, 9);

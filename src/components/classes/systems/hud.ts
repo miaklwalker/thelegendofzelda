@@ -54,7 +54,7 @@ export default class Hud {
         context.fillStyle = colors[1];
         context.fillRect(offsetX, offsetY, minimapX, minimapY);
 
-        context.fillStyle = "Gray";
+        context.fillStyle = "black";
         context.fillRect(31, 366, 130, 19);
       
 
