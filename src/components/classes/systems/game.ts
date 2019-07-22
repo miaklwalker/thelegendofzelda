@@ -8,6 +8,7 @@ import SpriteSheet from "./SpriteSheet.js";
 import Controls from "./controls.js";
 import MessageQueue from "./messageQueue.js";
 import config from "../../objects/config.js";
+import collision from "../../functions/collision.js";
 
 /**
  *
@@ -69,6 +70,7 @@ export default class Game {
         this.images[5].renderSprite(context, link, [x * 32,y * 34 + 120, 30,30,]);
         context.drawImage(pauseMenu(), 0, paused, 512, 480);
         this.rungame();
+        
     }
 
     rungame() {

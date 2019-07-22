@@ -1,6 +1,7 @@
 import makeCanvas from "./components/functions/canvas.js";
 import Game from "./components/classes/systems/game.js";
 import loadJson from "./components/functions/getjson.js";
+import { exportTiles } from "./components/functions/createTileMap.js";
 let canvas = makeCanvas();
 let ctx = canvas.getContext("2d");
 let game;
@@ -21,7 +22,7 @@ function setup() {
     canvas.width = 512;
     canvas.height = 480;
     document.body.appendChild(canvas);
-    //exportTiles()
+    exportTiles();
     draw();
 }
 function draw() {
