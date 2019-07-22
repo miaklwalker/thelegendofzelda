@@ -11,6 +11,8 @@ import inventory from "./inventory.js";
 import Overworld from "../../overworld.js";
 import { Vector } from "../math/vector.js";
 import Message from "./message.js";
+import { createTerrain } from "../../functions/collisionDetection.js";
+import Game from "./game.js";
 let index = 0;
 /**
  *
@@ -60,23 +62,33 @@ export default class gameState {
     }
   }
 
-  changeScreen(position: Vector) {
+  changeScreen(position: Vector,game:Game,context:CanvasRenderingContext2D) {
+    let index = `${game.gameState.currentMap.position.x},${game.gameState.currentMap.position.y}`
+
     let map = this.currentMap.position;
     if (position.x > 15) {
       position.x = 1;
       map.x += 1;
+          //@ts-ignore
+    createTerrain(context,game.json.tileMap[index])
     }
     if (position.x < 0.7) {
       position.x = 14;
       map.x -= 1;
+          //@ts-ignore
+    createTerrain(context,game.json.tileMap[index])
     }
     if (position.y > 9.7) {
       position.y = 1;
       map.y += 1;
+          //@ts-ignore
+    createTerrain(context,game.json.tileMap[index])
     }
     if (position.y < 0.7) {
       position.y = 9;
       map.y -= 1;
+          //@ts-ignore
+    createTerrain(context,game.json.tileMap[index])
     }
   }
   changeMap(position: Vector) {

@@ -51,13 +51,13 @@ export default class Game {
         this.camera.show(this, context);
         this.images[5].renderSprite(context, link, [x * 32, y * 34 + 120, 30, 30,]);
         context.drawImage(pauseMenu(), 0, paused, 512, 480);
-        this.rungame();
+        this.rungame(context);
     }
-    rungame() {
+    rungame(context) {
         this.gameState.changeMap(this.Link.position);
         this.controls.setupControls(this.messageCenter);
         this.messageCenter.dispatch();
-        this.gameState.changeScreen(this.Link.position);
+        this.gameState.changeScreen(this.Link.position, this, context);
     }
     /**
      *
