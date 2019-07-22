@@ -8,7 +8,6 @@ import SpriteSheet from "./SpriteSheet.js";
 import Controls from "./controls.js";
 import MessageQueue from "./messageQueue.js";
 import config from "../../objects/config.js";
-import collision from "../../functions/collision.js";
 
 /**
  *

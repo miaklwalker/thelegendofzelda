@@ -2,7 +2,6 @@ import { Vector } from "../math/vector.js";
 import loadImage from "../../functions/getImage.js";
 import Game from "./game";
 import createTileMap, { showTileMap } from "../../functions/createTileMap.js";
-import collision from "../../functions/collision.js";
 
 export default class camera {
   position: Vector;
