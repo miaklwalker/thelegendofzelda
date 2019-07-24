@@ -25,6 +25,7 @@ export function createTerrain(context:CanvasRenderingContext2D,tilemap:[[number,
   let storage:Polygon[] = []
   for(let ter of storage){
     system.remove(ter)
+    system
   }
 for(let i = 0 ; i<tilemap.length ; i++){
   let tile = tilemap[i]

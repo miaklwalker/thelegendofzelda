@@ -17,10 +17,10 @@ export default class pauseScreen {
      *Creates an instance of pauseScreen.
      * @memberof pauseScreen
      */
-    constructor(inventory, link, camera) {
+    constructor(game) {
         this.frame = 0;
         this.blink = true;
-        this.hud = new Hud(inventory, link, camera);
+        this.hud = new Hud(game);
     }
     /**
      * @param {Game} game

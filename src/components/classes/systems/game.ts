@@ -8,6 +8,7 @@ import SpriteSheet from "./SpriteSheet.js";
 import Controls from "./controls.js";
 import MessageQueue from "./messageQueue.js";
 import config from "../../objects/config.js";
+import CollisionSystem from "./collisionSystem.js";
 
 /**
  *
@@ -30,6 +31,7 @@ export default class Game {
     images: SpriteSheet[];
     controls: Controls;
     messageCenter: MessageQueue;
+    system: CollisionSystem;
     /**
      *Creates an instance of Game.
      * @param {number} width
@@ -44,12 +46,9 @@ export default class Game {
         this.Link = new Link();
         this.controls = new Controls(config);
         this.json = json;
+        this.system = new CollisionSystem(this)
         this.camera = new camera();
-        this.pauseScreen = new pauseScreen(
-            this.gameState.inventory,
-            this.Link,
-            this.camera,
-        );
+        this.pauseScreen = new pauseScreen(this);
         this.messageCenter = new MessageQueue(this);
         this.images = [];
     }
@@ -60,17 +59,17 @@ export default class Game {
      * @param {CanvasRenderingContext2D} context
      * @memberof Game
      */
-    makeGameScreen(context: CanvasRenderingContext2D) {
+    drawScreen(context: CanvasRenderingContext2D) {
+        const { x, y } = this.Link.position;
+        let link = this.Link.show();
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
-        let link = this.Link.show();
-        const { x, y } = this.Link.position;
+
         this.camera.show(this, context);
-        this.images[5].renderSprite(context, link, [x * 32,y * 34 + 120, 30,30,]);
+        this.images[5].renderSprite(context, link, [x * 32,y * 34 + 120, 30,30,]);        
         context.drawImage(pauseMenu(), 0, paused, 512, 480);
-        
         this.rungame(context);
-        
+    
     }
 
     rungame(context:CanvasRenderingContext2D) {

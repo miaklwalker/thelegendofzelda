@@ -1,17 +1,23 @@
-export interface TitleScreen {}
-
-export interface Urls {
+export default interface RootObject {
+    TitleScreen: BossesOrEnemiesOrNPCOrTilesOrTitleScreen;
+    urls: Urls;
+    hud: Hud;
+    Sprites: Sprites;
+    tileMap: TileMap;
+  }
+  export interface BossesOrEnemiesOrNPCOrTilesOrTitleScreen {
+  }
+  export interface Urls {
     dungeonTiles: string;
     enemyTiles: string;
     enemy: string;
     enemyTwo: string;
     enemyThree: string;
-    link3: string;
+    link: string;
     misc2: string;
     misc: string;
     npc: string;
     npc2: string;
-    zelda: string;
     zelda2: string;
     hud: string;
     fileSelect: string;
@@ -20,42 +26,36 @@ export interface Urls {
     overWorldTiles: string;
     title: string;
     overworld: string;
-}
-
-export interface Hud {
-    top: [number, number, number, number, number, number, number, number];
-    paused: [number, number, number, number, number, number, number, number];
-    triforce: [number, number, number, number, number, number, number, number];
-    inventory: [number, number, number, number, number, number, number, number];
-}
-
-export interface Bosses {}
-
-export interface Enemies {}
-
-export interface SpriteSheet {
+    dungeonOne: string;
+  }
+  export interface Hud {
+    top:       [number,number,number,number,number,number,number,number] ;
+    paused:    [number,number,number,number,number,number,number,number] ;
+    triforce:  [number,number,number,number,number,number,number,number] ;
+    inventory: [number,number,number,number,number,number,number,number] ;
+  }
+  export interface Sprites {
+    Bosses: BossesOrEnemiesOrNPCOrTilesOrTitleScreen;
+    Enemies: BossesOrEnemiesOrNPCOrTilesOrTitleScreen;
+    link?: (LinkEntity)[] | null;
+    NPC: BossesOrEnemiesOrNPCOrTilesOrTitleScreen;
+    Tiles: BossesOrEnemiesOrNPCOrTilesOrTitleScreen;
+  }
+  export interface LinkEntity {
     name: string;
     x: number;
     y: number;
     w: number;
     h: number;
-}
-
-export interface NPC {}
-
-export interface Tiles {}
-
-export interface Sprites {
-    Bosses: Bosses;
-    Enemies: Enemies;
-    Link: SpriteSheet[];
-    NPC: NPC;
-    Tiles: Tiles;
-}
-
-export default interface RootObject {
-    TitleScreen: TitleScreen;
-    urls: Urls;
-    hud: Hud;
-    Sprites: Sprites;
-}
+  }
+  export interface TileMap {
+    "0,0": number[]
+    "1,0": number[]
+    "2,0": number[]
+    "3,0": number[]
+    "4,0": number[]
+    "5,0": number[]
+    "6,0": number[]
+    "7,7": number[]
+  }
+  
