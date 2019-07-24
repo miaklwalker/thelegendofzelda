@@ -1,6 +1,4 @@
 import Game from "./game.js";
-import inventory from "./inventory.js";
-import Link from "../actors/link.js";
 import { Vector } from "../math/vector.js";
 import camera from "./camera.js";
 

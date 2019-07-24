@@ -1,14 +1,14 @@
-import firstDungeon from "../dungeons/dungeonOne.js";
-import secondDungeon from "../dungeons/dungeonTwo.js";
-import thirdDungeon from "../dungeons/dungeonThree.js";
-import fourthDungeon from "../dungeons/dungeonFour.js";
-import fifthDungeon from "../dungeons/dungeonFive.js";
-import sixthDungeon from "../dungeons/dungeonSix.js";
-import seventhDungeon from "../dungeons/dungeonSeven.js";
-import eighthDungeon from "../dungeons/dungeonEight.js";
-import ninthDungeon from "../dungeons/dungeonNine.js";
-import inventory from "./inventory.js";
-import Overworld from "../../overworld.js";
+import firstDungeon from '../dungeons/dungeonOne.js';
+import secondDungeon from '../dungeons/dungeonTwo.js';
+import thirdDungeon from '../dungeons/dungeonThree.js';
+import fourthDungeon from '../dungeons/dungeonFour.js';
+import fifthDungeon from '../dungeons/dungeonFive.js';
+import sixthDungeon from '../dungeons/dungeonSix.js';
+import seventhDungeon from '../dungeons/dungeonSeven.js';
+import eighthDungeon from '../dungeons/dungeonEight.js';
+import ninthDungeon from '../dungeons/dungeonNine.js';
+import inventory from './inventory.js';
+import Overworld from '../../overworld.js';
 let index = 0;
 /**
  *
@@ -41,7 +41,7 @@ export default class gameState {
     }
     set Map(num) {
         if (num < 0 || num > 9) {
-            throw new Error("Dungeon not found");
+            throw new Error('Dungeon not found');
         }
         else {
             this.currentMap = this.maps[num];
@@ -98,7 +98,7 @@ export default class gameState {
         }
     }
     onMessage(msg) {
-        if (msg.from === "controls") {
+        if (msg.from === 'controls') {
             //@ts-ignore
             this[msg.type] = !this[msg.type];
         }
