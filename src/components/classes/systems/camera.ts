@@ -1,5 +1,5 @@
-import { Vector } from "../math/vector.js";
-import loadImage from "../../functions/getImage.js";
+import { Vector } from "../../../../dist/components/classes/math/vector.js";
+import loadImage from "../../../../dist/components/functions/getImage.js";
 import Game from "./game";
 
 export default class camera {
