@@ -1,0 +1,1 @@
+import message from "../src/components/classes/systems/message"

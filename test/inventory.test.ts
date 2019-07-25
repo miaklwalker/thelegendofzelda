@@ -1,0 +1,1 @@
+import inventory from "../src/components/classes/systems/inventory"

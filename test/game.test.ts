@@ -1,0 +1,1 @@
+import game from "../src/components/classes/systems/game"

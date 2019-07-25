@@ -1,0 +1,1 @@
+import controllerConfig from "../src/components/classes/systems/controllerConfig"
