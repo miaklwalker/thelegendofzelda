@@ -49,13 +49,14 @@ export default interface RootObject {
     h: number;
   }
   export interface TileMap {
-    "0,0": number[]
-    "1,0": number[]
-    "2,0": number[]
-    "3,0": number[]
-    "4,0": number[]
-    "5,0": number[]
-    "6,0": number[]
-    "7,7": number[]
+    [index:string]:[[number,number,number,number]]
+    "0,0": [[number,number,number,number]],
+    "1,0": [[number,number,number,number]],
+    "2,0": [[number,number,number,number]],
+    "3,0": [[number,number,number,number]],
+    "4,0": [[number,number,number,number]],
+    "5,0": [[number,number,number,number]],
+    "6,0": [[number,number,number,number]],
+    "7,7": [[number,number,number,number]]
   }
   

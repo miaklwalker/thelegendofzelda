@@ -56,28 +56,35 @@ export default class gameState {
 		}
 	}
 
-	changeScreen(
-		position: Vector,
-		game: Game,
-		context: CanvasRenderingContext2D,
-	) {
-    let map = this.currentMap.position;
-    
+	changeScreen(position: Vector,game:Game) {
+	let map = this.currentMap.position;
+
+    let changed:boolean = false
 		if (position.x > 15) {
 			position.x = 1;
 			map.x += 1;
+			changed = true
 		}
 		if (position.x < 0.7) {
 			position.x = 14;
 			map.x -= 1;
+			changed = true
 		}
 		if (position.y > 9.7) {
 			position.y = 1;
 			map.y += 1;
+			changed = true
 		}
 		if (position.y < 0.7) {
 			position.y = 9;
 			map.y -= 1;
+			changed = true
+		}
+		if(changed){
+			let index:string = `${ map.x},${map.y}`
+			console.log(index)
+			game.system.makeScreen(game.json.tileMap[index])
+			changed = false
 		}
 	}
 	changeMap(position: Vector) {

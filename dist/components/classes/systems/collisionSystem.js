@@ -8,23 +8,19 @@ export default class CollisionSystem {
         this.game = game;
     }
     addPlayer() {
-        let x = this.game.Link.position.x;
-        let y = this.game.Link.position.y;
-        let link = this.system.createPolygon(x, y, [
-            [0, 0],
-            [0, 34],
-            [32, 34],
-            [32, 0],
-        ]);
+        let x = this.game.Link.position.x * 32;
+        let y = this.game.Link.position.y * 34;
+        let link = this.system.createPolygon(x, y + 120, [[0, 0], [0, 30], [30, 30], [30, 0]]);
         this.system.update();
         let potentials = link.potentials();
         for (let body of potentials) {
             if (link.collides(body, this.results)) {
-                console.log(this.results);
-                //this.game.Link.position.x -= this.results.overlap_x * 0.1;
-                //this.game.Link.position.y -= this.results.overlap_y * 0.1;
+                this.game.Link.position.x -= this.results.overlap_x * 0.1;
+                this.game.Link.position.y -= this.results.overlap_y * 0.1;
             }
         }
+        this.system.remove(link);
+        this.system.update();
     }
     createMap(tilemap) {
         for (let entity of this.entities) {
@@ -44,6 +40,10 @@ export default class CollisionSystem {
         return output;
     }
     makeScreen(tilemap) {
+        this.entities.forEach((entity) => {
+            this.system.remove(entity);
+        });
+        this.entities = [];
         for (let i = 0; i < tilemap.length; i++) {
             let tile = tilemap[i];
             let temp = this.system.createPolygon(tile[0], tile[1], [
@@ -54,6 +54,7 @@ export default class CollisionSystem {
             ]);
             this.entities.push(temp);
         }
+        console.log(this.entities);
         this.system.update();
     }
     drawSystem(context) {

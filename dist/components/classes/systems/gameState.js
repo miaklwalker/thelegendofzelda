@@ -47,23 +47,34 @@ export default class gameState {
             this.currentMap = this.maps[num];
         }
     }
-    changeScreen(position, game, context) {
+    changeScreen(position, game) {
         let map = this.currentMap.position;
+        let changed = false;
         if (position.x > 15) {
             position.x = 1;
             map.x += 1;
+            changed = true;
         }
         if (position.x < 0.7) {
             position.x = 14;
             map.x -= 1;
+            changed = true;
         }
         if (position.y > 9.7) {
             position.y = 1;
             map.y += 1;
+            changed = true;
         }
         if (position.y < 0.7) {
             position.y = 9;
             map.y -= 1;
+            changed = true;
+        }
+        if (changed) {
+            let index = `${map.x},${map.y}`;
+            console.log(index);
+            game.system.makeScreen(game.json.tileMap[index]);
+            changed = false;
         }
     }
     changeMap(position) {

@@ -18,6 +18,8 @@ async function preload() {
 function setup() {
   canvas.width = 512;
   canvas.height = 480;
+  let index:string = `${game.gameState.currentMap.position.x},${game.gameState.currentMap.position.y}`
+  game.system.makeScreen(game.json.tileMap[index])
   document.body.appendChild(canvas);
   exportTiles();
   draw();
