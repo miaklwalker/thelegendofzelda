@@ -1,6 +1,6 @@
 import controlsConfig from "./controlsConfig";
 import MessageQueue from "./messageQueue";
-import Message from "./message.js";
+import Message from "./message";
 
 export default class Controls {
     up: string;
