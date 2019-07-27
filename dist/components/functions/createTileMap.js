@@ -195,8 +195,10 @@ export function exportTiles() {
     });
 }
 export function showTileMap(tilemap, context) {
-    for (let tile = 0; tile < tilemap.length; tile++) {
-        context.fillRect(...tilemap[tile]);
+    if (tilemap !== undefined) {
+        for (let tile = 0; tile < tilemap.length; tile++) {
+            context.fillRect(...tilemap[tile]);
+        }
     }
 }
 export default createTileMap;

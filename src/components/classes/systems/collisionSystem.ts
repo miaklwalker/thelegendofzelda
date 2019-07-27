@@ -31,6 +31,7 @@ export default class CollisionSystem {
     this.system.update();
   }
   createMap(tilemap:number[]) {
+    if(tilemap !== undefined){
       for (let entity of this.entities) {
         entity.remove();
       }
@@ -46,8 +47,11 @@ export default class CollisionSystem {
            ]);
          }
          return output
-  }
+        }
+      }
+
   makeScreen(tilemap:[[number,number,number,number]]){
+    if(tilemap!== undefined){
 this.entities.forEach((entity:Polygon)=>{
 this.system.remove(entity)
 })
@@ -62,12 +66,16 @@ this.entities =[]
         ]);
         this.entities.push(temp);
       }
-      console.log(this.entities)
       this.system.update();
+    }
   }
-  drawSystem(context: CanvasRenderingContext2D) {
+  drawSystem(context:CanvasRenderingContext2D,debug:boolean|string = 'draw') {
+    if(debug){
+      this.game.debugMode(context)
+    }else if (debug === 'draw'){
     this.system.draw(context);
     this.system.drawBVH(context);
+    }
   }
   parseMap(){
 

@@ -9,6 +9,8 @@ import Controls from "./controls.js";
 import MessageQueue from "./messageQueue.js";
 import config from "../../objects/config.js";
 import CollisionSystem from "./collisionSystem.js";
+import createTileMap, { showTileMap } from "../../functions/createTileMap.js";
+import showGrid from "../../functions/showScreenGrid.js";
 
 /**
  *
@@ -32,6 +34,8 @@ export default class Game {
     controls: Controls;
     messageCenter: MessageQueue;
     system: CollisionSystem;
+    debugger: boolean;
+    toggle: boolean;
     /**
      *Creates an instance of Game.
      * @param {number} width
@@ -51,6 +55,8 @@ export default class Game {
         this.pauseScreen = new pauseScreen(this);
         this.messageCenter = new MessageQueue(this);
         this.images = [];
+        this.debugger = false 
+        this.toggle = true;
     }
 
     /**
@@ -69,10 +75,25 @@ export default class Game {
         this.images[5].renderSprite(context, link, [x * 32,y * 34 + 120, 30,30,]);        
         context.drawImage(pauseMenu(), 0, paused, 512, 480);
         this.rungame(context);
-        context.strokeStyle = 'black'
-       this.system.drawSystem(context)
-        context.stroke()
-    
+        this.debugMode(context)
+    }
+    debugMode(context:CanvasRenderingContext2D){
+        if(!this.debugger){
+            this.debugger=true
+            let button =document.createElement('button');
+            button.innerText = ' Create Tile Map'
+            document.body.appendChild(button);
+            button.addEventListener('click',()=>{
+                this.toggle = !this.toggle
+            })
+        }
+        if(this.toggle){
+            createTileMap(context)
+        }else{
+            let index:string = `${this.gameState.currentMap.position.x},${this.gameState.currentMap.position.y}`
+
+            showTileMap(this.json.tileMap[index],context)
+        }
     }
 
     rungame(context:CanvasRenderingContext2D) {

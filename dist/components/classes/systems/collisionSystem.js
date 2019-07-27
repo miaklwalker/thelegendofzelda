@@ -23,43 +23,51 @@ export default class CollisionSystem {
         this.system.update();
     }
     createMap(tilemap) {
-        for (let entity of this.entities) {
-            entity.remove();
+        if (tilemap !== undefined) {
+            for (let entity of this.entities) {
+                entity.remove();
+            }
+            this.entities = [];
+            this.system.update();
+            let output = [];
+            for (let i = 0; i < tilemap.length / 4; i++) {
+                output.push([
+                    tilemap[0 + i * 4],
+                    tilemap[1 + i * 4],
+                    tilemap[2 + i * 4],
+                    tilemap[3 + i * 4],
+                ]);
+            }
+            return output;
         }
-        this.entities = [];
-        this.system.update();
-        let output = [];
-        for (let i = 0; i < tilemap.length / 4; i++) {
-            output.push([
-                tilemap[0 + i * 4],
-                tilemap[1 + i * 4],
-                tilemap[2 + i * 4],
-                tilemap[3 + i * 4],
-            ]);
-        }
-        return output;
     }
     makeScreen(tilemap) {
-        this.entities.forEach((entity) => {
-            this.system.remove(entity);
-        });
-        this.entities = [];
-        for (let i = 0; i < tilemap.length; i++) {
-            let tile = tilemap[i];
-            let temp = this.system.createPolygon(tile[0], tile[1], [
-                [0, 0],
-                [0, 34],
-                [32, 34],
-                [32, 0],
-            ]);
-            this.entities.push(temp);
+        if (tilemap !== undefined) {
+            this.entities.forEach((entity) => {
+                this.system.remove(entity);
+            });
+            this.entities = [];
+            for (let i = 0; i < tilemap.length; i++) {
+                let tile = tilemap[i];
+                let temp = this.system.createPolygon(tile[0], tile[1], [
+                    [0, 0],
+                    [0, 34],
+                    [32, 34],
+                    [32, 0],
+                ]);
+                this.entities.push(temp);
+            }
+            this.system.update();
         }
-        console.log(this.entities);
-        this.system.update();
     }
-    drawSystem(context) {
-        this.system.draw(context);
-        this.system.drawBVH(context);
+    drawSystem(context, debug = 'draw') {
+        if (debug) {
+            this.game.debugMode(context);
+        }
+        else if (debug === 'draw') {
+            this.system.draw(context);
+            this.system.drawBVH(context);
+        }
     }
     parseMap() {
     }
