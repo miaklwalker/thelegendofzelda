@@ -26,34 +26,32 @@ export default class CollisionSystem {
     let potentials = link.potentials();
     for (let body of potentials) {
       if (link.collides(body, this.results)) {
+        console.log(this.results)
         //this.game.Link.position.x -= this.results.overlap_x * 0.1;
         //this.game.Link.position.y -= this.results.overlap_y * 0.1;
       }
     }
   }
-  createMap(tilemap: number[]) {
+  createMap(tilemap:number[]) {
       for (let entity of this.entities) {
         entity.remove();
       }
       this.entities = [];
       this.system.update();
-      let output = [];
-      //@ts-ignore
-      if (tilemap[0][0] === undefined) {
-        for (let i = 0; i < tilemap.length / 4; i++) {
-          output.push([
-            tilemap[0 + i * 4],
-            tilemap[1 + i * 4],
-            tilemap[2 + i * 4],
-            tilemap[3 + i * 4],
-          ]);
-        }
-      } else {
-        output = tilemap;
-      }
-      for (let i = 0; i < output.length; i++) {
-        let tile = output[i];
-        //@ts-ignore
+      let output=[];
+         for (let i = 0; i < tilemap.length / 4; i++) {
+           output.push([
+             tilemap[0 + i * 4],
+             tilemap[1 + i * 4],
+             tilemap[2 + i * 4],
+             tilemap[3 + i * 4],
+           ]);
+         }
+         return output
+  }
+  makeScreen(tilemap:[[number,number,number,number]]){
+      for (let i = 0; i < tilemap.length; i++) {
+        let tile:[number,number,number,number] = tilemap[i];
         let temp = this.system.createPolygon(tile[0], tile[1], [
           [0, 0],
           [0, 34],
@@ -67,5 +65,8 @@ export default class CollisionSystem {
   drawSystem(context: CanvasRenderingContext2D) {
     this.system.draw(context);
     this.system.drawBVH(context);
+  }
+  parseMap(){
+
   }
 }

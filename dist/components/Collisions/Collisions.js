@@ -132,3 +132,4 @@ class Collisions {
 }
 ;
 export { Collisions as default, Collisions, Result, Circle, Polygon, Point, };
+//# sourceMappingURL=Collisions.js.map

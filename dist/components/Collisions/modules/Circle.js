@@ -38,3 +38,4 @@ export default class Circle extends Body {
     }
 }
 ;
+//# sourceMappingURL=Circle.js.map

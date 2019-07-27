@@ -1,5 +1,5 @@
-import controlsConfig from "./controllerConfig.js";
-import MessageQueue from "./messageQueue.js";
+import controlsConfig from "./controlsConfig";
+import MessageQueue from "./messageQueue";
 import Message from "./message.js";
 
 export default class Controls {

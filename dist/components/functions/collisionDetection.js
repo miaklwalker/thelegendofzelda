@@ -32,3 +32,4 @@ export function drawsystem(context) {
     system.draw(context);
     context.stroke();
 }
+//# sourceMappingURL=collisionDetection.js.map

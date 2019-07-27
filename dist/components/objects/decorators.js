@@ -122,3 +122,4 @@ function decorator(fn) {
         desc.value = fn(desc.value, opt, target, key, desc);
     });
 }
+//# sourceMappingURL=decorators.js.map

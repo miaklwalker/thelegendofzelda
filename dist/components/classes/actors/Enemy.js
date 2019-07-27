@@ -4,3 +4,4 @@ export default class enemy {
         this.health = 0;
     }
 }
+//# sourceMappingURL=Enemy.js.map

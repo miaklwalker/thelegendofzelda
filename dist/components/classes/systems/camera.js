@@ -14,3 +14,4 @@ export default class camera {
         });
     }
 }
+//# sourceMappingURL=camera.js.map

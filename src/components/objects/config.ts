@@ -1,4 +1,4 @@
-import controlsConfig from "../classes/systems/controllerConfig.js";
+import controlsConfig from "../classes/systems/controlsConfig.js";
 
 let config = new controlsConfig(
 	'ArrowUp',

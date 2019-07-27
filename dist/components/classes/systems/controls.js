@@ -45,3 +45,4 @@ export default class Controls {
         }, 150);
     }
 }
+//# sourceMappingURL=controls.js.map

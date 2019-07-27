@@ -18,3 +18,4 @@ export default class eighthDungeon extends Dungeon {
         }
     }
 }
+//# sourceMappingURL=dungeonEight.js.map

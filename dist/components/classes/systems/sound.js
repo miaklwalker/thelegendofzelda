@@ -24,3 +24,4 @@ export default class sound {
         this.sound.pause();
     }
 }
+//# sourceMappingURL=sound.js.map

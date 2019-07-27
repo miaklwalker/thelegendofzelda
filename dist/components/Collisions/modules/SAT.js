@@ -340,3 +340,4 @@ function separatingAxis(a_coords, b_coords, x, y, result = null) {
     }
     return false;
 }
+//# sourceMappingURL=SAT.js.map

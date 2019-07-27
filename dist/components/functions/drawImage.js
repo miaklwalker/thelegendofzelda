@@ -9,3 +9,4 @@
 export default function showImage(context, image, cordinates) {
     context.drawImage(image, ...cordinates);
 }
+//# sourceMappingURL=drawImage.js.map

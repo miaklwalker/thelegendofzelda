@@ -52,3 +52,4 @@ export default class Result {
     }
 }
 ;
+//# sourceMappingURL=Result.js.map

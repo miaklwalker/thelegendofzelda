@@ -18,3 +18,4 @@ export default class Point extends Polygon {
 }
 ;
 Point.prototype.setPoints = undefined;
+//# sourceMappingURL=Point.js.map

@@ -36,3 +36,4 @@ function playButton() {
         document.body.removeChild(button);
     });
 }
+//# sourceMappingURL=main.js.map

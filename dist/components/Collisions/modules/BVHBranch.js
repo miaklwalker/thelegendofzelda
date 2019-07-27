@@ -59,3 +59,4 @@ export default class BVHBranch {
     }
 }
 ;
+//# sourceMappingURL=BVHBranch.js.map

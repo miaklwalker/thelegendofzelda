@@ -20,3 +20,4 @@ export default class Message {
         this.data = data;
     }
 }
+//# sourceMappingURL=message.js.map

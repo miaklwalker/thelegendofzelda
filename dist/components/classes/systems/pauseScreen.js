@@ -47,3 +47,4 @@ export default class pauseScreen {
 __decorate([
     memoize
 ], pauseScreen.prototype, "show", null);
+//# sourceMappingURL=pauseScreen.js.map

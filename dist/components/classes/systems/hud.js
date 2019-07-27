@@ -67,3 +67,4 @@ export default class Hud {
         }
     }
 }
+//# sourceMappingURL=hud.js.map

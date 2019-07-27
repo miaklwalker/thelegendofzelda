@@ -18,3 +18,4 @@ export default class secondDungeon extends Dungeon {
         }
     }
 }
+//# sourceMappingURL=dungeonTwo.js.map

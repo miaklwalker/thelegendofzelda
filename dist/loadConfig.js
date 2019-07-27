@@ -25,3 +25,4 @@ export const loadConfigAsync = async (filePath) => {
     const contents = await readFileAsync(path.resolve(baseDir, filePath, '.yaml'), 'utf8');
     return jsYaml.safeLoad(contents);
 };
+//# sourceMappingURL=loadConfig.js.map

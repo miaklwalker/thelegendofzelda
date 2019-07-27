@@ -1,5 +1,5 @@
 import { Vector } from "../math/vector.js";
-import sound from "../systems/sound.js"
+import sound from "../systems/sound.js";
 /**
  *
  *
@@ -22,3 +22,4 @@ export default class Dungeon {
         this.theme = new sound('../music/Labyrinth.mp3');
     }
 }
+//# sourceMappingURL=dungeons.js.map

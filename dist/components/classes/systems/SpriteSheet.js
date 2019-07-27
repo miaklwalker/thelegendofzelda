@@ -32,3 +32,4 @@ export default class SpriteSheet {
         context.drawImage(this.sheet, ...this.sprites[action], ...location);
     }
 }
+//# sourceMappingURL=SpriteSheet.js.map

@@ -18,3 +18,4 @@ export default class firstDungeon extends Dungeon {
         }
     }
 }
+//# sourceMappingURL=dungeonOne.js.map

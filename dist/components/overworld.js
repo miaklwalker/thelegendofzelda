@@ -7,3 +7,4 @@ export default class Overworld {
         this.url = "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/overworld/zelda-overworld.png";
     }
 }
+//# sourceMappingURL=overworld.js.map

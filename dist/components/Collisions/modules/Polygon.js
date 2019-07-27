@@ -195,3 +195,4 @@ export default class Polygon extends Body {
     }
 }
 ;
+//# sourceMappingURL=Polygon.js.map

@@ -1,4 +1,4 @@
-import controlsConfig from "../src/components/classes/systems/controllerConfig"
+import controlsConfig from '../src/components/classes/systems/controlsConfig'
 
 describe('Control Config Class Should Return a Control Config Object',()=>{
       let keys:[string,string,string,string,string,string,string,string] = ['up','down','left','right','start','select','A','B']
