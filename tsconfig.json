@@ -2,8 +2,8 @@
   "compilerOptions": {
     "allowJs":true,
 	  "experimentalDecorators": true,
-    "target": "esnext",
-    "module": "esnext",
+    "target": "es5",
+    "module": "es6",
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
