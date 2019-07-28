@@ -11,13 +11,15 @@
             "not op_mini all"
           ]
         },
-        "useBuiltIns": "usage"
+        "useBuiltIns": "usage",
+        "corejs": 2
       }
     ]
   ],
   "plugins": [
-    "@babel/proposal-class-properties",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
     "@babel/plugin-proposal-numeric-separator",
-    "@babel/proposal-object-rest-spread"
+    "@babel/plugin-proposal-object-rest-spread"
   ]
 }
