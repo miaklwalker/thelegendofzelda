@@ -1,0 +1,23 @@
+{
+  "presets": [
+    "@babel/typescript",
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": [
+            ">0.25%",
+            "not ie 11",
+            "not op_mini all"
+          ]
+        },
+        "useBuiltIns": "usage"
+      }
+    ]
+  ],
+  "plugins": [
+    "@babel/proposal-class-properties",
+    "@babel/plugin-proposal-numeric-separator",
+    "@babel/proposal-object-rest-spread"
+  ]
+}
