@@ -3,12 +3,13 @@
     "allowJs":true,
 	  "experimentalDecorators": true,
     "target": "esnext",
-    "module": "esnext",
+    "module": "es6",
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "sourceMap": true,                     /* Generates corresponding '.map' file. */
+    "sourceMap": true, 
+    "forceConsistentCasingInFileNames":true,                    /* Generates corresponding '.map' file. */
 
   },
   "include": [
