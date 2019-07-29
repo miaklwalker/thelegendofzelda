@@ -8,7 +8,7 @@ import Controls from "./controls.js";
 import MessageQueue from "./messageQueue.js";
 import config from "../../objects/config.js";
 import CollisionSystem from "./collisionSystem.js";
-import createTileMap, { showTileMap } from "../../functions/createTileMap.js";
+import createTileMap, { showTileMap, eraseTiles } from "../../functions/createTileMap.js";
 /**
  *
  *
@@ -68,6 +68,9 @@ export default class Game {
             document.body.appendChild(button);
             button.addEventListener('click', () => {
                 this.toggle = !this.toggle;
+                if (!this.toggle) {
+                    eraseTiles();
+                }
             });
         }
         if (this.toggle) {

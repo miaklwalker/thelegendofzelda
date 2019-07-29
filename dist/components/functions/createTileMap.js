@@ -201,5 +201,9 @@ export function showTileMap(tilemap, context) {
         }
     }
 }
+export function eraseTiles() {
+    points.clear();
+    navigator.clipboard.writeText('Cleared!');
+}
 export default createTileMap;
 //# sourceMappingURL=createTileMap.js.map

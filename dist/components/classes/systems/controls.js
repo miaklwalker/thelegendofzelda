@@ -1,4 +1,4 @@
-import Message from "./message";
+import Message from "./message.js";
 export default class Controls {
     constructor(config) {
         this.up = config.up;

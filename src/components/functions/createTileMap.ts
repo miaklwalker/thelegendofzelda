@@ -203,5 +203,10 @@ export function showTileMap(tilemap:[[number,number,number,number]],context:Canv
   }
 }
 }
+
+export function eraseTiles(){
+  points.clear()
+  navigator.clipboard.writeText('Cleared!')
+}
 export default createTileMap;
 
