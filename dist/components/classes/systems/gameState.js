@@ -1,15 +1,14 @@
-import firstDungeon from "../dungeons/dungeonOne.js";
-import secondDungeon from "../dungeons/dungeonTwo.js";
-import thirdDungeon from "../dungeons/dungeonThree.js";
-import fourthDungeon from "../dungeons/dungeonFour.js";
-import fifthDungeon from "../dungeons/dungeonFive.js";
-import sixthDungeon from "../dungeons/dungeonSix.js";
-import seventhDungeon from "../dungeons/dungeonSeven.js";
-import eighthDungeon from "../dungeons/dungeonEight.js";
-import ninthDungeon from "../dungeons/dungeonNine.js";
-import inventory from "./inventory.js";
-import Overworld from "../../overworld.js";
-import { createTerrain } from "../../functions/collisionDetection.js";
+import firstDungeon from '../dungeons/dungeonOne.js';
+import secondDungeon from '../dungeons/dungeonTwo.js';
+import thirdDungeon from '../dungeons/dungeonThree.js';
+import fourthDungeon from '../dungeons/dungeonFour.js';
+import fifthDungeon from '../dungeons/dungeonFive.js';
+import sixthDungeon from '../dungeons/dungeonSix.js';
+import seventhDungeon from '../dungeons/dungeonSeven.js';
+import eighthDungeon from '../dungeons/dungeonEight.js';
+import ninthDungeon from '../dungeons/dungeonNine.js';
+import inventory from './inventory.js';
+import Overworld from '../../overworld.js';
 let index = 0;
 /**
  *
@@ -40,46 +39,42 @@ export default class gameState {
         this.transition = false;
         this.currentMap = this.maps[0];
     }
-    /**
-     *
-     *
-     * @param {number} num
-     * @memberof gameState
-     */
     set Map(num) {
         if (num < 0 || num > 9) {
-            throw new Error("Dungeon not found");
+            throw new Error('Dungeon not found');
         }
         else {
             this.currentMap = this.maps[num];
         }
     }
-    changeScreen(position, game, context) {
-        let index = `${game.gameState.currentMap.position.x},${game.gameState.currentMap.position.y}`;
+    changeScreen(position, game) {
         let map = this.currentMap.position;
+        let changed = false;
         if (position.x > 15) {
             position.x = 1;
             map.x += 1;
-            //@ts-ignore
-            createTerrain(context, game.json.tileMap[index]);
+            changed = true;
         }
         if (position.x < 0.7) {
             position.x = 14;
             map.x -= 1;
-            //@ts-ignore
-            createTerrain(context, game.json.tileMap[index]);
+            changed = true;
         }
         if (position.y > 9.7) {
             position.y = 1;
             map.y += 1;
-            //@ts-ignore
-            createTerrain(context, game.json.tileMap[index]);
+            changed = true;
         }
         if (position.y < 0.7) {
             position.y = 9;
             map.y -= 1;
-            //@ts-ignore
-            createTerrain(context, game.json.tileMap[index]);
+            changed = true;
+        }
+        if (changed) {
+            let index = `${map.x},${map.y}`;
+            console.log(index);
+            game.system.makeScreen(game.json.tileMap[index]);
+            changed = false;
         }
     }
     changeMap(position) {
@@ -114,9 +109,10 @@ export default class gameState {
         }
     }
     onMessage(msg) {
-        if (msg.from === "controls") {
+        if (msg.from === 'controls') {
             //@ts-ignore
             this[msg.type] = !this[msg.type];
         }
     }
 }
+//# sourceMappingURL=gameState.js.map

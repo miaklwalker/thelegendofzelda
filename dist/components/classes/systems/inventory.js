@@ -22,3 +22,4 @@ export default class inventory {
         this.arrow = false;
     }
 }
+//# sourceMappingURL=inventory.js.map

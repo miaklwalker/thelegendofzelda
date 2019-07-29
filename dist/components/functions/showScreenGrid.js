@@ -1,3 +1,8 @@
+/**
+ *
+ *
+ * @param {CanvasRenderingContext2D} ctx
+ */
 function showGrid(ctx) {
     let canvas = {
         width: 512,
@@ -19,5 +24,12 @@ function showGrid(ctx) {
     ctx.moveTo(0, 480);
     ctx.lineTo(canvas.width, 480);
     ctx.stroke();
+    ctx.fillStyle = 'black';
 }
 export default showGrid;
+/*
+[0,120,32,34]
+
+
+*/ 
+//# sourceMappingURL=showScreenGrid.js.map

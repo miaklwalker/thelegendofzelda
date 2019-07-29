@@ -1,46 +1,48 @@
 {
-    "name": "the-legend-of-zelda",
-    "version": "0.0.1",
-    "description": "A TypeScript Remake of the original Tloz for nes",
-    "main": "index.html",
-    "scripts": {
-        "start": "tsc --watch",
-        "test": "jest",
-        "coverage": "jest --coverage"
-    },
-    "keywords": [
-        "nes",
-        "thelegendofzelda",
-        "rewrite",
-        "typescript"
+  "name": "the-legend-of-zelda",
+  "version": "0.0.1",
+  "description": "A TypeScript Remake of the original Tloz for nes",
+  "main": "index.html",
+  "scripts": {
+    "start": "tsc --watch",
+    "test": "jest",
+    "coverage": "jest --coverage"
+  },
+  "keywords": [
+    "nes",
+    "thelegendofzelda",
+    "rewrite",
+    "typescript"
+  ],
+  "author": "Michael Walker",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/types": "^7.5.0",
+    "@types/jest": "^24.0.15",
+    "@types/js-yaml": "^3.12.1",
+    "@types/node": "^12.6.2",
+    "i": "^0.3.6",
+    "jest": "^24.8.0",
+    "jest-canvas-mock": "^2.1.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.2"
+  },
+  "dependencies": {
+    "jest": "24.8.0",
+    "js-yaml": "^3.13.1",
+    "typescript": "3.5.2"
+  },
+  "jest": {
+    "setupFiles": [
+      "jest-canvas-mock"
     ],
-    "author": "Michael Walker",
-    "license": "MIT",
-    "devDependencies": {
-        "@babel/types": "^7.5.0",
-        "@types/jest": "^24.0.15",
-        "@types/js-yaml": "^3.12.1",
-        "@types/node": "^12.6.2",
-        "i": "^0.3.6",
-        "jest": "^24.8.0",
-        "jest-canvas-mock": "^2.1.0",
-        "ts-jest": "^24.0.2",
-        "typescript": "^3.5.2"
-    },
-    "dependencies": {
-        "js-yaml": "^3.13.1",
-        "typescript": "3.5.2"
-    },
-    "jest": {
-        "setupFiles": [
-            "jest-canvas-mock"
-        ],
-        "roots": [
-            "<rootDir>/src",
-            "<rootDir>/test"
-        ],
-        "transform": {
-            "^.+\\.tsx?$": "ts-jest"
-        }
+    "roots": [
+      "<rootDir>/src",
+      "<rootDir>/test",
+      "<rootDir>/dist"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
     }
+  }
 }

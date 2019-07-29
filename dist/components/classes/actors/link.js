@@ -38,3 +38,4 @@ export default class Link {
         this.frameAdjusted++;
     }
 }
+//# sourceMappingURL=link.js.map

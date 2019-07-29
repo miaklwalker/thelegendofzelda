@@ -1,4 +1,5 @@
 export default class controlsConfig {
+	[index:string]:string
 	up: string;
 	down: string;
 	left: string;

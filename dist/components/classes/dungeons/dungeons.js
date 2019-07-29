@@ -22,3 +22,4 @@ export default class Dungeon {
         this.theme = new sound('../music/Labyrinth.mp3');
     }
 }
+//# sourceMappingURL=dungeons.js.map

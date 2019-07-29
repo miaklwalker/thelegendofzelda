@@ -18,3 +18,4 @@ export default class ninthDungeon extends Dungeon {
         }
     }
 }
+//# sourceMappingURL=dungeonNine.js.map

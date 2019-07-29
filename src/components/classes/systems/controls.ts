@@ -1,4 +1,4 @@
-import controlsConfig from "./controllerConfig.js";
+import controlsConfig from "./controlsConfig.js";
 import MessageQueue from "./messageQueue.js";
 import Message from "./message.js";
 

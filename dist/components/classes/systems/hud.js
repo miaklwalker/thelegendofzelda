@@ -11,15 +11,15 @@ export default class Hud {
      * @param {Game} game
      * @memberof Hud
      */
-    constructor(inventory, link, camera) {
-        this.rupees = inventory.rupees;
-        this.keys = inventory.keys;
-        this.bombs = inventory.bombs;
-        this.hearts = link.hearts;
+    constructor(game) {
+        this.rupees = game.gameState.inventory.rupees;
+        this.keys = game.gameState.inventory.keys;
+        this.bombs = game.gameState.inventory.bombs;
+        this.hearts = game.Link.hearts;
         this.position = new Vector();
         this.frame = 0;
         this.blink = false;
-        this.camera = camera;
+        this.camera = game.camera;
     }
     minimap(context) {
         this.position = this.camera.position;
@@ -56,21 +56,15 @@ export default class Hud {
     showHearts(context) {
         let index = 0;
         let heartNum = this.hearts;
-        let colors = Array(8).fill('red');
-        context.fillStyle = "Gray";
-        context.fillRect(352, 423.4, 129, 39);
-        context.fillStyle = "red";
-        context.fillRect(352, 442.9, 16.125, 19.5);
-        context.fillStyle = "blue";
-        context.fillRect(368.125, 442.9, 16.125, 19.5);
-        context.fillStyle = "green";
-        context.fillRect(384.25, 442.9, 16.125, 19.5);
         for (let i = 0; i < 2; i++) {
             for (let j = 0; j < 8; j++) {
                 index++;
-                heartNum >= index ? context.fillStyle = colors[j] : context.fillStyle = 'black';
+                heartNum >= index
+                    ? (context.fillStyle = 'red')
+                    : (context.fillStyle = "black");
                 context.fillRect(352 + j * 16.125, 442.9 - 19.5 * i, 16.125, 19.5);
             }
         }
     }
 }
+//# sourceMappingURL=hud.js.map

@@ -18,3 +18,4 @@ export default class thirdDungeon extends Dungeon {
         }
     }
 }
+//# sourceMappingURL=dungeonThree.js.map

@@ -197,9 +197,16 @@ export function exportTiles (){
   
 }
 export function showTileMap(tilemap:[[number,number,number,number]],context:CanvasRenderingContext2D){
+  if(tilemap!==undefined){
   for(let tile = 0  ;tile<tilemap.length;tile++){
     context.fillRect(...tilemap[tile])
   }
+}
+}
+
+export function eraseTiles(){
+  points.clear()
+  navigator.clipboard.writeText('Cleared!')
 }
 export default createTileMap;
 

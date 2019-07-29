@@ -46,3 +46,4 @@ export default class MessageQueue {
         this.entities = [];
     }
 }
+//# sourceMappingURL=messageQueue.js.map

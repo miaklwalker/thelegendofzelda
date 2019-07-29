@@ -78,14 +78,10 @@ export class Vector {
         return this;
     }
     same(Other: Vector) {
-        if (Other instanceof Vector) {
             if (Other.x === this.x && Other.y === this.y) {
                 return true;
             } else {
                 return false;
             }
-        } else {
-            throw new Error("You may have passed a number instead of a vector");
-        }
     }
 }

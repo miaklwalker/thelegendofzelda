@@ -18,3 +18,4 @@ export default class fourthDungeon extends Dungeon {
         }
     }
 }
+//# sourceMappingURL=dungeonFour.js.map

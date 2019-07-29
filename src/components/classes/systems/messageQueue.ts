@@ -1,5 +1,5 @@
-import Message from "./message";
-import Game from "./game";
+import Message from "./message.js";
+import Game from "./game.js";
 
 /**
  *

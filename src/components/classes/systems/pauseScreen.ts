@@ -1,6 +1,5 @@
 import Game from "./game.js";
 import Hud from "./hud.js";
-import Link from "../actors/link.js";
 import inventory from "./inventory.js";
 import camera from "./camera.js";
 import { memoize } from "../../objects/decorators.js";
@@ -19,10 +18,10 @@ export default class pauseScreen {
      *Creates an instance of pauseScreen.
      * @memberof pauseScreen
      */
-    constructor(inventory:inventory,link:Link,camera:camera) {
+    constructor(game:Game) {
         this.frame = 0;
         this.blink = true;
-        this.hud = new Hud(inventory,link,camera)
+        this.hud = new Hud(game)
     }
     /**
      * @param {Game} game
