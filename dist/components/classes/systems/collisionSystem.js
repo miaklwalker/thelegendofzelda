@@ -1,5 +1,6 @@
 import { Collisions } from "../../Collisions/Collisions.js";
 import { Result } from "../../Collisions/Collisions.js";
+import Message from "./message.js";
 export default class CollisionSystem {
     constructor(game) {
         this.system = new Collisions();
@@ -15,8 +16,33 @@ export default class CollisionSystem {
         let potentials = link.potentials();
         for (let body of potentials) {
             if (link.collides(body, this.results)) {
-                this.game.Link.position.x -= this.results.overlap_x * 0.1;
-                this.game.Link.position.y -= this.results.overlap_y * 0.1;
+                let message;
+                let to = 'Link';
+                let from = 'collisions';
+                let type = 'Collision';
+                console.log(this.results);
+                if (this.results.overlap_x > .80) {
+                    message = new Message(to, from, type, 'right');
+                    this.game.messageCenter.add(message);
+                    console.log('right');
+                }
+                if (this.results.overlap_x < 0) {
+                    message = new Message(to, from, type, 'left');
+                    this.game.messageCenter.add(message);
+                    console.log('left');
+                }
+                if (this.results.overlap_y > 0) {
+                    message = new Message(to, from, type, 'down');
+                    this.game.messageCenter.add(message);
+                    console.log('Bottom');
+                }
+                if (this.results.overlap_y < 0) {
+                    message = new Message(to, from, type, 'up');
+                    this.game.messageCenter.add(message);
+                    console.log('Top');
+                }
+                this.game.Link.position.x -= this.results.overlap_x * 0.07;
+                this.game.Link.position.y -= this.results.overlap_y * 0.07;
             }
         }
         this.system.remove(link);
@@ -42,6 +68,12 @@ export default class CollisionSystem {
         }
     }
     makeScreen(tilemap) {
+        let topleft = [[0, 0], [32, 0], [0, 34], [0, 0]];
+        let topright = [[0, 0], [32, 0], [32, 32], [0, 0]];
+        let botleft = [[0, 0], [32, 34], [0, 34], [0, 0]];
+        let botright = [[0, 0], [0, 34], [32, 34], [0, 0]];
+        let square = [[0, 0], [0, 34], [32, 34], [32, 0]];
+        let shapes = [topleft, topright, botleft, botright, square];
         if (tilemap !== undefined) {
             this.entities.forEach((entity) => {
                 this.system.remove(entity);

@@ -77,18 +77,27 @@ export default class Game {
         this.debugMode(context)
     }
     debugMode(context:CanvasRenderingContext2D){
+        let select:HTMLSelectElement
         if(!this.debugger){
             this.debugger=true
+            select = this.makeSelect()
+            
             let button =document.createElement('button');
             button.innerText = ' Create Tile Map'
             document.body.appendChild(button);
+            document.body.appendChild(select);
+            select.addEventListener('click',()=>{
+                console.log(select.value)
+            })
             button.addEventListener('click',()=>{
                 this.toggle = !this.toggle
                 if(!this.toggle){
                     eraseTiles();
                 }
             })
+            
         }
+        
         if(this.toggle){
             createTileMap(context)
         }else{
@@ -123,5 +132,25 @@ export default class Game {
                 iterator++;
             });
         });
+    }
+    makeSelect(){
+        let select = document.createElement('select');
+        let option0 = document.createElement('option');
+        option0.innerText = 'Top Left';
+        option0.value = '0';
+        let option1 = document.createElement('option');
+        option1.innerText = 'Top Right';
+        option1.value = '1';
+        let option2 = document.createElement('option');
+        option2.innerText = 'Bottom Left';
+        option2.value = '2';
+        let option3 = document.createElement('option');
+        option3.innerText = 'Bottom Right';
+        option3.value = '3';
+        select.appendChild(option0);
+        select.append(option1);
+        select.append(option2);
+        select.append(option3);
+        return select
     }
 }

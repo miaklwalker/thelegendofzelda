@@ -161,7 +161,7 @@ let map:[number,number,number,number][] =[
 [ 480, 358, 512, 392 ], 
 [ 480, 392, 512, 426 ], 
 [ 480, 426, 512, 460 ] ] 
-function createTileMap(context: CanvasRenderingContext2D) {
+function createTileMap(context: CanvasRenderingContext2D,shape:number) {
 
   showGrid(context);
   document.addEventListener("click", event => {

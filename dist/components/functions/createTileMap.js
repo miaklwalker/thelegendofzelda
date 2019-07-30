@@ -162,7 +162,7 @@ let map = [
     [480, 392, 512, 426],
     [480, 426, 512, 460]
 ];
-function createTileMap(context) {
+function createTileMap(context, shape) {
     showGrid(context);
     document.addEventListener("click", event => {
         for (let i = 0; i < map.length; i++) {
