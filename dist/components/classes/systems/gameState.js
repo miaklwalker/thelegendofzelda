@@ -73,7 +73,8 @@ export default class gameState {
         if (changed) {
             let index = `${map.x},${map.y}`;
             console.log(index);
-            game.system.makeScreen(game.json.tileMap[index]);
+            let tilemap = game.system.createMap(game.json.tileMap[index]);
+            game.system.makeScreen(tilemap);
             changed = false;
         }
     }

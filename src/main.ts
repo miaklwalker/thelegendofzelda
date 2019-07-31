@@ -19,7 +19,8 @@ function setup() {
   canvas.width = 512;
   canvas.height = 480;
   let index:string = `${game.gameState.currentMap.position.x},${game.gameState.currentMap.position.y}`
-  game.system.makeScreen(game.json.tileMap[index])
+  let tilemap = game.system.createMap(game.json.tileMap[index]) as [[number,number,number,number,number]]
+  game.system.makeScreen(tilemap)
   document.body.appendChild(canvas);
   exportTiles();
   draw();

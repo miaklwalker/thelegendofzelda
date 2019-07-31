@@ -8,7 +8,7 @@ export default class CollisionSystem {
         this.entities = [];
         this.game = game;
     }
-    addPlayer() {
+    addPlayer(context) {
         let x = this.game.Link.position.x * 32;
         let y = this.game.Link.position.y * 34;
         let link = this.system.createPolygon(x, y + 120, [[0, 0], [0, 30], [30, 30], [30, 0]]);
@@ -20,7 +20,6 @@ export default class CollisionSystem {
                 let to = 'Link';
                 let from = 'collisions';
                 let type = 'Collision';
-                console.log(this.results);
                 if (this.results.overlap_x > .80) {
                     message = new Message(to, from, type, 'right');
                     this.game.messageCenter.add(message);
@@ -41,10 +40,15 @@ export default class CollisionSystem {
                     this.game.messageCenter.add(message);
                     console.log('Top');
                 }
-                this.game.Link.position.x -= this.results.overlap_x * 0.07;
-                this.game.Link.position.y -= this.results.overlap_y * 0.07;
+                context.strokeStyle = 'red';
+                this.results.a.draw(context);
+                this.results.b.draw(context);
+                context.stroke();
+                this.game.Link.position.x -= this.results.overlap_x * this.results.overlap * .03;
+                this.game.Link.position.y -= this.results.overlap_y * this.results.overlap * .03;
             }
         }
+        context.strokeStyle = 'black';
         this.system.remove(link);
         this.system.update();
     }
@@ -56,22 +60,27 @@ export default class CollisionSystem {
             this.entities = [];
             this.system.update();
             let output = [];
-            for (let i = 0; i < tilemap.length / 4; i++) {
+            for (let i = 0; i < tilemap.length / 5; i++) {
                 output.push([
-                    tilemap[0 + i * 4],
-                    tilemap[1 + i * 4],
-                    tilemap[2 + i * 4],
-                    tilemap[3 + i * 4],
+                    tilemap[0 + i * 5],
+                    tilemap[1 + i * 5],
+                    tilemap[2 + i * 5],
+                    tilemap[3 + i * 5],
+                    tilemap[4 + i * 5]
                 ]);
             }
             return output;
         }
     }
     makeScreen(tilemap) {
-        let topleft = [[0, 0], [32, 0], [0, 34], [0, 0]];
-        let topright = [[0, 0], [32, 0], [32, 32], [0, 0]];
-        let botleft = [[0, 0], [32, 34], [0, 34], [0, 0]];
-        let botright = [[0, 0], [0, 34], [32, 34], [0, 0]];
+        let x = 0;
+        let y = 0;
+        let w = 32;
+        let h = 34;
+        let topleft = [[x, y], [x, h], [x + 15, h], [w, y + 15], [w, y], [x, y]];
+        let topright = [[x, y], [w, y], [w, h], [x, y]];
+        let botleft = [[x, y], [x, h], [w, h], [x, y]];
+        let botright = [[w, y], [w, h], [x, h], [w, y]];
         let square = [[0, 0], [0, 34], [32, 34], [32, 0]];
         let shapes = [topleft, topright, botleft, botright, square];
         if (tilemap !== undefined) {
@@ -81,27 +90,17 @@ export default class CollisionSystem {
             this.entities = [];
             for (let i = 0; i < tilemap.length; i++) {
                 let tile = tilemap[i];
-                let temp = this.system.createPolygon(tile[0], tile[1], [
-                    [0, 0],
-                    [0, 34],
-                    [32, 34],
-                    [32, 0],
-                ]);
+                let temp = this.system.createPolygon(tile[0], tile[1], shapes[tile[4]]);
                 this.entities.push(temp);
             }
             this.system.update();
         }
     }
-    drawSystem(context, debug = 'draw') {
-        if (debug) {
-            this.game.debugMode(context);
-        }
-        else if (debug === 'draw') {
-            this.system.draw(context);
-            this.system.drawBVH(context);
-        }
-    }
-    parseMap() {
+    drawSystem(context) {
+        this.system.draw(context);
+        //this.system.drawBVH(context);
+        context.strokeStyle = 'black';
+        context.stroke();
     }
 }
 //# sourceMappingURL=collisionSystem.js.map

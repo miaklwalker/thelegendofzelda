@@ -10,6 +10,7 @@ import MessageQueue from "./messageQueue.js";
 import config from "../../objects/config.js";
 import CollisionSystem from "./collisionSystem.js";
 import createTileMap, { showTileMap, eraseTiles } from "../../functions/createTileMap.js";
+import makeSelect from "./makeSelect.js";
 
 /**
  *
@@ -69,7 +70,7 @@ export default class Game {
         let link = this.Link.show();
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
-        this.system.addPlayer()
+        this.system.addPlayer(context)
         this.camera.show(this, context);
         this.images[5].renderSprite(context, link, [x * 32,y * 34 + 120, 30,30,]);        
         context.drawImage(pauseMenu(), 0, paused, 512, 480);
@@ -80,18 +81,18 @@ export default class Game {
         let select:HTMLSelectElement
         if(!this.debugger){
             this.debugger=true
-            select = this.makeSelect()
-            
+            select = makeSelect()
+            select.id = 'Select'
             let button =document.createElement('button');
-            button.innerText = ' Create Tile Map'
+            button.innerText = ' Tile Map Viewer'
             document.body.appendChild(button);
             document.body.appendChild(select);
-            select.addEventListener('click',()=>{
-                console.log(select.value)
-            })
             button.addEventListener('click',()=>{
                 this.toggle = !this.toggle
+                this.toggle ? button.innerText = ' Tile Map Viewer':
+                button.innerText = 'Create Tile Map'
                 if(!this.toggle){
+                    
                     eraseTiles();
                 }
             })
@@ -101,9 +102,10 @@ export default class Game {
         if(this.toggle){
             createTileMap(context)
         }else{
-            let index:string = `${this.gameState.currentMap.position.x},${this.gameState.currentMap.position.y}`
-
-            showTileMap(this.json.tileMap[index],context)
+           // let index:string = `${this.gameState.currentMap.position.x},${this.gameState.currentMap.position.y}`
+           // let tilemap = this.system.createMap(this.json.tileMap[index]) as [[number,number,number,number,number]]
+           // showTileMap(tilemap ,context)
+           this.system.drawSystem(context)
         }
     }
 
@@ -133,24 +135,5 @@ export default class Game {
             });
         });
     }
-    makeSelect(){
-        let select = document.createElement('select');
-        let option0 = document.createElement('option');
-        option0.innerText = 'Top Left';
-        option0.value = '0';
-        let option1 = document.createElement('option');
-        option1.innerText = 'Top Right';
-        option1.value = '1';
-        let option2 = document.createElement('option');
-        option2.innerText = 'Bottom Left';
-        option2.value = '2';
-        let option3 = document.createElement('option');
-        option3.innerText = 'Bottom Right';
-        option3.value = '3';
-        select.appendChild(option0);
-        select.append(option1);
-        select.append(option2);
-        select.append(option3);
-        return select
-    }
+
 }
