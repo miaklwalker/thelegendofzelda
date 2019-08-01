@@ -1,6 +1,7 @@
 import { Collisions } from "../../Collisions/Collisions.js";
 import { Result } from "../../Collisions/Collisions.js";
 import Message from "./message.js";
+import { Vector } from "../math/vector.js";
 export default class CollisionSystem {
     constructor(game) {
         this.system = new Collisions();
@@ -11,7 +12,7 @@ export default class CollisionSystem {
     addPlayer(context) {
         let x = this.game.Link.position.x * 32;
         let y = this.game.Link.position.y * 34;
-        let link = this.system.createPolygon(x, y + 120, [[0, 0], [0, 30], [30, 30], [30, 0]]);
+        let link = this.system.createPolygon(x, y + 120, [[0, 0], [0, 30], [30, 30], [30, 0]], 0.0);
         this.system.update();
         let potentials = link.potentials();
         for (let body of potentials) {
@@ -20,6 +21,7 @@ export default class CollisionSystem {
                 let to = 'Link';
                 let from = 'collisions';
                 let type = 'Collision';
+                console.log(this.results);
                 if (this.results.overlap_x > .80) {
                     message = new Message(to, from, type, 'right');
                     this.game.messageCenter.add(message);
@@ -44,8 +46,12 @@ export default class CollisionSystem {
                 this.results.a.draw(context);
                 this.results.b.draw(context);
                 context.stroke();
-                this.game.Link.position.x -= this.results.overlap_x * this.results.overlap * .03;
-                this.game.Link.position.y -= this.results.overlap_y * this.results.overlap * .03;
+                let cX = this.results.overlap_x * this.results.overlap;
+                let cY = this.results.overlap_y * this.results.overlap;
+                console.log(cX, cY);
+                let correctionForce = new Vector(cX, cY);
+                correctionForce.div(30);
+                this.game.Link.position.subtract(correctionForce);
             }
         }
         context.strokeStyle = 'black';
@@ -77,10 +83,11 @@ export default class CollisionSystem {
         let y = 0;
         let w = 32;
         let h = 34;
-        let topleft = [[x, y], [x, h], [x + 15, h], [w, y + 15], [w, y], [x, y]];
-        let topright = [[x, y], [w, y], [w, h], [x, y]];
-        let botleft = [[x, y], [x, h], [w, h], [x, y]];
-        let botright = [[w, y], [w, h], [x, h], [w, y]];
+        let offset = 11;
+        let topleft = [[x, y], [x, h], [w, y]];
+        let topright = [[x, y], [w, y], [w, h]];
+        let botleft = [[x, y], [x, h], [w, h]];
+        let botright = [[w, y], [w, h], [x, h]];
         let square = [[0, 0], [0, 34], [32, 34], [32, 0]];
         let shapes = [topleft, topright, botleft, botright, square];
         if (tilemap !== undefined) {
