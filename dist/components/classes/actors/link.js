@@ -1,4 +1,5 @@
 import { Vector } from "../math/vector.js";
+import uniqueid from "../../functions/createId.js";
 /**
  *
  *
@@ -9,6 +10,7 @@ import { Vector } from "../math/vector.js";
 export default class Link {
     constructor() {
         this.frameAdjusted = 0;
+        this.id = uniqueid();
         this.hearts = 3;
         this.health = 3;
         this.position = new Vector(7, 5);
@@ -47,8 +49,10 @@ export default class Link {
         this.blocked.push(msg.data);
     }
     onMessage(msg) {
-        if (msg.from === 'collisions') {
-            this.blocks(msg);
+        if (msg.type === this.id) {
+            if (msg.from === 'collisions') {
+                this.blocks(msg);
+            }
         }
         if (msg.from === 'controls') {
             this.move(msg);

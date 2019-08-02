@@ -63,6 +63,7 @@ export class Circle extends Body {
  * @extends {Body}
  */
 export class Polygon extends Body {
+  id: string;
     /**
      * @constructor
      * @param {number} [x = 0] The starting X coordinate

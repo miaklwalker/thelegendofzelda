@@ -1,5 +1,6 @@
 import { Vector } from "../math/vector.js";
 import Message from "../systems/message.js";
+import uniqueid from "../../functions/createId.js";
 
 /**
  *
@@ -17,8 +18,10 @@ export default class Link {
     shield: string;
     direction: string;
     blocked:string[]
+    id: string;
     constructor(){
         this.frameAdjusted = 0 
+        this.id = uniqueid()
         this.hearts = 3;
         this.health = 3;
         this.position = new Vector(7,5)
@@ -58,9 +61,11 @@ export default class Link {
         
     }
     onMessage(msg:Message){
+        if(msg.type===this.id){
     if (msg.from === 'collisions'){
         this.blocks(msg)
     }
+}
     if(msg.from === 'controls'){
         this.move(msg)
     }

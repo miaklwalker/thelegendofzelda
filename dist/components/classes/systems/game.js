@@ -8,8 +8,9 @@ import Controls from "./controls.js";
 import MessageQueue from "./messageQueue.js";
 import config from "../../objects/config.js";
 import CollisionSystem from "./collisionSystem.js";
-import createTileMap, { eraseTiles } from "../../functions/createTileMap.js";
+import createTileMap, { eraseTiles, exportTiles } from "../../functions/createTileMap.js";
 import makeSelect from "./makeSelect.js";
+import enemy from "../actors/Enemy.js";
 /**
  *
  *
@@ -52,11 +53,13 @@ export default class Game {
     drawScreen(context) {
         const { x, y } = this.Link.position;
         let link = this.Link.show();
+        let octo = new enemy('octo');
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
-        this.system.addPlayer(context);
+        this.system.addPlayer();
         this.camera.show(this, context);
         this.images[5].renderSprite(context, link, [x * 32, y * 34 + 120, 30, 30,]);
+        //  this.images[4].renderSprite(context,octo.show(),[octo.position.x*32,octo.position.y*34+120,30,30])        
         context.drawImage(pauseMenu(), 0, paused, 512, 480);
         this.rungame(context);
         this.debugMode(context);
@@ -65,6 +68,7 @@ export default class Game {
         let select;
         if (!this.debugger) {
             this.debugger = true;
+            exportTiles();
             select = makeSelect();
             select.id = 'Select';
             let button = document.createElement('button');
@@ -84,9 +88,6 @@ export default class Game {
             createTileMap(context);
         }
         else {
-            // let index:string = `${this.gameState.currentMap.position.x},${this.gameState.currentMap.position.y}`
-            // let tilemap = this.system.createMap(this.json.tileMap[index]) as [[number,number,number,number,number]]
-            // showTileMap(tilemap ,context)
             this.system.drawSystem(context);
         }
     }
@@ -104,6 +105,7 @@ export default class Game {
     loadFiles() {
         let iterator = 0;
         let names = Object.keys(this.json.urls);
+        console.log(names);
         let images = Object.values(this.json.urls).map(url => loadImage(url));
         Promise.all(images).then((response) => {
             response.forEach(res => {

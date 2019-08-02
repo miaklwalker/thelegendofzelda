@@ -9,10 +9,11 @@ export default class CollisionSystem {
         this.entities = [];
         this.game = game;
     }
-    addPlayer(context) {
+    addPlayer() {
         let x = this.game.Link.position.x * 32;
         let y = this.game.Link.position.y * 34;
         let link = this.system.createPolygon(x, y + 120, [[0, 0], [0, 30], [30, 30], [30, 0]], 0.0);
+        link.id = this.game.Link.id;
         this.system.update();
         let potentials = link.potentials();
         for (let body of potentials) {
@@ -20,41 +21,30 @@ export default class CollisionSystem {
                 let message;
                 let to = 'Link';
                 let from = 'collisions';
-                let type = 'Collision';
-                console.log(this.results);
+                let type = link.id;
                 if (this.results.overlap_x > .80) {
                     message = new Message(to, from, type, 'right');
                     this.game.messageCenter.add(message);
-                    console.log('right');
                 }
                 if (this.results.overlap_x < 0) {
                     message = new Message(to, from, type, 'left');
                     this.game.messageCenter.add(message);
-                    console.log('left');
                 }
                 if (this.results.overlap_y > 0) {
                     message = new Message(to, from, type, 'down');
                     this.game.messageCenter.add(message);
-                    console.log('Bottom');
                 }
                 if (this.results.overlap_y < 0) {
                     message = new Message(to, from, type, 'up');
                     this.game.messageCenter.add(message);
-                    console.log('Top');
                 }
-                context.strokeStyle = 'red';
-                this.results.a.draw(context);
-                this.results.b.draw(context);
-                context.stroke();
                 let cX = this.results.overlap_x * this.results.overlap;
                 let cY = this.results.overlap_y * this.results.overlap;
-                console.log(cX, cY);
                 let correctionForce = new Vector(cX, cY);
                 correctionForce.div(30);
                 this.game.Link.position.subtract(correctionForce);
             }
         }
-        context.strokeStyle = 'black';
         this.system.remove(link);
         this.system.update();
     }

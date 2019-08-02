@@ -29,7 +29,66 @@
   },
   "Sprites": {
     "Bosses": {},
-    "Enemies": {},
+    "Enemies": {
+      "redOcto":[
+        {
+          "name": "red-octo-walk-down-1",
+          "x": -1,
+          "y": 0,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "name": "red-octo-walk-down-2",
+          "x": -1,
+          "y": 29,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "name": "red-octo-walk-left-1",
+          "x": 28,
+          "y": -1,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "name": "red-octo-walk-left-2",
+          "x": 29,
+          "y": 29,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "name": "red-octo-walk-up-1",
+          "x": 59,
+          "y": -2,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "name": "red-octo-walk-up-2",
+          "x": 59,
+          "y": 28,
+          "w": 18,
+          "h": 19
+        },
+        {
+          "name": "red-octo-walk-right-1",
+          "x": 90,
+          "y": -1,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "name": "red-octo-walk-right-2",
+          "x": 89,
+          "y": 29,
+          "w": 18,
+          "h": 18
+        }
+      ]
+    },
     "link": [
       {
         "name": "link-walk-down-1-small",
