@@ -70,15 +70,16 @@ export default class Game {
         const { x, y } = this.Link.position;
         let link = this.Link.show();
         let octo = new enemy('octo')
+        
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
         this.system.addPlayer()
         this.camera.show(this, context);
         this.images[5].renderSprite(context, link, [x * 32,y * 34 + 120, 30,30,]);
-      //  this.images[4].renderSprite(context,octo.show(),[octo.position.x*32,octo.position.y*34+120,30,30])        
+        this.images[2].renderSprite(context,octo.show(),[octo.position.x*32,octo.position.y*34+120,30,30])        
         context.drawImage(pauseMenu(), 0, paused, 512, 480);
         this.rungame(context);
-        this.debugMode(context)
+       // this.debugMode(context)
     }
     debugMode(context:CanvasRenderingContext2D){
         let select:HTMLSelectElement
@@ -124,7 +125,6 @@ export default class Game {
     loadFiles() {
         let iterator = 0;
         let names = Object.keys(this.json.urls);
-        console.log(names)
         let images = Object.values(this.json.urls).map(url => loadImage(url));
         Promise.all(images).then((response: HTMLImageElement[]) => {
             response.forEach(res => {
@@ -132,6 +132,10 @@ export default class Game {
                 if (names[iterator] == "link") {
                     spriteSheet.makeSprites(this.json);
                 }
+                if (names[iterator] == "enemy") {
+                    spriteSheet.makeSprites(this.json);
+                }
+
                 this.images.push(spriteSheet);
                 iterator++;
             });

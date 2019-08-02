@@ -38,7 +38,7 @@ export default class SpriteSheet{
     makeSprites(json:RootObject){
         //@ts-ignore
         json.Sprites[this.name].forEach((Sprite:SpriteSheetCor)=>{
-            if(this.name === "link"){
+            if(this.name === "link"||this.name == 'enemy'){
                 //@ts-ignore
             this.sprites[Sprite.name]=[Sprite.x,Sprite.y,Sprite.w,Sprite.h]
             }

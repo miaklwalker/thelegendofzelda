@@ -29,8 +29,7 @@
   },
   "Sprites": {
     "Bosses": {},
-    "Enemies": {
-      "redOcto":[
+    "enemy": [
         {
           "name": "red-octo-walk-down-1",
           "x": -1,
@@ -87,8 +86,7 @@
           "w": 18,
           "h": 18
         }
-      ]
-    },
+      ],
     "link": [
       {
         "name": "link-walk-down-1-small",

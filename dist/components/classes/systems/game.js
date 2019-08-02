@@ -59,10 +59,10 @@ export default class Game {
         this.system.addPlayer();
         this.camera.show(this, context);
         this.images[5].renderSprite(context, link, [x * 32, y * 34 + 120, 30, 30,]);
-        //  this.images[4].renderSprite(context,octo.show(),[octo.position.x*32,octo.position.y*34+120,30,30])        
+        this.images[2].renderSprite(context, octo.show(), [octo.position.x * 32, octo.position.y * 34 + 120, 30, 30]);
         context.drawImage(pauseMenu(), 0, paused, 512, 480);
         this.rungame(context);
-        this.debugMode(context);
+        // this.debugMode(context)
     }
     debugMode(context) {
         let select;
@@ -105,12 +105,14 @@ export default class Game {
     loadFiles() {
         let iterator = 0;
         let names = Object.keys(this.json.urls);
-        console.log(names);
         let images = Object.values(this.json.urls).map(url => loadImage(url));
         Promise.all(images).then((response) => {
             response.forEach(res => {
                 let spriteSheet = new SpriteSheet(res, names[iterator]);
                 if (names[iterator] == "link") {
+                    spriteSheet.makeSprites(this.json);
+                }
+                if (names[iterator] == "enemy") {
                     spriteSheet.makeSprites(this.json);
                 }
                 this.images.push(spriteSheet);
