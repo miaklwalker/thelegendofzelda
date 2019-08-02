@@ -206,6 +206,7 @@ export function exportTiles() {
             tiles.push([cell]);
         }
         navigator.clipboard.writeText(`[${tiles}]`).then(() => { console.log('copied'); });
+        tiles.length = 0;
     });
 }
 export function showTileMap(tilemap, context) {
