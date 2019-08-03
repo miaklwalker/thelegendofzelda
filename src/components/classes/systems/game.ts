@@ -69,17 +69,13 @@ export default class Game {
     drawScreen(context: CanvasRenderingContext2D) {
         const { x, y } = this.Link.position;
         let link = this.Link.show();
-        let octo = new enemy('octo')
-        
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
-        this.system.addPlayer()
+        this.system.addPlayer(this.Link)
         this.camera.show(this, context);
         this.images[5].renderSprite(context, link, [x * 32,y * 34 + 120, 30,30,]);
-        this.images[2].renderSprite(context,octo.show(),[octo.position.x*32,octo.position.y*34+120,30,30])        
         context.drawImage(pauseMenu(), 0, paused, 512, 480);
         this.rungame(context);
-       // this.debugMode(context)
     }
     debugMode(context:CanvasRenderingContext2D){
         let select:HTMLSelectElement
@@ -123,6 +119,7 @@ export default class Game {
      * @memberof Game
      */
     loadFiles() {
+        this.messageCenter.addEntities(this.Link)
         let iterator = 0;
         let names = Object.keys(this.json.urls);
         let images = Object.values(this.json.urls).map(url => loadImage(url));

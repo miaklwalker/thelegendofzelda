@@ -1,28 +1,72 @@
 import { Vector } from "../math/vector.js";
 import uniqueid from "../../functions/createId.js";
+import shot from "./shot.js";
 export default class enemy {
-    constructor(name) {
-        this.position = new Vector(7, 7);
+    constructor(Spawn) {
+        this.position = new Vector(Spawn.x, Spawn.y);
         this.id = uniqueid();
-        this.behavior = 0;
-        this.health = 0;
+        this.behaviors = [...Spawn.behaviors];
+        this.counter = 0;
+        this.health = Spawn.health;
         this.name = name;
         this.action = "walk";
-        this.color = "red";
+        this.color = Spawn.color;
         this.direction = "down";
+        this.shot = null;
         this.frames = 0;
-        this.left = false;
-        this.right = false;
-        this.up = false;
-        this.down = false;
     }
     show() {
-        this.logic();
-        let str = `${this.color}-${this.name}-${this.action}-${this.direction}-${(this.frames % 2) + 1}`;
+        let str = `
+    ${this.color}- 
+    ${this.name}-
+    ${"walk"}-
+    ${this.direction}
+    -${(this.frames % 2) + 1}`;
         return str;
     }
-    logic() {
+    timing() {
+        if (this.counter % 16 === 0) {
+            this.frames++;
+        }
+        if (this.counter % 200 === 0) {
+            this.chooseBehaviors();
+            this.chooseDirection();
+        }
+    }
+    logic(context) {
         if (this.action === "walk") {
+            this.move();
+        }
+        if (this.action === "stop") {
+            this.stop();
+        }
+        if (this.action === "shoot") {
+            this.action = "stop";
+            this.shoot(context);
+        }
+        this.counter++;
+    }
+    shoot(context) {
+        switch (this.direction) {
+            case "right":
+                this.shot = new shot(this.position.x, this.position.y, 1, 0);
+                break;
+            case "left":
+                this.shot = new shot(this.position.x, this.position.y, 1, 0);
+                break;
+            case "up":
+                this.shot = new shot(this.position.x, this.position.y, 1, 0);
+                break;
+            case "down":
+                this.shot = new shot(this.position.x, this.position.y, 1, 0);
+                break;
+        }
+    }
+    stop() {
+        console.log("I Stopped becuase i was tired");
+    }
+    move() {
+        if (this.counter % 8 === 0) {
             switch (this.direction) {
                 case "right":
                     this.position.x += 0.2;
@@ -37,13 +81,11 @@ export default class enemy {
                     this.position.y += 0.2;
                     break;
             }
-            this.frames++;
         }
     }
-    move() { }
-    chooseBehavior(numOfBehaviors, behaviors) {
-        let behavior = Math.floor(Math.random() * numOfBehaviors);
-        this.action = behaviors[behavior];
+    chooseBehaviors() {
+        let behavior = Math.random() * this.behaviors.length;
+        this.action = this.behaviors[behavior];
     }
     chooseDirection() {
         let dirNum = Math.floor(Math.random() * 4);
@@ -51,7 +93,21 @@ export default class enemy {
         this.direction = directions[dirNum];
     }
     onMessage(msg) {
-        if (msg.from === "collisions") {
+        if (msg.from === "collisions" && msg.type === this.id) {
+            switch (msg.data) {
+                case "right":
+                    this.direction = "left";
+                    break;
+                case "left":
+                    this.direction = "right";
+                    break;
+                case "up":
+                    this.direction = "down";
+                    break;
+                case "down":
+                    this.direction = "up";
+                    break;
+            }
         }
     }
 }

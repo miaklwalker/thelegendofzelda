@@ -28,7 +28,10 @@ export default class MessageQueue {
      *
      * @memberof MessageQueue
      */
-    addEntities() { }
+    addEntities(...entity) {
+        let entities = [...entity];
+        entities.forEach(one => { this.entities.push(one); });
+    }
     /**
      *
      *
@@ -37,8 +40,10 @@ export default class MessageQueue {
     dispatch() {
         for (let i = 0; i < this.messages.length; i++) {
             let msg = this.messages[i];
-            //@ts-ignore
-            this.game[msg.to].onMessage(msg);
+            this.game.gameState.onMessage(msg);
+            this.entities.forEach((entity) => {
+                entity.onMessage(msg);
+            });
             this.messages.splice(i, 1);
         }
     }

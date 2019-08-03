@@ -9,40 +9,40 @@ export default class CollisionSystem {
         this.entities = [];
         this.game = game;
     }
-    addPlayer() {
-        let x = this.game.Link.position.x * 32;
-        let y = this.game.Link.position.y * 34;
+    addPlayer(Actor) {
+        let x = Actor.position.x * 32;
+        let y = Actor.position.y * 34;
         let link = this.system.createPolygon(x, y + 120, [[0, 0], [0, 30], [30, 30], [30, 0]], 0.0);
-        link.id = this.game.Link.id;
+        link.id = Actor.id;
         this.system.update();
         let potentials = link.potentials();
         for (let body of potentials) {
             if (link.collides(body, this.results)) {
                 let message;
-                let to = 'Link';
-                let from = 'collisions';
+                let to = "Link";
+                let from = "collisions";
                 let type = link.id;
-                if (this.results.overlap_x > .80) {
-                    message = new Message(to, from, type, 'right');
+                if (this.results.overlap_x > 0.8) {
+                    message = new Message(to, from, type, "right");
                     this.game.messageCenter.add(message);
                 }
                 if (this.results.overlap_x < 0) {
-                    message = new Message(to, from, type, 'left');
+                    message = new Message(to, from, type, "left");
                     this.game.messageCenter.add(message);
                 }
                 if (this.results.overlap_y > 0) {
-                    message = new Message(to, from, type, 'down');
+                    message = new Message(to, from, type, "down");
                     this.game.messageCenter.add(message);
                 }
                 if (this.results.overlap_y < 0) {
-                    message = new Message(to, from, type, 'up');
+                    message = new Message(to, from, type, "up");
                     this.game.messageCenter.add(message);
                 }
                 let cX = this.results.overlap_x * this.results.overlap;
                 let cY = this.results.overlap_y * this.results.overlap;
                 let correctionForce = new Vector(cX, cY);
                 correctionForce.div(30);
-                this.game.Link.position.subtract(correctionForce);
+                Actor.position.subtract(correctionForce);
             }
         }
         this.system.remove(link);
@@ -96,7 +96,7 @@ export default class CollisionSystem {
     drawSystem(context) {
         this.system.draw(context);
         //this.system.drawBVH(context);
-        context.strokeStyle = 'black';
+        context.strokeStyle = "black";
         context.stroke();
     }
 }
