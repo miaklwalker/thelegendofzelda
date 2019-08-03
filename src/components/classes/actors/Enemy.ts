@@ -47,7 +47,7 @@ export default class enemy {
       this.chooseDirection();
     }
   }
-  logic(context: CanvasRenderingContext2D) {
+  logic() {
     if (this.action === "walk") {
       this.move();
     }
@@ -56,11 +56,11 @@ export default class enemy {
     }
     if (this.action === "shoot") {
       this.action = "stop";
-      this.shoot(context);
+      this.shoot();
     }
     this.counter++;
   }
-  shoot(context: CanvasRenderingContext2D) {
+  shoot() {
     switch (this.direction) {
       case "right":
         this.shot = new shot(this.position.x, this.position.y, 1, 0);

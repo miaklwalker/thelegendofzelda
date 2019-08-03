@@ -10,6 +10,8 @@ import config from "../../objects/config.js";
 import CollisionSystem from "./collisionSystem.js";
 import createTileMap, { eraseTiles, exportTiles } from "../../functions/createTileMap.js";
 import makeSelect from "./makeSelect.js";
+import enemy from "../actors/Enemy.js";
+import { enemies } from "../../objects/enemies.js";
 /**
  *
  *
@@ -31,6 +33,7 @@ export default class Game {
     constructor(width, height, json) {
         this.width = width;
         this.height = height;
+        this.enemies = [];
         this.gameState = new gameState();
         this.Link = new Link();
         this.controls = new Controls(config);
@@ -56,7 +59,21 @@ export default class Game {
         let paused = this.gameState.paused ? 0 : -360;
         this.system.addPlayer(this.Link);
         this.camera.show(this, context);
-        this.images[5].renderSprite(context, link, [x * 32, y * 34 + 120, 30, 30,]);
+        for (let i = 0; i < 8; i++) {
+            this.enemies.push(new enemy(enemies[Math.floor(Math.random()) * enemies.length]));
+        }
+        this.enemies.forEach(enem => {
+            let points = enem.show();
+            enem.timing();
+            enem.logic();
+            this.images[2].renderSprite(context, points, [
+                enem.position.x * 32,
+                enem.position.y * 34 + 120,
+                30,
+                30
+            ]);
+        });
+        this.images[5].renderSprite(context, link, [x * 32, y * 34 + 120, 30, 30]);
         context.drawImage(pauseMenu(), 0, paused, 512, 480);
         this.rungame(context);
     }
@@ -66,15 +83,16 @@ export default class Game {
             this.debugger = true;
             exportTiles();
             select = makeSelect();
-            select.id = 'Select';
-            let button = document.createElement('button');
-            button.innerText = ' Tile Map Viewer';
+            select.id = "Select";
+            let button = document.createElement("button");
+            button.innerText = " Tile Map Viewer";
             document.body.appendChild(button);
             document.body.appendChild(select);
-            button.addEventListener('click', () => {
+            button.addEventListener("click", () => {
                 this.toggle = !this.toggle;
-                this.toggle ? button.innerText = ' Tile Map Viewer' :
-                    button.innerText = 'Create Tile Map';
+                this.toggle
+                    ? (button.innerText = " Tile Map Viewer")
+                    : (button.innerText = "Create Tile Map");
                 if (!this.toggle) {
                     eraseTiles();
                 }

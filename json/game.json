@@ -85,7 +85,353 @@
           "y": 29,
           "w": 18,
           "h": 18
-        }
+        },
+          {
+            "name": "blue-octo-walk-down-1",
+            "x": 119,
+            "y": 0,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-octo-walk-down-2",
+            "x": 119,
+            "y": 29,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-octo-walk-left-1",
+            "x": 148,
+            "y": -1,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-octo-walk-left-2",
+            "x": 149,
+            "y": 30,
+            "w": 18,
+            "h": 17
+          },
+          {
+            "name": "blue-octo-walk-up-1",
+            "x": 179,
+            "y": -2,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-octo-walk-up-2",
+            "x": 179,
+            "y": 29,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-octo-walk-right-1",
+            "x": 210,
+            "y": -1,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-octo-walk-right-2",
+            "x": 210,
+            "y": 29,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-moblin-walk-down-1",
+            "x": -1,
+            "y": 118,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-moblin-walk-down-2",
+            "x": -1,
+            "y": 148,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-moblin-walk-left-1",
+            "x": 29,
+            "y": 117,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-moblin-walk-left-2",
+            "x": 29,
+            "y": 148,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-moblin-walk-up-1",
+            "x": 59,
+            "y": 118,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-moblin-walk-up-2",
+            "x": 59,
+            "y": 148,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-moblin-walk-right-1",
+            "x": 89,
+            "y": 118,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-moblin-walk-right-2",
+            "x": 89,
+            "y": 147,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-moblin-walk-down-1",
+            "x": 119,
+            "y": 118,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-moblin-walk-down-1",
+            "x": 119,
+            "y": 148,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-moblin-walk-left-1",
+            "x": 149,
+            "y": 117,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-moblin-walk-left-1",
+            "x": 149,
+            "y": 148,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-moblin-walk-up-1",
+            "x": 179,
+            "y": 118,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-moblin-walk-up-2",
+            "x": 179,
+            "y": 148,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-moblin-walk-right-1",
+            "x": 209,
+            "y": 118,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-moblin-walk-right-2",
+            "x": 209,
+            "y": 147,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-lynel-walk-down-1",
+            "x": -2,
+            "y": 238,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-lynel-walk-down-2",
+            "x": -1,
+            "y": 268,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-lynel-walk-left-1",
+            "x": 30,
+            "y": 237,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-lynel-walk-left-2",
+            "x": 30,
+            "y": 267,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-lynel-walk-up-1",
+            "x": 59,
+            "y": 238,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-lynel-walk-up-2",
+            "x": 59,
+            "y": 268,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-lynel-walk-right-1",
+            "x": 88,
+            "y": 237,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-lynel-walk-right-2",
+            "x": 88,
+            "y": 267,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-lynel-walk-down-1",
+            "x": 118,
+            "y": 238,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-lynel-walk-down-2",
+            "x": 119,
+            "y": 268,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-lynel-walk-left-1",
+            "x": 150,
+            "y": 237,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-lynel-walk-left-2",
+            "x": 150,
+            "y": 267,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-lynel-walk-up-1",
+            "x": 178,
+            "y": 238,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-lynel-walk-up-2",
+            "x": 179,
+            "y": 268,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-lynel-walk-right-1",
+            "x": 208,
+            "y": 237,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-lynel-walk-right-2",
+            "x": 208,
+            "y": 267,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "surface-1",
+            "x": 269,
+            "y": 294,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "surface-2",
+            "x": 239,
+            "y": 294,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-leever-surface-3",
+            "x": 299,
+            "y": 296,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-leever-1",
+            "x": 329,
+            "y": 299,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "red-leever-2",
+            "x": 359,
+            "y": 299,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-leever-surface-3",
+            "x": 299,
+            "y": 326,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-leever-1",
+            "x": 329,
+            "y": 329,
+            "w": 18,
+            "h": 18
+          },
+          {
+            "name": "blue-leever-2",
+            "x": 359,
+            "y": 329,
+            "w": 18,
+            "h": 18
+          }
+        
+
+
+
+
+
+
+
+
+
       ],
     "link": [
       {
