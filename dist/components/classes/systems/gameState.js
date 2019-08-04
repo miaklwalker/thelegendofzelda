@@ -75,8 +75,11 @@ export default class gameState {
             console.log(index);
             let tilemap = game.system.createMap(game.json.tileMap[index]);
             game.system.makeScreen(tilemap);
+            game.newScreen(index);
             changed = false;
         }
+    }
+    loadEnemies(Screen) {
     }
     changeMap(position) {
         if (this.currentMap !== this.maps[0]) {

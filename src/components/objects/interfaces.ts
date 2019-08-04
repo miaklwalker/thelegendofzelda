@@ -5,6 +5,14 @@ export default interface RootObject {
     Sprites: Sprites;
     tileMap: TileMap;
   }
+  export interface gameScreen{
+    hitBoxes: number[][];
+    enemies: string[];
+    secrets: [{ location: number[]; type: string }];
+    caves: [],
+    spawnPoints:number[];
+  }
+  
   export interface BossesOrEnemiesOrNPCOrTilesOrTitleScreen {
   }
   export interface Urls {

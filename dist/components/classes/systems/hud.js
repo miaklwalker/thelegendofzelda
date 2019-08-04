@@ -12,6 +12,7 @@ export default class Hud {
      * @memberof Hud
      */
     constructor(game) {
+        this.game = game;
         this.rupees = game.gameState.inventory.rupees;
         this.keys = game.gameState.inventory.keys;
         this.bombs = game.gameState.inventory.bombs;
@@ -55,6 +56,7 @@ export default class Hud {
     show(context, game) { }
     showHearts(context) {
         let index = 0;
+        this.hearts = this.game.Link.hearts;
         let heartNum = this.hearts;
         for (let i = 0; i < 2; i++) {
             for (let j = 0; j < 8; j++) {

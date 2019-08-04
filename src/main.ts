@@ -8,7 +8,8 @@ let game: Game;
 
 async function preload() {
   let data = await loadJson("../json/game.json");
-  game = new Game(512, 480, data);
+  let config = await loadJson("../json/Gameconfig.json")
+  game = new Game(512, 480, data,config);
   game.loadFiles();
   playButton()
   
@@ -20,6 +21,7 @@ function setup() {
   let index:string = `${game.gameState.currentMap.position.x},${game.gameState.currentMap.position.y}`
   let tilemap = game.system.createMap(game.json.tileMap[index]) as [[number,number,number,number,number]]
   game.system.makeScreen(tilemap)
+  game.newScreen(index)
   document.body.appendChild(canvas);
   draw();
 }

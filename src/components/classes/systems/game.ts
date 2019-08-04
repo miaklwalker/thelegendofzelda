@@ -3,7 +3,7 @@ import Link from "../actors/link.js";
 import Camera from "./camera.js";
 import PauseScreen from "./pauseScreen.js";
 import loadImage from "../../functions/getImage.js";
-import RootObject from "../../objects/interfaces.js";
+import RootObject, { gameScreen } from "../../objects/interfaces.js";
 import SpriteSheet from "./SpriteSheet.js";
 import Controls from "./controls.js";
 import MessageQueue from "./messageQueue.js";
@@ -15,7 +15,7 @@ import createTileMap, {
 } from "../../functions/createTileMap.js";
 import makeSelect from "./makeSelect.js";
 import enemy from "../actors/Enemy.js";
-import { enemies } from "../../objects/enemies.js";
+import { enemies, enemyIndex } from "../../objects/enemies.js";
 
 /**
  *
@@ -42,6 +42,7 @@ export default class Game {
   debugger: boolean;
   toggle: boolean;
   enemies: enemy[];
+  config: any;
   /**
    *Creates an instance of Game.
    * @param {number} width
@@ -49,7 +50,7 @@ export default class Game {
    * @param {*} json
    * @memberof Game
    */
-  constructor(width: number, height: number, json: any) {
+  constructor(width: number, height: number, json: any, gameConfig: any) {
     this.width = width;
     this.height = height;
     this.enemies = [];
@@ -57,6 +58,7 @@ export default class Game {
     this.Link = new Link();
     this.controls = new Controls(config);
     this.json = json;
+    this.config = gameConfig;
     this.system = new CollisionSystem(this);
     this.camera = new Camera();
     this.pauseScreen = new PauseScreen(this);
@@ -77,12 +79,12 @@ export default class Game {
     let link = this.Link.show();
     let pauseMenu = this.pauseScreen.show(this);
     let paused = this.gameState.paused ? 0 : -360;
-    this.system.runCollisions()
+    this.system.runCollisions();
     this.camera.show(this, context);
     this.enemies.forEach(enem => {
-     let points = enem.show();
-    enem.timing()
-    enem.logic()
+      let points = enem.show();
+      enem.timing();
+      enem.logic();
       this.images[2].renderSprite(context, points, [
         enem.position.x * 32,
         enem.position.y * 34 + 120,
@@ -93,7 +95,7 @@ export default class Game {
 
     this.images[5].renderSprite(context, link, [x * 32, y * 34 + 120, 30, 30]);
     context.drawImage(pauseMenu(), 0, paused, 512, 480);
-    this.rungame(context);
+    this.rungame();
   }
   debugMode(context: CanvasRenderingContext2D) {
     let select: HTMLSelectElement;
@@ -123,8 +125,28 @@ export default class Game {
       this.system.drawSystem(context);
     }
   }
-
-  rungame(context: CanvasRenderingContext2D) {
+  newScreen(index:string) {
+    this.enemies = []
+    this.system.enemies.forEach(e=>{
+      this.system.system.remove(e)
+    })
+    this.system.enemies = []
+    let screen:gameScreen= this.config.OverWorld[index];
+    let spawnPoints = this.system.parseMap(screen.spawnPoints) as number[][]
+    screen.enemies.forEach((e:string)=>{
+      let chooseEnemy = enemies[enemyIndex[e]]
+      let ChoosenPoint = spawnPoints.pop() as number[]
+      console.log(ChoosenPoint)
+      let badGuy = new enemy(chooseEnemy)
+      badGuy.position.x = ChoosenPoint[0]/32
+      badGuy.position.y = (ChoosenPoint[1]-120)/34
+      
+      this.messageCenter.addEntities(badGuy);
+      this.system.addPlayer(badGuy);
+      this.enemies.push(badGuy);
+    })
+  }
+  rungame() {
     this.gameState.changeMap(this.Link.position);
     this.controls.setupControls(this.messageCenter);
     this.messageCenter.dispatch();
@@ -136,15 +158,6 @@ export default class Game {
    * @memberof Game
    */
   loadFiles() {
-    for (let i = 0; i < enemies.length; i++) {
-        let chooseEnemy = enemies[i]
-        let badGuy = new enemy(chooseEnemy)
-        this.messageCenter.addEntities(badGuy)
-        this.system.addPlayer(badGuy)
-        this.enemies.push(badGuy);
-    }
-    // for custom enemies (extending defaults)
-    // const thisGuy = {...{a, b, c}, ...{a}, ...{a}, name: 'megaMoblin'};
     this.system.addPlayer(this.Link);
     this.messageCenter.addEntities(this.Link);
     let iterator = 0;

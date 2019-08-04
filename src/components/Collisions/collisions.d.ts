@@ -8,6 +8,7 @@ export abstract class Body {
     x: number;
     y: number;
     padding: number;
+  sprite: any;
 
     /**
      * Determines if the body is colliding with another body

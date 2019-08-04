@@ -2,12 +2,16 @@ import { Collisions } from "../../Collisions/Collisions.js";
 import { Result } from "../../Collisions/Collisions.js";
 import Message from "./message.js";
 import { Vector } from "../math/vector.js";
+import enemy from "../actors/Enemy.js";
+import Link from "../actors/link.js";
 export default class CollisionSystem {
     constructor(game) {
         this.system = new Collisions();
         this.results = new Result();
         this.tiles = [];
         this.sprites = [];
+        this.enemies = [];
+        this.entities = [...this.sprites, ...this.enemies];
         this.game = game;
     }
     addPlayer(Actor) {
@@ -17,14 +21,25 @@ export default class CollisionSystem {
         link.id = Actor.id;
         link.name = Actor.name;
         link.sprite = Actor;
-        this.sprites.push(link);
+        if (Actor instanceof Link) {
+            this.sprites.push(link);
+        }
+        else {
+            this.enemies.push(link);
+        }
     }
     runCollisions() {
-        this.system.update();
-        this.sprites.forEach(entity => {
+        this.entities = [...this.sprites, ...this.enemies];
+        this.entities.forEach(entity => {
+            entity.x = entity.sprite.position.x * 32;
+            entity.y = entity.sprite.position.y * 34 + 120;
+            this.system.update();
             let potentials = entity.potentials();
             for (let body of potentials) {
                 if (entity.collides(body, this.results)) {
+                    if (this.results.a.sprite instanceof Link && this.results.b.sprite instanceof enemy) {
+                        this.results.a.sprite.hearts -= this.results.b.sprite.damage;
+                    }
                     let message;
                     let to = entity.name;
                     let from = "collisions";
@@ -61,25 +76,28 @@ export default class CollisionSystem {
             }
             this.tiles = [];
             this.system.update();
-            let output = [];
-            for (let i = 0; i < tilemap.length / 5; i++) {
-                output.push([
-                    tilemap[0 + i * 5],
-                    tilemap[1 + i * 5],
-                    tilemap[2 + i * 5],
-                    tilemap[3 + i * 5],
-                    tilemap[4 + i * 5]
-                ]);
-            }
+            let output = this.parseMap(tilemap);
             return output;
         }
+    }
+    parseMap(tilemap) {
+        let output = [];
+        for (let i = 0; i < tilemap.length / 5; i++) {
+            output.push([
+                tilemap[0 + i * 5],
+                tilemap[1 + i * 5],
+                tilemap[2 + i * 5],
+                tilemap[3 + i * 5],
+                tilemap[4 + i * 5]
+            ]);
+        }
+        return output;
     }
     makeScreen(tilemap) {
         let x = 0;
         let y = 0;
         let w = 32;
         let h = 34;
-        let offset = 11;
         let topleft = [[x, y], [x, h], [w, y]];
         let topright = [[x, y], [w, y], [w, h]];
         let botleft = [[x, y], [x, h], [w, h]];

@@ -11,7 +11,7 @@ import CollisionSystem from "./collisionSystem.js";
 import createTileMap, { eraseTiles, exportTiles } from "../../functions/createTileMap.js";
 import makeSelect from "./makeSelect.js";
 import enemy from "../actors/Enemy.js";
-import { enemies } from "../../objects/enemies.js";
+import { enemies, enemyIndex } from "../../objects/enemies.js";
 /**
  *
  *
@@ -30,7 +30,7 @@ export default class Game {
      * @param {*} json
      * @memberof Game
      */
-    constructor(width, height, json) {
+    constructor(width, height, json, gameConfig) {
         this.width = width;
         this.height = height;
         this.enemies = [];
@@ -38,6 +38,7 @@ export default class Game {
         this.Link = new Link();
         this.controls = new Controls(config);
         this.json = json;
+        this.config = gameConfig;
         this.system = new CollisionSystem(this);
         this.camera = new Camera();
         this.pauseScreen = new PauseScreen(this);
@@ -72,7 +73,7 @@ export default class Game {
         });
         this.images[5].renderSprite(context, link, [x * 32, y * 34 + 120, 30, 30]);
         context.drawImage(pauseMenu(), 0, paused, 512, 480);
-        this.rungame(context);
+        this.rungame();
     }
     debugMode(context) {
         let select;
@@ -102,7 +103,27 @@ export default class Game {
             this.system.drawSystem(context);
         }
     }
-    rungame(context) {
+    newScreen(index) {
+        this.enemies = [];
+        this.system.enemies.forEach(e => {
+            this.system.system.remove(e);
+        });
+        this.system.enemies = [];
+        let screen = this.config.OverWorld[index];
+        let spawnPoints = this.system.parseMap(screen.spawnPoints);
+        screen.enemies.forEach((e) => {
+            let chooseEnemy = enemies[enemyIndex[e]];
+            let ChoosenPoint = spawnPoints.pop();
+            console.log(ChoosenPoint);
+            let badGuy = new enemy(chooseEnemy);
+            badGuy.position.x = ChoosenPoint[0] / 32;
+            badGuy.position.y = (ChoosenPoint[1] - 120) / 34;
+            this.messageCenter.addEntities(badGuy);
+            this.system.addPlayer(badGuy);
+            this.enemies.push(badGuy);
+        });
+    }
+    rungame() {
         this.gameState.changeMap(this.Link.position);
         this.controls.setupControls(this.messageCenter);
         this.messageCenter.dispatch();
@@ -114,15 +135,6 @@ export default class Game {
      * @memberof Game
      */
     loadFiles() {
-        for (let i = 0; i < enemies.length; i++) {
-            let chooseEnemy = enemies[i];
-            let badGuy = new enemy(chooseEnemy);
-            this.messageCenter.addEntities(badGuy);
-            this.system.addPlayer(badGuy);
-            this.enemies.push(badGuy);
-        }
-        // for custom enemies (extending defaults)
-        // const thisGuy = {...{a, b, c}, ...{a}, ...{a}, name: 'megaMoblin'};
         this.system.addPlayer(this.Link);
         this.messageCenter.addEntities(this.Link);
         let iterator = 0;

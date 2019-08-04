@@ -1,11 +1,55 @@
-enemies:
-  octo:
-    name: octo
-    behaviors:
-      - "walk"
-      - "stop"
-      - "shoot"
-    health: 0.5
-    color: "red"
-  moblin:
-    ...
+---
+- name: octo
+  x: 5
+  y: 6
+  behaviors:
+  - walk
+  - stop
+  - shoot
+  health: 0.5
+  color: red
+- name: octo
+  x: 2
+  y: 7
+  behaviors:
+  - walk
+  - stop
+  - shoot
+  health: 1
+  color: blue
+- name: moblin
+  x: 2
+  y: 2
+  behaviors:
+  - walk
+  - stop
+  - shoot
+  health: 2
+  color: red
+- name: moblin
+  x: 9
+  y: 1
+  behaviors:
+  - walk
+  - stop
+  - shoot
+  health: 3
+  color: blue
+- name: lynel
+  x: 8
+  y: 5
+  behaviors:
+  - walk
+  - stop
+  - shoot
+  health: 4
+  color: red
+- name: lynel
+  x: 13
+  y: 4
+  behaviors:
+  - walk
+  - stop
+  - shoot
+  health: 6
+  color: blue

@@ -17,12 +17,14 @@ export default class Hud {
   frame: number;
   blink: boolean;
   camera: camera;
+  game:Game;
   /**
    *Creates an instance of Hud.
    * @param {Game} game
    * @memberof Hud
    */
   constructor(game: Game) {
+    this.game = game;
     this.rupees = game.gameState.inventory.rupees;
     this.keys = game.gameState.inventory.keys;
     this.bombs = game.gameState.inventory.bombs;
@@ -69,6 +71,7 @@ export default class Hud {
   show(context: CanvasRenderingContext2D, game: Game) {}
   showHearts(context: CanvasRenderingContext2D) {
     let index = 0;
+    this.hearts = this.game.Link.hearts
     let heartNum = this.hearts;
     for (let i = 0; i < 2; i++) {
       for (let j = 0; j < 8; j++) {

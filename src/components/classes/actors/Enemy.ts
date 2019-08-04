@@ -15,12 +15,14 @@ export default class enemy {
   direction: string;
   shot: shot | null;
   frames: number;
+  damage: any;
 
-  constructor(Spawn:{name: string, x: number, y: number,behaviors:string[],health:number,color:string}) {
+  constructor(Spawn:{name: string, x: number, y: number,behaviors:string[],health:number,color:string,damage:number}) {
     this.position = new Vector(Spawn.x, Spawn.y);
     this.id = uniqueid();
     this.behaviors = [...Spawn.behaviors];
     this.counter = 0;
+    this.damage = Spawn.damage
     this.health = Spawn.health;
     this.name = Spawn.name;
     this.action = "walk";
@@ -36,6 +38,9 @@ export default class enemy {
   timing() {
     if (this.counter % 16 === 0) {
       this.frames++;
+    }
+    if(this.action ==='stop'){
+      this.counter+=150
     }
     if (this.counter % 200 === 0) {
       this.chooseBehaviors();
@@ -72,9 +77,20 @@ export default class enemy {
     }
   }
   stop() {
-    console.log("I Stopped becuase i was tired");
   }
   move() {
+    if(this.position.x>14){
+      this.direction = 'left'
+    }
+    if(this.position.x<.5){
+      this.direction = 'right'
+    }
+    if(this.position.y>9.5){
+      this.direction = 'up'
+    }
+    if(this.position.y<1){
+      this.direction = 'down'
+    }
     if (this.counter % 8 === 0) {
       switch (this.direction) {
         case "right":
@@ -94,7 +110,6 @@ export default class enemy {
   }
   chooseBehaviors() {
     let behavior = Math.floor(Math.random()*this.behaviors.length);
-    console.log(behavior)
     this.action=this.behaviors[behavior]
   }
   chooseDirection() {
@@ -104,7 +119,6 @@ export default class enemy {
   }
   onMessage(msg: Message) {
     if (msg.from === "collisions" && msg.type === this.id) {
-      console.log(msg)
       switch (msg.data) {
         case "right":
           this.direction = "left";
