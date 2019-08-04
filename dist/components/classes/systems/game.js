@@ -1,7 +1,7 @@
-import gameState from "./gameState.js";
+import GameState from "./gameState.js";
 import Link from "../actors/link.js";
-import camera from "./camera.js";
-import pauseScreen from "./pauseScreen.js";
+import Camera from "./camera.js";
+import PauseScreen from "./pauseScreen.js";
 import loadImage from "../../functions/getImage.js";
 import SpriteSheet from "./SpriteSheet.js";
 import Controls from "./controls.js";
@@ -34,13 +34,13 @@ export default class Game {
         this.width = width;
         this.height = height;
         this.enemies = [];
-        this.gameState = new gameState();
+        this.gameState = new GameState();
         this.Link = new Link();
         this.controls = new Controls(config);
         this.json = json;
         this.system = new CollisionSystem(this);
-        this.camera = new camera();
-        this.pauseScreen = new pauseScreen(this);
+        this.camera = new Camera();
+        this.pauseScreen = new PauseScreen(this);
         this.messageCenter = new MessageQueue(this);
         this.images = [];
         this.debugger = false;
@@ -57,11 +57,8 @@ export default class Game {
         let link = this.Link.show();
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
-        this.system.addPlayer(this.Link);
+        this.system.runCollisions();
         this.camera.show(this, context);
-        for (let i = 0; i < 8; i++) {
-            this.enemies.push(new enemy(enemies[Math.floor(Math.random()) * enemies.length]));
-        }
         this.enemies.forEach(enem => {
             let points = enem.show();
             enem.timing();
@@ -117,6 +114,16 @@ export default class Game {
      * @memberof Game
      */
     loadFiles() {
+        for (let i = 0; i < enemies.length; i++) {
+            let chooseEnemy = enemies[i];
+            let badGuy = new enemy(chooseEnemy);
+            this.messageCenter.addEntities(badGuy);
+            this.system.addPlayer(badGuy);
+            this.enemies.push(badGuy);
+        }
+        // for custom enemies (extending defaults)
+        // const thisGuy = {...{a, b, c}, ...{a}, ...{a}, name: 'megaMoblin'};
+        this.system.addPlayer(this.Link);
         this.messageCenter.addEntities(this.Link);
         let iterator = 0;
         let names = Object.keys(this.json.urls);

@@ -8,7 +8,7 @@ export default class enemy {
         this.behaviors = [...Spawn.behaviors];
         this.counter = 0;
         this.health = Spawn.health;
-        this.name = name;
+        this.name = Spawn.name;
         this.action = "walk";
         this.color = Spawn.color;
         this.direction = "down";
@@ -16,12 +16,7 @@ export default class enemy {
         this.frames = 0;
     }
     show() {
-        let str = `
-    ${this.color}- 
-    ${this.name}-
-    ${"walk"}-
-    ${this.direction}
-    -${(this.frames % 2) + 1}`;
+        let str = `${this.color}-${this.name}-${"walk"}-${this.direction}-${(this.frames % 2) + 1}`;
         return str;
     }
     timing() {
@@ -84,7 +79,8 @@ export default class enemy {
         }
     }
     chooseBehaviors() {
-        let behavior = Math.random() * this.behaviors.length;
+        let behavior = Math.floor(Math.random() * this.behaviors.length);
+        console.log(behavior);
         this.action = this.behaviors[behavior];
     }
     chooseDirection() {
@@ -94,6 +90,7 @@ export default class enemy {
     }
     onMessage(msg) {
         if (msg.from === "collisions" && msg.type === this.id) {
+            console.log(msg);
             switch (msg.data) {
                 case "right":
                     this.direction = "left";

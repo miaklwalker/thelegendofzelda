@@ -6,16 +6,19 @@ import { Vector } from "../math/vector.js";
 import uniqueid from "../../functions/createId.js";
 import enemy from "../actors/Enemy.js";
 import Link from "../actors/link.js";
+import { link } from "fs";
 
 export default class CollisionSystem {
   system: Collisions;
   results: Result;
-  entities: Polygon[];
+  tiles: Polygon[];
+  sprites:Polygon[]
   game: Game;
   constructor(game: Game) {
     this.system = new Collisions();
     this.results = new Result();
-    this.entities = [];
+    this.tiles = [];
+    this.sprites = []
     this.game = game;
   }
   addPlayer(Actor: Link | enemy) {
@@ -28,47 +31,51 @@ export default class CollisionSystem {
       0.0
     );
     link.id = Actor.id;
-    this.system.update();
-    let potentials = link.potentials();
-
-    for (let body of potentials) {
-      if (link.collides(body, this.results)) {
-        let message: Message;
-        let to = "Link";
-        let from = "collisions";
-        let type = link.id;
-        if (this.results.overlap_x > 0.8) {
-          message = new Message(to, from, type, "right");
-          this.game.messageCenter.add(message);
+    link.name = Actor.name
+    link.sprite = Actor
+    this.sprites.push(link)
+  }
+  runCollisions(){
+    this.system.update()
+    this.sprites.forEach(entity=>{
+      let potentials = entity.potentials()
+      for (let body of potentials) {
+        if (entity.collides(body, this.results)) {
+          let message: Message;
+          let to = entity.name
+          let from = "collisions";
+          let type = entity.id;
+          if (this.results.overlap_x > 0.8) {
+            message = new Message(to, from, type, "right");
+            this.game.messageCenter.add(message);
+          }
+          if (this.results.overlap_x < 0) {
+            message = new Message(to, from, type, "left");
+            this.game.messageCenter.add(message);
+          }
+          if (this.results.overlap_y > 0) {
+            message = new Message(to, from, type, "down");
+            this.game.messageCenter.add(message);
+          }
+          if (this.results.overlap_y < 0) {
+            message = new Message(to, from, type, "up");
+            this.game.messageCenter.add(message);
+          }
+          let cX = this.results.overlap_x * this.results.overlap;
+          let cY = this.results.overlap_y * this.results.overlap;
+          let correctionForce = new Vector(cX, cY);
+          correctionForce.div(30);
+          entity.sprite.position.subtract(correctionForce)
         }
-        if (this.results.overlap_x < 0) {
-          message = new Message(to, from, type, "left");
-          this.game.messageCenter.add(message);
-        }
-        if (this.results.overlap_y > 0) {
-          message = new Message(to, from, type, "down");
-          this.game.messageCenter.add(message);
-        }
-        if (this.results.overlap_y < 0) {
-          message = new Message(to, from, type, "up");
-          this.game.messageCenter.add(message);
-        }
-        let cX = this.results.overlap_x * this.results.overlap;
-        let cY = this.results.overlap_y * this.results.overlap;
-        let correctionForce = new Vector(cX, cY);
-        correctionForce.div(30);
-        Actor.position.subtract(correctionForce);
       }
-    }
-    this.system.remove(link);
-    this.system.update();
+    })
   }
   createMap(tilemap: number[]) {
     if (tilemap !== undefined) {
-      for (let entity of this.entities) {
+      for (let entity of this.tiles) {
         entity.remove();
       }
-      this.entities = [];
+      this.tiles = [];
       this.system.update();
       let output = [];
       for (let i = 0; i < tilemap.length / 5; i++) {
@@ -94,17 +101,17 @@ export default class CollisionSystem {
     let topright = [[x, y], [w, y], [w, h]];
     let botleft = [[x, y], [x, h], [w, h]];
     let botright = [[w, y], [w, h], [x, h]];
-    let square = [[0, 0], [0, 34], [32, 34], [32, 0]];
+    let square = [[x, y], [x, h], [w, h], [w, y]];
     let shapes = [topleft, topright, botleft, botright, square];
     if (tilemap !== undefined) {
-      this.entities.forEach((entity: Polygon) => {
+      this.tiles.forEach((entity: Polygon) => {
         this.system.remove(entity);
       });
-      this.entities = [];
+      this.tiles = [];
       for (let i = 0; i < tilemap.length; i++) {
         let tile: [number, number, number, number, number] = tilemap[i];
         let temp = this.system.createPolygon(tile[0], tile[1], shapes[tile[4]]);
-        this.entities.push(temp);
+        this.tiles.push(temp);
       }
       this.system.update();
     }

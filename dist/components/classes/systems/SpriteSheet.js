@@ -28,7 +28,7 @@ export default class SpriteSheet {
         });
     }
     renderSprite(context, action, location) {
-        //@ts-ignores
+        //@ts-ignore
         context.drawImage(this.sheet, ...this.sprites[action], ...location);
     }
 }

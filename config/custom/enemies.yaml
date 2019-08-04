@@ -1,0 +1,11 @@
+enemies:
+  octo:
+    name: octo
+    behaviors:
+      - "walk"
+      - "stop"
+      - "shoot"
+    health: 0.5
+    color: "red"
+  moblin:
+    ...
