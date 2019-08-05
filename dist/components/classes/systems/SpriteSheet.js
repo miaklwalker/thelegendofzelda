@@ -19,10 +19,9 @@ export default class SpriteSheet {
      * and uses it as the key for an array of values
      */
     makeSprites(json) {
-        //@ts-ignore
-        json.Sprites[this.name].forEach((Sprite) => {
+        let name = this.name;
+        json.Sprites[name].forEach((Sprite) => {
             if (this.name === "link" || this.name == 'enemy' || this.name === 'hud') {
-                //@ts-ignore
                 this.sprites[Sprite.name] = [Sprite.x, Sprite.y, Sprite.w, Sprite.h];
                 console.log(this.sprites);
             }

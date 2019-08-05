@@ -60,20 +60,13 @@ export default class Game {
         let paused = this.gameState.paused ? 0 : -360;
         this.system.runCollisions();
         this.camera.show(this, context);
-        this.enemies.forEach(enem => {
-            let points = enem.show();
-            enem.timing();
-            enem.logic();
-            this.images[2].renderSprite(context, points, [
-                enem.position.x * 32,
-                enem.position.y * 34 + 120,
-                30,
-                30
-            ]);
-        });
+        this.messageCenter.dispatch();
         this.images[5].renderSprite(context, link, [x * 32, y * 34 + 120, 30, 30]);
         context.drawImage(pauseMenu(), 0, paused, 512, 480);
-        this.rungame();
+        if (!this.gameState.paused) {
+            this.rungame(context);
+        }
+        this.controls.setupControls(this.messageCenter);
     }
     debugMode(context) {
         let select;
@@ -123,10 +116,19 @@ export default class Game {
             this.enemies.push(badGuy);
         });
     }
-    rungame() {
+    rungame(context) {
+        this.enemies.forEach(enem => {
+            let points = enem.show();
+            enem.timing();
+            enem.logic();
+            this.images[2].renderSprite(context, points, [
+                enem.position.x * 32,
+                enem.position.y * 34 + 120,
+                30,
+                30
+            ]);
+        });
         this.gameState.changeMap(this.Link.position);
-        this.controls.setupControls(this.messageCenter);
-        this.messageCenter.dispatch();
         this.gameState.changeScreen(this.Link.position, this);
     }
     /**

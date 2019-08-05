@@ -81,21 +81,13 @@ export default class Game {
     let paused = this.gameState.paused ? 0 : -360;
     this.system.runCollisions();
     this.camera.show(this, context);
-    this.enemies.forEach(enem => {
-      let points = enem.show();
-      enem.timing();
-      enem.logic();
-      this.images[2].renderSprite(context, points, [
-        enem.position.x * 32,
-        enem.position.y * 34 + 120,
-        30,
-        30
-      ]);
-    });
-
+    this.messageCenter.dispatch();
     this.images[5].renderSprite(context, link, [x * 32, y * 34 + 120, 30, 30]);
     context.drawImage(pauseMenu(), 0, paused, 512, 480);
-    this.rungame();
+    if (!this.gameState.paused) {
+      this.rungame(context);
+    }
+    this.controls.setupControls(this.messageCenter);
   }
   debugMode(context: CanvasRenderingContext2D) {
     let select: HTMLSelectElement;
@@ -125,31 +117,39 @@ export default class Game {
       this.system.drawSystem(context);
     }
   }
-  newScreen(index:string) {
-    this.enemies = []
-    this.system.enemies.forEach(e=>{
-      this.system.system.remove(e)
-    })
-    this.system.enemies = []
-    let screen:gameScreen= this.config.OverWorld[index];
-    let spawnPoints = this.system.parseMap(screen.spawnPoints) as number[][]
-    screen.enemies.forEach((e:string)=>{
-      let chooseEnemy = enemies[enemyIndex[e]]
-      let ChoosenPoint = spawnPoints.pop() as number[]
-      console.log(ChoosenPoint)
-      let badGuy = new enemy(chooseEnemy)
-      badGuy.position.x = ChoosenPoint[0]/32
-      badGuy.position.y = (ChoosenPoint[1]-120)/34
-      
+  newScreen(index: string) {
+    this.enemies = [];
+    this.system.enemies.forEach(e => {
+      this.system.system.remove(e);
+    });
+    this.system.enemies = [];
+    let screen: gameScreen = this.config.OverWorld[index];
+    let spawnPoints = this.system.parseMap(screen.spawnPoints) as number[][];
+    screen.enemies.forEach((e: string) => {
+      let chooseEnemy = enemies[enemyIndex[e]];
+      let ChoosenPoint = spawnPoints.pop() as number[];
+      console.log(ChoosenPoint);
+      let badGuy = new enemy(chooseEnemy);
+      badGuy.position.x = ChoosenPoint[0] / 32;
+      badGuy.position.y = (ChoosenPoint[1] - 120) / 34;
       this.messageCenter.addEntities(badGuy);
       this.system.addPlayer(badGuy);
       this.enemies.push(badGuy);
-    })
+    });
   }
-  rungame() {
+  rungame(context: CanvasRenderingContext2D) {
+    this.enemies.forEach(enem => {
+      let points = enem.show();
+      enem.timing();
+      enem.logic();
+      this.images[2].renderSprite(context, points, [
+        enem.position.x * 32,
+        enem.position.y * 34 + 120,
+        30,
+        30
+      ]);
+    });
     this.gameState.changeMap(this.Link.position);
-    this.controls.setupControls(this.messageCenter);
-    this.messageCenter.dispatch();
     this.gameState.changeScreen(this.Link.position, this);
   }
   /**
@@ -162,7 +162,7 @@ export default class Game {
     this.messageCenter.addEntities(this.Link);
     let iterator = 0;
     let names = Object.keys(this.json.urls);
-    console.log(names)
+    console.log(names);
     let images = Object.values(this.json.urls).map(url => loadImage(url));
     Promise.all(images).then((response: HTMLImageElement[]) => {
       response.forEach(res => {

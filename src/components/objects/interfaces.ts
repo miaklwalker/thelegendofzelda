@@ -43,6 +43,7 @@ export default interface RootObject {
     inventory: [number,number,number,number,number,number,number,number] ;
   }
   export interface Sprites {
+    [index:string]:any
     Bosses: BossesOrEnemiesOrNPCOrTilesOrTitleScreen;
     Enemies: BossesOrEnemiesOrNPCOrTilesOrTitleScreen;
     link?: (LinkEntity)[] | null;
