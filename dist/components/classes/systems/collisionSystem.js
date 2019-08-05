@@ -38,7 +38,7 @@ export default class CollisionSystem {
             for (let body of potentials) {
                 if (entity.collides(body, this.results)) {
                     if (this.results.a.sprite instanceof Link && this.results.b.sprite instanceof enemy) {
-                        this.results.a.sprite.hearts -= this.results.b.sprite.damage;
+                        this.results.a.sprite.health -= this.results.b.sprite.damage;
                     }
                     let message;
                     let to = entity.name;

@@ -11,8 +11,8 @@ export default class Link {
     constructor() {
         this.frameAdjusted = 0;
         this.id = uniqueid();
-        this.hearts = 3;
-        this.health = 3;
+        this.hearts = 16;
+        this.health = 14.5;
         this.position = new Vector(7, 5);
         this.action = "walk";
         this.shield = "small";

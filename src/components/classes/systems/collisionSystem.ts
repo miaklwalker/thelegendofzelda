@@ -46,12 +46,12 @@ export default class CollisionSystem {
     this.entities.forEach(entity=>{
       entity.x = entity.sprite.position.x*32
       entity.y = entity.sprite.position.y*34+120
-      this.system.update()
+      this.system.update() 
       let potentials = entity.potentials()
       for (let body of potentials) {
         if (entity.collides(body, this.results)) {
           if(this.results.a.sprite instanceof Link&&this.results.b.sprite instanceof enemy){
-           this.results.a.sprite.hearts-=this.results.b.sprite.damage
+           this.results.a.sprite.health-=this.results.b.sprite.damage
           }
           let message: Message;
           let to = entity.name

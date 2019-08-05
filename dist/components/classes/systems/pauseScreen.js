@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import Hud from "./hud.js";
 import { memoize } from "../../objects/decorators.js";
+import Overworld from "../../overworld.js";
 /**
  *
  *
@@ -34,10 +35,11 @@ export default class pauseScreen {
             canvas.height = game.height;
             let context = canvas.getContext("2d");
             let imageOne = game.images[11].sheet;
+            let middle = game.gameState.currentMap instanceof Overworld ? 'Triforce' : 'dungeonMap';
             const HUD = imageOne;
-            context.drawImage(HUD, ...game.json.hud.inventory); //*inventory
-            context.drawImage(HUD, ...game.json.hud.triforce); //*triforce
-            context.drawImage(HUD, ...game.json.hud.top); //*hud
+            game.images[11].renderSprite(context, 'Inventory', [0, 0, 512, 166]);
+            game.images[11].renderSprite(context, middle, [0, 166, 512, 195]);
+            game.images[11].renderSprite(context, 'Hud', [0, 360, 512, 120]);
             this.hud.minimap(context);
             return canvas;
         };

@@ -17,7 +17,7 @@ export default class Hud {
   frame: number;
   blink: boolean;
   camera: camera;
-  game:Game;
+  game: Game;
   /**
    *Creates an instance of Hud.
    * @param {Game} game
@@ -68,18 +68,43 @@ export default class Hud {
    * @param {Game} game
    * @memberof Hud
    */
-  show(context: CanvasRenderingContext2D, game: Game) {}
   showHearts(context: CanvasRenderingContext2D) {
     let index = 0;
-    this.hearts = this.game.Link.hearts
-    let heartNum = this.hearts;
+    this.hearts = this.game.Link.hearts;
+    let hearts = this.hearts
+    let health = this.game.Link.health;
     for (let i = 0; i < 2; i++) {
       for (let j = 0; j < 8; j++) {
+        let x = 350 + j * 17;
+        let y = 444 - 19.5 * i;
+        let width = 17.5;
+        let height = 19.6;
+        if (index < health - 0.5) {
+          this.game.images[11].renderSprite(context, "heart", [
+            x,
+            y,
+            width,
+            height
+          ]);
+        } else if (index < health) {
+          this.game.images[11].renderSprite(context, "halfHeart", [
+            x,
+            y,
+            width,
+            height
+          ]);
+        } else if (index < hearts) {
+          this.game.images[11].renderSprite(context, "emptyHeart", [
+            x,
+            y,
+            width,
+            height
+          ]);
+        } else {
+          context.fillStyle = "black";
+          context.fillRect(x,y,width,height);
+        }
         index++;
-        heartNum >= index
-          ? (context.fillStyle = 'red')
-          : (context.fillStyle = "black");
-        context.fillRect(352 + j * 16.125, 442.9 - 19.5 * i, 16.125, 19.5);
       }
     }
   }
