@@ -1,0 +1,43 @@
+name: dungeon1
+screens:
+  '2,2':
+    enemies:
+      - redead
+      - name: redead
+        droppedItems:
+          - key
+        pool:
+          - walk
+          - shoot
+          - stop
+          - strategy: 'patrol'
+            weight: 5
+enemyBehaviors:
+  patrol:
+    - name: 'walk'
+      duration: 2
+    - name: 'walk'
+      duration: 5
+    - name: 'walk'
+      duration: 1
+  attack:
+    - shoot
+    - walk
+    - shoot
+    - shoot
+    - walk
+    - walk
+
+      - name: redead
+        droppedItems:
+          - strategy: 'pool'
+            pool:
+              - heart
+              - rupees
+          - strategy: 'weightedPool'
+            pool:
+              - item: heart
+                weight: 5
+              - item: rupees
+                weight: 3
+        dropRate: 0.5

@@ -1,6 +1,6 @@
-import controlsConfig from "./controlsConfig";
-import MessageQueue from "./messageQueue";
-import Message from "./message";
+import controlsConfig from "./controlsConfig.js";
+import MessageQueue from "./messageQueue.js";
+import Message from "./message.js";
 
 export default class Controls {
     up: string;
@@ -31,13 +31,12 @@ export default class Controls {
         const values = Object.values(this);
         const keys = Object.keys(this);
         document.addEventListener("keydown", event => {
+            // Loop Through all of the keys
             for (let i = 0; i < keys.length; i++) {
+                // if one of the values matches the key pressed and it wasn't pressed in the last few milliseconds
                 if (event.code === values[i] && this.lastKey !== keys[i]) {
-                    if (
-                        ["up", "down", "left", "right", "A", "B"].includes(
-                            keys[i],
-                        )
-                    ) {
+                    // Then check if it is a movement key and block the default
+                    if (["up", "down", "left", "right", "A", "B"].includes(keys[i])) {
                         event.preventDefault();
                         this.lastKey = keys[i];
                         let msg: Message = new Message(

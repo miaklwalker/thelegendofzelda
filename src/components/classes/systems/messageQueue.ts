@@ -1,5 +1,8 @@
-import Message from "./message";
-import Game from "./game";
+import Message from "./message.js";
+import Game from "./game.js";
+import enemy from "../actors/Enemy.js";
+import Link from "../actors/link.js";
+import gameState from "./gameState.js";
 
 /**
  *
@@ -9,7 +12,8 @@ import Game from "./game";
  */
 export default class MessageQueue {
     messages: any[];
-    entities: any[];
+
+    entities:Link[]|enemy[];
     game:Game
 
     /**
@@ -37,7 +41,10 @@ export default class MessageQueue {
      *
      * @memberof MessageQueue
      */
-    addEntities() {}
+    addEntities(...entity:any) {
+        let entities = [...entity]
+        entities.forEach(one=>{this.entities.push(one)})
+    }
 
     /**
      *
@@ -47,8 +54,10 @@ export default class MessageQueue {
     dispatch() {
         for (let i = 0; i < this.messages.length; i++) {
             let msg = this.messages[i];
-                        //@ts-ignore
-            this.game[msg.to].onMessage(msg)
+            this.game.gameState.onMessage(msg)
+            this.entities.forEach((entity:Link|enemy)=>{
+                entity.onMessage(msg)
+            })
             this.messages.splice(i,1);
         }
 

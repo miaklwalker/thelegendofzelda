@@ -161,23 +161,39 @@ let map:[number,number,number,number][] =[
 [ 480, 358, 512, 392 ], 
 [ 480, 392, 512, 426 ], 
 [ 480, 426, 512, 460 ] ] 
+let offset = 50
+let topleft = [[0,0],[32,0],[0,34],[0,0]]
+let topright = [[0,0],[32,0],[32,32],[0,0]]
+let botleft = [[0,0],[32,34],[0,34],[0,0]]
+let botright = [[32,0],[32,34],[0,34],[32,0]]
+let square = [[0, 0],[0, 34],[32, 34],[32, 0]]
+let shapes = [topleft,topright,botleft,botright,square]
+
+
+
 function createTileMap(context: CanvasRenderingContext2D) {
-
   showGrid(context);
+  let shape = document.getElementById('Select') as HTMLSelectElement
+ 
   document.addEventListener("click", event => {
-
+    let shapeCode:string = shape.value
     for(let i = 0 ; i < map.length;i++){
       if(event.clientX>=map[i][0]&&event.clientX<=map[i][2]&&
         event.clientY>=map[i][1]&&event.clientY<=map[i][3]){
-          points.add(JSON.stringify([map[i][0],map[i][1],32,34]))
+          /*                             X         Y      W  H    Shape        */
+          points.add(JSON.stringify([map[i][0],map[i][1],32,34,shapeCode]))
         }
     }
   });
-  for(let value of points){
-    //@ts-ignore
-    let cell = JSON.parse([value])
-    //@ts-ignore
-    context.fillRect(...cell)
+  let value:string
+  for(value of points){
+    let cell:[number,number,number,number,number] = JSON.parse(value)
+      context.beginPath()
+      context.moveTo( shapes[cell[4]][0][0]+cell[0], shapes[cell[4]][0][1]+cell[1])
+      context.lineTo( shapes[cell[4]][1][0]+cell[0], shapes[cell[4]][1][1]+cell[1])
+      context.lineTo( shapes[cell[4]][2][0]+cell[0], shapes[cell[4]][2][1]+cell[1])
+      context.lineTo( shapes[cell[4]][3][0]+cell[0], shapes[cell[4]][3][1]+cell[1])
+      context.fill()
    }
 }
 export function exportTiles (){
@@ -193,13 +209,29 @@ export function exportTiles (){
       tiles.push([cell])
      }
      navigator.clipboard.writeText(`[${tiles}]`).then(()=>{console.log('copied')})
+     tiles.length = 0 ;
   })
   
 }
-export function showTileMap(tilemap:[[number,number,number,number]],context:CanvasRenderingContext2D){
+export function showTileMap(tilemap:[[number,number,number,number,number]],context:CanvasRenderingContext2D){
+  if(tilemap!==undefined){
+    console.log(tilemap)
+    
   for(let tile = 0  ;tile<tilemap.length;tile++){
-    context.fillRect(...tilemap[tile])
+    console.log(tilemap[tile])
+    context.beginPath()
+    context.moveTo( shapes[tilemap[tile][4]][0][0]+tilemap[tile][0],shapes[tilemap[tile][4]][0][1]+tilemap[tile][1])
+    context.lineTo( shapes[tilemap[tile][4]][1][0]+tilemap[tile][0],shapes[tilemap[tile][4]][1][1]+tilemap[tile][1])
+    context.lineTo( shapes[tilemap[tile][4]][2][0]+tilemap[tile][0],shapes[tilemap[tile][4]][2][1]+tilemap[tile][1])
+    context.lineTo( shapes[tilemap[tile][4]][3][0]+tilemap[tile][0],shapes[tilemap[tile][4]][3][1]+tilemap[tile][1])
+    context.fill()
   }
+}
+}
+
+export function eraseTiles(){
+  points.clear()
+  navigator.clipboard.writeText('Cleared!')
 }
 export default createTileMap;
 

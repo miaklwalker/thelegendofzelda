@@ -1,7 +1,6 @@
 import makeCanvas from "./components/functions/canvas.js";
 import Game from "./components/classes/systems/game.js";
 import loadJson from "./components/functions/getjson.js";
-import { exportTiles } from "./components/functions/createTileMap.js";
 
 let canvas = makeCanvas() as HTMLCanvasElement;
 let ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
@@ -9,7 +8,8 @@ let game: Game;
 
 async function preload() {
   let data = await loadJson("../json/game.json");
-  game = new Game(512, 480, data);
+  let config = await loadJson("../json/Gameconfig.json")
+  game = new Game(512, 480, data,config);
   game.loadFiles();
   playButton()
   
@@ -19,9 +19,10 @@ function setup() {
   canvas.width = 512;
   canvas.height = 480;
   let index:string = `${game.gameState.currentMap.position.x},${game.gameState.currentMap.position.y}`
-  game.system.makeScreen(game.json.tileMap[index])
+  let tilemap = game.system.createMap(game.json.tileMap[index]) as [[number,number,number,number,number]]
+  game.system.makeScreen(tilemap)
+  game.newScreen(index)
   document.body.appendChild(canvas);
-  exportTiles();
   draw();
 }
 

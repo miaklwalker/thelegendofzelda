@@ -8,6 +8,7 @@ export abstract class Body {
     x: number;
     y: number;
     padding: number;
+  sprite: any;
 
     /**
      * Determines if the body is colliding with another body
@@ -63,6 +64,9 @@ export class Circle extends Body {
  * @extends {Body}
  */
 export class Polygon extends Body {
+  id: string;
+  name: any;
+  sprite: import("c:/Users/ouisi/Desktop/CodeProjects/thelegendofzelda/src/components/classes/actors/link").default | import("c:/Users/ouisi/Desktop/CodeProjects/thelegendofzelda/src/components/classes/actors/Enemy").default;
     /**
      * @constructor
      * @param {number} [x = 0] The starting X coordinate

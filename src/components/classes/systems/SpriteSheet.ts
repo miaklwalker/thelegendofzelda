@@ -5,7 +5,7 @@ import RootObject from "../../objects/interfaces";
 
 
 interface SpriteSheetCor {
-[key:string]:any
+[index:string]:string|number
     name: string;
     x: number;
     y: number;
@@ -21,7 +21,7 @@ interface SpriteSheetCor {
 export default class SpriteSheet{
     sheet: HTMLImageElement;
     name: string;
-    sprites: Object;
+    sprites: {[index:string]:[number,number,number,number]};
     constructor(image:HTMLImageElement,name:string){
         this.sheet = image;
         this.name = name;
@@ -36,17 +36,17 @@ export default class SpriteSheet{
      * and uses it as the key for an array of values
      */
     makeSprites(json:RootObject){
-        //@ts-ignore
-        json.Sprites[this.name].forEach((Sprite:SpriteSheetCor)=>{
-            if(this.name === "link"){
-                //@ts-ignore
+        let name:string = this.name 
+        json.Sprites[name].forEach((Sprite:SpriteSheetCor)=>{
+            if(this.name === "link"||this.name == 'enemy'||this.name==='hud'){
             this.sprites[Sprite.name]=[Sprite.x,Sprite.y,Sprite.w,Sprite.h]
+            console.log(this.sprites)
             }
         })
     }
 
     renderSprite(context:CanvasRenderingContext2D,action:string,location:[number,number,number,number]){
-        //@ts-ignores
+        //@ts-ignore
         context.drawImage(this.sheet,...this.sprites[action],...location)
     }
 }

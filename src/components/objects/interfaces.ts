@@ -5,6 +5,14 @@ export default interface RootObject {
     Sprites: Sprites;
     tileMap: TileMap;
   }
+  export interface gameScreen{
+    hitBoxes: number[][];
+    enemies: string[];
+    secrets: [{ location: number[]; type: string }];
+    caves: [],
+    spawnPoints:number[];
+  }
+  
   export interface BossesOrEnemiesOrNPCOrTilesOrTitleScreen {
   }
   export interface Urls {
@@ -35,6 +43,7 @@ export default interface RootObject {
     inventory: [number,number,number,number,number,number,number,number] ;
   }
   export interface Sprites {
+    [index:string]:any
     Bosses: BossesOrEnemiesOrNPCOrTilesOrTitleScreen;
     Enemies: BossesOrEnemiesOrNPCOrTilesOrTitleScreen;
     link?: (LinkEntity)[] | null;
@@ -49,14 +58,6 @@ export default interface RootObject {
     h: number;
   }
   export interface TileMap {
-    [index:string]:[[number,number,number,number]]
-    "0,0": [[number,number,number,number]],
-    "1,0": [[number,number,number,number]],
-    "2,0": [[number,number,number,number]],
-    "3,0": [[number,number,number,number]],
-    "4,0": [[number,number,number,number]],
-    "5,0": [[number,number,number,number]],
-    "6,0": [[number,number,number,number]],
-    "7,7": [[number,number,number,number]]
+    [index:string]:number[]
   }
   

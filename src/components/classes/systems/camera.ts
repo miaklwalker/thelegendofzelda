@@ -1,7 +1,7 @@
 
-import Game from "./game";
-import { Vector } from "../math/vector";
-import loadImage from "../../functions/getImage";
+import Game from "./game.js";
+import { Vector } from "../math/vector.js";
+import loadImage from "../../functions/getImage.js";
 
 export default class camera {
   position: Vector;

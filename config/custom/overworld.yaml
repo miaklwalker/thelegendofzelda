@@ -1,0 +1,19 @@
+overworld:
+  screens:
+    '0,1':
+        enemies:
+          - octo
+          - name: octo
+            position: 5, 5
+          # - parent: moblin
+          #   name: 'blue-moblin'
+          #   damage: 4
+          #   sprite: 'somefile.png'
+          - moblin
+            position: 10, 5
+        secrets:
+          - type: bombable
+            position: 2, 4
+          - type: flamable
+            position: 1, 3
+          - type: chest
