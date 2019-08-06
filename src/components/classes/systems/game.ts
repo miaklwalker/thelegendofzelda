@@ -162,7 +162,6 @@ export default class Game {
     this.messageCenter.addEntities(this.Link);
     let iterator = 0;
     let names = Object.keys(this.json.urls);
-    console.log(names);
     let images = Object.values(this.json.urls).map(url => loadImage(url));
     Promise.all(images).then((response: HTMLImageElement[]) => {
       response.forEach(res => {

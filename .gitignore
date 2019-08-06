@@ -6,5 +6,5 @@ package-lock.json
 sandbox.config.json
 master
 coverage
-
+dist
 
