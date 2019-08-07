@@ -1,0 +1,27 @@
+// Always Different
+{
+let ranNum =()=>{ return {num:Math.floor(Math.random()*10)}}
+let j 
+for(let i = 0 ; i < 10 ; i ++){
+    j = ranNum()
+    console.log(j.num)
+}
+}
+// Always Same
+{
+{
+let ranNum =()=>{ return {num:Math.floor(Math.random()*10)}}
+let j = ranNum()
+for(let i = 0 ; i < 10 ; i ++){
+    console.log(j.num)
+}
+}
+// Always Same
+}
+{
+    function ranNum (){this.num=Math.floor(Math.random()*10)}
+let j = new ranNum()
+for(let i = 0 ; i < 10 ; i ++){
+    console.log(j.num)
+}
+} 

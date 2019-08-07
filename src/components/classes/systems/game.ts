@@ -128,7 +128,7 @@ export default class Game {
     screen.enemies.forEach((e: string) => {
       let chooseEnemy = enemies[enemyIndex[e]];
       let ChoosenPoint = spawnPoints.pop() as number[];
-      console.log(ChoosenPoint);
+      console.log(chooseEnemy,ChoosenPoint)
       let badGuy = new enemy(chooseEnemy);
       badGuy.position.x = ChoosenPoint[0] / 32;
       badGuy.position.y = (ChoosenPoint[1] - 120) / 34;
@@ -141,7 +141,7 @@ export default class Game {
     this.enemies.forEach(enem => {
       let points = enem.show();
       enem.timing();
-      enem.logic();
+      enem.logic(context);
       this.images[2].renderSprite(context, points, [
         enem.position.x * 32,
         enem.position.y * 34 + 120,

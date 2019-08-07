@@ -107,7 +107,7 @@ export default class Game {
         screen.enemies.forEach((e) => {
             let chooseEnemy = enemies[enemyIndex[e]];
             let ChoosenPoint = spawnPoints.pop();
-            console.log(ChoosenPoint);
+            console.log(chooseEnemy, ChoosenPoint);
             let badGuy = new enemy(chooseEnemy);
             badGuy.position.x = ChoosenPoint[0] / 32;
             badGuy.position.y = (ChoosenPoint[1] - 120) / 34;
@@ -120,7 +120,7 @@ export default class Game {
         this.enemies.forEach(enem => {
             let points = enem.show();
             enem.timing();
-            enem.logic();
+            enem.logic(context);
             this.images[2].renderSprite(context, points, [
                 enem.position.x * 32,
                 enem.position.y * 34 + 120,
@@ -141,7 +141,6 @@ export default class Game {
         this.messageCenter.addEntities(this.Link);
         let iterator = 0;
         let names = Object.keys(this.json.urls);
-        console.log(names);
         let images = Object.values(this.json.urls).map(url => loadImage(url));
         Promise.all(images).then((response) => {
             response.forEach(res => {

@@ -12,7 +12,9 @@ export let enemyIndex: {
   moblin: 2,
   blueMoblin: 3,
   lynel: 4,
-  blueLynel: 5
+  blueLynel: 5,
+  tektite:6,
+  blueTektite:7
 };
 
 export let enemies: {
@@ -77,5 +79,23 @@ export let enemies: {
     health: 6,
     color: "blue",
     damage:2
-  }
+  },
+  {
+    name: "tektite",
+    x: Math.floor(Math.random() * 14),
+    y: Math.floor(Math.random() * 8),
+    behaviors: ["jump", "stop"],
+    health: 0.5,
+    color: "red",
+    damage:.5
+  },
+  {
+    name: "tektite",
+    x: Math.floor(Math.random() * 14),
+    y: Math.floor(Math.random() * 8),
+    behaviors: ["jump", "stop"],
+    health: 0.5,
+    color: "blue",
+    damage:.5
+  },
 ];

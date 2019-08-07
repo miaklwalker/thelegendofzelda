@@ -5,7 +5,7 @@ import loadJson from "./components/functions/getjson.js";
 let canvas = makeCanvas() as HTMLCanvasElement;
 let ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 let game: Game;
-
+let intro = document.getElementById('container') as HTMLDivElement
 async function preload() {
   let data = await loadJson("../json/game.json");
   let config = await loadJson("../json/Gameconfig.json")
@@ -39,9 +39,10 @@ preload();
 
 function playButton(){
   let button = document.createElement("button");
-  button.innerText = "Play Game";
+  button.innerText = "Start Button";
   document.body.appendChild(button);
   button.addEventListener("click", () => {
+    document.body.removeChild(intro)
     game.gameState.currentMap.theme.play();
     setup();
 		document.body.removeChild(button);

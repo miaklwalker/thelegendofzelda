@@ -2,8 +2,12 @@ import { Vector } from "../math/vector.js";
 import Message from "../systems/message.js";
 import uniqueid from "../../functions/createId.js";
 import shot from "./shot.js";
+import random from "../../functions/random.js";
+import { exportDefaultSpecifier } from "@babel/types";
 
 export default class enemy {
+  jumpTimer: number;
+  [index:string]:any
   position: Vector;
   id: string;
   behaviors: string[];
@@ -29,17 +33,22 @@ export default class enemy {
     this.color = Spawn.color;
     this.direction = "down";
     this.shot = null;
+    this.jumpTimer = 0;
     this.frames = 0;
   }
   show() {
-    let str = `${this.color}-${this.name}-${"walk"}-${this.direction}-${(this.frames % 2) + 1}`;
+    let action:string 
+    let frame = this.jumpTimer > 0 ? 1 : this.frames %2
+    if(this.name.includes('tektite')){action = 'jump'}else{action='walk'}
+
+    let str = `${this.color}-${this.name}-${action}-${this.direction}-${frame + 1}`;
     return str;
   }
   timing() {
     if (this.counter % 16 === 0) {
       this.frames++;
     }
-    if(this.action ==='stop'){
+    if(this.action ==='stop'&&!this.name.includes('tektite')){
       this.counter+=150
     }
     if (this.counter % 200 === 0) {
@@ -47,38 +56,53 @@ export default class enemy {
       this.chooseDirection();
     }
   }
-  logic() {
-    if (this.action === "walk") {
-      this.move();
+  jump(){
+    let steps = 10 
+    let resolution = 8 
+    let distance = random(1,2);
+    let height = random(1,1)
+    let hor = this.direction === 'left' ? -1 : 1; 
+    let ver = this.direction === 'down' ? -1 : 1;
+    this.jumpTimer++
+    if(this.jumpTimer === steps){
+      this.chooseBehaviors()
+      this.jumpTimer = 0 
+      this.chooseBehaviors()
     }
-    if (this.action === "stop") {
-      this.stop();
+    let flip = this.jumpTimer < steps*.5 ? 1 : -1 ;
+    if(distance===height/resolution&&flip===1){
+      height/=2
+    }else if(distance===height/resolution){
+      height*=2
     }
-    if (this.action === "shoot") {
-      this.action = "stop";
-      this.shoot();
-    }
+    this.position.x+= hor*distance/steps
+    this.position.y-= ver*height/steps
+
+  }
+  logic(context:CanvasRenderingContext2D) {
+    this[this.action]()
     this.counter++;
   }
-  shoot() {
+  shoot(context:CanvasRenderingContext2D) {
     switch (this.direction) {
       case "right":
-        this.shot = new shot(this.position.x, this.position.y, 1, 0);
+        this.shot = new shot(this.position.x, this.position.y, 1, 0)
         break;
       case "left":
-        this.shot = new shot(this.position.x, this.position.y, 1, 0);
+        this.shot = new shot(this.position.x, this.position.y, -1, 0)
         break;
       case "up":
-        this.shot = new shot(this.position.x, this.position.y, 1, 0);
+        this.shot = new shot(this.position.x, this.position.y, 0, -1)
         break;
       case "down":
-        this.shot = new shot(this.position.x, this.position.y, 1, 0);
+        this.shot = new shot(this.position.x, this.position.y, 0, 1)
         break;
     }
+    if(this.shot!==null){}
   }
   stop() {
   }
-  move() {
+  walk() {
     if(this.position.x>14){
       this.direction = 'left'
     }

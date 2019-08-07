@@ -40,7 +40,6 @@ export default class SpriteSheet{
         json.Sprites[name].forEach((Sprite:SpriteSheetCor)=>{
             if(this.name === "link"||this.name == 'enemy'||this.name==='hud'){
             this.sprites[Sprite.name]=[Sprite.x,Sprite.y,Sprite.w,Sprite.h]
-            console.log(this.sprites)
             }
         })
     }

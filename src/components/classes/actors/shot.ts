@@ -17,6 +17,8 @@ export default class shot {
   }
   shot(context:CanvasRenderingContext2D){
       this.show = true
+      context.fillStyle = 'black'
+      console.log('i ran')
     context.fillRect(this.position.x*32,this.position.y*34+120,this.width,this.height)
   }
 }
