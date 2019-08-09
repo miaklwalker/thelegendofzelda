@@ -17,6 +17,7 @@ export default class enemy {
         this.shot = null;
         this.jumpTimer = 0;
         this.frames = 0;
+        this.chance = 1;
     }
     show() {
         let action;
@@ -41,6 +42,13 @@ export default class enemy {
             this.chooseBehaviors();
             this.chooseDirection();
         }
+    }
+    fall() {
+        if (this.counter % 60 === 0) {
+            this.chance = Math.random() > .5 ? 1 : -1;
+        }
+        this.position.x += .01 * this.chance;
+        this.position.y += .01;
     }
     jump() {
         let steps = 10;

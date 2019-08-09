@@ -533,7 +533,63 @@
         "y": 207,
         "w": 18,
         "h": 18
-      }
+      },
+        {
+          "name": "red-boulder-walk-down-1",
+          "x": 59,
+          "y": 299,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "name": "red-boulder-walk-down-2",
+          "x": 89,
+          "y": 299,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "name": "red-boulder-walk-up-1",
+          "x": 59,
+          "y": 299,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "name": "red-boulder-walk-up-2",
+          "x": 89,
+          "y": 299,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "name": "red-boulder-walk-left-1",
+          "x": 59,
+          "y": 299,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "name": "red-boulder-walk-left-2",
+          "x": 89,
+          "y": 299,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "name": "red-boulder-walk-right-1",
+          "x": 59,
+          "y": 299,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "name": "red-boulder-walk-right-2",
+          "x": 89,
+          "y": 299,
+          "w": 18,
+          "h": 18
+        }
     ],
     "link": [
       {

@@ -56,7 +56,7 @@ export default class Link {
     this.frameAdjusted++;
   }
   blocks(msg: Message) {
-    this.blocked.push(msg.data);
+   // this.blocked.push(msg.data);
   }
   onMessage(msg: Message) {
     if (msg.type === this.id) {

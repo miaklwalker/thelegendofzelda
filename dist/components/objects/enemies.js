@@ -6,7 +6,8 @@ export let enemyIndex = {
     lynel: 4,
     blueLynel: 5,
     tektite: 6,
-    blueTektite: 7
+    blueTektite: 7,
+    boulder: 8,
 };
 export let enemies = [
     {
@@ -79,6 +80,15 @@ export let enemies = [
         behaviors: ["jump", "stop"],
         health: 0.5,
         color: "blue",
+        damage: .5
+    },
+    {
+        name: "boulder",
+        x: Math.floor(Math.random() * 14),
+        y: Math.floor(Math.random() * 8),
+        behaviors: ["fall"],
+        health: 0.5,
+        color: "red",
         damage: .5
     },
 ];

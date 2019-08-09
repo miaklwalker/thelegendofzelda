@@ -7,6 +7,7 @@ import { exportDefaultSpecifier } from "@babel/types";
 
 export default class enemy {
   jumpTimer: number;
+  chance: number;
   [index:string]:any
   position: Vector;
   id: string;
@@ -35,12 +36,12 @@ export default class enemy {
     this.shot = null;
     this.jumpTimer = 0;
     this.frames = 0;
+    this.chance = 1;
   }
   show() {
     let action:string 
     let frame = this.jumpTimer > 0 ? 1 : this.frames %2
     if(this.name.includes('tektite')){action = 'jump'}else{action='walk'}
-
     let str = `${this.color}-${this.name}-${action}-${this.direction}-${frame + 1}`;
     return str;
   }
@@ -55,6 +56,13 @@ export default class enemy {
       this.chooseBehaviors();
       this.chooseDirection();
     }
+  }
+  fall(){
+    if(this.counter%60===0){
+     this.chance = Math.random()>.5? 1:-1
+    }
+    this.position.x+= .01 * this.chance
+    this.position.y+= .01
   }
   jump(){
     let steps = 10 
