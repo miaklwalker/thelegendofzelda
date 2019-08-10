@@ -10,7 +10,7 @@ export default class CollisionSystem {
   system: Collisions;
   results: Result;
   tiles: Polygon[];
-  sprites:Polygon[]
+  sprites: Polygon[];
   game: Game;
   enemies: Polygon[];
   entities: Polygon[];
@@ -18,9 +18,9 @@ export default class CollisionSystem {
     this.system = new Collisions();
     this.results = new Result();
     this.tiles = [];
-    this.sprites = []
-    this.enemies = []
-    this.entities =[...this.sprites,...this.enemies]
+    this.sprites = [];
+    this.enemies = [];
+    this.entities = [...this.sprites, ...this.enemies];
     this.game = game;
   }
   addPlayer(Actor: Link | enemy) {
@@ -33,55 +33,60 @@ export default class CollisionSystem {
       0.0
     );
     link.id = Actor.id;
-    link.name = Actor.name
-    link.sprite = Actor
-    if(Actor instanceof Link){
-      this.sprites.push(link)
-    }else{
-      this.enemies.push(link)
+    link.name = Actor.name;
+    link.sprite = Actor;
+    if (Actor instanceof Link) {
+      this.sprites.push(link);
+    } else {
+      this.enemies.push(link);
     }
   }
-  runCollisions(){
-    this.entities = [...this.sprites,...this.enemies];
-    this.entities.forEach(entity=>{
-      entity.x = entity.sprite.position.x*32
-      entity.y = entity.sprite.position.y*34+120
-      this.system.update() 
-      let potentials = entity.potentials()
+  runCollisions() {
+    this.entities = [...this.sprites, ...this.enemies];
+    this.entities.forEach(entity => {
+      entity.x = entity.sprite.position.x * 32;
+      entity.y = entity.sprite.position.y * 34 + 120;
+      this.system.update();
+      let potentials = entity.potentials();
       for (let body of potentials) {
         if (entity.collides(body, this.results)) {
-          if(this.results.a.sprite instanceof Link&&this.results.b.sprite instanceof enemy){
-           this.results.a.sprite.health-=this.results.b.sprite.damage
+          if (
+            this.results.a.sprite instanceof Link &&
+            this.results.b.sprite instanceof enemy
+          ) {
+            this.results.a.sprite.health -= this.results.b.sprite.damage;
           }
-          let message: Message;
-          let to = entity.name
-          let from = "collisions";
-          let type = entity.id;
-          if (this.results.overlap_x > 0.8) {
-            message = new Message(to, from, type, "right");
-            this.game.messageCenter.add(message);
+          if (entity.sprite.name !== "boulder") {
+            let message: Message;
+            let to = entity.name;
+            let from = "collisions";
+            let type = entity.id;
+            if (this.results.overlap_x > 0.8) {
+              message = new Message(to, from, type, "right");
+              this.game.messageCenter.add(message);
+            }
+            if (this.results.overlap_x < 0) {
+              message = new Message(to, from, type, "left");
+              this.game.messageCenter.add(message);
+            }
+            if (this.results.overlap_y > 0) {
+              message = new Message(to, from, type, "down");
+              this.game.messageCenter.add(message);
+            }
+            if (this.results.overlap_y < 0) {
+              message = new Message(to, from, type, "up");
+              this.game.messageCenter.add(message);
+            }
+
+            let cX = this.results.overlap_x * this.results.overlap;
+            let cY = this.results.overlap_y * this.results.overlap;
+            let correctionForce = new Vector(cX, cY);
+            correctionForce.div(24);
+            entity.sprite.position.subtract(correctionForce);
           }
-          if (this.results.overlap_x < 0) {
-            message = new Message(to, from, type, "left");
-            this.game.messageCenter.add(message);
-          }
-          if (this.results.overlap_y > 0) {
-            message = new Message(to, from, type, "down");
-            this.game.messageCenter.add(message);
-          }
-          if (this.results.overlap_y < 0) {
-            message = new Message(to, from, type, "up");
-            this.game.messageCenter.add(message);
-          }
-          
-          let cX = this.results.overlap_x * this.results.overlap;
-          let cY = this.results.overlap_y * this.results.overlap;
-          let correctionForce = new Vector(cX, cY);
-          correctionForce.div(30);
-          entity.sprite.position.subtract(correctionForce)
         }
       }
-    })
+    });
   }
   createMap(tilemap: number[]) {
     if (tilemap !== undefined) {
@@ -90,23 +95,23 @@ export default class CollisionSystem {
       }
       this.tiles = [];
       this.system.update();
-      let output = this.parseMap(tilemap)
-      return output as [[number,number,number,number,number]]
+      let output = this.parseMap(tilemap);
+      return output as [[number, number, number, number, number]];
     }
   }
- parseMap(tilemap:number[]){
-  let output = [];
-  for (let i = 0; i < tilemap.length / 5; i++) {
-    output.push([
-      tilemap[0 + i * 5],
-      tilemap[1 + i * 5],
-      tilemap[2 + i * 5],
-      tilemap[3 + i * 5],
-      tilemap[4 + i * 5]
-    ]);
+  parseMap(tilemap: number[]) {
+    let output = [];
+    for (let i = 0; i < tilemap.length / 5; i++) {
+      output.push([
+        tilemap[0 + i * 5],
+        tilemap[1 + i * 5],
+        tilemap[2 + i * 5],
+        tilemap[3 + i * 5],
+        tilemap[4 + i * 5]
+      ]);
+    }
+    return output as [[number, number, number, number, number]];
   }
-  return output as [[number, number, number, number, number]];
- }
   makeScreen(tilemap: [[number, number, number, number, number]]) {
     let x = 0;
     let y = 0;

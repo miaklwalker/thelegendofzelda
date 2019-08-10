@@ -36,6 +36,9 @@
     "setupFiles": [
       "jest-canvas-mock"
     ],
+    "moduleNameMapper": {
+      "(.*)\\.js": "$1"
+    },
     "roots": [
       "<rootDir>/src",
       "<rootDir>/test",

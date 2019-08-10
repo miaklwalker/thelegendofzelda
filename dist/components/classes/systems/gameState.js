@@ -49,37 +49,36 @@ export default class gameState {
     }
     changeScreen(position, game) {
         let map = this.currentMap.position;
-        let changed = false;
+        this.transition = false;
         if (position.x > 15) {
             position.x = 1;
             map.x += 1;
-            changed = true;
+            this.transition = true;
         }
         if (position.x < 0.7) {
             position.x = 14;
             map.x -= 1;
-            changed = true;
+            this.transition = true;
         }
         if (position.y > 9.7) {
             position.y = 1;
             map.y += 1;
-            changed = true;
+            this.transition = true;
         }
         if (position.y < 0.7) {
             position.y = 9;
             map.y -= 1;
-            changed = true;
+            this.transition = true;
         }
-        if (changed) {
+        if (this.transition) {
             let index = `${map.x},${map.y}`;
-            console.log(index);
+            game.camera.position;
             let tilemap = game.system.createMap(game.json.tileMap[index]);
             game.system.makeScreen(tilemap);
             game.newScreen(index);
-            changed = false;
+            this.transition = false;
+            console.log(index);
         }
-    }
-    loadEnemies(Screen) {
     }
     changeMap(position) {
         if (this.currentMap !== this.maps[0]) {

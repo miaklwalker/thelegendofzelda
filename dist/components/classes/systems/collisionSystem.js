@@ -37,34 +37,37 @@ export default class CollisionSystem {
             let potentials = entity.potentials();
             for (let body of potentials) {
                 if (entity.collides(body, this.results)) {
-                    if (this.results.a.sprite instanceof Link && this.results.b.sprite instanceof enemy) {
+                    if (this.results.a.sprite instanceof Link &&
+                        this.results.b.sprite instanceof enemy) {
                         this.results.a.sprite.health -= this.results.b.sprite.damage;
                     }
-                    let message;
-                    let to = entity.name;
-                    let from = "collisions";
-                    let type = entity.id;
-                    if (this.results.overlap_x > 0.8) {
-                        message = new Message(to, from, type, "right");
-                        this.game.messageCenter.add(message);
+                    if (entity.sprite.name !== "boulder") {
+                        let message;
+                        let to = entity.name;
+                        let from = "collisions";
+                        let type = entity.id;
+                        if (this.results.overlap_x > 0.8) {
+                            message = new Message(to, from, type, "right");
+                            this.game.messageCenter.add(message);
+                        }
+                        if (this.results.overlap_x < 0) {
+                            message = new Message(to, from, type, "left");
+                            this.game.messageCenter.add(message);
+                        }
+                        if (this.results.overlap_y > 0) {
+                            message = new Message(to, from, type, "down");
+                            this.game.messageCenter.add(message);
+                        }
+                        if (this.results.overlap_y < 0) {
+                            message = new Message(to, from, type, "up");
+                            this.game.messageCenter.add(message);
+                        }
+                        let cX = this.results.overlap_x * this.results.overlap;
+                        let cY = this.results.overlap_y * this.results.overlap;
+                        let correctionForce = new Vector(cX, cY);
+                        correctionForce.div(24);
+                        entity.sprite.position.subtract(correctionForce);
                     }
-                    if (this.results.overlap_x < 0) {
-                        message = new Message(to, from, type, "left");
-                        this.game.messageCenter.add(message);
-                    }
-                    if (this.results.overlap_y > 0) {
-                        message = new Message(to, from, type, "down");
-                        this.game.messageCenter.add(message);
-                    }
-                    if (this.results.overlap_y < 0) {
-                        message = new Message(to, from, type, "up");
-                        this.game.messageCenter.add(message);
-                    }
-                    let cX = this.results.overlap_x * this.results.overlap;
-                    let cY = this.results.overlap_y * this.results.overlap;
-                    let correctionForce = new Vector(cX, cY);
-                    correctionForce.div(30);
-                    entity.sprite.position.subtract(correctionForce);
                 }
             }
         });

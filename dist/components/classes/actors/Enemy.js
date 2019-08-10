@@ -44,11 +44,20 @@ export default class enemy {
         }
     }
     fall() {
-        if (this.counter % 60 === 0) {
+        if (this.counter % 30 === 0) {
             this.chance = Math.random() > .5 ? 1 : -1;
         }
-        this.position.x += .01 * this.chance;
-        this.position.y += .01;
+        this.position.x += .04 * this.chance;
+        this.position.y += .04;
+        if (this.position.y * 35 > 360) {
+            this.position.y = 0;
+        }
+        else if (this.position.x * 35 > 512) {
+            this.position.x = 0;
+        }
+        else if (this.position.x * 35 < 1) {
+            this.position.x = 14;
+        }
     }
     jump() {
         let steps = 10;
@@ -74,25 +83,35 @@ export default class enemy {
         this.position.y -= ver * height / steps;
     }
     logic(context) {
-        this[this.action]();
+        if (this.action === 'shoot') {
+            this.shoot(context);
+        }
+        else {
+            this.shot = null;
+            this[this.action]();
+        }
         this.counter++;
     }
     shoot(context) {
-        switch (this.direction) {
-            case "right":
-                this.shot = new shot(this.position.x, this.position.y, 1, 0);
-                break;
-            case "left":
-                this.shot = new shot(this.position.x, this.position.y, -1, 0);
-                break;
-            case "up":
-                this.shot = new shot(this.position.x, this.position.y, 0, -1);
-                break;
-            case "down":
-                this.shot = new shot(this.position.x, this.position.y, 0, 1);
-                break;
+        if (this.shot !== null) {
+            this.shot.show(context);
         }
-        if (this.shot !== null) { }
+        else {
+            switch (this.direction) {
+                case "right":
+                    this.shot = new shot(this.position.x, this.position.y, .1, 0, this.name);
+                    break;
+                case "left":
+                    this.shot = new shot(this.position.x, this.position.y, -.1, 0, this.name);
+                    break;
+                case "up":
+                    this.shot = new shot(this.position.x, this.position.y, 0, -.1, this.name);
+                    break;
+                case "down":
+                    this.shot = new shot(this.position.x, this.position.y, 0, .1, this.name);
+                    break;
+            }
+        }
     }
     stop() {
     }

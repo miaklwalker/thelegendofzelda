@@ -63,7 +63,7 @@ export default class Game {
         this.messageCenter.dispatch();
         this.images[5].renderSprite(context, link, [x * 32, y * 34 + 120, 30, 30]);
         context.drawImage(pauseMenu(), 0, paused, 512, 480);
-        if (!this.gameState.paused) {
+        if (!this.gameState.paused || this.gameState.transition) {
             this.rungame(context);
         }
         this.controls.setupControls(this.messageCenter);
@@ -116,7 +116,10 @@ export default class Game {
         });
     }
     rungame(context) {
-        this.enemies.forEach(enem => {
+        this.enemies.forEach((enem, index) => {
+            if (enem.health === 0) {
+                this.enemies.splice(index, 1);
+            }
             let points = enem.show();
             enem.timing();
             enem.logic(context);
