@@ -12,6 +12,7 @@ import Overworld from '../../overworld.js';
 import { Vector } from '../math/vector.js';
 import Message from './message.js';
 import Game from './game.js';
+import Dungeon from '../dungeons/dungeons.js';
 let index = 0;
 /**
  *
@@ -24,7 +25,7 @@ export default class gameState {
 	inventory: inventory;
 	paused: boolean;
 	transition: boolean;
-	currentMap: Overworld;
+	currentMap: Overworld|Dungeon
 	/**
 	 *Creates an instance of gameState.
 	 * @memberof gameState

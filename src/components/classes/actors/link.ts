@@ -34,12 +34,12 @@ export default class Link {
     this.blocked = [];
   }
   show() {
-    let str = `link-${this.action}-${this.direction}-${(this.frameAdjusted %2)+1}-${this.shield}`;
+    let str = `link-${this.action}-${this.direction}-${(this.frameAdjusted %8%4%2)+1}-${this.shield}`;
     return str;
   }
   move(msg: Message) {
     if(msg.from==='controls'){
-      this[msg.type] = msg.data;
+      this.direction = msg.data;
     }
     if (msg.data === "right") {
       this.velocity.x += 0.2;

@@ -1,7 +1,8 @@
 
-import Game from "./game.js";
 import { Vector } from "../math/vector.js";
 import loadImage from "../../functions/getImage.js";
+import Overworld from "../../overworld.js";
+import Dungeon from "../dungeons/dungeons.js";
 
 export default class camera {
   position: Vector;
@@ -10,10 +11,10 @@ export default class camera {
     this.position = new Vector();
     this.map = new Map()
   }
-  show(game: Game, context: CanvasRenderingContext2D) {
-    let paused = game.gameState.paused ? 480 : 120;
+  show(pause:boolean,currentMap:Dungeon|Overworld, context: CanvasRenderingContext2D) {
+    let paused = pause ? 480 : 120;
     let { x, y } = this.position;
-    let { url,position } = game.gameState.currentMap;
+    let { url,position } = currentMap;
     if(this.map.has(url)){
       let cache = this.map.get(url)
       context.drawImage(cache ,x*256,y*176.1,256,405,0,paused,512,863)

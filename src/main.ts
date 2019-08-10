@@ -6,6 +6,8 @@ let canvas = makeCanvas() as HTMLCanvasElement;
 let ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 let game: Game;
 let intro = document.getElementById('container') as HTMLDivElement
+
+
 async function preload() {
   let data = await loadJson("../json/game.json");
   let config = await loadJson("../json/Gameconfig.json")

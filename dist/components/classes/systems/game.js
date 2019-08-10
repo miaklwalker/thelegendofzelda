@@ -47,26 +47,18 @@ export default class Game {
         this.debugger = false;
         this.toggle = true;
     }
-    /**
-     *
-     *
-     * @param {CanvasRenderingContext2D} context
-     * @memberof Game
-     */
     drawScreen(context) {
         const { x, y } = this.Link.position;
-        let link = this.Link.show();
         let pauseMenu = this.pauseScreen.show(this);
         let paused = this.gameState.paused ? 0 : -360;
         this.system.runCollisions();
-        this.camera.show(this, context);
+        this.camera.show(this.gameState.paused, this.gameState.currentMap, context);
         this.messageCenter.dispatch();
-        this.images[5].renderSprite(context, link, [x * 32, y * 34 + 120, 30, 30]);
+        this.images[5].renderSprite(context, this.Link.show(), [x * 32, y * 34 + 120, 30, 30]);
         context.drawImage(pauseMenu(), 0, paused, 512, 480);
         if (!this.gameState.paused || this.gameState.transition) {
             this.rungame(context);
         }
-        this.controls.setupControls(this.messageCenter);
     }
     debugMode(context) {
         let select;
@@ -133,12 +125,8 @@ export default class Game {
         this.gameState.changeMap(this.Link.position);
         this.gameState.changeScreen(this.Link.position, this);
     }
-    /**
-     *
-     *
-     * @memberof Game
-     */
     loadFiles() {
+        this.controls.setupControls(this.messageCenter);
         this.system.addPlayer(this.Link);
         this.messageCenter.addEntities(this.Link);
         let iterator = 0;

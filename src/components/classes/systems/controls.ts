@@ -30,6 +30,7 @@ export default class Controls {
     setupControls(msgCenter: MessageQueue) {
         const values = Object.values(this);
         const keys = Object.keys(this);
+        let from = 'controls'
         document.addEventListener("keydown", event => {
             // Loop Through all of the keys
             for (let i = 0; i < keys.length; i++) {
@@ -39,35 +40,29 @@ export default class Controls {
                     if (["up", "down", "left", "right", "A", "B"].includes(keys[i])) {
                         event.preventDefault();
                         this.lastKey = keys[i];
-                        let msg: Message = new Message(
-                            "Link",
-                            "controls",
-                            "direction",
-                            keys[i],
-                        );
+                        let msg: Message = new Message("Link",from,"direction",keys[i]);
                         msgCenter.add(msg);
                     } else {
                         this.lastKey = keys[i];
-                        let msg: Message = new Message(
-                            "gameState",
-                            "controls",
-                            "paused",
-                            keys[i],
-                        );
+                        let msg: Message = new Message("gameState",from,"paused",keys[i]);
                         msgCenter.add(msg);
                     }
                 }
             }
+            setTimeout(() => {
+                this.lastKey = "";
+        },);
         });
+
         document.addEventListener("keyup", event => {
             for (let i = 0; i < keys.length; i++) {
                 if (event.code === values[i] && this.keyUp !== keys[i]) {
                     this.keyUp = keys[i];
                 }
             }
+            setTimeout(() => {
+                this.lastKey = "";
+            }, 150);
         });
-        setTimeout(() => {
-            this.lastKey = "";
-        }, 150);
     }
 }

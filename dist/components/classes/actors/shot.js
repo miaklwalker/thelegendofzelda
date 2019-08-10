@@ -15,7 +15,6 @@ export default class shot {
         this.speed.add(this.velocity);
         this.velocity.mult(0);
         this.position.add(this.speed);
-        console.log(this.name);
         if (this.name.includes('octo')) {
             context.fillStyle = 'saddleBrown';
             context.beginPath();

@@ -8,6 +8,7 @@ export let enemyIndex = {
     tektite: 6,
     blueTektite: 7,
     boulder: 8,
+    armos: 9,
 };
 export let enemies = [
     {
@@ -90,6 +91,15 @@ export let enemies = [
         health: 0.5,
         color: "red",
         damage: .5
+    },
+    {
+        name: "armos",
+        x: Math.floor(Math.random() * 14),
+        y: Math.floor(Math.random() * 8),
+        behaviors: ["fall"],
+        health: 3,
+        color: "red",
+        damage: 1
     },
 ];
 //# sourceMappingURL=enemies.js.map
