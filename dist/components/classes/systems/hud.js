@@ -58,7 +58,6 @@ export default class Hud {
         this.hearts = this.game.Link.hearts;
         let hearts = this.hearts;
         let health = this.game.Link.health;
-        console.log(hearts, health);
         for (let i = 0; i < 2; i++) {
             for (let j = 0; j < 8; j++) {
                 let x = 350 + j * 17;

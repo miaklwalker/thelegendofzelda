@@ -9,6 +9,7 @@ import uniqueid from "../../functions/createId.js";
  */
 export default class Link {
     constructor() {
+        this.frame = 0;
         this.frameAdjusted = 0;
         this.id = uniqueid();
         this.hearts = 16;
@@ -21,7 +22,7 @@ export default class Link {
         this.blocked = [];
     }
     show() {
-        let str = `link-${this.action}-${this.direction}-${(this.frameAdjusted % 8 % 4 % 2) + 1}-${this.shield}`;
+        let str = `link-${this.action}-${this.direction}-${(this.frameAdjusted % 2) + 1}-${this.shield}`;
         return str;
     }
     move(msg) {
@@ -42,7 +43,10 @@ export default class Link {
         }
         this.position.add(this.velocity);
         this.velocity.mult(0);
-        this.frameAdjusted++;
+        this.frame++;
+        if (this.frame % 2 === 0) {
+            this.frameAdjusted++;
+        }
     }
     onMessage(msg) {
         if (msg.to === this.id) {
