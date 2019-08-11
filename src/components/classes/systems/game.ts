@@ -11,9 +11,10 @@ import config from "../../objects/config.js";
 import CollisionSystem from "./collisionSystem.js";
 import createTileMap, {
   eraseTiles,
-  exportTiles
+  exportTiles,
+  showPoints
 } from "../../functions/createTileMap.js";
-import makeSelect from "./makeSelect.js";
+import makeSelect, { selectFactory } from "../../functions/makeSelect.js";
 import enemy from "../actors/Enemy.js";
 import { enemies, enemyIndex } from "../../objects/enemies.js";
 
@@ -43,6 +44,7 @@ export default class Game {
   toggle: boolean;
   enemies: enemy[];
   config: any;
+  once:boolean;
   constructor(width: number, height: number, json: any, gameConfig: any) {
     this.width = width;
     this.height = height;
@@ -58,6 +60,7 @@ export default class Game {
     this.messageCenter = new MessageQueue(this);
     this.images = [];
     this.debugger = false;
+    this.once = false
     this.toggle = true;
   }
 
@@ -74,31 +77,39 @@ export default class Game {
     if (!this.gameState.paused||this.gameState.transition) {
       this.rungame(context);
     }
+    this.debugMode(context)
   }
   debugMode(context: CanvasRenderingContext2D) {
     let select: HTMLSelectElement;
+    let select2: HTMLSelectElement
     if (!this.debugger) {
       this.debugger = true;
       exportTiles();
       select = makeSelect();
       select.id = "Select";
+      select2 = selectFactory('type',[['Tile','Block'],['Spawn','Spawn'],['Secret','Secret'],['Cave','Cave']])
       let button = document.createElement("button");
       button.innerText = " Tile Map Viewer";
       document.body.appendChild(button);
       document.body.appendChild(select);
+      document.body.appendChild(select2);
       button.addEventListener("click", () => {
         this.toggle = !this.toggle;
         this.toggle
-          ? (button.innerText = " Tile Map Viewer")
-          : (button.innerText = "Create Tile Map");
+        ? (button.innerText = " Tile Map Viewer")
+        : (button.innerText = "Create Tile Map");
         if (!this.toggle) {
           eraseTiles();
         }
       });
     }
-
+    
     if (this.toggle) {
-      createTileMap(context);
+      if(!this.once){
+        this.once = true
+        createTileMap()
+      };
+      showPoints(context)
     } else {
       this.system.drawSystem(context);
     }

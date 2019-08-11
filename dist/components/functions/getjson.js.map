@@ -1,1 +1,1 @@
-{"version":3,"file":"getjson.js","sourceRoot":"","sources":["../../../src/components/functions/getjson.ts"],"names":[],"mappings":"AAAC;;;;GAIG;AACH,MAAM,QAAQ,GAAG,KAAK,EAAE,GAAW,EAAC,EAAE,CAAC,MAAM,CAAC,MAAM,KAAK,CAAC,GAAG,CAAC,CAAC,CAAC,IAAI,EAAE,CAAC;AACxE,eAAe,QAAQ,CAAA"}
+{"version":3,"file":"GetJson.js","sourceRoot":"","sources":["../../../src/components/functions/GetJson.ts"],"names":[],"mappings":"AAAC;;;;GAIG;AACH,MAAM,QAAQ,GAAG,KAAK,EAAE,GAAW,EAAC,EAAE,CAAC,MAAM,CAAC,MAAM,KAAK,CAAC,GAAG,CAAC,CAAC,CAAC,IAAI,EAAE,CAAC;AACxE,eAAe,QAAQ,CAAA"}

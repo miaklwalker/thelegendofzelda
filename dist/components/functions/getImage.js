@@ -14,4 +14,4 @@ export default function loadImage(url) {
         image.src = url;
     });
 }
-//# sourceMappingURL=getImage.js.map
+//# sourceMappingURL=GetImage.js.map

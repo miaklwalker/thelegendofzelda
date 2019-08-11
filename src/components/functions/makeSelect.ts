@@ -15,11 +15,27 @@
     let option4 = document.createElement('option');
     option4.innerText = 'Square';
     option4.value = '4';
-    select.appendChild(option0);
+    select.append(option4);
+    select.append(option0);
     select.append(option1);
     select.append(option2);
     select.append(option3);
-    select.append(option4)
     return select
 }
 export default makeSelect
+/**
+ * 
+ * @param id 
+ * @param options options is a InnerText / Value Pair in nested Arrays
+ */
+export function selectFactory(id:string,options:string[][]){
+    let select = document.createElement('select');
+    select.id = id
+    options.forEach(option=>{
+        let choice = document.createElement('option');
+        choice.innerText = option[0]
+        choice.value = option[1]
+        select.append(choice)
+    })
+    return select
+}

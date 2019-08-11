@@ -1,5 +1,10 @@
 import showGrid from "./ShowScreenGrid.js";
-let points = new Set();
+let Block = new Set();
+let Spawn = new Set();
+let Secret = new Set();
+let Cave = new Set();
+let sets = [Block, Spawn, Secret, Cave];
+let setsString = ["Block", "Spawn", "Secret", "Cave"];
 let map = [
     [0, 120, 32, 154],
     [0, 154, 32, 188],
@@ -169,29 +174,41 @@ let botleft = [[0, 0], [32, 34], [0, 34], [0, 0]];
 let botright = [[32, 0], [32, 34], [0, 34], [32, 0]];
 let square = [[0, 0], [0, 34], [32, 34], [32, 0]];
 let shapes = [topleft, topright, botleft, botright, square];
-function createTileMap(context) {
-    showGrid(context);
+function createTileMap() {
     let shape = document.getElementById('Select');
+    let type = document.getElementById('type');
     document.addEventListener("click", event => {
+        let typeValue = type.value;
         let shapeCode = shape.value;
+        let currentSet = sets[setsString.indexOf(typeValue)];
         for (let i = 0; i < map.length; i++) {
-            if (event.clientX >= map[i][0] && event.clientX <= map[i][2] &&
-                event.clientY >= map[i][1] && event.clientY <= map[i][3]) {
-                /*                             X         Y      W  H    Shape        */
-                points.add(JSON.stringify([map[i][0], map[i][1], 32, 34, shapeCode]));
+            if (event.clientX >= map[i][0] && event.clientX <= map[i][2] && event.clientY >= map[i][1] && event.clientY <= map[i][3]) {
+                if (currentSet.has(JSON.stringify([map[i][0], map[i][1], 32, 34, shapeCode]))) {
+                    currentSet.delete(JSON.stringify([map[i][0], map[i][1], 32, 34, shapeCode]));
+                }
+                else {
+                    currentSet.add(JSON.stringify([map[i][0], map[i][1], 32, 34, shapeCode]));
+                }
             }
         }
     });
-    let value;
-    for (value of points) {
-        let cell = JSON.parse(value);
-        context.beginPath();
-        context.moveTo(shapes[cell[4]][0][0] + cell[0], shapes[cell[4]][0][1] + cell[1]);
-        context.lineTo(shapes[cell[4]][1][0] + cell[0], shapes[cell[4]][1][1] + cell[1]);
-        context.lineTo(shapes[cell[4]][2][0] + cell[0], shapes[cell[4]][2][1] + cell[1]);
-        context.lineTo(shapes[cell[4]][3][0] + cell[0], shapes[cell[4]][3][1] + cell[1]);
-        context.fill();
-    }
+}
+export function showPoints(context) {
+    showGrid(context);
+    let colors = ['black', 'red', 'yellow', 'green'];
+    sets.forEach((set, index) => {
+        let value;
+        for (value of set) {
+            context.fillStyle = colors[index];
+            let cell = JSON.parse(value);
+            context.beginPath();
+            context.moveTo(shapes[cell[4]][0][0] + cell[0], shapes[cell[4]][0][1] + cell[1]);
+            context.lineTo(shapes[cell[4]][1][0] + cell[0], shapes[cell[4]][1][1] + cell[1]);
+            context.lineTo(shapes[cell[4]][2][0] + cell[0], shapes[cell[4]][2][1] + cell[1]);
+            context.lineTo(shapes[cell[4]][3][0] + cell[0], shapes[cell[4]][3][1] + cell[1]);
+            context.fill();
+        }
+    });
 }
 export function exportTiles() {
     let button = document.createElement('button');
@@ -199,7 +216,7 @@ export function exportTiles() {
     button.innerText = 'Export';
     document.body.appendChild(button);
     button.addEventListener('click', () => {
-        for (let value of points) {
+        for (let value of Block) {
             //@ts-ignore
             let cell = JSON.parse([value]);
             //@ts-ignore
@@ -224,7 +241,7 @@ export function showTileMap(tilemap, context) {
     }
 }
 export function eraseTiles() {
-    points.clear();
+    Block.clear();
     navigator.clipboard.writeText('Cleared!');
 }
 export default createTileMap;
