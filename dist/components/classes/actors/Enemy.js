@@ -1,7 +1,7 @@
 import { Vector } from "../math/vector.js";
 import uniqueid from "../../functions/createId.js";
 import shot from "./shot.js";
-import random from "../../functions/random.js";
+import random from "../../functions/Random.js";
 export default class enemy {
     constructor(Spawn) {
         this.position = new Vector(Spawn.x, Spawn.y);

@@ -1,5 +1,5 @@
 import { Vector } from "../math/vector.js";
-import loadImage from "../../functions/getImage.js";
+import loadImage from "../../functions/GetImage.js";
 export default class camera {
     constructor() {
         this.position = new Vector();

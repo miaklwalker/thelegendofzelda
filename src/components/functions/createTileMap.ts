@@ -1,4 +1,4 @@
-import showGrid from "./showScreenGrid.js";
+import showGrid from "./ShowScreenGrid.js";
 let points:Set<any> = new Set()
 let map:[number,number,number,number][] =[ 
 [ 0, 120, 32, 154 ], 

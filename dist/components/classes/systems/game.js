@@ -2,7 +2,7 @@ import GameState from "./gameState.js";
 import Link from "../actors/link.js";
 import Camera from "./camera.js";
 import PauseScreen from "./pauseScreen.js";
-import loadImage from "../../functions/getImage.js";
+import loadImage from "../../functions/GetImage.js";
 import SpriteSheet from "./SpriteSheet.js";
 import Controls from "./controls.js";
 import MessageQueue from "./messageQueue.js";
@@ -23,13 +23,6 @@ import { enemies, enemyIndex } from "../../objects/enemies.js";
  *
  */
 export default class Game {
-    /**
-     *Creates an instance of Game.
-     * @param {number} width
-     * @param {number} height
-     * @param {*} json
-     * @memberof Game
-     */
     constructor(width, height, json, gameConfig) {
         this.width = width;
         this.height = height;
@@ -49,13 +42,13 @@ export default class Game {
     }
     drawScreen(context) {
         const { x, y } = this.Link.position;
-        let pauseMenu = this.pauseScreen.show(this);
+        let pauseMenu = this.pauseScreen.show();
         let paused = this.gameState.paused ? 0 : -360;
         this.system.runCollisions();
         this.camera.show(this.gameState.paused, this.gameState.currentMap, context);
         this.messageCenter.dispatch();
         this.images[5].renderSprite(context, this.Link.show(), [x * 32, y * 34 + 120, 30, 30]);
-        context.drawImage(pauseMenu(), 0, paused, 512, 480);
+        context.drawImage(pauseMenu, 0, paused, 512, 480);
         if (!this.gameState.paused || this.gameState.transition) {
             this.rungame(context);
         }
@@ -89,19 +82,18 @@ export default class Game {
         }
     }
     newScreen(index) {
+        this.system.enemies.forEach(e => this.system.system.remove(e));
         this.enemies = [];
-        this.system.enemies.forEach(e => {
-            this.system.system.remove(e);
-        });
         this.system.enemies = [];
         let screen = this.config.OverWorld[index];
         let spawnPoints = this.system.parseMap(screen.spawnPoints);
+        let random;
         screen.enemies.forEach((e) => {
             let chooseEnemy = enemies[enemyIndex[e]];
-            let ChoosenPoint = spawnPoints.pop();
+            let ChoosenPoint = spawnPoints.splice(random, 1);
             let badGuy = new enemy(chooseEnemy);
-            badGuy.position.x = ChoosenPoint[0] / 32;
-            badGuy.position.y = (ChoosenPoint[1] - 120) / 34;
+            badGuy.position.x = ChoosenPoint[0][0] / 32;
+            badGuy.position.y = (ChoosenPoint[0][1] - 120) / 34;
             this.messageCenter.addEntities(badGuy);
             this.system.addPlayer(badGuy);
             this.enemies.push(badGuy);
@@ -115,12 +107,7 @@ export default class Game {
             let points = enem.show();
             enem.timing();
             enem.logic(context);
-            this.images[2].renderSprite(context, points, [
-                enem.position.x * 32,
-                enem.position.y * 34 + 120,
-                30,
-                30
-            ]);
+            this.images[2].renderSprite(context, points, [enem.position.x * 32, enem.position.y * 34 + 120, 30, 30]);
         });
         this.gameState.changeMap(this.Link.position);
         this.gameState.changeScreen(this.Link.position, this);

@@ -1,6 +1,6 @@
 
 import { Vector } from "../math/vector.js";
-import loadImage from "../../functions/getImage.js";
+import loadImage from "../../functions/GetImage.js";
 import Overworld from "../../overworld.js";
 import Dungeon from "../dungeons/dungeons.js";
 

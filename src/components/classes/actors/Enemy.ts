@@ -2,7 +2,7 @@ import { Vector } from "../math/vector.js";
 import Message from "../systems/message.js";
 import uniqueid from "../../functions/createId.js";
 import shot from "./shot.js";
-import random from "../../functions/random.js";
+import random from "../../functions/Random.js";
 import { exportDefaultSpecifier } from "@babel/types";
 
 export default class enemy {

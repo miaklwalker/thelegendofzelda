@@ -39,6 +39,7 @@ export default class CollisionSystem {
                 if (entity.collides(body, this.results)) {
                     if (this.results.a.sprite instanceof Link &&
                         this.results.b.sprite instanceof enemy) {
+                        console.log('hit');
                         this.results.a.sprite.health -= this.results.b.sprite.damage;
                     }
                     if (entity.sprite.name !== "boulder") {

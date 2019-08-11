@@ -1,4 +1,4 @@
-import loadImage from "./getImage.js";
+import loadImage from "./GetImage.js";
 
 /**
  *
