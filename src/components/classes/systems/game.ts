@@ -1,6 +1,6 @@
 import GameState from "./gameState.js";
 import Link from "../actors/link.js";
-import Camera from "./camera.js";
+import Camera from "./Camera.js";
 import PauseScreen from "./pauseScreen.js";
 import loadImage from "../../functions/GetImage.js";
 import RootObject, { gameScreen } from "../../objects/interfaces.js";
@@ -81,13 +81,13 @@ export default class Game {
   }
   debugMode(context: CanvasRenderingContext2D) {
     let select: HTMLSelectElement;
-    let select2: HTMLSelectElement
+    let select2: HTMLSelectElement;
     if (!this.debugger) {
       this.debugger = true;
       exportTiles();
       select = makeSelect();
       select.id = "Select";
-      select2 = selectFactory('type',[['Tile','Block'],['Spawn','Spawn'],['Secret','Secret'],['Cave','Cave']])
+      select2 = selectFactory('type',[['Tile','Block'],['Spawn','Spawn'],['Secret','Secret'],['Cave','Cave']]) as HTMLSelectElement
       let button = document.createElement("button");
       button.innerText = " Tile Map Viewer";
       document.body.appendChild(button);

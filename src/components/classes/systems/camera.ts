@@ -1,24 +1,36 @@
-
-import { Vector } from "../math/vector.js";
 import loadImage from "../../functions/GetImage.js";
 import Overworld from "../../overworld.js";
 import Dungeon from "../dungeons/dungeons.js";
 
-export default class camera {
-  position: Vector;
-  map: Map<any, any>;
-  constructor() {
-    this.position = new Vector();
-    this.map = new Map()
-  }
-  show(pause:boolean,currentMap:Dungeon|Overworld, context: CanvasRenderingContext2D) {
-    let paused = pause ? 480 : 120;
-    let { x, y } = this.position;
-    let { url,position } = currentMap;
-      loadImage(url).then(data => {
-        this.position = position;
-        this.map.set(url,data)
-        context.drawImage(data, x * 256, y * 176.1, 256, 405, 0, paused, 512, 863);
-      });
+const mapX = 256;
+const mapY = 176.1;
+const height = 405;
+const screenWidth = 512;
+const screenHeight = 863;
+const canvasX = 0;
+const canvasY = (pause: boolean) => pause ? 480 : 120;
+const sourceX = (x: number)=> x * mapX;
+const sourceY = (y: number) => y * mapY;
+
+export default class Camera {
+  async show(
+    pause: boolean,
+    currentMap: Dungeon | Overworld,
+    context: CanvasRenderingContext2D
+  ) {
+    const { url, position: mapPosition } = currentMap;
+    const { x, y } = mapPosition;
+    const image = await loadImage(url);
+    context.drawImage(
+      image,
+      sourceX(x),
+      sourceY(y),
+      mapX,
+      height,
+      canvasX,
+      canvasY(pause),
+      screenWidth,
+      screenHeight
+    );
   }
 }

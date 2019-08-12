@@ -49,9 +49,7 @@ export default class Link {
         }
     }
     onMessage(msg) {
-        if (msg.to === this.id) {
-        }
-        if (msg.from === "controls") {
+        if (msg.from === "controls" && msg.type === 'direction') {
             this.move(msg);
         }
     }

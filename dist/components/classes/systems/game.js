@@ -1,6 +1,6 @@
 import GameState from "./gameState.js";
 import Link from "../actors/link.js";
-import Camera from "./camera.js";
+import Camera from "./Camera.js";
 import PauseScreen from "./pauseScreen.js";
 import loadImage from "../../functions/GetImage.js";
 import SpriteSheet from "./SpriteSheet.js";

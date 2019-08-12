@@ -1,4 +1,5 @@
 import showGrid from "./ShowScreenGrid.js";
+import { selectFactory } from "./makeSelect.js";
 let Block = new Set();
 let Spawn = new Set();
 let Secret = new Set();
@@ -167,7 +168,6 @@ let map = [
     [480, 392, 512, 426],
     [480, 426, 512, 460]
 ];
-let offset = 50;
 let topleft = [[0, 0], [32, 0], [0, 34], [0, 0]];
 let topright = [[0, 0], [32, 0], [32, 32], [0, 0]];
 let botleft = [[0, 0], [32, 34], [0, 34], [0, 0]];
@@ -175,14 +175,20 @@ let botright = [[32, 0], [32, 34], [0, 34], [32, 0]];
 let square = [[0, 0], [0, 34], [32, 34], [32, 0]];
 let shapes = [topleft, topright, botleft, botright, square];
 function createTileMap() {
-    let shape = document.getElementById('Select');
-    let type = document.getElementById('type');
+    let shape = document.getElementById("Select");
+    let type = document.getElementById("type");
     document.addEventListener("click", event => {
         let typeValue = type.value;
+        if (typeValue === 'Secret') {
+            let select3 = selectFactory('secretType', [['Bombable', 'bombable'], ['Burnable', 'burnable'], ['Flute ']]);
+        }
         let shapeCode = shape.value;
         let currentSet = sets[setsString.indexOf(typeValue)];
         for (let i = 0; i < map.length; i++) {
-            if (event.clientX >= map[i][0] && event.clientX <= map[i][2] && event.clientY >= map[i][1] && event.clientY <= map[i][3]) {
+            if (event.clientX >= map[i][0] &&
+                event.clientX <= map[i][2] &&
+                event.clientY >= map[i][1] &&
+                event.clientY <= map[i][3]) {
                 if (currentSet.has(JSON.stringify([map[i][0], map[i][1], 32, 34, shapeCode]))) {
                     currentSet.delete(JSON.stringify([map[i][0], map[i][1], 32, 34, shapeCode]));
                 }
@@ -195,7 +201,7 @@ function createTileMap() {
 }
 export function showPoints(context) {
     showGrid(context);
-    let colors = ['black', 'red', 'yellow', 'green'];
+    let colors = ["black", "red", "yellow", "green"];
     sets.forEach((set, index) => {
         let value;
         for (value of set) {
@@ -211,18 +217,31 @@ export function showPoints(context) {
     });
 }
 export function exportTiles() {
-    let button = document.createElement('button');
+    let button = document.createElement("button");
     let tiles = [];
-    button.innerText = 'Export';
+    let spawns = [];
+    let secrets = [];
+    let caves = [];
+    let arrs = [tiles, spawns, secrets, caves];
+    button.innerText = "Export";
     document.body.appendChild(button);
-    button.addEventListener('click', () => {
-        for (let value of Block) {
-            //@ts-ignore
-            let cell = JSON.parse([value]);
-            //@ts-ignore
-            tiles.push([cell]);
-        }
-        navigator.clipboard.writeText(`[${tiles}]`).then(() => { console.log('copied'); });
+    button.addEventListener("click", () => {
+        sets.forEach((set, index) => {
+            let value;
+            for (value of set) {
+                let cell = JSON.parse(value);
+                arrs[index].push([cell]);
+            }
+        });
+        navigator.clipboard.writeText(`
+    "hitboxes":[${tiles}],
+    "enemies":[],
+    "secrets":[${secrets}],
+    "caves":[${caves}],
+    "spawnPoints":[${spawns}]
+    `).then(() => {
+            console.log("copied");
+        });
         tiles.length = 0;
     });
 }
@@ -242,7 +261,7 @@ export function showTileMap(tilemap, context) {
 }
 export function eraseTiles() {
     Block.clear();
-    navigator.clipboard.writeText('Cleared!');
+    navigator.clipboard.writeText("Cleared!");
 }
 export default createTileMap;
 //# sourceMappingURL=createTileMap.js.map

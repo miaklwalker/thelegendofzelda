@@ -23,7 +23,7 @@ export default class Hud {
         this.camera = game.camera;
     }
     minimap(context) {
-        this.position = this.camera.position;
+        this.position = this.game.gameState.currentMap.position;
         this.frame++;
         if (this.frame % 30 === 0) {
             this.blink = !this.blink;

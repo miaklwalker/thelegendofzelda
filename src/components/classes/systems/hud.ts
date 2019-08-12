@@ -1,6 +1,6 @@
 import Game from "./game.js";
 import { Vector } from "../math/vector.js";
-import camera from "./camera.js";
+import Camera from "./Camera.js";
 
 /**
  *
@@ -16,7 +16,7 @@ export default class Hud {
   position: Vector;
   frame: number;
   blink: boolean;
-  camera: camera;
+  camera: Camera;
   game: Game;
   /**
    *Creates an instance of Hud.
@@ -35,7 +35,7 @@ export default class Hud {
     this.camera = game.camera;
   }
   minimap(context: CanvasRenderingContext2D) {
-    this.position = this.camera.position;
+    this.position = this.game.gameState.currentMap.position;
     this.frame++;
     if (this.frame % 30 === 0) {
       this.blink = !this.blink;

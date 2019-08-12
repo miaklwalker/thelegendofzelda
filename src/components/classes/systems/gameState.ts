@@ -84,7 +84,6 @@ export default class gameState {
 		}
 		if(this.transition){
 			let index:string = `${ map.x},${map.y}`
-			game.camera.position
 			let tilemap = game.system.createMap(game.json.tileMap[index]) as [[number,number,number,number,number]]
 			game.system.makeScreen(tilemap)
 			game.newScreen(index)

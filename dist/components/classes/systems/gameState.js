@@ -72,7 +72,6 @@ export default class gameState {
         }
         if (this.transition) {
             let index = `${map.x},${map.y}`;
-            game.camera.position;
             let tilemap = game.system.createMap(game.json.tileMap[index]);
             game.system.makeScreen(tilemap);
             game.newScreen(index);
