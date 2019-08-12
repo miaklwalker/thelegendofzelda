@@ -2,16 +2,19 @@ import GameState from "./gameState.js";
 import Link from "../actors/link.js";
 import Camera from "./Camera.js";
 import PauseScreen from "./pauseScreen.js";
-import loadImage from "../../functions/GetImage.js";
+import loadImage from "../../functions/loadImage.js";
 import SpriteSheet from "./SpriteSheet.js";
 import Controls from "./controls.js";
 import MessageQueue from "./messageQueue.js";
 import config from "../../objects/config.js";
 import CollisionSystem from "./collisionSystem.js";
-import createTileMap, { eraseTiles, exportTiles, showPoints } from "../../functions/createTileMap.js";
+import createTileMap from "../../functions/TileMapper/createTileMap.js";
 import makeSelect, { selectFactory } from "../../functions/makeSelect.js";
 import enemy from "../actors/Enemy.js";
 import { enemies, enemyIndex } from "../../objects/enemies.js";
+import { exportTiles } from "../../functions/TileMapper/exportTiles.js";
+import { eraseTiles } from "../../functions/TileMapper/ereaseTiles.js";
+import { showPoints } from "../../functions/TileMapper/showPoints.js";
 /**
  *
  *

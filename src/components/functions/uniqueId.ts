@@ -3,7 +3,7 @@
   *
   * @returns
   */
- function uniqueid() {
+ function uniqueId() {
 	let idString:string = String.fromCharCode(Math.floor(Math.random() * 25 + 65));
 	do {
 		let ascicode:number = Math.floor(Math.random() * 42 + 48);
@@ -14,4 +14,4 @@
 	return idString;
 }
 
-export default uniqueid
+export default uniqueId

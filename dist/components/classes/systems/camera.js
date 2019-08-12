@@ -1,4 +1,4 @@
-import loadImage from "../../functions/GetImage.js";
+import loadImage from "../../functions/loadImage.js";
 const mapX = 256;
 const mapY = 176.1;
 const height = 405;

@@ -1,5 +1,5 @@
 import { Vector } from "../math/vector.js";
-import uniqueid from "../../functions/createId.js";
+import uniqueId from "../../functions/uniqueId.js";
 /**
  *
  *
@@ -11,7 +11,7 @@ export default class Link {
     constructor() {
         this.frame = 0;
         this.frameAdjusted = 0;
-        this.id = uniqueid();
+        this.id = uniqueId();
         this.hearts = 16;
         this.health = 14.5;
         this.position = new Vector(7, 5);

@@ -1,4 +1,4 @@
-import loadImage from "../../functions/GetImage.js";
+import loadImage from "../../functions/loadImage.js";
 import Overworld from "../../overworld.js";
 import Dungeon from "../dungeons/dungeons.js";
 

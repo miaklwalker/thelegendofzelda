@@ -1,6 +1,6 @@
-import makeCanvas from "./components/functions/Canvas.js";
+import makeCanvas from "./components/functions/makeCanvas.js";
 import Game from "./components/classes/systems/game.js";
-import loadJson from "./components/functions/GetJson.js";
+import loadJson from "./components/functions/getJson.js";
 
 let canvas = makeCanvas() as HTMLCanvasElement;
 let ctx = canvas.getContext("2d") as CanvasRenderingContext2D;

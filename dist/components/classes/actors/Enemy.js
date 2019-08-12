@@ -1,11 +1,11 @@
 import { Vector } from "../math/vector.js";
-import uniqueid from "../../functions/createId.js";
+import uniqueId from "../../functions/uniqueId.js";
 import shot from "./shot.js";
 import random from "../../functions/Random.js";
 export default class enemy {
     constructor(Spawn) {
         this.position = new Vector(Spawn.x, Spawn.y);
-        this.id = uniqueid();
+        this.id = uniqueId();
         this.behaviors = [...Spawn.behaviors];
         this.counter = 0;
         this.damage = Spawn.damage;

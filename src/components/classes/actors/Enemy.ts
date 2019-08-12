@@ -1,6 +1,6 @@
 import { Vector } from "../math/vector.js";
 import Message from "../systems/message.js";
-import uniqueid from "../../functions/createId.js";
+import uniqueId from "../../functions/uniqueId.js";
 import shot from "./shot.js";
 import random from "../../functions/Random.js";
 import { exportDefaultSpecifier } from "@babel/types";
@@ -24,7 +24,7 @@ export default class enemy {
 
   constructor(Spawn:{name: string, x: number, y: number,behaviors:string[],health:number,color:string,damage:number}) {
     this.position = new Vector(Spawn.x, Spawn.y);
-    this.id = uniqueid();
+    this.id = uniqueId();
     this.behaviors = [...Spawn.behaviors];
     this.counter = 0;
     this.damage = Spawn.damage
