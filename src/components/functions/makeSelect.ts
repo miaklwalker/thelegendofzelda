@@ -15,11 +15,28 @@
     let option4 = document.createElement('option');
     option4.innerText = 'Square';
     option4.value = '4';
+    let option5 = document.createElement('option');
+    option5.innerText = 'Bottom Half';
+    option5.value = '5';
+    let option6 = document.createElement('option');
+    option6.innerText = 'Top Half';
+    option6.value = '6';
+    let option7 = document.createElement('option');
+    option7.innerText = 'Left Half';
+    option7.value = '7';
+    let option8 = document.createElement('option');
+    option8.innerText = 'Right Half';
+    option8.value = '8';
     select.append(option4);
     select.append(option0);
     select.append(option1);
     select.append(option2);
     select.append(option3);
+    select.append(option5);
+    select.append(option6);
+    select.append(option7);
+    select.append(option8);
+
     return select
 }
 export default makeSelect

@@ -7,7 +7,11 @@ let topright = [[0, 0], [32, 0], [32, 32], [0, 0]];
 let botleft = [[0, 0], [32, 34], [0, 34], [0, 0]];
 let botright = [[32, 0], [32, 34], [0, 34], [32, 0]];
 let square = [[0, 0], [0, 34], [32, 34], [32, 0]];
-export let shapes = [topleft, topright, botleft, botright, square];
+let botHalf = [[0,34/2],[0,34],[32,34],[32,34/2]]
+let topHalf = [[0,0],[0,34/2],[32,34/2],[32,0]]
+let leftHalf = [[0,0],[0,34],[32/2,34],[32/2,0]]
+let rightHalf = [[32/2,0],[32/2,34],[32,34],[32,0]]
+export let shapes = [topleft, topright, botleft, botright, square,botHalf,topHalf,leftHalf,rightHalf];
 let secretTypes = [['Bombable','bombable'],['Burnable','burnable'],['Flute','flute'],['Pushable','pushable']]
 
 function createTileMap() {
@@ -32,7 +36,6 @@ function createTileMap() {
     let shapeCode: string = shape.value;
     let currentSet = sets[setsString.indexOf(typeValue)] as Set<any>;
     for (let i = 0; i < map.length; i++) {
-      console.log(event.clientX,event.clientY)
       if (event.clientX >= map[i][0] &&event.clientX <= map[i][2] &&event.clientY >= map[i][1] &&event.clientY <= map[i][3]
       ) {
         let secret

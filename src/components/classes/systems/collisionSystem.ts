@@ -5,6 +5,7 @@ import Message from "./message.js";
 import { Vector } from "../math/vector.js";
 import enemy from "../actors/Enemy.js";
 import Link from "../actors/link.js";
+import { shapes } from "../../functions/TileMapper/createTileMap.js";
 
 export default class CollisionSystem {
   system: Collisions;
@@ -113,16 +114,6 @@ export default class CollisionSystem {
     return output as [[number, number, number, number, number]];
   }
   makeScreen(tilemap: [[number, number, number, number, number]]) {
-    let x = 0;
-    let y = 0;
-    let w = 32;
-    let h = 34;
-    let topleft = [[x, y], [x, h], [w, y]];
-    let topright = [[x, y], [w, y], [w, h]];
-    let botleft = [[x, y], [x, h], [w, h]];
-    let botright = [[w, y], [w, h], [x, h]];
-    let square = [[x, y], [x, h], [w, h], [w, y]];
-    let shapes = [topleft, topright, botleft, botright, square];
     if (tilemap !== undefined) {
       this.tiles.forEach((entity: Polygon) => {
         this.system.remove(entity);
