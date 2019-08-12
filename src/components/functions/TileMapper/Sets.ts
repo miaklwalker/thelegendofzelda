@@ -5,5 +5,5 @@ export let SecretObject:Set<any> = new Set()
 export let Cave: Set<any> = new Set();
 export let sets = [Block, Spawn, Secret, Cave];
 export let outSets = [Block, Spawn, SecretObject, Cave];
-export let allSets = [Block, Spawn, SecretObject,Secret, Cave]
+export let allSets = [Block, Spawn, SecretObject, Secret, Cave]
 export let setsString = ["Block", "Spawn", "Secret", "Cave"];

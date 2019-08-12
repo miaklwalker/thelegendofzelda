@@ -16,4 +16,4 @@ export default class Camera {
         context.drawImage(image, sourceX(x), sourceY(y), mapX, height, canvasX, canvasY(pause), screenWidth, screenHeight);
     }
 }
-//# sourceMappingURL=camera.js.map
+//# sourceMappingURL=Camera.js.map

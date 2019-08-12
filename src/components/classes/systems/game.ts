@@ -14,8 +14,9 @@ import makeSelect, { selectFactory } from "../../functions/makeSelect.js";
 import enemy from "../actors/Enemy.js";
 import { enemies, enemyIndex } from "../../objects/enemies.js";
 import { exportTiles } from "../../functions/TileMapper/exportTiles.js";
-import { eraseTiles } from "../../functions/TileMapper/ereaseTiles.js";
+import { eraseTiles } from "../../functions/TileMapper/eraseTiles.js";
 import { showPoints } from "../../functions/TileMapper/showPoints.js";
+import teleporter from "../../functions/TileMapper/Teleporter.js";
 
 /**
  *
@@ -81,6 +82,8 @@ export default class Game {
   debugMode(context: CanvasRenderingContext2D) {
     let select: HTMLSelectElement;
     let select2: HTMLSelectElement;
+    let input :HTMLInputElement
+    let input2
     if (!this.debugger) {
       this.debugger = true;
       exportTiles();
@@ -88,10 +91,14 @@ export default class Game {
       select.id = "Select";
       select2 = selectFactory('type',[['Tile','Block'],['Spawn','Spawn'],['Secret','Secret'],['Cave','Cave']]) as HTMLSelectElement
       let button = document.createElement("button");
+      input = teleporter('tele')
+      input2 = teleporter('porter')
       button.innerText = " Tile Map Viewer";
       document.body.appendChild(button);
       document.body.appendChild(select);
       document.body.appendChild(select2);
+      document.body.appendChild(input)
+      document.body.appendChild(input2)
       button.addEventListener("click", () => {
         this.toggle = !this.toggle;
         this.toggle
@@ -102,8 +109,12 @@ export default class Game {
         }
       });
     }
-    
+    let tele = document.getElementById('tele') as HTMLInputElement
+    let porter = document.getElementById('porter') as HTMLInputElement
+    this.gameState.currentMap.position.x = Number(tele.value)
+    this.gameState.currentMap.position.y = Number(porter.value)
     if (this.toggle) {
+      
       if(!this.once){
         this.once = true
         createTileMap()

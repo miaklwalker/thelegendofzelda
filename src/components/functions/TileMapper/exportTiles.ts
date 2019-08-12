@@ -31,6 +31,6 @@ export function exportTiles() {
       .then(() => {
         console.log("copied");
       });
-    tiles.length = 0;
+    arrs.forEach(arr=>arr.length=0)
   });
 }

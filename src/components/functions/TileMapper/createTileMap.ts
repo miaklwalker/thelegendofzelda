@@ -14,6 +14,7 @@ function createTileMap() {
   let select3:HTMLSelectElement
   let shape = document.getElementById("Select") as HTMLSelectElement;
   let type = document.getElementById("type") as HTMLSelectElement;
+
   document.addEventListener("click", event => {
     let typeValue: string = type.value;
     if(typeValue==='Secret'){
@@ -31,6 +32,7 @@ function createTileMap() {
     let shapeCode: string = shape.value;
     let currentSet = sets[setsString.indexOf(typeValue)] as Set<any>;
     for (let i = 0; i < map.length; i++) {
+      console.log(event.clientX,event.clientY)
       if (event.clientX >= map[i][0] &&event.clientX <= map[i][2] &&event.clientY >= map[i][1] &&event.clientY <= map[i][3]
       ) {
         let secret
