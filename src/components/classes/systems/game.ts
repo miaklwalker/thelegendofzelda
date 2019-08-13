@@ -17,6 +17,9 @@ import { exportTiles } from "../../functions/TileMapper/exportTiles.js";
 import { eraseTiles } from "../../functions/TileMapper/eraseTiles.js";
 import { showPoints } from "../../functions/TileMapper/showPoints.js";
 import teleporter from "../../functions/TileMapper/Teleporter.js";
+import Sword from "../actors/Sword.js";
+
+let once = false
 
 /**
  *
@@ -72,12 +75,24 @@ export default class Game {
     this.system.runCollisions();
     this.camera.show(this.gameState.paused,this.gameState.currentMap, context);
     this.messageCenter.dispatch();
-    this.images[5].renderSprite(context, this.Link.show(), [x * 32, y * 34 + 120, 30, 30]);
+    this.images[3].renderSprite(context, this.Link.show(), [x * 32, y * 34 + 120, 30, 30]);
+    let sword = new Sword(1.5,x*32,y*34+120,this.Link.direction)
+    if(this.Link.action==='slash'){
+      this.images[17].renderSprite(context,sword.show(),sword.placement(x,y,this.Link.direction))
+      if(!once){
+        once= true
+        this.system.addPlayer(sword)
+      }
+    }else{
+      once = false
+      this.system.remove(sword)
+    }
+
     context.drawImage(pauseMenu, 0, paused, 512, 480);
     if (!this.gameState.paused||this.gameState.transition) {
       this.rungame(context);
     }
-    this.debugMode(context)
+   this.debugMode(context)
   }
   debugMode(context: CanvasRenderingContext2D) {
     let select: HTMLSelectElement;
@@ -111,8 +126,8 @@ export default class Game {
     }
     let tele = document.getElementById('tele') as HTMLInputElement
     let porter = document.getElementById('porter') as HTMLInputElement
-    this.gameState.currentMap.position.x = Number(tele.value)
-    this.gameState.currentMap.position.y = Number(porter.value)
+    //this.gameState.currentMap.position.x = Number(tele.value)
+    //this.gameState.currentMap.position.y = Number(porter.value)
     if (this.toggle) {
       
       if(!this.once){
@@ -144,7 +159,7 @@ export default class Game {
   }
   rungame(context: CanvasRenderingContext2D) {
     this.enemies.forEach((enem,index) => {
-      if(enem.health===0){this.enemies.splice(index,1)}
+      if(enem.health<=0){this.enemies.splice(index,1)}
       let points = enem.show();
       enem.timing();
       enem.logic(context);
@@ -171,6 +186,9 @@ export default class Game {
           spriteSheet.makeSprites(this.json);
         }
         if (names[iterator] == "hud") {
+          spriteSheet.makeSprites(this.json);
+        }
+        if (names[iterator] == "zeldaItems") {
           spriteSheet.makeSprites(this.json);
         }
 

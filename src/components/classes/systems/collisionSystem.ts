@@ -6,6 +6,7 @@ import { Vector } from "../math/vector.js";
 import enemy from "../actors/Enemy.js";
 import Link from "../actors/link.js";
 import { shapes } from "../../functions/TileMapper/createTileMap.js";
+import Sword from "../actors/Sword.js";
 
 export default class CollisionSystem {
   system: Collisions;
@@ -24,7 +25,7 @@ export default class CollisionSystem {
     this.entities = [...this.sprites, ...this.enemies];
     this.game = game;
   }
-  addPlayer(Actor: Link | enemy) {
+  addPlayer(Actor: Link | enemy|Sword) {
     let x = Actor.position.x * 32;
     let y = Actor.position.y * 34;
     let link = this.system.createPolygon(
@@ -36,12 +37,13 @@ export default class CollisionSystem {
     link.id = Actor.id;
     link.name = Actor.name;
     link.sprite = Actor;
-    if (Actor instanceof Link) {
+    if (Actor instanceof Link||Actor instanceof Sword) {
       this.sprites.push(link);
     } else {
       this.enemies.push(link);
     }
   }
+
   runCollisions() {
     this.entities = [...this.sprites, ...this.enemies];
     this.entities.forEach(entity => {
@@ -56,6 +58,13 @@ export default class CollisionSystem {
             this.results.b.sprite instanceof enemy
           ) {
             this.results.a.sprite.health -= this.results.b.sprite.damage;
+          }
+          if (
+            this.results.a.sprite instanceof Sword &&
+            this.results.b.sprite instanceof enemy
+          ) {
+
+            this.results.b.sprite.health -= this.results.a.sprite.damage;
           }
           if (entity.sprite.name !== "boulder") {
             let message: Message;
@@ -112,6 +121,14 @@ export default class CollisionSystem {
       ]);
     }
     return output as [[number, number, number, number, number]];
+  }
+  remove(Actor:Sword){
+    for(let i = 0 ; i<this.sprites.length;i++){
+      if(this.sprites[i].sprite instanceof Sword){
+        this.system.remove(this.sprites[i])
+        this.sprites.pop()
+      }
+    }
   }
   makeScreen(tilemap: [[number, number, number, number, number]]) {
     if (tilemap !== undefined) {

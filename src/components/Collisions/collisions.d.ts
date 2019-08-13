@@ -66,7 +66,6 @@ export class Circle extends Body {
 export class Polygon extends Body {
   id: string;
   name: any;
-  sprite: import("c:/Users/ouisi/Desktop/CodeProjects/thelegendofzelda/src/components/classes/actors/link").default | import("c:/Users/ouisi/Desktop/CodeProjects/thelegendofzelda/src/components/classes/actors/Enemy").default;
     /**
      * @constructor
      * @param {number} [x = 0] The starting X coordinate

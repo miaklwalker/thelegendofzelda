@@ -5,6 +5,7 @@ import { Vector } from "../math/vector.js";
 import enemy from "../actors/Enemy.js";
 import Link from "../actors/link.js";
 import { shapes } from "../../functions/TileMapper/createTileMap.js";
+import Sword from "../actors/Sword.js";
 export default class CollisionSystem {
     constructor(game) {
         this.system = new Collisions();
@@ -22,7 +23,7 @@ export default class CollisionSystem {
         link.id = Actor.id;
         link.name = Actor.name;
         link.sprite = Actor;
-        if (Actor instanceof Link) {
+        if (Actor instanceof Link || Actor instanceof Sword) {
             this.sprites.push(link);
         }
         else {
@@ -41,6 +42,10 @@ export default class CollisionSystem {
                     if (this.results.a.sprite instanceof Link &&
                         this.results.b.sprite instanceof enemy) {
                         this.results.a.sprite.health -= this.results.b.sprite.damage;
+                    }
+                    if (this.results.a.sprite instanceof Sword &&
+                        this.results.b.sprite instanceof enemy) {
+                        this.results.b.sprite.health -= this.results.a.sprite.damage;
                     }
                     if (entity.sprite.name !== "boulder") {
                         let message;
@@ -96,6 +101,14 @@ export default class CollisionSystem {
             ]);
         }
         return output;
+    }
+    remove(Actor) {
+        for (let i = 0; i < this.sprites.length; i++) {
+            if (this.sprites[i].sprite instanceof Sword) {
+                this.system.remove(this.sprites[i]);
+                this.sprites.pop();
+            }
+        }
     }
     makeScreen(tilemap) {
         if (tilemap !== undefined) {

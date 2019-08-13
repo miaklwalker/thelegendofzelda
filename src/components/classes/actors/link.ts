@@ -11,6 +11,7 @@ import uniqueId from "../../functions/uniqueId.js";
  */
 export default class Link {
   velocity: Vector;
+  name: string;
   [index: string]: any;
   hearts: number;
   health: number;
@@ -24,6 +25,7 @@ export default class Link {
   id: string;
   constructor() {
     this.frame = 0;
+    this.name = 'link'
     this.frameAdjusted = 0;
     this.id = uniqueId();
     this.hearts = 16;
@@ -36,7 +38,6 @@ export default class Link {
     this.blocked = [];
   }
   show() {
-    
     let str = `link-${this.action}-${this.direction}-${(this.frameAdjusted %2)+1}-${this.shield}`;
     return str;
   }
@@ -66,7 +67,12 @@ export default class Link {
 
   onMessage(msg: Message) {
     if (msg.from === "controls"&&msg.type==='direction') {
-      this.move(msg);
+      if(msg.data!=='A'&&msg.data!=='B'){
+        this.action = 'walk'
+        this.move(msg);
+      }else{
+        this.action = 'slash'
+      }
     }
   }
 }

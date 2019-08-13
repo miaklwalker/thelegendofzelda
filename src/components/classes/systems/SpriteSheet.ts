@@ -38,8 +38,8 @@ export default class SpriteSheet{
     makeSprites(json:RootObject){
         let name:string = this.name 
         json.Sprites[name].forEach((Sprite:SpriteSheetCor)=>{
-            if(this.name === "link"||this.name == 'enemy'||this.name==='hud'){
-            this.sprites[Sprite.name]=[Sprite.x,Sprite.y,Sprite.w,Sprite.h]
+            if(this.name === "link"||this.name == 'enemy'||this.name==='hud'||this.name==='zeldaItems'){
+            this.sprites[Sprite.name]=[Sprite.x,Sprite.y,Sprite.w,Sprite.h];
             }
         })
     }

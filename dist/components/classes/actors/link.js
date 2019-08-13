@@ -10,6 +10,7 @@ import uniqueId from "../../functions/uniqueId.js";
 export default class Link {
     constructor() {
         this.frame = 0;
+        this.name = 'link';
         this.frameAdjusted = 0;
         this.id = uniqueId();
         this.hearts = 16;
@@ -50,7 +51,13 @@ export default class Link {
     }
     onMessage(msg) {
         if (msg.from === "controls" && msg.type === 'direction') {
-            this.move(msg);
+            if (msg.data !== 'A' && msg.data !== 'B') {
+                this.action = 'walk';
+                this.move(msg);
+            }
+            else {
+                this.action = 'slash';
+            }
         }
     }
 }

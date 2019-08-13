@@ -4,7 +4,7 @@
     "dungeonTiles": "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/dungeons/tiles-dungeon.gif",
     "enemyTiles": "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/bosses.png",
     "enemy": "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/enemies.png",
-    "link": "https://github.com/miaklwalker/thelegendofzelda/blob/master/images/sprites/linkSheet.gif",
+    "link": "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/linkSheet.gif",
     "misc2": "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/misc-2.png",
     "misc": "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/misc.gif",
     "npc": "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/npc.png",
@@ -17,7 +17,8 @@
     "overWorldTiles": "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/tiles/tiles-overworld.png",
     "title": "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/tiles/title.png",
     "overworld": "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/overworld/zelda-overworld.png",
-    "dungeonOne": "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/dungeons/zelda-dungeon1.png"
+    "dungeonOne": "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/dungeons/zelda-dungeon1.png",
+    "zeldaItems":"https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/sprites/zelda_items.gif"
   },
   "hud": {
     "top": [258, 16, 255.5, 55, 0, 360, 512, 130],
@@ -819,6 +820,36 @@
     ],
     "NPC": {},
     "Tiles": {},
+    "zeldaItems":[
+      {
+        "name": "wood-sword-right",
+        "x": 35,
+        "y": 7,
+        "w": 16,
+        "h": 16
+      },
+      {
+        "name": "wood-sword-down",
+        "x": 54,
+        "y": 7,
+        "w": 16,
+        "h": 16
+      },
+      {
+        "name": "wood-sword-left",
+        "x": 73,
+        "y": 6,
+        "w": 16,
+        "h": 16
+      },
+      {
+        "name": "wood-sword-up",
+        "x": 93,
+        "y": 7,
+        "w": 16,
+        "h": 16
+      }
+    ],
     "hud": [
       {
         "name": "Inventory",

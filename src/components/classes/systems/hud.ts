@@ -80,21 +80,21 @@ export default class Hud {
         let width = 17.5;
         let height = 19.6;
         if (index < health - 0.5) {
-          this.game.images[11].renderSprite(context, "heart", [
+          this.game.images[9].renderSprite(context, "heart", [
             x,
             y,
             width,
             height
           ]);
         } else if (index < health) {
-          this.game.images[11].renderSprite(context, "halfHeart", [
+          this.game.images[9].renderSprite(context, "halfHeart", [
             x,
             y,
             width,
             height
           ]);
         } else if (index < hearts) {
-          this.game.images[11].renderSprite(context, "emptyHeart", [
+          this.game.images[9].renderSprite(context, "emptyHeart", [
             x,
             y,
             width,
