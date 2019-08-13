@@ -76,7 +76,6 @@ export default class gameState {
             game.system.makeScreen(tilemap);
             game.newScreen(index);
             this.transition = false;
-            console.log(index);
         }
     }
     changeMap(position) {

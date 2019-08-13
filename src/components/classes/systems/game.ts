@@ -20,6 +20,19 @@ import teleporter from "../../functions/TileMapper/Teleporter.js";
 import Sword from "../actors/Sword.js";
 
 let once = false
+let debug = false;
+let teleport = false;
+document.addEventListener('keypress',event=>{
+
+if(event.key==='d'){
+  console.log(`debugger: ${!debug}`)
+  debug = !debug
+}
+if(event.key==='t'){
+  console.log(`teleport:${!teleport}`)
+  teleport = !teleport
+}
+})
 
 /**
  *
@@ -92,7 +105,9 @@ export default class Game {
     if (!this.gameState.paused||this.gameState.transition) {
       this.rungame(context);
     }
+    if(debug){
    this.debugMode(context)
+    }
   }
   debugMode(context: CanvasRenderingContext2D) {
     let select: HTMLSelectElement;
@@ -124,11 +139,17 @@ export default class Game {
         }
       });
     }
-    let tele = document.getElementById('tele') as HTMLInputElement
-    let porter = document.getElementById('porter') as HTMLInputElement
-    //this.gameState.currentMap.position.x = Number(tele.value)
-    //this.gameState.currentMap.position.y = Number(porter.value)
+  
     if (this.toggle) {
+      let tele = document.getElementById('tele') as HTMLInputElement
+      let porter = document.getElementById('porter') as HTMLInputElement
+      if(teleport){
+      this.gameState.currentMap.position.x = Number(tele.value)
+      this.gameState.currentMap.position.y = Number(porter.value)
+      }else{
+        tele.value = `${this.gameState.currentMap.position.x}`
+        porter.value = `${this.gameState.currentMap.position.y}`
+      }
       
       if(!this.once){
         this.once = true
