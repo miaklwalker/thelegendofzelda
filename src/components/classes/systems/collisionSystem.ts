@@ -53,19 +53,6 @@ export default class CollisionSystem {
       let potentials = entity.potentials();
       for (let body of potentials) {
         if (entity.collides(body, this.results)) {
-          if (
-            this.results.a.sprite instanceof Link &&
-            this.results.b.sprite instanceof enemy
-          ) {
-            this.results.a.sprite.health -= this.results.b.sprite.damage;
-          }
-          if (
-            this.results.a.sprite instanceof Sword &&
-            this.results.b.sprite instanceof enemy
-          ) {
-
-            this.results.b.sprite.health -= this.results.a.sprite.damage;
-          }
           if (entity.sprite.name !== "boulder") {
             let message: Message;
             let to = entity.name;
@@ -87,7 +74,6 @@ export default class CollisionSystem {
               message = new Message(to, from, type, "up");
               this.game.messageCenter.add(message);
             }
-
             let cX = this.results.overlap_x * this.results.overlap;
             let cY = this.results.overlap_y * this.results.overlap;
             let correctionForce = new Vector(cX, cY);
@@ -122,12 +108,20 @@ export default class CollisionSystem {
     }
     return output as [[number, number, number, number, number]];
   }
-  remove(Actor:Sword){
+  remove(Actor:Sword|enemy){
     for(let i = 0 ; i<this.sprites.length;i++){
       if(this.sprites[i].sprite instanceof Sword){
         this.system.remove(this.sprites[i])
         this.sprites.pop()
       }
+    }
+    if(Actor instanceof enemy){
+    for(let j = 0 ; j<this.enemies.length ; j++ ){
+      if(Actor.id === this.enemies[j].sprite.id){
+        this.system.remove(this.enemies[j])
+        this.enemies.splice(j,1)
+      }
+    }
     }
   }
   makeScreen(tilemap: [[number, number, number, number, number]]) {
@@ -145,8 +139,10 @@ export default class CollisionSystem {
     }
   }
   drawSystem(context: CanvasRenderingContext2D) {
+    context.clearRect(0,120,512,480)
+    context.beginPath()
+    this.system.update()
     this.system.draw(context);
-    //this.system.drawBVH(context);
     context.strokeStyle = "black";
     context.stroke();
   }

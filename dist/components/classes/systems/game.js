@@ -141,6 +141,7 @@ export default class Game {
         this.enemies.forEach((enem, index) => {
             if (enem.health <= 0) {
                 this.enemies.splice(index, 1);
+                this.system.remove(enem);
             }
             let points = enem.show();
             enem.timing();

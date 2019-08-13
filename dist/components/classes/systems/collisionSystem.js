@@ -39,14 +39,6 @@ export default class CollisionSystem {
             let potentials = entity.potentials();
             for (let body of potentials) {
                 if (entity.collides(body, this.results)) {
-                    if (this.results.a.sprite instanceof Link &&
-                        this.results.b.sprite instanceof enemy) {
-                        this.results.a.sprite.health -= this.results.b.sprite.damage;
-                    }
-                    if (this.results.a.sprite instanceof Sword &&
-                        this.results.b.sprite instanceof enemy) {
-                        this.results.b.sprite.health -= this.results.a.sprite.damage;
-                    }
                     if (entity.sprite.name !== "boulder") {
                         let message;
                         let to = entity.name;
@@ -109,6 +101,14 @@ export default class CollisionSystem {
                 this.sprites.pop();
             }
         }
+        if (Actor instanceof enemy) {
+            for (let j = 0; j < this.enemies.length; j++) {
+                if (Actor.id === this.enemies[j].sprite.id) {
+                    this.system.remove(this.enemies[j]);
+                    this.enemies.splice(j, 1);
+                }
+            }
+        }
     }
     makeScreen(tilemap) {
         if (tilemap !== undefined) {
@@ -125,8 +125,10 @@ export default class CollisionSystem {
         }
     }
     drawSystem(context) {
+        context.clearRect(0, 120, 512, 480);
+        context.beginPath();
+        this.system.update();
         this.system.draw(context);
-        //this.system.drawBVH(context);
         context.strokeStyle = "black";
         context.stroke();
     }

@@ -159,7 +159,10 @@ export default class Game {
   }
   rungame(context: CanvasRenderingContext2D) {
     this.enemies.forEach((enem,index) => {
-      if(enem.health<=0){this.enemies.splice(index,1)}
+      if(enem.health<=0){
+        this.enemies.splice(index,1)
+        this.system.remove(enem)
+      }
       let points = enem.show();
       enem.timing();
       enem.logic(context);
