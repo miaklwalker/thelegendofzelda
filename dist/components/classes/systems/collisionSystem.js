@@ -3,9 +3,12 @@ import { Result } from "../../Collisions/Collisions.js";
 import Message from "./message.js";
 import { Vector } from "../math/vector.js";
 import enemy from "../actors/Enemy.js";
-import Link from "../actors/link.js";
 import { shapes } from "../../functions/TileMapper/createTileMap.js";
 import Sword from "../actors/Sword.js";
+const tileWidth = 32;
+const tileHeight = 34;
+const hudOffset = 120;
+const square = [[0, 0], [0, 30], [30, 30], [30, 0]];
 export default class CollisionSystem {
     constructor(game) {
         this.system = new Collisions();
@@ -16,50 +19,59 @@ export default class CollisionSystem {
         this.entities = [...this.sprites, ...this.enemies];
         this.game = game;
     }
+    /**
+     *
+     *
+     * @param {(Link | enemy | Sword)} Actor
+     * @memberof CollisionSystem
+     * @description Adds a Actor to the collision system assumes x = 0 - 15 and y = 1 - 10
+     */
     addPlayer(Actor) {
-        let x = Actor.position.x * 32;
-        let y = Actor.position.y * 34;
-        let link = this.system.createPolygon(x, y + 120, [[0, 0], [0, 30], [30, 30], [30, 0]], 0.0);
-        link.id = Actor.id;
-        link.name = Actor.name;
-        link.sprite = Actor;
-        if (Actor instanceof Link || Actor instanceof Sword) {
-            this.sprites.push(link);
+        const { x, y } = Actor.position;
+        const actualX = x * tileWidth;
+        const actualY = y * tileHeight + hudOffset;
+        let entity = this.system.createPolygon(actualX, actualY, square);
+        entity.id = Actor.id;
+        entity.name = Actor.name;
+        entity.sprite = Actor;
+        if (Actor instanceof enemy) {
+            this.enemies.push(entity);
         }
         else {
-            this.enemies.push(link);
+            this.sprites.push(entity);
         }
     }
     runCollisions() {
         this.entities = [...this.sprites, ...this.enemies];
         this.entities.forEach(entity => {
-            entity.x = entity.sprite.position.x * 32;
-            entity.y = entity.sprite.position.y * 34 + 120;
+            const { x, y } = entity.sprite.position;
+            const actualX = x * tileWidth;
+            const actualY = y * tileHeight + hudOffset;
+            entity.x = actualX;
+            entity.y = actualY;
             this.system.update();
             let potentials = entity.potentials();
             for (let body of potentials) {
                 if (entity.collides(body, this.results)) {
                     if (entity.sprite.name !== "boulder") {
                         let message;
-                        let to = entity.name;
-                        let from = "collisions";
-                        let type = entity.id;
-                        if (this.results.overlap_x > 0.8) {
-                            message = new Message(to, from, type, "right");
-                            this.game.messageCenter.add(message);
+                        const to = entity.name;
+                        const from = "collisions";
+                        const type = entity.id;
+                        let data = 'none';
+                        if (this.results.overlap_x > 0) {
+                            data = "right";
                         }
                         if (this.results.overlap_x < 0) {
-                            message = new Message(to, from, type, "left");
-                            this.game.messageCenter.add(message);
+                            data = "left";
                         }
                         if (this.results.overlap_y > 0) {
-                            message = new Message(to, from, type, "down");
-                            this.game.messageCenter.add(message);
+                            data = "down";
                         }
                         if (this.results.overlap_y < 0) {
-                            message = new Message(to, from, type, "up");
-                            this.game.messageCenter.add(message);
+                            data = "up";
                         }
+                        message = new Message(to, from, type, data);
                         let cX = this.results.overlap_x * this.results.overlap;
                         let cY = this.results.overlap_y * this.results.overlap;
                         let correctionForce = new Vector(cX, cY);

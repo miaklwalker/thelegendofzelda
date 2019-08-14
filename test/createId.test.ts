@@ -1,4 +1,4 @@
-import uniqueid from "../src/components/functions/createId"
+import uniqueid from "../src/components/functions/uniqueId"
 
 describe('CreateId should return a string 32 characters long of random numbers and letters',()=>{
     test('UniqueId should only have Capitol Letters & Numbers',()=>{

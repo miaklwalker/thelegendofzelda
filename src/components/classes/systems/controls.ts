@@ -32,11 +32,8 @@ export default class Controls {
         const keys = Object.keys(this);
         let from = 'controls'
         document.addEventListener("keydown", event => {
-            // Loop Through all of the keys
             for (let i = 0; i < keys.length; i++) {
-                // if one of the values matches the key pressed and it wasn't pressed in the last few milliseconds
                 if (event.code === values[i] && this.lastKey !== keys[i]) {
-                    // Then check if it is a movement key and block the default
                     if (["up", "down", "left", "right", "A", "B"].includes(keys[i])) {
                         event.preventDefault();
                         this.lastKey = keys[i];
@@ -49,9 +46,7 @@ export default class Controls {
                     }
                 }
             }
-            setTimeout(() => {
-                this.lastKey = "";
-        },);
+            setTimeout(() => {this.lastKey = ""});
         });
 
         document.addEventListener("keyup", event => {
