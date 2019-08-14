@@ -1,9 +1,5 @@
 import RootObject from "../../objects/interfaces";
 
-
-
-
-
 interface SpriteSheetCor {
 [index:string]:string|number
     name: string;

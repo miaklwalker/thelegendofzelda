@@ -2,10 +2,10 @@ import { selectFactory } from "../makeSelect.js";
 import { sets, setsString, SecretObject } from "./Sets.js";
 import map from "./tileMap.js";
 
-let topleft = [[0, 0], [32, 0], [0, 34]];
-let topright = [[0, 0], [32, 0], [32, 32]];
-let botleft = [[0, 0], [32, 34], [0, 34]];
-let botright = [[32, 0], [32, 34], [0, 34]];
+let topleft = [[0, 0], [32, 0], [0, 34],[1,0]];
+let topright = [[0, 0], [32, 0], [32, 32],[1,0]];
+let botleft = [[0, 0], [32, 34], [0, 34],[1,0]];
+let botright = [[32, 0], [32, 34], [0, 34],[31,0]];
 let square = [[0, 0], [0, 34], [32, 34], [32, 0]];
 let botHalf = [[0,34/2],[0,34],[32,34],[32,34/2]]
 let topHalf = [[0,0],[0,34/2],[32,34/2],[32,0]]

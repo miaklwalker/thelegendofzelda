@@ -620,6 +620,20 @@
         "h": 16
       },
       {
+        "name": "link-walk-up-1-big",
+        "x": 39,
+        "y": 6,
+        "w": 16,
+        "h": 16
+      },
+      {
+        "name": "link-walk-up-2-big",
+        "x": 54,
+        "y": 6,
+        "w": 16,
+        "h": 16
+      },
+      {
         "name": "link-walk-left-1-small",
         "x": 71,
         "y": 5,

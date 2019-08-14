@@ -21,7 +21,7 @@ export default class Link {
         this.position = new Vector(7, 5);
         this.velocity = new Vector(0, 0);
         this.action = "walk";
-        this.shield = "small";
+        this.shield = "big";
         this.direction = "right";
         this.blocked = [];
     }

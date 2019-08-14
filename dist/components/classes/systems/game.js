@@ -92,8 +92,8 @@ export default class Game {
                 ["Cave", "Cave"]
             ]);
             let button = document.createElement("button");
-            input = teleporter("tele");
-            input2 = teleporter("porter");
+            input = teleporter("tele", '15');
+            input2 = teleporter("porter", '7');
             button.innerText = " Tile Map Viewer";
             document.body.appendChild(button);
             document.body.appendChild(select);
