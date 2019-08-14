@@ -53,7 +53,9 @@ export default class CollisionSystem {
             let potentials = entity.potentials();
             for (let body of potentials) {
                 if (entity.collides(body, this.results)) {
+                    const { a, b } = this.results;
                     if (entity.sprite.name !== "boulder") {
+                        this.resolveCollision(a.sprite, b.sprite);
                         let message;
                         const to = entity.name;
                         const from = "collisions";
@@ -121,6 +123,9 @@ export default class CollisionSystem {
                 }
             }
         }
+    }
+    resolveCollision(a, b) {
+        b.health -= a.damage;
     }
     makeScreen(tilemap) {
         if (tilemap !== undefined) {

@@ -56,6 +56,7 @@ export default class CollisionSystem {
   runCollisions() {
     this.entities = [...this.sprites, ...this.enemies];
     this.entities.forEach(entity => {
+  
       const { x, y } = entity.sprite.position;
       const actualX = x * tileWidth;
       const actualY = y * tileHeight + hudOffset;
@@ -65,7 +66,9 @@ export default class CollisionSystem {
       let potentials = entity.potentials();
       for (let body of potentials) {
         if (entity.collides(body, this.results)) {
+          const{a,b}=this.results
           if (entity.sprite.name !== "boulder") {
+            this.resolveCollision(a.sprite,b.sprite)
             let message: Message;
             const to = entity.name;
             const from = "collisions";
@@ -125,6 +128,9 @@ export default class CollisionSystem {
         }
       }
     }
+  }
+  resolveCollision(a,b){
+    b.health-=a.damage
   }
   makeScreen(tilemap: [[number, number, number, number, number]]) {
     if (tilemap !== undefined) {
