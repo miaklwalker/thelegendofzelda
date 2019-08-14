@@ -3,6 +3,7 @@ import { Result } from "../../Collisions/Collisions.js";
 import Message from "./message.js";
 import { Vector } from "../math/vector.js";
 import enemy from "../actors/Enemy.js";
+import Link from "../actors/link.js";
 import { shapes } from "../../functions/TileMapper/createTileMap.js";
 import Sword from "../actors/Sword.js";
 const tileWidth = 32;
@@ -125,7 +126,16 @@ export default class CollisionSystem {
         }
     }
     resolveCollision(a, b) {
-        b.health -= a.damage;
+        if (b instanceof enemy) {
+            if (a instanceof Sword) {
+                b.health -= a.damage;
+            }
+        }
+        else if (b instanceof Link) {
+            if (a instanceof enemy) {
+                b.health -= a.damage;
+            }
+        }
     }
     makeScreen(tilemap) {
         if (tilemap !== undefined) {

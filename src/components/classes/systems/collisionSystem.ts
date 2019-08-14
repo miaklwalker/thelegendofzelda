@@ -56,7 +56,6 @@ export default class CollisionSystem {
   runCollisions() {
     this.entities = [...this.sprites, ...this.enemies];
     this.entities.forEach(entity => {
-  
       const { x, y } = entity.sprite.position;
       const actualX = x * tileWidth;
       const actualY = y * tileHeight + hudOffset;
@@ -129,9 +128,19 @@ export default class CollisionSystem {
       }
     }
   }
-  resolveCollision(a,b){
-    b.health-=a.damage
+
+  resolveCollision(a:Sword|enemy,b:enemy|Link){
+    if(b instanceof enemy){
+      if(a instanceof Sword){
+        b.health-=a.damage
+      }
+    }else if ( b instanceof Link){
+      if(a instanceof enemy){
+        b.health-=a.damage
+      }
+    }
   }
+
   makeScreen(tilemap: [[number, number, number, number, number]]) {
     if (tilemap !== undefined) {
       this.tiles.forEach((entity: Polygon) => {
