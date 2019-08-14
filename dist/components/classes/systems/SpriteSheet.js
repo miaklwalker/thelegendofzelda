@@ -21,14 +21,12 @@ export default class SpriteSheet {
     makeSprites(json) {
         let name = this.name;
         json.Sprites[name].forEach((Sprite) => {
-            if (this.name === "link" || this.name == 'enemy' || this.name === 'hud' || this.name === 'zeldaItems') {
-                this.sprites[Sprite.name] = [Sprite.x, Sprite.y, Sprite.w, Sprite.h];
-            }
+            this.sprites[Sprite.name] = [Sprite.x, Sprite.y, Sprite.w, Sprite.h];
         });
     }
     renderSprite(context, action, location) {
-        //@ts-ignore
-        context.drawImage(this.sheet, ...this.sprites[action], ...location);
+        let sprite = [this.sheet, ...this.sprites[action], ...location];
+        context.drawImage(...sprite);
     }
 }
 //# sourceMappingURL=SpriteSheet.js.map

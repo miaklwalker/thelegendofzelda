@@ -1,5 +1,8 @@
 import { Vector } from "../math/vector.js";
 import uniqueId from "../../functions/uniqueId.js";
+import Sword from "./Sword.js";
+let once = false;
+let timer = 0;
 /**
  *
  *
@@ -10,7 +13,7 @@ import uniqueId from "../../functions/uniqueId.js";
 export default class Link {
     constructor() {
         this.frame = 0;
-        this.name = 'link';
+        this.name = "link";
         this.frameAdjusted = 0;
         this.id = uniqueId();
         this.hearts = 16;
@@ -18,16 +21,18 @@ export default class Link {
         this.position = new Vector(7, 5);
         this.velocity = new Vector(0, 0);
         this.action = "walk";
-        this.shield = "small";
+        this.shield = "big";
         this.direction = "right";
         this.blocked = [];
     }
     show() {
-        let str = `link-${this.action}-${this.direction}-${(this.frameAdjusted % 2) + 1}-${this.shield}`;
+        let str = `link-${this.action}-${this.direction}-${(this.frameAdjusted %
+            2) +
+            1}-${this.shield}`;
         return str;
     }
     move(msg) {
-        if (msg.from === 'controls') {
+        if (msg.from === "controls") {
             this.direction = msg.data;
         }
         if (msg.data === "right") {
@@ -49,14 +54,34 @@ export default class Link {
             this.frameAdjusted++;
         }
     }
-    onMessage(msg) {
-        if (msg.from === "controls" && msg.type === 'direction') {
-            if (msg.data !== 'A' && msg.data !== 'B') {
+    slash(context, system, image) {
+        const { x, y } = this.position;
+        let sword = new Sword(1.5, x * 32, y * 34 + 120, this.direction);
+        if (this.action === "slash") {
+            image.renderSprite(context, sword.show(), sword.placement(x, y, this.direction));
+            timer++;
+            if (timer === 7) {
                 this.action = 'walk';
+            }
+            if (!once) {
+                once = true;
+                system.addPlayer(sword);
+            }
+        }
+        else {
+            timer = 0;
+            once = false;
+            system.remove(sword);
+        }
+    }
+    onMessage(msg) {
+        if (msg.from === "controls" && msg.type === "direction") {
+            if (msg.data !== "A" && msg.data !== "B") {
+                this.action = "walk";
                 this.move(msg);
             }
             else {
-                this.action = 'slash';
+                this.action = "slash";
             }
         }
     }

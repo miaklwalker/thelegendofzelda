@@ -1,4 +1,4 @@
-import makeCanvas from "../src/components/functions/canvas"
+import makeCanvas from "../src/components/functions/makeCanvas"
 
 
 describe('A function returning a html canvas ',() => {

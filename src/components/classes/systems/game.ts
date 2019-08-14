@@ -19,20 +19,18 @@ import { showPoints } from "../../functions/TileMapper/showPoints.js";
 import teleporter from "../../functions/TileMapper/Teleporter.js";
 import Sword from "../actors/Sword.js";
 
-let once = false
 let debug = false;
 let teleport = false;
-document.addEventListener('keypress',event=>{
-
-if(event.key==='d'){
-  console.log(`debugger: ${!debug}`)
-  debug = !debug
-}
-if(event.key==='t'){
-  console.log(`teleport:${!teleport}`)
-  teleport = !teleport
-}
-})
+document.addEventListener("keypress", event => {
+  if (event.key === "d") {
+    console.log(`debugger: ${!debug}`);
+    debug = !debug;
+  }
+  if (event.key === "t") {
+    console.log(`teleport:${!teleport}`);
+    teleport = !teleport;
+  }
+});
 
 /**
  *
@@ -60,7 +58,7 @@ export default class Game {
   toggle: boolean;
   enemies: enemy[];
   config: any;
-  once:boolean;
+  once: boolean;
   constructor(width: number, height: number, json: any, gameConfig: any) {
     this.width = width;
     this.height = height;
@@ -76,86 +74,75 @@ export default class Game {
     this.messageCenter = new MessageQueue(this);
     this.images = [];
     this.debugger = false;
-    this.once = false
+    this.once = false;
     this.toggle = true;
   }
-
-
   drawScreen(context: CanvasRenderingContext2D) {
     const { x, y } = this.Link.position;
+    const {paused,transition}=this.gameState
     let pauseMenu = this.pauseScreen.show();
-    let paused = this.gameState.paused ? 0 : -360;
-    this.system.runCollisions();
-    this.camera.show(this.gameState.paused,this.gameState.currentMap, context);
+    let pause = this.gameState.paused ? 0 : -360;
+    let linkLocation:[number,number,number,number]=[x*32,y*34+120,30,30];
+    this.camera.show(this.gameState.paused, this.gameState.currentMap, context);
+    this.images[3].renderSprite(context, this.Link.show(),linkLocation);
+    this.Link.slash(context,this.system,this.images[17])
     this.messageCenter.dispatch();
-    this.images[3].renderSprite(context, this.Link.show(), [x * 32, y * 34 + 120, 30, 30]);
-    let sword = new Sword(1.5,x*32,y*34+120,this.Link.direction)
-    if(this.Link.action==='slash'){
-      this.images[17].renderSprite(context,sword.show(),sword.placement(x,y,this.Link.direction))
-      if(!once){
-        once= true
-        this.system.addPlayer(sword)
-      }
-    }else{
-      once = false
-      this.system.remove(sword)
-    }
-
-    context.drawImage(pauseMenu, 0, paused, 512, 480);
-    if (!this.gameState.paused||this.gameState.transition) {
-      this.rungame(context);
-    }
-    if(debug){
-   this.debugMode(context)
-    }
+    context.drawImage(pauseMenu, 0, pause, 512, 480);
+    if (!paused || transition){this.rungame(context)}
+    if (debug) {this.debugMode(context)}
   }
   debugMode(context: CanvasRenderingContext2D) {
     let select: HTMLSelectElement;
     let select2: HTMLSelectElement;
-    let input :HTMLInputElement
-    let input2
+    let input: HTMLInputElement;
+    let input2;
     if (!this.debugger) {
       this.debugger = true;
       exportTiles();
       select = makeSelect();
       select.id = "Select";
-      select2 = selectFactory('type',[['Tile','Block'],['Spawn','Spawn'],['Secret','Secret'],['Cave','Cave']]) as HTMLSelectElement
+      select2 = selectFactory("type", [
+        ["Tile", "Block"],
+        ["Spawn", "Spawn"],
+        ["Secret", "Secret"],
+        ["Cave", "Cave"]
+      ]) as HTMLSelectElement;
       let button = document.createElement("button");
-      input = teleporter('tele')
-      input2 = teleporter('porter')
+      input = teleporter("tele",'15');
+      input2 = teleporter("porter",'7');
       button.innerText = " Tile Map Viewer";
       document.body.appendChild(button);
       document.body.appendChild(select);
       document.body.appendChild(select2);
-      document.body.appendChild(input)
-      document.body.appendChild(input2)
+      document.body.appendChild(input);
+      document.body.appendChild(input2);
       button.addEventListener("click", () => {
         this.toggle = !this.toggle;
         this.toggle
-        ? (button.innerText = " Tile Map Viewer")
-        : (button.innerText = "Create Tile Map");
+          ? (button.innerText = " Tile Map Viewer")
+          : (button.innerText = "Create Tile Map");
         if (!this.toggle) {
           eraseTiles();
         }
       });
     }
-  
+
     if (this.toggle) {
-      let tele = document.getElementById('tele') as HTMLInputElement
-      let porter = document.getElementById('porter') as HTMLInputElement
-      if(teleport){
-      this.gameState.currentMap.position.x = Number(tele.value)
-      this.gameState.currentMap.position.y = Number(porter.value)
-      }else{
-        tele.value = `${this.gameState.currentMap.position.x}`
-        porter.value = `${this.gameState.currentMap.position.y}`
+      let tele = document.getElementById("tele") as HTMLInputElement;
+      let porter = document.getElementById("porter") as HTMLInputElement;
+      if (teleport) {
+        this.gameState.currentMap.position.x = Number(tele.value);
+        this.gameState.currentMap.position.y = Number(porter.value);
+      } else {
+        tele.value = `${this.gameState.currentMap.position.x}`;
+        porter.value = `${this.gameState.currentMap.position.y}`;
       }
-      
-      if(!this.once){
-        this.once = true
-        createTileMap()
-      };
-      showPoints(context)
+
+      if (!this.once) {
+        this.once = true;
+        createTileMap();
+      }
+      showPoints(context);
     } else {
       this.system.drawSystem(context);
     }
@@ -166,10 +153,10 @@ export default class Game {
     this.system.enemies = [];
     let screen: gameScreen = this.config.OverWorld[index];
     let spawnPoints = this.system.parseMap(screen.spawnPoints) as number[][];
-    let random:number
+    let random: number;
     screen.enemies.forEach((e: string) => {
       let chooseEnemy = enemies[enemyIndex[e]];
-      let ChoosenPoint = spawnPoints.splice(random,1) as number[][];
+      let ChoosenPoint = spawnPoints.splice(random, 1) as number[][];
       let badGuy = new enemy(chooseEnemy);
       badGuy.position.x = ChoosenPoint[0][0] / 32;
       badGuy.position.y = (ChoosenPoint[0][1] - 120) / 34;
@@ -179,20 +166,26 @@ export default class Game {
     });
   }
   rungame(context: CanvasRenderingContext2D) {
-    this.enemies.forEach((enem,index) => {
-      if(enem.health<=0){
-        this.enemies.splice(index,1)
-        this.system.remove(enem)
+    this.enemies.forEach((enem, index) => {
+      if (enem.health <= 0) {
+        this.enemies.splice(index, 1);
+        this.system.remove(enem);
       }
       let points = enem.show();
       enem.timing();
       enem.logic(context);
-      this.images[2].renderSprite(context, points, [enem.position.x * 32,enem.position.y * 34 + 120,30,30]);
+      this.images[2].renderSprite(context, points, [
+        enem.position.x * 32,
+        enem.position.y * 34 + 120,
+        30,
+        30
+      ]);
     });
+    
+    this.system.runCollisions();
     this.gameState.changeMap(this.Link.position);
     this.gameState.changeScreen(this.Link.position, this);
   }
-
   loadFiles() {
     this.controls.setupControls(this.messageCenter);
     this.system.addPlayer(this.Link);
