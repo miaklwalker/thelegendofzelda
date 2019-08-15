@@ -21,9 +21,9 @@ export function exportTiles() {
     navigator.clipboard
       .writeText(
         `
-      "hitboxes":[${tiles}],
+      "hitBoxes":[${tiles}],
       "enemies":[],
-      "secrets":[${JSON.stringify(secrets)}],
+      "secrets":${JSON.stringify(secrets)},
       "caves":[${caves}],
       "spawnPoints":[${spawns}]
       `

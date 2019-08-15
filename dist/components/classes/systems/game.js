@@ -139,6 +139,7 @@ export default class Game {
         let spawnPoints = this.system.parseMap(screen.spawnPoints);
         let random;
         screen.enemies.forEach((e) => {
+            random = Math.floor(Math.random() * spawnPoints.length);
             let chooseEnemy = enemies[enemyIndex[e]];
             let ChoosenPoint = spawnPoints.splice(random, 1);
             let badGuy = new enemy(chooseEnemy);
@@ -166,7 +167,7 @@ export default class Game {
             ]);
         });
         this.system.runCollisions();
-        this.gameState.changeMap(this.Link.position);
+        this.gameState.changeMap(this.Link.position, this);
         this.gameState.changeScreen(this.Link.position, this);
     }
     loadFiles() {

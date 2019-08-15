@@ -1,15 +1,27 @@
-import firstDungeon from '../dungeons/dungeonOne.js';
-import secondDungeon from '../dungeons/dungeonTwo.js';
-import thirdDungeon from '../dungeons/dungeonThree.js';
-import fourthDungeon from '../dungeons/dungeonFour.js';
-import fifthDungeon from '../dungeons/dungeonFive.js';
-import sixthDungeon from '../dungeons/dungeonSix.js';
-import seventhDungeon from '../dungeons/dungeonSeven.js';
-import eighthDungeon from '../dungeons/dungeonEight.js';
-import ninthDungeon from '../dungeons/dungeonNine.js';
-import inventory from './inventory.js';
-import Overworld from '../../overworld.js';
+import firstDungeon from "../dungeons/dungeonOne.js";
+import secondDungeon from "../dungeons/dungeonTwo.js";
+import thirdDungeon from "../dungeons/dungeonThree.js";
+import fourthDungeon from "../dungeons/dungeonFour.js";
+import fifthDungeon from "../dungeons/dungeonFive.js";
+import sixthDungeon from "../dungeons/dungeonSix.js";
+import seventhDungeon from "../dungeons/dungeonSeven.js";
+import eighthDungeon from "../dungeons/dungeonEight.js";
+import ninthDungeon from "../dungeons/dungeonNine.js";
+import inventory from "./inventory.js";
+import Overworld from "../../overworld.js";
 let index = 0;
+let Worldmaps = [
+    "OverWorld",
+    "dungeonOne",
+    "dungeonTwo",
+    "dungeonThree",
+    "dungeonFour",
+    "dungeonFive",
+    "dungeonSix",
+    "dungeonSeven",
+    "dungeonEight",
+    "dungeonNine"
+];
 /**
  *
  *
@@ -32,24 +44,25 @@ export default class gameState {
             new sixthDungeon(),
             new seventhDungeon(),
             new eighthDungeon(),
-            new ninthDungeon(),
+            new ninthDungeon()
         ];
         this.inventory = new inventory();
         this.paused = false;
         this.transition = false;
+        this.mapNum = 0;
         this.currentMap = this.maps[0];
     }
     set Map(num) {
         if (num < 0 || num > 9) {
-            throw new Error('Dungeon not found');
+            throw new Error("Dungeon not found");
         }
         else {
+            this.mapNum = num;
             this.currentMap = this.maps[num];
         }
     }
     changeScreen(position, game) {
         let map = this.currentMap.position;
-        this.transition = false;
         if (position.x > 15) {
             position.x = 1;
             map.x += 1;
@@ -71,17 +84,20 @@ export default class gameState {
             this.transition = true;
         }
         if (this.transition) {
+            this.transition = false;
             let index = `${map.x},${map.y}`;
-            let tilemap = game.system.createMap(game.json.tileMap[index]);
+            let tiller = game.config[Worldmaps[this.mapNum]][index].hitBoxes;
+            let tilemap = game.system.createMap(tiller);
             game.system.makeScreen(tilemap);
             game.newScreen(index);
             this.transition = false;
         }
     }
-    changeMap(position) {
+    changeMap(position, game) {
         if (this.currentMap !== this.maps[0]) {
             //@ts-ignore
             this.currentMap.goToOverworld(position, this);
+            this.transition = true;
         }
         else {
             let dunLoc = [
@@ -93,15 +109,17 @@ export default class gameState {
                 [2, 4, 7, 4],
                 [2, 2, 7, 4],
                 [13, 6, 10, 2],
-                [5, 0, 5, 6],
+                [5, 0, 5, 6]
             ];
             dunLoc.forEach(([oX, oY, lX, lY], index) => {
                 if (oX === this.currentMap.position.x &&
                     oY === this.currentMap.position.y &&
                     lX === Math.round(position.x) &&
                     lY === Math.round(position.y)) {
+                    this.Map = index + 1;
                     this.currentMap.theme.stop();
-                    this.currentMap = this.maps[index + 1];
+                    this.transition = true;
+                    this.changeScreen(position, game);
                     this.currentMap.theme.play();
                     position.x = 7.6;
                     position.y = 7.7;
@@ -110,7 +128,7 @@ export default class gameState {
         }
     }
     onMessage(msg) {
-        if (msg.from === 'controls') {
+        if (msg.from === "controls") {
             //@ts-ignore
             this[msg.type] = !this[msg.type];
         }

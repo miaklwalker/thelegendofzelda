@@ -16,7 +16,9 @@ function setup() {
     canvas.width = 512;
     canvas.height = 480;
     let index = `${game.gameState.currentMap.position.x},${game.gameState.currentMap.position.y}`;
-    let tilemap = game.system.createMap(game.json.tileMap[index]);
+    console.log(index);
+    let tilemap = game.system.createMap(game.config.OverWorld[index].hitBoxes);
+    console.log(tilemap);
     game.system.makeScreen(tilemap);
     game.newScreen(index);
     document.body.appendChild(canvas);

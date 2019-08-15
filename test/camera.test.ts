@@ -22,7 +22,7 @@ describe('Should Create a Camera Class that displays a portion of the whole map'
 
       afterEach(jest.clearAllMocks);
 
-      it('#show() happy path -- should draw to the context', async ()=>{
+      it.skip('#show() happy path -- should draw to the context', async ()=>{
             // 1. Arrange -- mock etc
             const camera = new Camera();
 
