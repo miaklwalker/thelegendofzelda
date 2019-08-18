@@ -35,6 +35,9 @@ export default class MessageQueue {
     add(msg: Message) {
         this.messages.push(msg);
     }
+    clearMessages(){
+        this.messages=[]
+    }
 
     /**
      *
@@ -55,9 +58,7 @@ export default class MessageQueue {
         for (let i = 0; i < this.messages.length; i++) {
             let msg = this.messages[i];
             this.game.gameState.onMessage(msg)
-            this.entities.forEach((entity:Link|enemy)=>{
-                entity.onMessage(msg)
-            })
+            this.entities.forEach((entity:Link|enemy)=>{entity.onMessage(msg)})
             this.messages.splice(i,1);
         }
 

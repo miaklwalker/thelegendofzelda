@@ -82,8 +82,6 @@ export default class gameState {
   }
 
   changeScreen(position: Vector, game: Game) {
-
-
     if (position.x > rightSide) {
       position.x = leftSide+1;
       this.direction = new Vector(1/offset,0)
@@ -95,12 +93,12 @@ export default class gameState {
       this.transition = true;
     }
     if (position.y > bottomSide) {
-      position.y = topSide+1;
+      position.y = topSide;
       this.direction = new Vector(0,1/offset)
       this.transition = true;
     }
     if (position.y < topSide) {
-      position.y = bottomSide-1;
+      position.y = bottomSide-.5;
       this.direction = new Vector(0,-1/offset)
       this.transition = true;
     }
@@ -119,7 +117,6 @@ export default class gameState {
   }
 
   scrollScreen(position:Vector,game:Game){
-    console.log(position)
     if(index<offset-1&&this.transition===true){
       this.currentMap.position.add(position)
       index++
@@ -138,7 +135,7 @@ export default class gameState {
       topSide = 1
       //@ts-ignore
       this.currentMap.goToOverworld(position, this);
-      this.transition = true
+
     } else{
       topSide= 0 
       let dunLoc = [
@@ -161,8 +158,7 @@ export default class gameState {
         ) {
           this.Map = index + 1
           this.currentMap.theme.stop();
-          this.transition = true
-          this.changeScreen(position,game)
+          this.makeScreen(game)
           this.currentMap.theme.play();
           position.x = 7.6;
           position.y = 7.7;

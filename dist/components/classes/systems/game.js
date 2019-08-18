@@ -66,13 +66,14 @@ export default class Game {
         this.camera.show(this.gameState.paused, this.gameState.currentMap, context);
         this.images[3].renderSprite(context, this.Link.show(), linkLocation);
         this.Link.slash(context, this.system, this.images[17]);
-        this.messageCenter.dispatch();
         context.drawImage(pauseMenu, 0, pause, 512, 480);
         if (this.gameState.transition) {
+            this.messageCenter.clearMessages();
             this.gameState.scrollScreen(this.gameState.direction, this);
         }
-        if (!paused || transition) {
+        if (!paused && !transition) {
             this.rungame(context);
+            this.messageCenter.dispatch();
         }
         if (debug) {
             this.debugMode(context);
