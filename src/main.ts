@@ -21,9 +21,7 @@ function setup() {
   canvas.width = 512;
   canvas.height = 480;
   let index:string = `${game.gameState.currentMap.position.x},${game.gameState.currentMap.position.y}`
-  console.log(index)
   let tilemap = game.system.createMap(game.config.OverWorld[index].hitBoxes) as [[number,number,number,number,number]]
-  console.log(tilemap)
   game.system.makeScreen(tilemap)
   game.newScreen(index)
   document.body.appendChild(canvas);

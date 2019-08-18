@@ -35,4 +35,5 @@ export default class Dungeon {
         this.treasures=equipment
         this.theme = new sound('../music/Labyrinth.mp3')
     }
+
 }

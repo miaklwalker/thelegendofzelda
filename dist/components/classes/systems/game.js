@@ -68,6 +68,9 @@ export default class Game {
         this.Link.slash(context, this.system, this.images[17]);
         this.messageCenter.dispatch();
         context.drawImage(pauseMenu, 0, pause, 512, 480);
+        if (this.gameState.transition) {
+            this.gameState.scrollScreen(this.gameState.direction, this);
+        }
         if (!paused || transition) {
             this.rungame(context);
         }
@@ -171,6 +174,7 @@ export default class Game {
         this.gameState.changeScreen(this.Link.position, this);
     }
     loadFiles() {
+        this.gameState.maps.forEach(map => loadImage(map.url));
         this.controls.setupControls(this.messageCenter);
         this.system.addPlayer(this.Link);
         this.messageCenter.addEntities(this.Link);

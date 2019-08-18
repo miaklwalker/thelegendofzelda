@@ -14,6 +14,11 @@ import Message from "./message.js";
 import Game from "./game.js";
 import Dungeon from "../dungeons/dungeons.js";
 let index = 0;
+let leftSide = -1
+let topSide = 1 
+let rightSide = 16
+let bottomSide = 10.5
+let offset = 100
 let Worldmaps = [
   "OverWorld",
   "dungeonOne",
@@ -41,6 +46,7 @@ export default class gameState {
   transition: boolean;
   currentMap: Overworld | Dungeon;
   mapNum: number;
+  direction:Vector
   /**
    *Creates an instance of gameState.
    * @memberof gameState
@@ -63,6 +69,7 @@ export default class gameState {
     this.transition = false;
     this.mapNum=0
     this.currentMap = this.maps[0];
+    this.direction = new Vector()
   }
 
   set Map(num: number) {
@@ -75,29 +82,33 @@ export default class gameState {
   }
 
   changeScreen(position: Vector, game: Game) {
+
+
+    if (position.x > rightSide) {
+      position.x = leftSide+1;
+      this.direction = new Vector(1/offset,0)
+      this.transition = true;
+    }
+    if (position.x < leftSide) {
+      position.x = rightSide-1;
+      this.direction = new Vector(-1/offset,0)
+      this.transition = true;
+    }
+    if (position.y > bottomSide) {
+      position.y = topSide+1;
+      this.direction = new Vector(0,1/offset)
+      this.transition = true;
+    }
+    if (position.y < topSide) {
+      position.y = bottomSide-1;
+      this.direction = new Vector(0,-1/offset)
+      this.transition = true;
+    }
+
+  }
+
+  makeScreen(game: Game){
     let map = this.currentMap.position;
-    if (position.x > 15) {
-      position.x = 1;
-      map.x += 1;
-      this.transition = true;
-    }
-    if (position.x < 0.7) {
-      position.x = 14;
-      map.x -= 1;
-      this.transition = true;
-    }
-    if (position.y > 9.7) {
-      position.y = 1;
-      map.y += 1;
-      this.transition = true;
-    }
-    if (position.y < 0.7) {
-      position.y = 9;
-      map.y -= 1;
-      this.transition = true;
-    }
-    if (this.transition) {
-      this.transition = false
       let index: string = `${map.x},${map.y}`;
       let tiller = game.config[Worldmaps[this.mapNum]][index].hitBoxes;
       let tilemap = game.system.createMap(tiller) as [
@@ -105,15 +116,31 @@ export default class gameState {
       ];
       game.system.makeScreen(tilemap);
       game.newScreen(index);
-      this.transition = false;
+  }
+
+  scrollScreen(position:Vector,game:Game){
+    console.log(position)
+    if(index<offset-1&&this.transition===true){
+      this.currentMap.position.add(position)
+      index++
+    }else{
+      this.transition = false
+      index = 0 
+      this.currentMap.position.x = Math.round(this.currentMap.position.x)
+      this.currentMap.position.y = Math.round(this.currentMap.position.y)
+      this.makeScreen(game)
     }
+  
+
   }
   changeMap(position: Vector,game:Game) {
     if (this.currentMap !== this.maps[0]) {
+      topSide = 1
       //@ts-ignore
       this.currentMap.goToOverworld(position, this);
       this.transition = true
-    } else {
+    } else{
+      topSide= 0 
       let dunLoc = [
         [7, 3, 7, 4],
         [12, 3, 7, 4],

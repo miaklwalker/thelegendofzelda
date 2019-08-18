@@ -2,7 +2,20 @@ import { Vector } from "../math/vector.js";
 import uniqueId from "../../functions/uniqueId.js";
 import shot from "./shot.js";
 import random from "../../functions/Random.js";
+/**
+ *
+ *
+ * @export
+ * @class enemy
+ * @description Returns a Enemy when passed a config Object
+ * @param Spawn {object} MUST contain a name{string} x{number} y{number} behaviors{Array of strings} health{number} color {string} damage{number}
+ */
 export default class enemy {
+    /**
+     *Creates an instance of enemy.
+     * @param {{name: string, x: number, y: number,behaviors:string[],health:number,color:string,damage:number}} Spawn
+     * @memberof enemy
+     */
     constructor(Spawn) {
         this.position = new Vector(Spawn.x, Spawn.y);
         this.id = uniqueId();
@@ -19,6 +32,12 @@ export default class enemy {
         this.frames = 0;
         this.chance = 1;
     }
+    /**
+     *
+     *
+     * @returns
+     * @memberof enemy
+     */
     show() {
         let action;
         let frame = this.jumpTimer > 0 ? 1 : this.frames % 2;
@@ -31,6 +50,11 @@ export default class enemy {
         let str = `${this.color}-${this.name}-${action}-${this.direction}-${frame + 1}`;
         return str;
     }
+    /**
+     *
+     *
+     * @memberof enemy
+     */
     timing() {
         if (this.counter % 16 === 0) {
             this.frames++;
@@ -43,6 +67,11 @@ export default class enemy {
             this.chooseDirection();
         }
     }
+    /**
+     *
+     *
+     * @memberof enemy
+     */
     fall() {
         if (this.counter % 30 === 0) {
             this.chance = Math.random() > .5 ? 1 : -1;
@@ -59,6 +88,11 @@ export default class enemy {
             this.position.x = 14;
         }
     }
+    /**
+     *
+     *
+     * @memberof enemy
+     */
     jump() {
         let steps = 10;
         let resolution = 8;
@@ -82,6 +116,12 @@ export default class enemy {
         this.position.x += hor * distance / steps;
         this.position.y -= ver * height / steps;
     }
+    /**
+     *
+     *
+     * @param {CanvasRenderingContext2D} context
+     * @memberof enemy
+     */
     logic(context) {
         if (this.action === 'shoot') {
             this.shoot(context);
@@ -92,6 +132,12 @@ export default class enemy {
         }
         this.counter++;
     }
+    /**
+     *
+     *
+     * @param {CanvasRenderingContext2D} context
+     * @memberof enemy
+     */
     shoot(context) {
         if (this.shot !== null) {
             this.shot.show(context);
@@ -113,8 +159,18 @@ export default class enemy {
             }
         }
     }
+    /**
+     *
+     *
+     * @memberof enemy
+     */
     stop() {
     }
+    /**
+     *
+     *
+     * @memberof enemy
+     */
     walk() {
         if (this.position.x > 14) {
             this.direction = 'left';
@@ -145,15 +201,31 @@ export default class enemy {
             }
         }
     }
+    /**
+     *
+     *
+     * @memberof enemy
+     */
     chooseBehaviors() {
         let behavior = Math.floor(Math.random() * this.behaviors.length);
         this.action = this.behaviors[behavior];
     }
+    /**
+     *
+     *
+     * @memberof enemy
+     */
     chooseDirection() {
         let dirNum = Math.floor(Math.random() * 4);
         let directions = ["left", "right", "up", "down"];
         this.direction = directions[dirNum];
     }
+    /**
+     *
+     *
+     * @param {Message} msg
+     * @memberof enemy
+     */
     onMessage(msg) {
         if (msg.from === "collisions" && msg.type === this.id) {
             switch (msg.data) {
