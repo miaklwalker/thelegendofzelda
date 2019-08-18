@@ -3,7 +3,6 @@ import Message from "../systems/message.js";
 import uniqueId from "../../functions/uniqueId.js";
 import shot from "./shot.js";
 import random from "../../functions/Random.js";
-import { exportDefaultSpecifier } from "@babel/types";
 
 
 /**

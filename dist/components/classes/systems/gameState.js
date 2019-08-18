@@ -116,6 +116,7 @@ export default class gameState {
             topSide = 1;
             //@ts-ignore
             this.currentMap.goToOverworld(position, this);
+            this.makeScreen(game);
         }
         else {
             topSide = 0;
