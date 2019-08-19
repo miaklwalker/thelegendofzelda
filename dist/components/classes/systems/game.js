@@ -16,6 +16,7 @@ import { exportTiles } from "../../functions/TileMapper/exportTiles.js";
 import { eraseTiles } from "../../functions/TileMapper/eraseTiles.js";
 import { showPoints } from "../../functions/TileMapper/showPoints.js";
 import teleporter from "../../functions/TileMapper/Teleporter.js";
+import Overworld from "../../overworld.js";
 let debug = false;
 let teleport = false;
 document.addEventListener("keypress", event => {
@@ -76,7 +77,15 @@ export default class Game {
             this.messageCenter.dispatch();
         }
         if (debug) {
+            if (this.gameState.currentMap instanceof Overworld) {
+                this.gameState.currentMap.debug();
+            }
             this.debugMode(context);
+        }
+        else {
+            if (this.gameState.currentMap instanceof Overworld) {
+                this.gameState.currentMap.normal();
+            }
         }
     }
     debugMode(context) {

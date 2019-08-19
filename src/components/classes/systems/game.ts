@@ -18,6 +18,7 @@ import { eraseTiles } from "../../functions/TileMapper/eraseTiles.js";
 import { showPoints } from "../../functions/TileMapper/showPoints.js";
 import teleporter from "../../functions/TileMapper/Teleporter.js";
 import Sword from "../actors/Sword.js";
+import Overworld from "../../overworld.js";
 
 let debug = false;
 let teleport = false;
@@ -95,7 +96,10 @@ export default class Game {
     {this.rungame(context)
       this.messageCenter.dispatch();
     }
-    if (debug) {this.debugMode(context)}
+    if (debug) {
+      if(this.gameState.currentMap instanceof Overworld){this.gameState.currentMap.debug()}
+      this.debugMode(context)
+    }else{if(this.gameState.currentMap instanceof Overworld){this.gameState.currentMap.normal()}}
   }
   debugMode(context: CanvasRenderingContext2D) {
     let select: HTMLSelectElement;
@@ -103,6 +107,7 @@ export default class Game {
     let input: HTMLInputElement;
     let input2;
     if (!this.debugger) {
+      
       this.debugger = true;
       exportTiles();
       select = makeSelect();
