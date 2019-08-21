@@ -20,9 +20,11 @@ export default class SpriteSheet {
      */
     makeSprites(json) {
         let name = this.name;
-        json.Sprites[name].forEach((Sprite) => {
-            this.sprites[Sprite.name] = [Sprite.x, Sprite.y, Sprite.w, Sprite.h];
-        });
+        if (json.Sprites[name] !== undefined) {
+            json.Sprites[name].forEach((Sprite) => {
+                this.sprites[Sprite.name] = [Sprite.x, Sprite.y, Sprite.w, Sprite.h];
+            });
+        }
     }
     renderSprite(context, action, location) {
         let sprite = [this.sheet, ...this.sprites[action], ...location];

@@ -80,26 +80,37 @@ export default class Game {
   }
   drawScreen(context: CanvasRenderingContext2D) {
     const { x, y } = this.Link.position;
-    const {paused,transition}=this.gameState
+    const { paused, transition } = this.gameState;
     let pauseMenu = this.pauseScreen.show();
     let pause = this.gameState.paused ? 0 : -360;
-    let linkLocation:[number,number,number,number]=[x*32,y*34+120,30,30];
+    let linkLocation: [number, number, number, number] = [
+      x * 32,
+      y * 34 + 120,
+      30,
+      30
+    ];
     this.camera.show(this.gameState.paused, this.gameState.currentMap, context);
-    this.images[3].renderSprite(context, this.Link.show(),linkLocation);
-    this.Link.slash(context,this.system,this.images[17])
+    this.images[3].renderSprite(context, this.Link.show(), linkLocation);
+    this.Link.slash(context, this.system, this.images[17]);
     context.drawImage(pauseMenu, 0, pause, 512, 480);
-    if(this.gameState.transition){
-      this.messageCenter.clearMessages()
-      this.gameState.scrollScreen(this.gameState.direction,this)
+    if (this.gameState.transition) {
+      this.messageCenter.clearMessages();
+      this.gameState.scrollScreen(this.gameState.direction, this);
     }
-    if (!paused && !transition)
-    {this.rungame(context)
+    if (!paused && !transition) {
+      this.rungame(context);
       this.messageCenter.dispatch();
     }
     if (debug) {
-      if(this.gameState.currentMap instanceof Overworld){this.gameState.currentMap.debug()}
-      this.debugMode(context)
-    }else{if(this.gameState.currentMap instanceof Overworld){this.gameState.currentMap.normal()}}
+      if (this.gameState.currentMap instanceof Overworld) {
+        this.gameState.currentMap.debug();
+      }
+      this.debugMode(context);
+    } else {
+      if (this.gameState.currentMap instanceof Overworld) {
+        this.gameState.currentMap.normal();
+      }
+    }
   }
   debugMode(context: CanvasRenderingContext2D) {
     let select: HTMLSelectElement;
@@ -107,7 +118,6 @@ export default class Game {
     let input: HTMLInputElement;
     let input2;
     if (!this.debugger) {
-      
       this.debugger = true;
       exportTiles();
       select = makeSelect();
@@ -119,8 +129,8 @@ export default class Game {
         ["Cave", "Cave"]
       ]) as HTMLSelectElement;
       let button = document.createElement("button");
-      input = teleporter("tele",'15');
-      input2 = teleporter("porter",'7');
+      input = teleporter("tele", "15");
+      input2 = teleporter("porter", "7");
       button.innerText = " Tile Map Viewer";
       document.body.appendChild(button);
       document.body.appendChild(select);
@@ -166,7 +176,7 @@ export default class Game {
     let spawnPoints = this.system.parseMap(screen.spawnPoints) as number[][];
     let random: number;
     screen.enemies.forEach((e: string) => {
-      random = Math.floor(Math.random()*spawnPoints.length)
+      random = Math.floor(Math.random() * spawnPoints.length);
       let chooseEnemy = enemies[enemyIndex[e]];
       let ChoosenPoint = spawnPoints.splice(random, 1) as number[][];
       let badGuy = new enemy(chooseEnemy);
@@ -186,20 +196,21 @@ export default class Game {
       let points = enem.show();
       enem.timing();
       enem.logic(context);
-      this.images[2].renderSprite(context, points, [
+      let location: [number, number, number, number] = [
         enem.position.x * 32,
         enem.position.y * 34 + 120,
         30,
         30
-      ]);
+      ];
+      this.images[2].renderSprite(context, points, location);
     });
-    
+
     this.system.runCollisions();
-    this.gameState.changeMap(this.Link.position,this);
+    this.gameState.changeMap(this.Link.position, this);
     this.gameState.changeScreen(this.Link.position, this);
   }
   loadFiles() {
-    this.gameState.maps.forEach(map=> loadImage(map.url))
+    this.gameState.maps.forEach(map => loadImage(map.url));
     this.controls.setupControls(this.messageCenter);
     this.system.addPlayer(this.Link);
     this.messageCenter.addEntities(this.Link);
@@ -209,19 +220,7 @@ export default class Game {
     Promise.all(images).then((response: HTMLImageElement[]) => {
       response.forEach(res => {
         let spriteSheet = new SpriteSheet(res, names[iterator]);
-        if (names[iterator] == "link") {
-          spriteSheet.makeSprites(this.json);
-        }
-        if (names[iterator] == "enemy") {
-          spriteSheet.makeSprites(this.json);
-        }
-        if (names[iterator] == "hud") {
-          spriteSheet.makeSprites(this.json);
-        }
-        if (names[iterator] == "zeldaItems") {
-          spriteSheet.makeSprites(this.json);
-        }
-
+        spriteSheet.makeSprites(this.json);
         this.images.push(spriteSheet);
         iterator++;
       });

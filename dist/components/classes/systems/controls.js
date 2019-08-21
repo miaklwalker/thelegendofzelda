@@ -1,4 +1,8 @@
 import Message from "./message.js";
+let to;
+let from = "controls";
+let type;
+let data;
 export default class Controls {
     constructor(config) {
         this.up = config.up;
@@ -16,24 +20,29 @@ export default class Controls {
     setupControls(msgCenter) {
         const values = Object.values(this);
         const keys = Object.keys(this);
-        let from = 'controls';
         document.addEventListener("keydown", event => {
             for (let i = 0; i < keys.length; i++) {
                 if (event.code === values[i] && this.lastKey !== keys[i]) {
                     if (["up", "down", "left", "right", "A", "B"].includes(keys[i])) {
                         event.preventDefault();
                         this.lastKey = keys[i];
-                        let msg = new Message("Link", from, "direction", keys[i]);
-                        msgCenter.add(msg);
+                        to = "Link";
+                        type = "direction";
+                        data = keys[i];
                     }
                     else {
                         this.lastKey = keys[i];
-                        let msg = new Message("gameState", from, "paused", keys[i]);
-                        msgCenter.add(msg);
+                        to = "gameState";
+                        type = "paused";
+                        data = keys[i];
                     }
+                    let msg = new Message(to, from, type, data);
+                    msgCenter.add(msg);
                 }
             }
-            setTimeout(() => { this.lastKey = ""; });
+            setTimeout(() => {
+                this.lastKey = "";
+            });
         });
         document.addEventListener("keyup", event => {
             for (let i = 0; i < keys.length; i++) {

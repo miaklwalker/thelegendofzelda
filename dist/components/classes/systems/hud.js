@@ -1,16 +1,5 @@
 import { Vector } from "../math/vector.js";
-/**
- *
- *
- * @export
- * @class Hud
- */
 export default class Hud {
-    /**
-     *Creates an instance of Hud.
-     * @param {Game} game
-     * @memberof Hud
-     */
     constructor(game) {
         this.game = game;
         this.rupees = game.gameState.inventory.rupees;
@@ -46,13 +35,6 @@ export default class Hud {
         context.fillRect(x, y, 9, 9);
         this.showHearts(context);
     }
-    /**
-     *
-     *
-     * @param {CanvasRenderingContext2D} context
-     * @param {Game} game
-     * @memberof Hud
-     */
     showHearts(context) {
         let index = 0;
         this.hearts = this.game.Link.hearts;

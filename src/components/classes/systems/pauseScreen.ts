@@ -8,16 +8,14 @@ export default class pauseScreen {
   blink: boolean;
   hud: Hud;
   game: Game;
-  /**
-   *Creates an instance of pauseScreen.
-   * @memberof pauseScreen
-   */
+
   constructor(game: Game) {
     this.frame = 0;
     this.blink = true;
     this.hud = new Hud(game);
     this.game = game
   }
+  
   show() {
     let canvas: HTMLCanvasElement = document.createElement("canvas");
     const {width,height,gameState,images}=this.game

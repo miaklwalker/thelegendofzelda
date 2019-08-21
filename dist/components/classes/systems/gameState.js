@@ -28,17 +28,18 @@ let Worldmaps = [
     "dungeonEight",
     "dungeonNine"
 ];
-/**
- *
- *
- * @export
- * @class gameState
- */
+let dunLoc = [
+    [7, 3, 7, 4],
+    [12, 3, 7, 4],
+    [4, 7, 8, 4],
+    [5, 4, 8, 4],
+    [11, 0, 7, 4],
+    [2, 4, 7, 4],
+    [2, 2, 7, 4],
+    [13, 6, 10, 2],
+    [5, 0, 5, 6]
+];
 export default class gameState {
-    /**
-     *Creates an instance of gameState.
-     * @memberof gameState
-     */
     constructor() {
         this.maps = [
             new Overworld(),
@@ -58,6 +59,7 @@ export default class gameState {
         this.mapNum = 0;
         this.currentMap = this.maps[0];
         this.direction = new Vector();
+        this.running = new Vector();
     }
     set Map(num) {
         if (num < 0 || num > 9) {
@@ -70,23 +72,23 @@ export default class gameState {
     }
     changeScreen(position, game) {
         if (position.x > rightSide) {
-            position.x = leftSide + 1;
             this.direction = new Vector(1 / offset, 0);
+            this.running = new Vector(-rightSide / offset, 0);
             this.transition = true;
         }
         if (position.x < leftSide) {
-            position.x = rightSide - 1;
             this.direction = new Vector(-1 / offset, 0);
+            this.running = new Vector(rightSide / offset, 0);
             this.transition = true;
         }
         if (position.y > bottomSide) {
-            position.y = topSide;
             this.direction = new Vector(0, 1 / offset);
+            this.running = new Vector(0, -bottomSide / offset);
             this.transition = true;
         }
         if (position.y < topSide) {
-            position.y = bottomSide - .5;
             this.direction = new Vector(0, -1 / offset);
+            this.running = new Vector(0, bottomSide / offset);
             this.transition = true;
         }
     }
@@ -100,7 +102,11 @@ export default class gameState {
     }
     scrollScreen(position, game) {
         if (index < offset - 1 && this.transition === true) {
+            if (index % 4 === 0) {
+                game.Link.frameAdjusted++;
+            }
             this.currentMap.position.add(position);
+            game.Link.position.add(this.running);
             index++;
         }
         else {
@@ -120,17 +126,6 @@ export default class gameState {
         }
         else {
             topSide = 0;
-            let dunLoc = [
-                [7, 3, 7, 4],
-                [12, 3, 7, 4],
-                [4, 7, 8, 4],
-                [5, 4, 8, 4],
-                [11, 0, 7, 4],
-                [2, 4, 7, 4],
-                [2, 2, 7, 4],
-                [13, 6, 10, 2],
-                [5, 0, 5, 6]
-            ];
             dunLoc.forEach(([oX, oY, lX, lY], index) => {
                 if (oX === this.currentMap.position.x &&
                     oY === this.currentMap.position.y &&

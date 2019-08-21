@@ -63,7 +63,12 @@ export default class Game {
         const { paused, transition } = this.gameState;
         let pauseMenu = this.pauseScreen.show();
         let pause = this.gameState.paused ? 0 : -360;
-        let linkLocation = [x * 32, y * 34 + 120, 30, 30];
+        let linkLocation = [
+            x * 32,
+            y * 34 + 120,
+            30,
+            30
+        ];
         this.camera.show(this.gameState.paused, this.gameState.currentMap, context);
         this.images[3].renderSprite(context, this.Link.show(), linkLocation);
         this.Link.slash(context, this.system, this.images[17]);
@@ -105,8 +110,8 @@ export default class Game {
                 ["Cave", "Cave"]
             ]);
             let button = document.createElement("button");
-            input = teleporter("tele", '15');
-            input2 = teleporter("porter", '7');
+            input = teleporter("tele", "15");
+            input2 = teleporter("porter", "7");
             button.innerText = " Tile Map Viewer";
             document.body.appendChild(button);
             document.body.appendChild(select);
@@ -172,12 +177,13 @@ export default class Game {
             let points = enem.show();
             enem.timing();
             enem.logic(context);
-            this.images[2].renderSprite(context, points, [
+            let location = [
                 enem.position.x * 32,
                 enem.position.y * 34 + 120,
                 30,
                 30
-            ]);
+            ];
+            this.images[2].renderSprite(context, points, location);
         });
         this.system.runCollisions();
         this.gameState.changeMap(this.Link.position, this);
@@ -194,18 +200,7 @@ export default class Game {
         Promise.all(images).then((response) => {
             response.forEach(res => {
                 let spriteSheet = new SpriteSheet(res, names[iterator]);
-                if (names[iterator] == "link") {
-                    spriteSheet.makeSprites(this.json);
-                }
-                if (names[iterator] == "enemy") {
-                    spriteSheet.makeSprites(this.json);
-                }
-                if (names[iterator] == "hud") {
-                    spriteSheet.makeSprites(this.json);
-                }
-                if (names[iterator] == "zeldaItems") {
-                    spriteSheet.makeSprites(this.json);
-                }
+                spriteSheet.makeSprites(this.json);
                 this.images.push(spriteSheet);
                 iterator++;
             });

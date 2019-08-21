@@ -1,10 +1,6 @@
 import Hud from "./hud.js";
 import Overworld from "../../overworld.js";
 export default class pauseScreen {
-    /**
-     *Creates an instance of pauseScreen.
-     * @memberof pauseScreen
-     */
     constructor(game) {
         this.frame = 0;
         this.blink = true;

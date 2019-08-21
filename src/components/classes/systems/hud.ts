@@ -2,12 +2,6 @@ import Game from "./game.js";
 import { Vector } from "../math/vector.js";
 import Camera from "./Camera.js";
 
-/**
- *
- *
- * @export
- * @class Hud
- */
 export default class Hud {
   rupees: any;
   bombs: any;
@@ -18,11 +12,7 @@ export default class Hud {
   blink: boolean;
   camera: Camera;
   game: Game;
-  /**
-   *Creates an instance of Hud.
-   * @param {Game} game
-   * @memberof Hud
-   */
+
   constructor(game: Game) {
     this.game = game;
     this.rupees = game.gameState.inventory.rupees;
@@ -34,6 +24,7 @@ export default class Hud {
     this.blink = false;
     this.camera = game.camera;
   }
+
   minimap(context: CanvasRenderingContext2D) {
     this.position = this.game.gameState.currentMap.position;
     this.frame++;
@@ -61,13 +52,7 @@ export default class Hud {
     context.fillRect(x, y, 9, 9);
     this.showHearts(context);
   }
-  /**
-   *
-   *
-   * @param {CanvasRenderingContext2D} context
-   * @param {Game} game
-   * @memberof Hud
-   */
+
   showHearts(context: CanvasRenderingContext2D) {
     let index = 0;
     this.hearts = this.game.Link.hearts;

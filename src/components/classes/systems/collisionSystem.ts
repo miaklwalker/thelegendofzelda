@@ -11,9 +11,17 @@ import Sword from "../actors/Sword.js";
 const tileWidth = 32;
 const tileHeight = 34;
 const hudOffset = 120;
-
+const actualX =(x:number)=> x * tileWidth;
+const actualY = (y:number)=>y * tileHeight + hudOffset;
 const square = [[0, 0], [0, 30], [30, 30], [30, 0]];
 
+/**
+ *
+ *
+ * @export
+ * @class CollisionSystem
+ * @description Provides a useful interface for the collision system
+ */
 export default class CollisionSystem {
   system: Collisions;
   results: Result;
@@ -40,9 +48,7 @@ export default class CollisionSystem {
    */
   addPlayer(Actor: Link | enemy | Sword) {
     const { x, y } = Actor.position;
-    const actualX = x * tileWidth;
-    const actualY = y * tileHeight + hudOffset;
-    let entity = this.system.createPolygon(actualX, actualY, square);
+    let entity = this.system.createPolygon(actualX(x), actualY(y), square);
     entity.id = Actor.id;
     entity.name = Actor.name;
     entity.sprite = Actor;
@@ -53,34 +59,31 @@ export default class CollisionSystem {
     }
   }
 
+  /**
+   *@name runCollisions
+   *@description
+   *
+   */
   runCollisions() {
     this.entities = [...this.sprites, ...this.enemies];
     this.entities.forEach(entity => {
       const { x, y } = entity.sprite.position;
-      const actualX = x * tileWidth;
-      const actualY = y * tileHeight + hudOffset;
-      entity.x = actualX;
-      entity.y = actualY;
+      entity.x = actualX(x);
+      entity.y = actualY(y);
       this.system.update();
       let potentials = entity.potentials();
       for (let body of potentials) {
         if (entity.collides(body, this.results)) {
-          const{a,b}=this.results
+          const { a, b } = this.results;
           if (entity.sprite.name !== "boulder") {
-            this.resolveCollision(a.sprite,b.sprite)
-            let message: Message;
-            const to = entity.name;
-            const from = "collisions";
-            const type = entity.id;
-            let data: string='none'
-            if (this.results.overlap_x > 0) {data = "right";}
-            if (this.results.overlap_x < 0) {data = "left";}
-            if (this.results.overlap_y > 0) {data = "down";}
-            if (this.results.overlap_y < 0) {data = "up";}
-            message = new Message(to,from,type,data)
+            this.resolveCollision(a.sprite, b.sprite);
             let cX = this.results.overlap_x * this.results.overlap;
             let cY = this.results.overlap_y * this.results.overlap;
             let correctionForce = new Vector(cX, cY);
+            if (this.results.a.sprite instanceof Sword) {
+              cX /= 2;
+              cY /= 2;
+            }
             correctionForce.div(24);
             entity.sprite.position.subtract(correctionForce);
           }
@@ -99,6 +102,7 @@ export default class CollisionSystem {
       return output as [[number, number, number, number, number]];
     }
   }
+
   parseMap(tilemap: number[]) {
     let output = [];
     for (let i = 0; i < tilemap.length / 5; i++) {
@@ -112,6 +116,7 @@ export default class CollisionSystem {
     }
     return output as [[number, number, number, number, number]];
   }
+
   remove(Actor: Sword | enemy) {
     for (let i = 0; i < this.sprites.length; i++) {
       if (this.sprites[i].sprite instanceof Sword) {
@@ -129,14 +134,14 @@ export default class CollisionSystem {
     }
   }
 
-  resolveCollision(a:Sword|enemy,b:enemy|Link){
-    if(b instanceof enemy){
-      if(a instanceof Sword){
-        b.health-=a.damage
+  resolveCollision(a: Sword | enemy, b: enemy | Link) {
+    if (b instanceof enemy) {
+      if (a instanceof Sword) {
+        b.health -= a.damage;
       }
-    }else if ( b instanceof Link){
-      if(a instanceof enemy){
-        b.health-=a.damage
+    } else if (b instanceof Link) {
+      if (a instanceof enemy) {
+        b.health -= a.damage;
       }
     }
   }
@@ -155,6 +160,7 @@ export default class CollisionSystem {
       this.system.update();
     }
   }
+
   drawSystem(context: CanvasRenderingContext2D) {
     context.clearRect(0, 120, 512, 480);
     context.beginPath();

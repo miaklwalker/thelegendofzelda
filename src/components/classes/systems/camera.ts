@@ -12,25 +12,27 @@ const canvasY = (pause: boolean) => pause ? 480 : 120;
 const sourceX = (x: number)=> x * mapX;
 const sourceY = (y: number) => y * mapY;
 
+/**
+ *
+ *
+ * @export
+ * @class Camera
+ * @description The camera displays a 512 X 360 chunk of whatever Map is passed to it
+ * 
+ */
 export default class Camera {
-  async show(
-    pause: boolean,
-    currentMap: Dungeon | Overworld,
-    context: CanvasRenderingContext2D
-  ) {
+
+  /**
+   *
+   *
+   * @param {boolean} pause Boolean declaring the game as paused or not 
+   * @param {(Dungeon | Overworld)} currentMap This is a instance of Dungeon or Overworld 
+   * @param {CanvasRenderingContext2D} context This is the main canvas rendering context for the game
+   * @memberof Camera
+   */
+  async show(pause: boolean,currentMap: Dungeon | Overworld,context: CanvasRenderingContext2D) {
     const { url, position: mapPosition } = currentMap;
     const { x, y } = mapPosition;
     const image = await loadImage(url);
-    context.drawImage(
-      image,
-      sourceX(x),
-      sourceY(y),
-      mapX,
-      height,
-      canvasX,
-      canvasY(pause),
-      screenWidth,
-      screenHeight
-    );
-  }
+    context.drawImage(image,sourceX(x),sourceY(y),mapX,height,canvasX,canvasY(pause),screenWidth,screenHeight)}
 }
