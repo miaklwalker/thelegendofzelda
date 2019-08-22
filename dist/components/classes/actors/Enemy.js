@@ -159,13 +159,7 @@ export default class enemy {
             }
         }
     }
-    /**
-     *
-     *
-     * @memberof enemy
-     */
-    stop() {
-    }
+    stop() { }
     /**
      *
      *

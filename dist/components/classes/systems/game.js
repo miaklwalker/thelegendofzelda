@@ -17,6 +17,7 @@ import { eraseTiles } from "../../functions/TileMapper/eraseTiles.js";
 import { showPoints } from "../../functions/TileMapper/showPoints.js";
 import teleporter from "../../functions/TileMapper/Teleporter.js";
 import Overworld from "../../overworld.js";
+import { actualX, actualY } from "../../functions/tileCorConvert.js";
 let debug = false;
 let teleport = false;
 document.addEventListener("keypress", event => {
@@ -64,8 +65,8 @@ export default class Game {
         let pauseMenu = this.pauseScreen.show();
         let pause = this.gameState.paused ? 0 : -360;
         let linkLocation = [
-            x * 32,
-            y * 34 + 120,
+            actualX(x),
+            actualY(y),
             30,
             30
         ];
@@ -178,8 +179,8 @@ export default class Game {
             enem.timing();
             enem.logic(context);
             let location = [
-                enem.position.x * 32,
-                enem.position.y * 34 + 120,
+                actualX(enem.position.x),
+                actualY(enem.position.y),
                 30,
                 30
             ];

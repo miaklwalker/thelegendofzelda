@@ -12,6 +12,7 @@ export default class inventory {
     bombs: number;
     bomb: boolean;
     arrow: boolean;
+    sword: number;
 
     constructor(){
         this.rupees = 0;
@@ -24,6 +25,6 @@ export default class inventory {
         this.bombs = 0 ;
         this.bomb = false;
         this.arrow = false;
-        
+        this.sword = 0
     }
 }

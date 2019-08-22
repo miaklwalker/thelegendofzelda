@@ -78,5 +78,19 @@ export default class Hud {
             }
         }
     }
+    showAbutton(context) {
+        context.fillStyle = 'black';
+        context.fillRect(303, 410, 18, 35);
+    }
+    showBbutton(context) {
+        context.fillStyle = 'black';
+        context.fillRect(255, 410, 18, 36);
+    }
+    showRupees() {
+    }
+    showBombs() {
+    }
+    showKeys() {
+    }
 }
 //# sourceMappingURL=hud.js.map

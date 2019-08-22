@@ -1,18 +1,15 @@
 import { Collisions, Polygon } from "../../Collisions/Collisions.js";
 import { Result } from "../../Collisions/Collisions.js";
 import Game from "./game.js";
-import Message from "./message.js";
 import { Vector } from "../math/vector.js";
 import enemy from "../actors/Enemy.js";
 import Link from "../actors/link.js";
 import { shapes } from "../../functions/TileMapper/createTileMap.js";
 import Sword from "../actors/Sword.js";
+import Message from "./message.js";
+import { direction } from "../../functions/directionMessage.js";
+import { actualX, actualY } from "../../functions/tileCorConvert.js";
 
-const tileWidth = 32;
-const tileHeight = 34;
-const hudOffset = 120;
-const actualX =(x:number)=> x * tileWidth;
-const actualY = (y:number)=>y * tileHeight + hudOffset;
 const square = [[0, 0], [0, 30], [30, 30], [30, 0]];
 
 /**
@@ -74,16 +71,13 @@ export default class CollisionSystem {
       let potentials = entity.potentials();
       for (let body of potentials) {
         if (entity.collides(body, this.results)) {
-          const { a, b } = this.results;
+          const { a, b, overlap, overlap_x, overlap_y } = this.results;
           if (entity.sprite.name !== "boulder") {
+            this.game.messageCenter.add(new Message(...direction(this.results)))
             this.resolveCollision(a.sprite, b.sprite);
-            let cX = this.results.overlap_x * this.results.overlap;
-            let cY = this.results.overlap_y * this.results.overlap;
+            let cX = overlap_x * overlap;
+            let cY = overlap_y * overlap;
             let correctionForce = new Vector(cX, cY);
-            if (this.results.a.sprite instanceof Sword) {
-              cX /= 2;
-              cY /= 2;
-            }
             correctionForce.div(24);
             entity.sprite.position.subtract(correctionForce);
           }

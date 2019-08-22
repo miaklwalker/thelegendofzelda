@@ -93,4 +93,21 @@ export default class Hud {
       }
     }
   }
+  showAbutton(context:CanvasRenderingContext2D){
+    context.fillStyle = 'black'
+    context.fillRect(303,410,18,35)
+  }
+  showBbutton(context:CanvasRenderingContext2D){
+    context.fillStyle = 'black'
+    context.fillRect(255,410,18,36)
+  }
+  showRupees(){
+
+  }
+  showBombs(){
+    
+  }
+  showKeys(){
+    
+  }
 }

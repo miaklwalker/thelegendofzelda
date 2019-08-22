@@ -1,4 +1,5 @@
 import { Vector } from "../math/vector.js";
+import { actualX, actualY } from "../../functions/tileCorConvert.js";
 export default class shot {
     constructor(x, y, vx, vy, name) {
         this.name = name;
@@ -10,6 +11,7 @@ export default class shot {
         this.height = 30;
     }
     show(context) {
+        const { x, y } = this.position;
         this.shown = true;
         context.fillStyle = 'black';
         this.speed.add(this.velocity);
@@ -18,7 +20,7 @@ export default class shot {
         if (this.name.includes('octo')) {
             context.fillStyle = 'saddleBrown';
             context.beginPath();
-            context.ellipse(this.position.x * 32, this.position.y * 34 + 120, 10, 10, 0, 0, Math.PI * 2);
+            context.ellipse(actualX(x), actualY(y), 10, 10, 0, 0, Math.PI * 2);
             context.fill();
         }
     }
