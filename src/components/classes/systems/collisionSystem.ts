@@ -1,14 +1,13 @@
 import { Collisions, Polygon } from "../../Collisions/Collisions.js";
 import { Result } from "../../Collisions/Collisions.js";
 import Game from "./game.js";
-import { Vector } from "../math/vector.js";
 import enemy from "../actors/Enemy.js";
 import Link from "../actors/link.js";
 import { shapes } from "../../functions/TileMapper/createTileMap.js";
 import Sword from "../actors/Sword.js";
-import Message from "./message.js";
-import { direction } from "../../functions/directionMessage.js";
+import {reset } from "../../functions/directionMessage.js";
 import { actualX, actualY } from "../../functions/tileCorConvert.js";
+import collisionParser from "../../functions/collisionParser.js";
 
 const square = [[0, 0], [0, 30], [30, 30], [30, 0]];
 
@@ -71,16 +70,9 @@ export default class CollisionSystem {
       let potentials = entity.potentials();
       for (let body of potentials) {
         if (entity.collides(body, this.results)) {
-          const { a, b, overlap, overlap_x, overlap_y } = this.results;
-          if (entity.sprite.name !== "boulder") {
-            this.game.messageCenter.add(new Message(...direction(this.results)))
-            this.resolveCollision(a.sprite, b.sprite);
-            let cX = overlap_x * overlap;
-            let cY = overlap_y * overlap;
-            let correctionForce = new Vector(cX, cY);
-            correctionForce.div(24);
-            entity.sprite.position.subtract(correctionForce);
-          }
+          collisionParser(this.results,this.game.messageCenter)
+        }else{
+          reset()
         }
       }
     });
@@ -128,17 +120,6 @@ export default class CollisionSystem {
     }
   }
 
-  resolveCollision(a: Sword | enemy, b: enemy | Link) {
-    if (b instanceof enemy) {
-      if (a instanceof Sword) {
-        b.health -= a.damage;
-      }
-    } else if (b instanceof Link) {
-      if (a instanceof enemy) {
-        b.health -= a.damage;
-      }
-    }
-  }
 
   makeScreen(tilemap: [[number, number, number, number, number]]) {
     if (tilemap !== undefined) {

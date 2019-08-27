@@ -145,6 +145,8 @@ export default class gameState {
         if (msg.from === "controls") {
             //@ts-ignore
             this[msg.type] = !this[msg.type];
+            //@ts-ignore
+            console.log(this[msg.type]);
         }
     }
 }

@@ -1,6 +1,7 @@
 import controlsConfig from "./controlsConfig.js";
 import MessageQueue from "./messageQueue.js";
 import Message from "./message.js";
+import { reset } from "../../functions/directionMessage.js";
 let to: string;
 let from = "controls";
 let type: string;
@@ -60,6 +61,7 @@ export default class Controls {
     document.addEventListener("keyup", event => {
       for (let i = 0; i < keys.length; i++) {
         if (event.code === values[i] && this.keyUp !== keys[i]) {
+          reset()
           this.keyUp = keys[i];
         }
       }

@@ -82,6 +82,9 @@ export default class Game {
             this.rungame(context);
             this.messageCenter.dispatch();
         }
+        else {
+            this.messageCenter.pauseMenuDispatch();
+        }
         if (debug) {
             if (this.gameState.currentMap instanceof Overworld) {
                 this.gameState.currentMap.debug();

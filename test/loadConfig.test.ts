@@ -1,3 +1,6 @@
+
+
+test('s',()=>{expect(2+2).toEqual(4)})
 // const mockJsYaml = {
 //     safeLoad: jest.fn()
 // };

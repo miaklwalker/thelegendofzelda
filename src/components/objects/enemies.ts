@@ -1,13 +1,4 @@
-export let enemyIndex: {
-  [index:string]:number
-  octo: number;
-  blueOcto: number;
-  moblin: number;
-  blueMoblin: number;
-  lynel: number;
-  blueLynel: number;
-  boulder:number;
-} = {
+export let enemyIndex: {[index:string]:number} = {
   octo: 0,
   blueOcto: 1,
   moblin: 2,

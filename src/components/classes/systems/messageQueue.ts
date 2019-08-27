@@ -40,6 +40,16 @@ export default class MessageQueue {
             this.messages.splice(i,1);
         }
     }
+    pauseMenuDispatch(){
+        for (let i = 0; i < this.messages.length; i++) {
+            let msg = this.messages[i];
+            if(msg.type==='paused'){
+            this.game.gameState.onMessage(msg)
+            this.entities.forEach((entity:Link|enemy)=>{entity.onMessage(msg)})
+        }
+            this.messages.splice(i,1);
+        }
+    }
     
     purge() {
         this.entities = [];

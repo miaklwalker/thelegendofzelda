@@ -1,6 +1,7 @@
 import { Vector } from "../math/vector.js";
 import uniqueId from "../../functions/uniqueId.js";
 import Sword from "./Sword.js";
+import { wallHit } from "../../functions/directionMessage.js";
 let once = false;
 let timer = 0;
 /**
@@ -24,28 +25,41 @@ export default class Link {
         this.shield = "big";
         this.direction = "right";
         this.blocked = [];
+        this.hurt = [false, 0];
+        this.left = false;
+        this.right = false;
+        this.up = false;
+        this.down = false;
     }
     show() {
+        if (this.hurt[1] !== 0) {
+            this.hurt[0] = true;
+            this.hurt[1]--;
+        }
+        else {
+            this.hurt[0] = false;
+        }
         let str = `link-${this.action}-${this.direction}-${(this.frameAdjusted %
             2) +
             1}-${this.shield}`;
         return str;
     }
     move(msg) {
-        if (msg.from === "controls") {
-            this.direction = msg.data;
-        }
-        if (msg.data === "right") {
-            this.velocity.x += 0.2;
-        }
-        if (msg.data === "down") {
-            this.velocity.y += 0.2;
-        }
-        if (msg.data === "left") {
-            this.velocity.x -= 0.2;
-        }
-        if (msg.data === "up") {
-            this.velocity.y -= 0.2;
+        this.direction = msg.data;
+        this.reset();
+        if (!this[msg.data]) {
+            if (msg.data === "right") {
+                this.velocity.x += 0.2;
+            }
+            if (msg.data === "down") {
+                this.velocity.y += 0.2;
+            }
+            if (msg.data === "left") {
+                this.velocity.x -= 0.2;
+            }
+            if (msg.data === "up") {
+                this.velocity.y -= 0.2;
+            }
         }
         this.position.add(this.velocity);
         this.velocity.mult(0);
@@ -73,6 +87,12 @@ export default class Link {
             once = false;
             system.remove(sword);
         }
+    }
+    reset() {
+        this.right = wallHit[0];
+        this.left = wallHit[1];
+        this.down = wallHit[2];
+        this.up = wallHit[3];
     }
     onMessage(msg) {
         if (msg.from === "controls" && msg.type === "direction") {
