@@ -26,10 +26,12 @@ export default class CollisionSystem {
   game: Game;
   enemies: Polygon[];
   entities: Polygon[];
+  entrances: Polygon[];
   constructor(game: Game) {
     this.system = new Collisions();
     this.results = new Result();
     this.tiles = [];
+    this.entrances=[]
     this.sprites = [];
     this.enemies = [];
     this.entities = [...this.sprites, ...this.enemies];
@@ -53,6 +55,9 @@ export default class CollisionSystem {
     } else {
       this.sprites.push(entity);
     }
+  }
+  addEntrance(){
+
   }
 
   /**

@@ -19,6 +19,7 @@ export default class CollisionSystem {
         this.system = new Collisions();
         this.results = new Result();
         this.tiles = [];
+        this.entrances = [];
         this.sprites = [];
         this.enemies = [];
         this.entities = [...this.sprites, ...this.enemies];
@@ -43,6 +44,8 @@ export default class CollisionSystem {
         else {
             this.sprites.push(entity);
         }
+    }
+    addEntrance() {
     }
     /**
      *@name runCollisions

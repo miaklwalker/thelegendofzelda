@@ -23,6 +23,7 @@ import { actualX, actualY } from "../../functions/tileCorConvert.js";
 
 let debug = false;
 let teleport = false;
+let cave = false;
 document.addEventListener("keypress", event => {
   if (event.key === "d") {
     console.log(`debugger: ${!debug}`);
@@ -32,6 +33,11 @@ document.addEventListener("keypress", event => {
     console.log(`teleport:${!teleport}`);
     teleport = !teleport;
   }
+  if (event.key === "c") {
+    console.log(`Cave:${!cave}`);
+    cave = !cave;
+  }
+  
 });
 
 /**
@@ -75,7 +81,9 @@ export default class Game {
     this.pauseScreen = new PauseScreen(this);
     this.messageCenter = new MessageQueue(this);
     this.images = [];
+    //todo delete in final game
     this.debugger = false;
+    //
     this.once = false;
     this.toggle = true;
   }
@@ -104,9 +112,14 @@ export default class Game {
     }else{
       this.messageCenter.pauseMenuDispatch()
     }
+//todo delete in final product
     if (debug) {
       if (this.gameState.currentMap instanceof Overworld) {
-        this.gameState.currentMap.debug();
+        if(cave){
+        this.gameState.currentMap.cave();
+        }else{
+          this.gameState.currentMap.debug();
+        }
       }
       this.debugMode(context);
     } else {
@@ -114,6 +127,7 @@ export default class Game {
         this.gameState.currentMap.normal();
       }
     }
+  //todo stop here
   }
   debugMode(context: CanvasRenderingContext2D) {
     let select: HTMLSelectElement;
@@ -210,7 +224,7 @@ export default class Game {
 
     this.system.runCollisions();
     this.gameState.changeMap(this.Link.position, this);
-    this.gameState.changeScreen(this.Link.position, this);
+    this.gameState.changeScreen(this.Link.position);
   }
   loadFiles() {
     this.gameState.maps.forEach(map => loadImage(map.url));

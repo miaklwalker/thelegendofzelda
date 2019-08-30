@@ -70,7 +70,7 @@ export default class gameState {
             this.currentMap = this.maps[num];
         }
     }
-    changeScreen(position, game) {
+    changeScreen(position) {
         if (position.x > rightSide) {
             this.direction = new Vector(1 / offset, 0);
             this.running = new Vector(-rightSide / offset, 0);
@@ -94,8 +94,12 @@ export default class gameState {
     }
     makeScreen(game) {
         let map = this.currentMap.position;
-        let index = `${map.x},${map.y}`;
-        let tiller = game.config[Worldmaps[this.mapNum]][index].hitBoxes;
+        let index = `${Math.round(map.x)},${Math.round(map.y)}`;
+        console.log(index);
+        let tile = game.config[Worldmaps[this.mapNum]][index];
+        console.log(tile.secrets.location);
+        let tiller = [tile.hitBoxes, tile.secrets.location].flat();
+        console.log(tiller);
         let tilemap = game.system.createMap(tiller);
         game.system.makeScreen(tilemap);
         game.newScreen(index);
@@ -146,7 +150,6 @@ export default class gameState {
             //@ts-ignore
             this[msg.type] = !this[msg.type];
             //@ts-ignore
-            console.log(this[msg.type]);
         }
     }
 }

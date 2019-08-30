@@ -1,6 +1,7 @@
 import { selectFactory } from "../makeSelect.js";
 import { sets, setsString, SecretObject } from "./Sets.js";
 import map from "./tileMap.js";
+import { enemies } from "../../objects/enemies.js";
 
 let topleft = [[0, 0], [32, 0], [0, 34],[1,0]];
 let topright = [[0, 0], [32, 0], [32, 32],[1,0]];
@@ -11,11 +12,15 @@ let botHalf = [[0,34/2],[0,34],[32,34],[32,34/2]]
 let topHalf = [[0,0],[0,34/2],[32,34/2],[32,0]]
 let leftHalf = [[0,0],[0,34],[32/2,34],[32/2,0]]
 let rightHalf = [[32/2,0],[32/2,34],[32,34],[32,0]]
+
 export let shapes = [topleft, topright, botleft, botright, square,botHalf,topHalf,leftHalf,rightHalf];
-let secretTypes = [['Bombable','bombable'],['Burnable','burnable'],['Flute','flute'],['Pushable','pushable']]
+let secretConditions = [['Bombable','bombable'],['Burnable','burnable'],['Flute','flute'],['Pushable','pushable']]
+let enemiesTypes = Object.keys(enemies).map(key=>[key,key]);
+
 
 function createTileMap() {
   let select3:HTMLSelectElement
+  let select4:HTMLSelectElement
   let shape = document.getElementById("Select") as HTMLSelectElement;
   let type = document.getElementById("type") as HTMLSelectElement;
 
@@ -23,7 +28,7 @@ function createTileMap() {
     let typeValue: string = type.value;
     if(typeValue==='Secret'){
       if(document.getElementById('secretType')===null){
-      select3 = selectFactory('secretType',secretTypes)
+      select3 = selectFactory('secretType',secretConditions)
       document.body.appendChild(select3)
       }
     }else{
@@ -43,7 +48,6 @@ function createTileMap() {
           if(typeValue==='Secret'){
           secret = {location:[map[i][0], map[i][1], 32, 34, shapeCode],type:select3.value}
           JSON.stringify(secret)
-
           SecretObject.delete(JSON.stringify(secret))
           }
           currentSet.delete(JSON.stringify([map[i][0], map[i][1], 32, 34, shapeCode]));

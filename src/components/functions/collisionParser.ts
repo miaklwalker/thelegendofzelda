@@ -6,24 +6,24 @@ import { direction } from "./directionMessage.js";
 import Message from "../classes/systems/message.js";
 import { Vector } from "../classes/math/vector.js";
 import MessageQueue from "../classes/systems/messageQueue.js";
-
-let collisionBehavior = (result:Result,player:any)=>{
-  let divisor = new Vector(32,34)
+let Corrector=(result:Result)=>{
   const { overlap, overlap_x, overlap_y } = result;
+  let divisor = new Vector(32,34)
   let cX = overlap_x * overlap;
   let cY = overlap_y * overlap;
   let correctionForce = new Vector(cX, cY);
   correctionForce.div(divisor);
-  player.position.subtractX(correctionForce);
+  return correctionForce
+}
+
+let collisionBehavior = (result:Result,player:any)=>{
+let correctionForce = Corrector(result)
+player.position.subtractX(correctionForce);
 }
 
 let swordCollision = (sword: Sword, other: enemy, result: Result) => {
   if (other instanceof enemy) {
-    const { a, b, overlap, overlap_x, overlap_y } = result;
-    let cX = overlap_x * overlap;
-    let cY = overlap_y * overlap;
-    let correctionForce = new Vector(cX, cY);
-    correctionForce.div(24);
+    let correctionForce = Corrector(result)
     other.health -= sword.damage;
     if (result.overlap_x > 0) {
       other.position.addX(correctionForce);
@@ -47,7 +47,8 @@ let swordCollision = (sword: Sword, other: enemy, result: Result) => {
 let boulderCollision=(boulder: enemy, player: Link, result: Result)=> {
   let all = [boulder,player].every(el=>el.name==='boulder');
   if(!all){
-
+    let correctionForce = Corrector(result);
+    player.position.subtractX(correctionForce);
   }
   }
 
@@ -81,10 +82,7 @@ function collisionParser(result: Result, messageCenter: MessageQueue) {
     let arr = [a.sprite,b.sprite].filter(el=>el!==undefined)
     if(arr[0].name!=='boulder'){
     messageCenter.add(new Message(...direction(result)));
-    let cX = overlap_x * overlap;
-    let cY = overlap_y * overlap;
-    let correctionForce = new Vector(cX, cY);
-    correctionForce.div(24);
+    let correctionForce = Corrector(result)
     a.sprite.position.subtract(correctionForce);
     }
   }

@@ -15,4 +15,9 @@ export default class Overworld {
     }
     normal(){
         this.url= "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/overworld/zelda-overworld.png"
-}}
+}
+    cave(){
+    this.url = "https://raw.githubusercontent.com/miaklwalker/thelegendofzelda/master/images/overworld/zelda-overworld(grottos).png"
+}
+
+}

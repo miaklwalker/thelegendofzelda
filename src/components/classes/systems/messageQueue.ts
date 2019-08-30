@@ -18,20 +18,16 @@ export default class MessageQueue {
         this.entities = [];
         this.game = game;
     }
-
     add(msg: Message) {
         this.messages.push(msg);
     }
-
     clearMessages(){
         this.messages=[]
     }
-
     addEntities(...entity:any) {
         let entities = [...entity]
         entities.forEach(one=>{this.entities.push(one)})
     }
-
     dispatch() {
         for (let i = 0; i < this.messages.length; i++) {
             let msg = this.messages[i];
@@ -50,7 +46,6 @@ export default class MessageQueue {
             this.messages.splice(i,1);
         }
     }
-    
     purge() {
         this.entities = [];
     }

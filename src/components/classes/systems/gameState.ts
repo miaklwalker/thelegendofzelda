@@ -13,12 +13,14 @@ import { Vector } from "../math/vector.js";
 import Message from "./message.js";
 import Game from "./game.js";
 import Dungeon from "../dungeons/dungeons.js";
+
 let index = 0;
 let leftSide = -1
 let topSide = 1 
 let rightSide = 16
 let bottomSide = 10.5
 let offset = 100
+
 let Worldmaps = [
   "OverWorld",
   "dungeonOne",
@@ -31,6 +33,7 @@ let Worldmaps = [
   "dungeonEight",
   "dungeonNine"
 ];
+
 let dunLoc = [
   [7, 3, 7, 4],
   [12, 3, 7, 4],
@@ -73,7 +76,6 @@ export default class gameState {
     this.direction = new Vector()
     this.running = new Vector();
   }
-
   set Map(num: number) {
     if (num < 0 || num > 9) {
       throw new Error("Dungeon not found");
@@ -82,8 +84,7 @@ export default class gameState {
       this.currentMap = this.maps[num];
     }
   }
-
-  changeScreen(position: Vector, game: Game) {
+  changeScreen(position: Vector) {
     if (position.x > rightSide) {
       this.direction = new Vector(1/offset,0)
       this.running = new Vector(-rightSide/offset,0)
@@ -104,20 +105,21 @@ export default class gameState {
       this.running = new Vector(0,bottomSide/offset)
       this.transition = true;
     }
-
   }
-
   makeScreen(game: Game){
     let map = this.currentMap.position;
-      let index: string = `${map.x},${map.y}`;
-      let tiller = game.config[Worldmaps[this.mapNum]][index].hitBoxes;
+      let index: string = `${Math.round(map.x)},${Math.round(map.y)}`;
+      console.log(index)
+      let tile = game.config[Worldmaps[this.mapNum]][index];
+      console.log(tile.secrets.location)
+      let tiller = [tile.hitBoxes,tile.secrets.location].flat()
+      console.log(tiller)
       let tilemap = game.system.createMap(tiller) as [
         [number, number, number, number, number]
       ];
       game.system.makeScreen(tilemap);
       game.newScreen(index);
   }
-
   scrollScreen(position:Vector,game:Game){
     if(index<offset-1&&this.transition===true){
       if(index%4===0){game.Link.frameAdjusted++}
@@ -132,7 +134,6 @@ export default class gameState {
       this.makeScreen(game)
     }
   }
-
   changeMap(position: Vector,game:Game) {
     if (this.currentMap !== this.maps[0]) {
       topSide = 1
@@ -158,13 +159,11 @@ export default class gameState {
       });
     }
   }
-
   onMessage(msg: Message) {
     if (msg.from === "controls") {
       //@ts-ignore
       this[msg.type] = !this[msg.type];
       //@ts-ignore
-      console.log(this[msg.type])
     }
   }
 }
