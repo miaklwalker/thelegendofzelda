@@ -5,10 +5,7 @@ export function showTileMap(
     context: CanvasRenderingContext2D
   ) {
     if (tilemap !== undefined) {
-      console.log(tilemap);
-  
       for (let tile = 0; tile < tilemap.length; tile++) {
-        console.log(tilemap[tile]);
         context.beginPath();
         context.moveTo(
           shapes[tilemap[tile][4]][0][0] + tilemap[tile][0],

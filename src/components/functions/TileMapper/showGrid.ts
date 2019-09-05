@@ -30,8 +30,3 @@ function showGrid(ctx:CanvasRenderingContext2D){
 
 }
 export default showGrid
-/*
-[0,120,32,34]
-
-
-*/

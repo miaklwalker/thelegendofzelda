@@ -2,6 +2,7 @@ import { selectFactory } from "../makeSelect.js";
 import { sets, setsString, SecretObject } from "./Sets.js";
 import map from "./tileMap.js";
 import { enemies } from "../../objects/enemies.js";
+import { subtypes, conditions } from "../../objects/secretInterfaces.js";
 
 let topleft = [[0, 0], [32, 0], [0, 34],[1,0]];
 let topright = [[0, 0], [32, 0], [32, 32],[1,0]];
@@ -14,28 +15,40 @@ let leftHalf = [[0,0],[0,34],[32/2,34],[32/2,0]]
 let rightHalf = [[32/2,0],[32/2,34],[32,34],[32,0]]
 
 export let shapes = [topleft, topright, botleft, botright, square,botHalf,topHalf,leftHalf,rightHalf];
-let secretConditions = [['Bombable','bombable'],['Burnable','burnable'],['Flute','flute'],['Pushable','pushable']]
+let secretConditions = conditions
 let enemiesTypes = Object.keys(enemies).map(key=>[key,key]);
-
-
+let keys = Object.keys(subtypes).map(el=>[el,el])
+let keySel = selectFactory('Types',keys)
 function createTileMap() {
   let select3:HTMLSelectElement
   let select4:HTMLSelectElement
+  let select5:HTMLSelectElement
   let shape = document.getElementById("Select") as HTMLSelectElement;
   let type = document.getElementById("type") as HTMLSelectElement;
-
   document.addEventListener("click", event => {
     let typeValue: string = type.value;
+    let selection = keySel.value
+    console.log(selection);
+    let subkeys = selectFactory('subTypes',Object.keys(subtypes[selection]).map(el=>[el,el]))
+    console.log(subkeys)
+    let sType = document.getElementById('secretType')
     if(typeValue==='Secret'){
-      if(document.getElementById('secretType')===null){
+      if(sType===null){
       select3 = selectFactory('secretType',secretConditions)
+      select4 = keySel
+      select5 = subkeys
+      document.body.appendChild(select4)
+      document.body.appendChild(select5)
       document.body.appendChild(select3)
       }
     }else{
-      if(document.getElementById('secretType')!==null){
+      if(sType!==null){
         let s3 = document.getElementById('secretType') as HTMLSelectElement
+        let s4 = document.getElementById('Types') as HTMLSelectElement
+        let s5 = document.getElementById('subTypes') as HTMLSelectElement
+        document.body.removeChild(s5)
         document.body.removeChild(s3)
-
+        document.body.removeChild(s4)
         }
     }
     let shapeCode: string = shape.value;

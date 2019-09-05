@@ -125,7 +125,8 @@ export default class Game {
                 ["Tile", "Block"],
                 ["Spawn", "Spawn"],
                 ["Secret", "Secret"],
-                ["Cave", "Cave"]
+                ["Cave", "Cave"],
+                ["dungeon", "dungeon"]
             ]);
             let button = document.createElement("button");
             input = teleporter("tele", "15");
