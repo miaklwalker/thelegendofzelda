@@ -110,6 +110,7 @@ export default class gameState {
     let map = this.currentMap.position;
       let index: string = `${Math.round(map.x)},${Math.round(map.y)}`;
       console.log(index)
+      console.log('hello World')
       let tile = game.config[Worldmaps[this.mapNum]][index];
       console.log(tile.secrets.location)
       let tiller = [tile.hitBoxes,tile.secrets.location].flat()

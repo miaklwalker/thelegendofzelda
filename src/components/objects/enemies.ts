@@ -61,7 +61,7 @@ export let enemies: {
     name: "lynel",
     x: Math.floor(Math.random() * 14),
     y: Math.floor(Math.random() * 8),
-    behaviors: ["walk", "stop", "shoot"],
+    behaviors: ["walk", "stop", /*"shoot"*/],
     health: 4,
     color: "red",
     damage:2
@@ -70,7 +70,7 @@ export let enemies: {
     name: "lynel",
     x: Math.floor(Math.random() * 14),
     y: Math.floor(Math.random() * 8),
-    behaviors: ["walk", "stop", "shoot"],
+    behaviors: ["walk", "stop", /*"shoot"*/],
     health: 6,
     color: "blue",
     damage:2

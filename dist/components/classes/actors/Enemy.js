@@ -24,7 +24,7 @@ export default class enemy {
         this.damage = Spawn.damage;
         this.health = Spawn.health;
         this.name = Spawn.name;
-        this.action = "walk";
+        this.action = 'walk';
         this.color = Spawn.color;
         this.direction = "down";
         this.shot = null;
@@ -39,15 +39,9 @@ export default class enemy {
      * @memberof enemy
      */
     show() {
-        let action;
         let frame = this.jumpTimer > 0 ? 1 : this.frames % 2;
-        if (this.name.includes('tektite')) {
-            action = 'jump';
-        }
-        else {
-            action = 'walk';
-        }
-        let str = `${this.color}-${this.name}-${action}-${this.direction}-${frame + 1}`;
+        let stance = this.name.includes('tektite') ? 'jump' : 'walk';
+        let str = `${this.color}-${this.name}-${stance}-${this.direction}-${frame + 1}`;
         return str;
     }
     /**
@@ -56,6 +50,7 @@ export default class enemy {
      * @memberof enemy
      */
     timing() {
+        // every sixteen frames the enemy frame counter advances
         if (this.counter % 16 === 0) {
             this.frames++;
         }

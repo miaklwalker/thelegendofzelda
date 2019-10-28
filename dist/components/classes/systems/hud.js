@@ -11,6 +11,14 @@ export default class Hud {
         this.blink = false;
         this.camera = game.camera;
     }
+    show(context) {
+        this.minimap(context);
+        this.showHearts(context);
+        this.showAbutton(context);
+        this.showBbutton(context);
+        this.showBombs(context);
+        this.showRupees(context);
+    }
     minimap(context) {
         this.position = this.game.gameState.currentMap.position;
         this.frame++;
@@ -79,18 +87,45 @@ export default class Hud {
         }
     }
     showAbutton(context) {
-        context.fillStyle = 'black';
+        context.fillStyle = "black";
         context.fillRect(303, 410, 18, 35);
     }
     showBbutton(context) {
-        context.fillStyle = 'black';
+        context.fillStyle = "black";
         context.fillRect(255, 410, 18, 36);
     }
-    showRupees() {
+    showRupees(context) {
+        let space = 0;
+        const x = 192;
+        const y = 390;
+        const w = 16;
+        const h = 36;
+        for (let i = 0; i < 3; i++) {
+            context.fillRect(x + space * w, y, w, h);
+            space++;
+        }
     }
-    showBombs() {
+    showBombs(context) {
+        let space = 0;
+        const x = 192.1;
+        const y = 427;
+        const w = 16.2;
+        const h = 36;
+        for (let i = 0; i < 3; i++) {
+            context.fillRect(x + space * w, y, w, h);
+            space++;
+        }
     }
-    showKeys() {
+    showKeys(context) {
+        let space = 0;
+        const x = 192;
+        const y = 409;
+        const w = 16;
+        const h = 36;
+        for (let i = 0; i < 3; i++) {
+            context.fillRect(x + space * w, y, w, h);
+            space++;
+        }
     }
 }
 //# sourceMappingURL=hud.js.map

@@ -26,9 +26,8 @@ export default class pauseScreen {
     images[9].renderSprite(context, "Inventory", [0, 0, 512, 166]);
     images[9].renderSprite(context, middle, [0, 166, 512, 195]);
     images[9].renderSprite(context, "Hud", [0, 360, 512, 120]);
-    this.hud.minimap(context);
-    this.hud.showAbutton(context)
-    this.hud.showBbutton(context)
+    this.hud.show(context)
+   
     return canvas;
   }
 }

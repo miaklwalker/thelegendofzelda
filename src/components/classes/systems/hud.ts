@@ -24,7 +24,14 @@ export default class Hud {
     this.blink = false;
     this.camera = game.camera;
   }
-
+  show(context: CanvasRenderingContext2D) {
+    this.minimap(context);
+    this.showHearts(context);
+    this.showAbutton(context);
+    this.showBbutton(context);
+    this.showBombs(context);
+    this.showRupees(context);
+  }
   minimap(context: CanvasRenderingContext2D) {
     this.position = this.game.gameState.currentMap.position;
     this.frame++;
@@ -56,7 +63,7 @@ export default class Hud {
   showHearts(context: CanvasRenderingContext2D) {
     let index = 0;
     this.hearts = this.game.Link.hearts;
-    let hearts = this.hearts
+    let hearts = this.hearts;
     let health = this.game.Link.health;
     for (let i = 0; i < 2; i++) {
       for (let j = 0; j < 8; j++) {
@@ -87,27 +94,51 @@ export default class Hud {
           ]);
         } else {
           context.fillStyle = "black";
-          context.fillRect(x,y,width,height);
+          context.fillRect(x, y, width, height);
         }
         index++;
       }
     }
   }
-  showAbutton(context:CanvasRenderingContext2D){
-    context.fillStyle = 'black'
-    context.fillRect(303,410,18,35)
+  showAbutton(context: CanvasRenderingContext2D) {
+    context.fillStyle = "black";
+    context.fillRect(303, 410, 18, 35);
   }
-  showBbutton(context:CanvasRenderingContext2D){
-    context.fillStyle = 'black'
-    context.fillRect(255,410,18,36)
+  showBbutton(context: CanvasRenderingContext2D) {
+    context.fillStyle = "black";
+    context.fillRect(255, 410, 18, 36);
   }
-  showRupees(){
-
+  showRupees(context: CanvasRenderingContext2D) {
+    let space = 0
+    const x = 192
+    const y = 390
+    const w = 16
+    const h = 36
+    for(let i = 0 ; i < 3 ; i++){
+      context.fillRect(x+space*w,y,w,h);
+      space++  
+    }
   }
-  showBombs(){
-    
+  showBombs(context: CanvasRenderingContext2D) {
+    let space = 0
+    const x = 192.1
+    const y = 427
+    const w = 16.2
+    const h = 36
+    for(let i = 0 ; i < 3 ; i++){
+      context.fillRect(x+space*w,y,w,h);
+      space++  
+    }
   }
-  showKeys(){
-    
+  showKeys(context: CanvasRenderingContext2D) {
+    let space = 0
+    const x = 192
+    const y = 409
+    const w = 16
+    const h = 36
+    for(let i = 0 ; i < 3 ; i++){
+      context.fillRect(x+space*w,y,w,h);
+      space++  
+    }
   }
 }

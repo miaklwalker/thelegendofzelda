@@ -1,6 +1,7 @@
 import makeCanvas from "./components/functions/makeCanvas.js";
 import Game from "./components/classes/systems/game.js";
 import loadJson from "./components/functions/getJson.js";
+import loadFiles from "./components/functions/loadFiles.js";
 
 let canvas = makeCanvas() as HTMLCanvasElement;
 let ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
@@ -12,7 +13,7 @@ async function preload() {
   let data = await loadJson("../json/game.json");
   let config = await loadJson("../json/Gameconfig.json")
   game = new Game(512, 480, data,config);
-  game.loadFiles();
+  loadFiles(game);
   playButton()
   
 }
