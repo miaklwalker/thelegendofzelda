@@ -107,7 +107,7 @@ export default class Hud {
     }
     showBombs(context) {
         let space = 0;
-        const x = 192.1;
+        const x = 192.3;
         const y = 427;
         const w = 16.2;
         const h = 36;

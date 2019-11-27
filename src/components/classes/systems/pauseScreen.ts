@@ -24,7 +24,7 @@ export default class pauseScreen {
     let context = canvas.getContext("2d") as CanvasRenderingContext2D;
     let middle = gameState.currentMap instanceof Overworld ? "Triforce": "dungeonMap";
     images[9].renderSprite(context, "Inventory", [0, 0, 512, 166]);
-    images[9].renderSprite(context, middle, [0, 166, 512, 195]);
+    images[9].renderSprite(context, middle, [0, 165, 512, 196]);
     images[9].renderSprite(context, "Hud", [0, 360, 512, 120]);
     this.hud.show(context)
    
