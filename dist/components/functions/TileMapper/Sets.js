@@ -1,0 +1,10 @@
+export let Block = new Set();
+export let Spawn = new Set();
+export let Secret = new Set();
+export let SecretObject = new Set();
+export let Cave = new Set();
+export let sets = [Block, Spawn, Secret, Cave];
+export let outSets = [Block, Spawn, SecretObject, Cave];
+export let allSets = [Block, Spawn, SecretObject, Secret, Cave];
+export let setsString = ["Block", "Spawn", "Secret", "Cave"];
+//# sourceMappingURL=Sets.js.map

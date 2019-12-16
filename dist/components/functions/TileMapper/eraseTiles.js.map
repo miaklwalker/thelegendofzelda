@@ -1,0 +1,1 @@
+{"version":3,"file":"eraseTiles.js","sourceRoot":"","sources":["../../../../src/components/functions/TileMapper/eraseTiles.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,MAAM,WAAW,CAAC;AAGpC,MAAM,UAAU,UAAU;IACtB,OAAO,CAAC,OAAO,CAAC,GAAG,CAAA,EAAE,GAAC,GAAG,CAAC,KAAK,EAAE,CAAA,CAAA,CAAC,CAAC,CAAC;IACpC,SAAS,CAAC,SAAS,CAAC,SAAS,CAAC,UAAU,CAAC,CAAC;AAC5C,CAAC"}
