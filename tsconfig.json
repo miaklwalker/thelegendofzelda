@@ -8,8 +8,7 @@
     "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "sourceMap": true,                   /* Generates corresponding '.map' file. */
-
+    "sourceMap":true
   },
   "include": [
     "./src"
